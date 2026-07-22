@@ -21,10 +21,16 @@ class ScreensaverWindow(Gtk.Window):
         
         # Position the window on the correct monitor geometry
         display = Gdk.Display.get_default()
-        monitor = display.get_monitor(monitor_idx)
-        geom = monitor.get_geometry()
-        self.move(geom.x, geom.y)
-        self.resize(geom.width, geom.height)
+        monitor = None
+        if display and hasattr(display, 'get_n_monitors') and monitor_idx < display.get_n_monitors():
+            monitor = display.get_monitor(monitor_idx)
+            
+        if monitor:
+            geom = monitor.get_geometry()
+            self.move(geom.x, geom.y)
+            self.resize(geom.width, geom.height)
+        else:
+            self.maximize()
         
         # Enable event masks
         self.add_events(Gdk.EventMask.POINTER_MOTION_MASK | 
@@ -56,7 +62,10 @@ class ScreensaverWindow(Gtk.Window):
         self.webview.connect("scroll-event", self.on_input_event)
         
         self.show_all()
-        self.fullscreen_on_monitor(self.get_screen(), monitor_idx)
+        if display and hasattr(display, 'get_n_monitors') and monitor_idx < display.get_n_monitors():
+            self.fullscreen_on_monitor(self.get_screen(), monitor_idx)
+        else:
+            self.fullscreen()
         
     def on_input_event(self, widget, event):
         print(f"Input event detected: {event.type}. Exiting screensaver.")

@@ -20,6 +20,16 @@ cp flipclock.py "$INSTALL_DIR/flipclock.py"
 cp clock.html "$INSTALL_DIR/clock.html"
 chmod +x "$INSTALL_DIR/flipclock.py"
 
+ICON_PATH="preferences-desktop-screensaver"
+if [ -f "flipclock.png" ]; then
+    mkdir -p "$HOME/.local/share/pixmaps"
+    mkdir -p "$HOME/.local/share/icons/hicolor/512x512/apps"
+    cp flipclock.png "$INSTALL_DIR/flipclock.png"
+    cp flipclock.png "$HOME/.local/share/pixmaps/flipclock.png"
+    cp flipclock.png "$HOME/.local/share/icons/hicolor/512x512/apps/flipclock.png"
+    ICON_PATH="$HOME/.local/share/pixmaps/flipclock.png"
+fi
+
 # 4. Create default configuration if not present
 if [ ! -f "$CONFIG_DIR/flipclock.conf" ]; then
     echo "Creating default configuration file..."
@@ -33,19 +43,31 @@ monitors = all
 EOF
 fi
 
-# 5. Create Desktop Application Launcher
-echo "Creating application launcher..."
+# 5. Create Desktop Application Launchers
+echo "Creating application launchers..."
 cat <<EOF > "$APP_LAUNCHER_DIR/flipclock.desktop"
 [Desktop Entry]
 Type=Application
 Name=Flip Clock Screensaver
 Comment=Start the Flip Clock screensaver immediately in fullscreen
 Exec=python3 $INSTALL_DIR/flipclock.py --run
-Icon=preferences-desktop-screensaver
+Icon=$ICON_PATH
 Terminal=false
 Categories=Utility;
 EOF
 chmod +x "$APP_LAUNCHER_DIR/flipclock.desktop"
+
+cat <<EOF > "$APP_LAUNCHER_DIR/flipclock-settings.desktop"
+[Desktop Entry]
+Type=Application
+Name=Flip Clock Settings
+Comment=Configure Flip Clock screensaver settings
+Exec=python3 $INSTALL_DIR/flipclock.py --settings
+Icon=$ICON_PATH
+Terminal=false
+Categories=Settings;Utility;
+EOF
+chmod +x "$APP_LAUNCHER_DIR/flipclock-settings.desktop"
 
 # 6. Create Autostart Entry for Daemon
 echo "Creating autostart entry..."

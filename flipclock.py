@@ -88,10 +88,16 @@ class FlipClockWindow(Gtk.Window):
         
         # Position window on correct monitor geometry
         display = Gdk.Display.get_default()
-        monitor = display.get_monitor(monitor_idx)
-        geom = monitor.get_geometry()
-        self.move(geom.x, geom.y)
-        self.resize(geom.width, geom.height)
+        monitor = None
+        if display and hasattr(display, 'get_n_monitors') and monitor_idx < display.get_n_monitors():
+            monitor = display.get_monitor(monitor_idx)
+            
+        if monitor:
+            geom = monitor.get_geometry()
+            self.move(geom.x, geom.y)
+            self.resize(geom.width, geom.height)
+        else:
+            self.maximize()
         
         # Add event listeners for interaction
         self.add_events(Gdk.EventMask.POINTER_MOTION_MASK | 
@@ -125,7 +131,10 @@ class FlipClockWindow(Gtk.Window):
         self.webview.connect("scroll-event", self.on_input_event)
         
         self.show_all()
-        self.fullscreen_on_monitor(self.get_screen(), monitor_idx)
+        if display and hasattr(display, 'get_n_monitors') and monitor_idx < display.get_n_monitors():
+            self.fullscreen_on_monitor(self.get_screen(), monitor_idx)
+        else:
+            self.fullscreen()
 
     def on_input_event(self, widget, event):
         print(f"Input event: {event.type}. Exiting.")
@@ -233,8 +242,12 @@ class FlipClockSettingsWindow(Gtk.Window):
         self.show_all()
         
     def on_save_clicked(self, button):
-        fmt = self.combo_format.get_active_id()
-        timeout = int(self.combo_timeout.get_active_id())
+        fmt = self.combo_format.get_active_id() or "12"
+        timeout_str = self.combo_timeout.get_active_id() or "180"
+        try:
+            timeout = int(timeout_str)
+        except ValueError:
+            timeout = 180
         size = f"{self.scale_size.get_value():.1f}"
         
         self.manager.config['hour_format'] = fmt
@@ -258,10 +271,12 @@ class FlipClockSettingsWindow(Gtk.Window):
         
         # Launch screensaver preview
         try:
-            if os.path.exists("/usr/share/flipclock/flipclock.py"):
-                subprocess.Popen(["/usr/local/bin/flipclock", "--run"])
+            if os.path.exists("/usr/bin/flipclock"):
+                subprocess.Popen(["/usr/bin/flipclock", "--run"])
+            elif os.path.exists("/usr/share/flipclock/flipclock.py"):
+                subprocess.Popen([sys.executable, "/usr/share/flipclock/flipclock.py", "--run"])
             else:
-                script_path = os.path.abspath(__file__)
+                script_path = os.path.realpath(__file__)
                 subprocess.Popen([sys.executable, script_path, "--run"])
         except Exception as e:
             print(f"Error starting preview: {e}")
@@ -274,7 +289,7 @@ class FlipClockManager:
     def __init__(self):
         self.config_dir = os.path.expanduser("~/.config/flipclock")
         self.config_path = os.path.join(self.config_dir, "flipclock.conf")
-        self.script_dir = os.path.dirname(os.path.abspath(__file__))
+        self.script_dir = os.path.dirname(os.path.realpath(__file__))
         self.html_path = os.path.join(self.script_dir, "clock.html")
         
         # Default configuration
@@ -339,16 +354,19 @@ class FlipClockManager:
     def restart_daemon(self):
         """Restarts the screensaver daemon process to apply new settings."""
         try:
-            subprocess.run(["pkill", "-f", "flipclock.*--daemon"], capture_output=True)
+            uid = os.getuid()
+            subprocess.run(["pkill", "-u", str(uid), "-f", "flipclock.*--daemon"], capture_output=True)
         except Exception as e:
             print(f"Error stopping daemon: {e}")
             
         try:
             # Re-spawn daemon in background
-            if os.path.exists("/usr/share/flipclock/flipclock.py"):
-                subprocess.Popen(["/usr/local/bin/flipclock", "--daemon"])
+            if os.path.exists("/usr/bin/flipclock"):
+                subprocess.Popen(["/usr/bin/flipclock", "--daemon"])
+            elif os.path.exists("/usr/share/flipclock/flipclock.py"):
+                subprocess.Popen([sys.executable, "/usr/share/flipclock/flipclock.py", "--daemon"])
             else:
-                script_path = os.path.abspath(__file__)
+                script_path = os.path.realpath(__file__)
                 subprocess.Popen([sys.executable, script_path, "--daemon"])
             print("Daemon restarted successfully.")
         except Exception as e:
@@ -359,16 +377,23 @@ class FlipClockManager:
         Gtk.init(None)
         
         display = Gdk.Display.get_default()
-        n_monitors = display.get_n_monitors()
-        
+        if not display:
+            print("Error: Gdk display not available.")
+            sys.exit(1)
+            
+        n_monitors = display.get_n_monitors() if hasattr(display, 'get_n_monitors') else 1
+        if n_monitors < 1:
+            n_monitors = 1
+            
         # Determine target monitors
         target_monitors = []
-        if self.config['monitors'].lower() == 'all':
+        mon_setting = str(self.config.get('monitors', 'all')).lower()
+        if mon_setting == 'all':
             target_monitors = list(range(n_monitors))
         else:
             try:
-                target_monitors = [int(i.strip()) for i in self.config['monitors'].split(',') if int(i.strip()) < n_monitors]
-            except ValueError:
+                target_monitors = [int(i.strip()) for i in mon_setting.split(',') if i.strip().isdigit() and int(i.strip()) < n_monitors]
+            except Exception:
                 target_monitors = list(range(n_monitors))
                 
         if not target_monitors:
@@ -420,7 +445,8 @@ class FlipClockManager:
                         subprocess.run(["xscreensaver-command", "-exit"], capture_output=True)
                         
                         # Launch screensaver wrapper
-                        proc = subprocess.Popen([sys.executable, __file__, "--run"])
+                        script_path = os.path.realpath(__file__)
+                        proc = subprocess.Popen([sys.executable, script_path, "--run"])
                     else:
                         if proc.poll() is not None:
                             proc = None # Screensaver exited internally

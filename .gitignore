@@ -1,2 +1,4 @@
 *.log
 flipclock-build/
+__pycache__/
+*.pyc

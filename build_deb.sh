@@ -15,9 +15,16 @@ mkdir -p "$PKG_DIR/usr/share/flipclock"
 mkdir -p "$PKG_DIR/usr/share/applications"
 mkdir -p "$PKG_DIR/etc/xdg/autostart"
 
+mkdir -p "$PKG_DIR/usr/share/pixmaps"
+mkdir -p "$PKG_DIR/usr/share/icons/hicolor/512x512/apps"
+
 # Copy application files
 cp clock.html "$PKG_DIR/usr/share/flipclock/"
 cp flipclock.py "$PKG_DIR/usr/share/flipclock/"
+if [ -f "flipclock.png" ]; then
+    cp flipclock.png "$PKG_DIR/usr/share/pixmaps/flipclock.png"
+    cp flipclock.png "$PKG_DIR/usr/share/icons/hicolor/512x512/apps/flipclock.png"
+fi
 
 # Create DEBIAN/control file
 cat << 'EOF' > "$PKG_DIR/DEBIAN/control"
@@ -41,8 +48,14 @@ set -e
 # Ensure executable permissions
 chmod +x /usr/share/flipclock/flipclock.py
 
-# Create system bin symlink
+# Create system bin symlinks
+ln -sf /usr/share/flipclock/flipclock.py /usr/bin/flipclock
 ln -sf /usr/share/flipclock/flipclock.py /usr/local/bin/flipclock
+
+# Refresh icon cache if command exists
+if command -v gtk-update-icon-cache >/dev/null 2>&1; then
+    gtk-update-icon-cache -f /usr/share/icons/hicolor || true
+fi
 
 echo "=========================================================="
 echo " Flip Clock Screensaver successfully installed!"
@@ -61,7 +74,8 @@ cat << 'EOF' > "$PKG_DIR/DEBIAN/postrm"
 set -e
 
 if [ "$1" = "remove" ] || [ "$1" = "purge" ]; then
-    # Remove system bin symlink
+    # Remove system bin symlinks
+    rm -f /usr/bin/flipclock
     rm -f /usr/local/bin/flipclock
     echo "Flip Clock Screensaver successfully removed."
 fi
@@ -75,7 +89,7 @@ Type=Application
 Name=Flip Clock Screensaver
 Comment=Launch Flip Clock Screensaver immediately
 Exec=flipclock --run
-Icon=preferences-desktop-screensaver
+Icon=flipclock
 Terminal=false
 Categories=Utility;
 EOF
@@ -87,7 +101,7 @@ Type=Application
 Name=Flip Clock Settings
 Comment=Configure Flip Clock screensaver settings
 Exec=flipclock --settings
-Icon=preferences-desktop-screensaver
+Icon=flipclock
 Terminal=false
 Categories=Settings;Utility;
 EOF
@@ -99,7 +113,7 @@ Type=Application
 Name=Flip Clock Screensaver Daemon
 Comment=Autostart Flip Clock Screensaver Daemon
 Exec=flipclock --daemon
-Icon=preferences-desktop-screensaver
+Icon=flipclock
 Terminal=false
 NoDisplay=true
 X-GNOME-Autostart-enabled=true

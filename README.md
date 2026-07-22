@@ -1,6 +1,7 @@
 # Premium Fliqlo-Style Flip Clock Screensaver for Ubuntu
 
 [![Platform](https://img.shields.io/badge/platform-Ubuntu%2020.04%20%7C%2022.04%20%7C%2024.04-orange.svg)](https://ubuntu.com)
+[![Download .deb Package](https://img.shields.io/badge/Download-flipclock--screensaver__1.0.0__all.deb-blue?style=for-the-badge&logo=debian)](https://github.com/smit-darji/ubuntu-flipclock-screensaver/releases/download/v1.0.0/flipclock-screensaver_1.0.0_all.deb)
 [![Language](https://img.shields.io/badge/language-Python%203%20%2B%20GTK3%20%2B%20HTML5-blue.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
@@ -27,22 +28,40 @@ A native, high-fidelity, dual-monitor flip clock screensaver for Ubuntu Linux. I
 
 ## Installation Methods
 
-### Method 1: Installing the Debian Package (`.deb`) — *Recommended*
+### Method 1: Download & Install Debian Package (`flipclock-screensaver_1.0.0_all.deb`) — *Recommended*
 
-The Debian package automatically resolves and configures all system requirements and adds launcher shortcuts to the Ubuntu Applications menu.
+Click the button below to download the official `.deb` package file:
 
-#### 1. Download & Install
-Navigate to the directory containing the package and install it using `apt` (to automatically download dependencies):
+[<img src="https://img.shields.io/badge/Download-flipclock--screensaver__1.0.0__all.deb-2088FF?style=for-the-badge&logo=debian&logoColor=white" height="42">](https://github.com/smit-darji/ubuntu-flipclock-screensaver/releases/download/v1.0.0/flipclock-screensaver_1.0.0_all.deb)
+
+#### 1. Download & Install via Terminal or GUI
+Download `flipclock-screensaver_1.0.0_all.deb` and install it using `apt` (which automatically fetches required dependencies):
+
 ```bash
+# Download package file via terminal (or click the Download button above)
+wget https://github.com/smit-darji/ubuntu-flipclock-screensaver/releases/download/v1.0.0/flipclock-screensaver_1.0.0_all.deb
+
+# Install package
 sudo apt update
 sudo apt install ./flipclock-screensaver_1.0.0_all.deb
 ```
+*(Alternatively, double-click the downloaded `flipclock-screensaver_1.0.0_all.deb` file to install via Ubuntu Software Center / GDebi).*
 
-#### 2. Start the Daemon
-The package installs a system-wide autostart launcher that automatically starts the screensaver background monitor daemon when you log in. If you want to start it immediately for the current session without logging out, run:
-```bash
-flipclock --daemon
-```
+#### 2. Configure & Save Settings (Per User)
+Any logged-in user on the system can configure and save their personalized screensaver settings:
+* Open **"Flip Clock Settings"** from the Ubuntu Applications menu, or run in terminal:
+  ```bash
+  flipclock --settings
+  ```
+* Custom options include **Time Format** (12-Hour AM/PM vs 24-Hour), **Idle Timeout** (2, 3, 5, 10, 15, 30 min, 1 hour), and **Clock Scaling**.
+* Click **"Save & Apply"** to write settings to `~/.config/flipclock/flipclock.conf` and restart the idle daemon for your account.
+
+#### 3. Perform / Run Screensaver
+* **Automatic Idle Screen**: The background daemon starts automatically at login and triggers the flip clock screensaver after your configured idle duration.
+* **Manual Trigger**: Launch **"Flip Clock Screensaver"** from the Applications menu or run:
+  ```bash
+  flipclock --run
+  ```
 
 ---
 
