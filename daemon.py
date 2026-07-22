@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
+import os
+import sys
+
+# Disable WebKit hardware compositing mode to prevent GPU black screens on Linux
+os.environ["WEBKIT_DISABLE_COMPOSITING_MODE"] = "1"
+
 import time
 import subprocess
 import ctypes
-import os
-import sys
 import argparse
 
 # Load X11 and Xss
@@ -66,7 +70,8 @@ def main():
     html_path = os.path.join(script_dir, "clock.html")
     
     proc = None
-    idle_limit = args.timeout * 1000 # convert to milliseconds
+    idle_limit = args.timeout * 1000  # convert to milliseconds
+    state = "IDLE"  # IDLE, RUNNING, WAIT_USER_ACTIVE
     
     print(f"Screensaver clock daemon started. Timeout set to {args.timeout}s.")
     print("Monitoring idle time...")
@@ -75,34 +80,31 @@ def main():
         while True:
             idle = get_idle_time(display, root, info_ptr)
             
-            if idle >= idle_limit:
-                # If screensaver is not already running, start it
-                if proc is None:
+            if state == "IDLE":
+                if idle >= idle_limit:
                     print(f"System idle for {idle/1000:.1f}s. Launching screensaver clock...")
-                    
-                    # Stop system xscreensaver if running to avoid overlap conflicts
                     subprocess.run(["xscreensaver-command", "-exit"], capture_output=True)
-                    
-                    # Start our fullscreen clock
                     proc = subprocess.Popen([sys.executable, screensaver_path, html_path])
-                else:
-                    # If screensaver was launched but closed by itself (e.g. via its internal input listener),
-                    # we should wait until the idle time resets (user activity) before launching it again.
-                    if proc.poll() is not None:
-                        # The screensaver closed itself (which means activity occurred, but x11 idle hasn't reset yet,
-                        # or it closed due to some signal). We clean up and wait.
-                        proc = None
-            else:
-                # If system is active and screensaver process is active, stop it
-                if proc is not None:
-                    if proc.poll() is None:
-                        print("Activity detected. Stopping screensaver.")
-                        proc.terminate()
-                        try:
-                            proc.wait(timeout=1)
-                        except subprocess.TimeoutExpired:
-                            proc.kill()
+                    state = "RUNNING"
+            
+            elif state == "RUNNING":
+                if proc is None or proc.poll() is not None:
+                    print("Screensaver closed by user input.")
                     proc = None
+                    state = "WAIT_USER_ACTIVE"
+                elif idle < idle_limit:
+                    print("Activity detected. Stopping screensaver.")
+                    proc.terminate()
+                    try:
+                        proc.wait(timeout=1)
+                    except subprocess.TimeoutExpired:
+                        proc.kill()
+                    proc = None
+                    state = "IDLE"
+                    
+            elif state == "WAIT_USER_ACTIVE":
+                if idle < idle_limit:
+                    state = "IDLE"
                     
             time.sleep(0.5)
             

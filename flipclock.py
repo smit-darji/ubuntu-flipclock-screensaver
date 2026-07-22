@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 import os
 import sys
+
+# Disable WebKit hardware compositing mode to prevent GPU black screens on Linux
+os.environ["WEBKIT_DISABLE_COMPOSITING_MODE"] = "1"
+
 import time
 import subprocess
 import ctypes
@@ -57,21 +61,46 @@ try:
     X11_AVAILABLE = True
 except Exception as e:
     X11_AVAILABLE = False
-    print(f"X11 screensaver library not available: {e}")
 
-# Global mouse tracking variables
-initial_x = None
-initial_y = None
-exit_threshold = 15 # pixels
-tracking_enabled = False
+# Input tracking flags
+key_input_enabled = False
+mouse_input_enabled = False
+exit_threshold = 30  # pixels
+
+def enable_key_tracking():
+    global key_input_enabled
+    key_input_enabled = True
+    return False
 
 def enable_mouse_tracking():
-    global tracking_enabled, initial_x, initial_y
-    tracking_enabled = True
-    initial_x = None
-    initial_y = None
-    print("Mouse motion tracking activated.")
-    return False # Run once
+    global mouse_input_enabled
+    mouse_input_enabled = True
+    return False
+
+def get_html_content(html_path_arg=None):
+    candidates = []
+    if html_path_arg:
+        candidates.append(html_path_arg)
+        
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    candidates.extend([
+        os.path.join(script_dir, "clock.html"),
+        os.path.join(script_dir, "index.html"),
+        os.path.expanduser("~/.local/share/flipclock/clock.html"),
+        "/usr/share/flipclock/clock.html",
+        os.path.join(os.getcwd(), "clock.html"),
+        os.path.join(os.getcwd(), "index.html")
+    ])
+    
+    for candidate in candidates:
+        if candidate and os.path.exists(candidate):
+            try:
+                with open(candidate, 'r', encoding='utf-8') as f:
+                    return f.read(), os.path.abspath(os.path.dirname(candidate))
+            except Exception:
+                pass
+    return None, None
+
 
 class FlipClockWindow(Gtk.Window):
     """Fullscreen GTK window hosting the WebKit flip clock."""
@@ -79,8 +108,19 @@ class FlipClockWindow(Gtk.Window):
         super().__init__(title=f"Flip Clock - Screen {monitor_idx}")
         self.set_decorated(False)
         self.set_keep_above(True)
+        self.set_can_focus(True)
         
-        # Position window on correct monitor geometry
+        self.initial_x = None
+        self.initial_y = None
+        
+        css_provider = Gtk.CssProvider()
+        css_provider.load_from_data(b"window { background-color: black; }")
+        Gtk.StyleContext.add_provider_for_screen(
+            Gdk.Screen.get_default(),
+            css_provider,
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+        )
+        
         display = Gdk.Display.get_default()
         monitor = None
         if display and hasattr(display, 'get_n_monitors') and monitor_idx < display.get_n_monitors():
@@ -93,54 +133,115 @@ class FlipClockWindow(Gtk.Window):
         else:
             self.maximize()
         
-        # Add event listeners for interaction
         self.add_events(Gdk.EventMask.POINTER_MOTION_MASK | 
                         Gdk.EventMask.BUTTON_PRESS_MASK | 
                         Gdk.EventMask.KEY_PRESS_MASK |
-                        Gdk.EventMask.SCROLL_MASK)
+                        Gdk.EventMask.SCROLL_MASK |
+                        Gdk.EventMask.TOUCH_MASK)
         
         # WebKit WebView
         self.webview = WebKit2.WebView()
+        if hasattr(self.webview, 'set_background_color'):
+            self.webview.set_background_color(Gdk.RGBA(0, 0, 0, 1.0))
+            
+        settings = self.webview.get_settings()
+        settings.set_enable_javascript(True)
+        if hasattr(settings, 'set_allow_file_access_from_file_urls'):
+            settings.set_allow_file_access_from_file_urls(True)
+        if hasattr(settings, 'set_allow_universal_access_from_file_urls'):
+            settings.set_allow_universal_access_from_file_urls(True)
+            
         self.webview.add_events(Gdk.EventMask.POINTER_MOTION_MASK | 
                                 Gdk.EventMask.BUTTON_PRESS_MASK | 
                                 Gdk.EventMask.KEY_PRESS_MASK |
-                                Gdk.EventMask.SCROLL_MASK)
+                                Gdk.EventMask.SCROLL_MASK |
+                                Gdk.EventMask.TOUCH_MASK)
+        
+        # Guard against WebKit load failures
+        self.webview.connect("load-failed", self.on_load_failed)
+        
+        # DOM script exit trigger listener
+        ucm = self.webview.get_user_content_manager()
+        ucm.register_script_message_handler("screensaverExit")
+        ucm.connect("script-message-received::screensaverExit", self.on_script_message)
+        
         self.add(self.webview)
         
-        # Formulate query string based on configuration
-        query_string = f"?format={config_params['hour_format']}&size={config_params['clock_size']}&speed={config_params['animation_speed']}"
-        full_uri = "file://" + os.path.abspath(html_path) + query_string
-        self.webview.load_uri(full_uri)
+        html_content, base_dir = get_html_content(html_path)
+        if not html_content:
+            print("Error: Could not locate clock.html or index.html")
+            sys.exit(1)
+            
+        fmt = config_params.get('hour_format', '12')
+        size = config_params.get('clock_size', '1.0')
+        speed = config_params.get('animation_speed', 500)
         
-        # Connect exit triggers
+        config_script = f"<script>window.screensaverConfig = {{ format: '{fmt}', size: '{size}', speed: '{speed}' }};</script>"
+        if "</head>" in html_content:
+            html_content = html_content.replace("</head>", f"{config_script}</head>")
+        else:
+            html_content = config_script + html_content
+            
+        base_uri = "file://" + base_dir + "/"
+        self.webview.load_html(html_content, base_uri)
+        
         self.connect("destroy", Gtk.main_quit)
-        self.connect("key-press-event", self.on_input_event)
+        self.connect("key-press-event", self.on_key_event)
         self.connect("button-press-event", self.on_input_event)
         self.connect("motion-notify-event", self.on_motion_event)
         self.connect("scroll-event", self.on_input_event)
         
-        self.webview.connect("key-press-event", self.on_input_event)
+        self.webview.connect("key-press-event", self.on_key_event)
         self.webview.connect("button-press-event", self.on_input_event)
         self.webview.connect("motion-notify-event", self.on_motion_event)
         self.webview.connect("scroll-event", self.on_input_event)
         
         self.show_all()
+        self.present_with_time(Gdk.CURRENT_TIME)
+        self.present()
+        self.webview.grab_focus()
+
         if display and hasattr(display, 'get_n_monitors') and monitor_idx < display.get_n_monitors():
             self.fullscreen_on_monitor(self.get_screen(), monitor_idx)
         else:
             self.fullscreen()
 
-    def on_input_event(self, widget, event):
-        print(f"Input event: {event.type}. Exiting.")
+    def on_load_failed(self, webview, load_event, failing_uri, error):
+        print(f"WebView load failed ({failing_uri}): {error}")
         Gtk.main_quit()
         return True
 
-    def on_motion_event(self, widget, event):
-        global tracking_enabled, initial_x, initial_y
-        
-        if not tracking_enabled:
-            return True
+    def on_script_message(self, ucm, result):
+        global key_input_enabled, mouse_input_enabled
+        reason = "DOM trigger"
+        try:
+            js_val = result.get_js_value()
+            if js_val:
+                reason = js_val.to_string()
+        except Exception:
+            pass
             
+        if key_input_enabled or mouse_input_enabled:
+            print(f"Script message exit trigger ({reason}). Exiting.")
+            Gtk.main_quit()
+
+    def on_key_event(self, widget, event):
+        global key_input_enabled
+        if key_input_enabled:
+            print(f"Key press event: {event.keyval}. Exiting.")
+            Gtk.main_quit()
+        return True
+
+    def on_input_event(self, widget, event):
+        global mouse_input_enabled
+        if mouse_input_enabled:
+            print(f"Input event: {event.type}. Exiting.")
+            Gtk.main_quit()
+        return True
+
+    def on_motion_event(self, widget, event):
+        global mouse_input_enabled
+        
         x = getattr(event, 'x_root', None)
         y = getattr(event, 'y_root', None)
         
@@ -156,14 +257,14 @@ class FlipClockWindow(Gtk.Window):
         if x is None or y is None:
             return True
         
-        if initial_x is None or initial_y is None:
-            initial_x = x
-            initial_y = y
+        if self.initial_x is None or self.initial_y is None or not mouse_input_enabled:
+            self.initial_x = x
+            self.initial_y = y
             return True
             
-        dist = math.sqrt((x - initial_x)**2 + (y - initial_y)**2)
+        dist = math.sqrt((x - self.initial_x)**2 + (y - self.initial_y)**2)
         if dist > exit_threshold:
-            print(f"Mouse moved past threshold: {dist:.1f}px. Exiting.")
+            print(f"Mouse moved {dist:.1f}px. Exiting.")
             Gtk.main_quit()
         return True
 
@@ -177,13 +278,11 @@ class FlipClockSettingsWindow(Gtk.Window):
         self.set_border_width(15)
         self.set_position(Gtk.WindowPosition.CENTER)
         
-        # Header bar
         hb = Gtk.HeaderBar()
         hb.set_show_close_button(True)
         hb.set_title("Flip Clock Settings")
         self.set_titlebar(hb)
         
-        # Grid layout
         grid = Gtk.Grid()
         grid.set_column_spacing(15)
         grid.set_row_spacing(15)
@@ -191,7 +290,6 @@ class FlipClockSettingsWindow(Gtk.Window):
         grid.set_valign(Gtk.Align.CENTER)
         self.add(grid)
         
-        # Row 0: Time Format
         lbl_format = Gtk.Label(label="Time Format:")
         lbl_format.set_xalign(0)
         grid.attach(lbl_format, 0, 0, 1, 1)
@@ -203,7 +301,6 @@ class FlipClockSettingsWindow(Gtk.Window):
         self.combo_format.set_active_id(current_fmt)
         grid.attach(self.combo_format, 1, 0, 1, 1)
         
-        # Row 1: Idle Timeout
         lbl_timeout = Gtk.Label(label="Idle Timeout:")
         lbl_timeout.set_xalign(0)
         grid.attach(lbl_timeout, 0, 1, 1, 1)
@@ -224,7 +321,6 @@ class FlipClockSettingsWindow(Gtk.Window):
         self.combo_timeout.set_active_id(current_to)
         grid.attach(self.combo_timeout, 1, 1, 1, 1)
         
-        # Row 2: Clock Size
         lbl_size = Gtk.Label(label="Clock Size:")
         lbl_size.set_xalign(0)
         grid.attach(lbl_size, 0, 2, 1, 1)
@@ -237,7 +333,6 @@ class FlipClockSettingsWindow(Gtk.Window):
         self.scale_size.set_size_request(150, -1)
         grid.attach(self.scale_size, 1, 2, 1, 1)
         
-        # Row 3: Save Button
         self.btn_save = Gtk.Button(label="Save & Apply")
         self.btn_save.connect("clicked", self.on_save_clicked)
         grid.attach(self.btn_save, 0, 3, 2, 1)
@@ -261,7 +356,6 @@ class FlipClockSettingsWindow(Gtk.Window):
         self.manager.save_config()
         self.manager.restart_daemon()
         
-        # Success dialog
         dialog = Gtk.MessageDialog(
             transient_for=self,
             flags=0,
@@ -273,7 +367,6 @@ class FlipClockSettingsWindow(Gtk.Window):
         dialog.run()
         dialog.destroy()
         
-        # Launch screensaver preview
         try:
             if os.path.exists("/usr/bin/flipclock"):
                 subprocess.Popen(["/usr/bin/flipclock", "--run"])
@@ -296,18 +389,16 @@ class FlipClockManager:
         self.script_dir = os.path.dirname(os.path.realpath(__file__))
         self.html_path = os.path.join(self.script_dir, "clock.html")
         
-        # Default configuration
         self.config = {
-            'idle_timeout': 120,       # 2 minutes
-            'hour_format': '12',       # 12 or 24
-            'clock_size': '1.0',       # Scale factor
-            'animation_speed': 500,    # milliseconds
-            'monitors': 'all'          # all or comma separated indices (e.g. 0,1)
+            'idle_timeout': 120,
+            'hour_format': '12',
+            'clock_size': '1.0',
+            'animation_speed': 500,
+            'monitors': 'all'
         }
         self.load_config()
 
     def load_config(self):
-        """Loads or creates the ini style configuration file."""
         if not os.path.exists(self.config_dir):
             os.makedirs(self.config_dir, exist_ok=True)
             
@@ -325,7 +416,6 @@ class FlipClockManager:
             except Exception as e:
                 print(f"Error reading config, using defaults: {e}")
         else:
-            # Create default config file
             parser['Settings'] = {
                 'idle_timeout': str(self.config['idle_timeout']),
                 'hour_format': self.config['hour_format'],
@@ -340,7 +430,6 @@ class FlipClockManager:
                 print(f"Could not write default configuration: {e}")
 
     def save_config(self):
-        """Saves current config back to config file."""
         parser = configparser.ConfigParser()
         parser['Settings'] = {
             'idle_timeout': str(self.config['idle_timeout']),
@@ -356,7 +445,6 @@ class FlipClockManager:
             print(f"Error saving config file: {e}")
 
     def restart_daemon(self):
-        """Restarts the screensaver daemon process to apply new settings."""
         try:
             uid = os.getuid()
             subprocess.run(["pkill", "-u", str(uid), "-f", "flipclock.*--daemon"], capture_output=True)
@@ -364,7 +452,6 @@ class FlipClockManager:
             print(f"Error stopping daemon: {e}")
             
         try:
-            # Re-spawn daemon in background
             if os.path.exists("/usr/bin/flipclock"):
                 subprocess.Popen(["/usr/bin/flipclock", "--daemon"])
             elif os.path.exists("/usr/share/flipclock/flipclock.py"):
@@ -377,7 +464,6 @@ class FlipClockManager:
             print(f"Error starting daemon: {e}")
 
     def run_screensaver(self):
-        """Spawns the screensaver window on each configured monitor."""
         Gtk.init(None)
         
         display = Gdk.Display.get_default()
@@ -389,7 +475,6 @@ class FlipClockManager:
         if n_monitors < 1:
             n_monitors = 1
             
-        # Determine target monitors
         target_monitors = []
         mon_setting = str(self.config.get('monitors', 'all')).lower()
         if mon_setting == 'all':
@@ -410,14 +495,12 @@ class FlipClockManager:
             win = FlipClockWindow(self.html_path, monitor_idx, self.config)
             windows.append(win)
             
-        # Register mouse tracking timeout (1.5 seconds)
-        GLib.timeout_add(1500, enable_mouse_tracking)
+        GLib.timeout_add(400, enable_key_tracking)
+        GLib.timeout_add(800, enable_mouse_tracking)
             
         Gtk.main()
 
     def get_system_idle_time_ms(self):
-        """Gets system idle time in milliseconds using GNOME DBus IdleMonitor, xprintidle, or X11 libXss fallback."""
-        # 1. Try GNOME Mutter DBus IdleMonitor (works on both Wayland and X11)
         try:
             res = subprocess.run(
                 ["gdbus", "call", "--session", "--dest", "org.gnome.Mutter.IdleMonitor",
@@ -432,7 +515,6 @@ class FlipClockManager:
         except Exception:
             pass
 
-        # 2. Try xprintidle fallback command
         try:
             res = subprocess.run(["xprintidle"], capture_output=True, text=True, timeout=1)
             if res.returncode == 0 and res.stdout.strip().isdigit():
@@ -440,7 +522,6 @@ class FlipClockManager:
         except Exception:
             pass
 
-        # 3. Try X11 libXss fallback
         if X11_AVAILABLE:
             try:
                 display = x11.XOpenDisplay(None)
@@ -460,55 +541,51 @@ class FlipClockManager:
         return 0
 
     def run_daemon(self):
-        """Monitors idle time and launches/kills screensaver window dynamically."""
         proc = None
-        last_exit_time = 0
+        state = "IDLE"  # IDLE, RUNNING, WAIT_USER_ACTIVE
         
         print(f"Flip Clock screensaver daemon started. Default timeout: {self.config.get('idle_timeout', 120)}s.")
         
         try:
             while True:
-                # Reload config on each tick to apply live setting updates
                 self.load_config()
                 
                 idle_ms = self.get_system_idle_time_ms()
                 try:
                     idle_limit_ms = int(self.config.get('idle_timeout', 120)) * 1000
                 except (ValueError, TypeError):
-                    idle_limit_ms = 120000 # fallback 2 min (120 sec)
+                    idle_limit_ms = 120000
                     
-                now = time.time()
-                
-                if idle_ms >= idle_limit_ms:
-                    if proc is None:
-                        # Enforce a 5-second cooldown after previous exit before respawning
-                        if (now - last_exit_time) > 5.0:
-                            print(f"System idle for {idle_ms/1000:.1f}s. Spawning screensaver windows...")
-                            
-                            # Stop xscreensaver to avoid overlapping conflicts
-                            subprocess.run(["xscreensaver-command", "-exit"], capture_output=True)
-                            
-                            # Launch screensaver wrapper
-                            script_path = os.path.realpath(__file__)
-                            proc = subprocess.Popen([sys.executable, script_path, "--run"])
-                    else:
-                        if proc.poll() is not None:
-                            print("Screensaver exited.")
-                            proc = None
-                            last_exit_time = time.time()
-                else:
-                    if proc is not None:
-                        if proc.poll() is None:
-                            print("User activity detected. Closing screensaver.")
-                            proc.terminate()
-                            try:
-                                proc.wait(timeout=1)
-                            except subprocess.TimeoutExpired:
-                                proc.kill()
-                        proc = None
-                        last_exit_time = time.time()
+                if state == "IDLE":
+                    if idle_ms >= idle_limit_ms:
+                        print(f"System idle for {idle_ms/1000:.1f}s. Spawning screensaver windows...")
+                        subprocess.run(["xscreensaver-command", "-exit"], capture_output=True)
                         
-                time.sleep(1.0)
+                        script_path = os.path.realpath(__file__)
+                        proc = subprocess.Popen([sys.executable, script_path, "--run"])
+                        state = "RUNNING"
+
+                elif state == "RUNNING":
+                    if proc is None or proc.poll() is not None:
+                        print("Screensaver closed by user input.")
+                        proc = None
+                        state = "WAIT_USER_ACTIVE"
+                    elif idle_ms < idle_limit_ms:
+                        print("User activity detected. Closing screensaver.")
+                        proc.terminate()
+                        try:
+                            proc.wait(timeout=1)
+                        except subprocess.TimeoutExpired:
+                            proc.kill()
+                        proc = None
+                        state = "IDLE"
+
+                elif state == "WAIT_USER_ACTIVE":
+                    if idle_ms < idle_limit_ms:
+                        # User activity confirmed by system idle reset
+                        state = "IDLE"
+
+                time.sleep(0.5)
         except KeyboardInterrupt:
             print("\nStopping daemon.")
         finally:
@@ -534,5 +611,4 @@ if __name__ == "__main__":
         FlipClockSettingsWindow(manager)
         Gtk.main()
     else:
-        # Default behavior: run the screensaver
         manager.run_screensaver()

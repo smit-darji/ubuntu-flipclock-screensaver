@@ -8,12 +8,14 @@ INSTALL_DIR="$HOME/.local/share/flipclock"
 APP_LAUNCHER_DIR="$HOME/.local/share/applications"
 AUTOSTART_DIR="$HOME/.config/autostart"
 CONFIG_DIR="$HOME/.config/flipclock"
+SYSTEMD_USER_DIR="$HOME/.config/systemd/user"
 
 # 2. Create directories
 mkdir -p "$INSTALL_DIR"
 mkdir -p "$APP_LAUNCHER_DIR"
 mkdir -p "$AUTOSTART_DIR"
 mkdir -p "$CONFIG_DIR"
+mkdir -p "$SYSTEMD_USER_DIR"
 
 # 3. Copy files to installation directory
 cp flipclock.py "$INSTALL_DIR/flipclock.py"
@@ -69,7 +71,7 @@ Categories=Settings;Utility;
 EOF
 chmod +x "$APP_LAUNCHER_DIR/flipclock-settings.desktop"
 
-# 6. Create Autostart Entry for Daemon
+# 6. Create Autostart Desktop Entry for Daemon
 echo "Creating autostart entry..."
 cat <<EOF > "$AUTOSTART_DIR/flipclock-daemon.desktop"
 [Desktop Entry]
@@ -83,15 +85,40 @@ X-GNOME-Autostart-enabled=true
 EOF
 chmod +x "$AUTOSTART_DIR/flipclock-daemon.desktop"
 
-# 7. Start the daemon process right now
+# 7. Create Systemd User Service for automatic restart on reboot
+echo "Creating systemd user service..."
+cat <<EOF > "$SYSTEMD_USER_DIR/flipclock-daemon.service"
+[Unit]
+Description=Flip Clock Screensaver Daemon
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 $INSTALL_DIR/flipclock.py --daemon
+Restart=always
+RestartSec=3
+Environment=DISPLAY=:0
+
+[Install]
+WantedBy=default.target
+EOF
+
+# Enable & start systemd service if systemctl is available
+if command -v systemctl &> /dev/null; then
+    echo "Enabling systemd user service..."
+    systemctl --user daemon-reload || true
+    systemctl --user enable flipclock-daemon.service || true
+    systemctl --user restart flipclock-daemon.service || true
+fi
+
+# 8. Ensure background daemon process is running right now
 echo "Stopping any existing screensaver processes..."
 pkill -f "flipclock.py" || true
 pkill -f "daemon.py" || true
 pkill -f "screensaver.py" || true
 
 echo "Starting Flip Clock screensaver daemon..."
-DISPLAY=:1 nohup python3 -u "$INSTALL_DIR/flipclock.py" --daemon > "$INSTALL_DIR/daemon.log" 2>&1 &
+DISPLAY="${DISPLAY:-:0}" nohup python3 -u "$INSTALL_DIR/flipclock.py" --daemon > "$INSTALL_DIR/daemon.log" 2>&1 &
 
-echo "Installation complete! Flip Clock screensaver will start after 2 minutes of idle time."
-echo "You can launch the screensaver immediately from your Applications menu or using command: ~/.local/share/flipclock/flipclock.py --run"
-echo "Configuration is located at ~/.config/flipclock/flipclock.conf"
+echo "Installation complete!"
+echo "The screensaver daemon is enabled via Systemd & Autostart to automatically start after 2 minutes of idle time on every restart."
