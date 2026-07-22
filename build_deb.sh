@@ -20,7 +20,15 @@ mkdir -p "$PKG_DIR/usr/share/icons/hicolor/512x512/apps"
 
 # Copy application files
 cp clock.html "$PKG_DIR/usr/share/flipclock/"
+if [ -f "index.html" ]; then
+    cp index.html "$PKG_DIR/usr/share/flipclock/"
+else
+    cp clock.html "$PKG_DIR/usr/share/flipclock/index.html"
+fi
 cp flipclock.py "$PKG_DIR/usr/share/flipclock/"
+if [ -f "daemon.py" ]; then cp daemon.py "$PKG_DIR/usr/share/flipclock/"; fi
+if [ -f "screensaver.py" ]; then cp screensaver.py "$PKG_DIR/usr/share/flipclock/"; fi
+
 if [ -f "flipclock.png" ]; then
     cp flipclock.png "$PKG_DIR/usr/share/pixmaps/flipclock.png"
     cp flipclock.png "$PKG_DIR/usr/share/icons/hicolor/512x512/apps/flipclock.png"
@@ -57,11 +65,17 @@ if command -v gtk-update-icon-cache >/dev/null 2>&1; then
     gtk-update-icon-cache -f /usr/share/icons/hicolor || true
 fi
 
+# Restart daemon for active desktop session if installed via sudo
+pkill -f "flipclock.*--daemon" || true
+if [ -n "$SUDO_USER" ]; then
+    su "$SUDO_USER" -c "DISPLAY=${DISPLAY:-:0} nohup /usr/bin/flipclock --daemon >/dev/null 2>&1 &" || true
+fi
+
 echo "=========================================================="
 echo " Flip Clock Screensaver successfully installed!"
-echo " The daemon will start automatically on next login."
-echo " To start it manually for the current session, run:"
-echo "   flipclock --daemon"
+echo " The daemon is active and will start after 2 min idle time."
+echo " To configure settings, run:"
+echo "   flipclock --settings"
 echo " To preview screensaver immediately, run:"
 echo "   flipclock --run"
 echo "=========================================================="

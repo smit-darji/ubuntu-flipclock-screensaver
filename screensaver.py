@@ -46,8 +46,22 @@ class ScreensaverWindow(Gtk.Window):
                                 Gdk.EventMask.SCROLL_MASK)
         self.add(self.webview)
         
-        # Load HTML
-        self.webview.load_uri("file://" + os.path.abspath(html_path))
+        # Load config if present
+        config_path = os.path.expanduser("~/.config/flipclock/flipclock.conf")
+        fmt, size, speed = "12", "1.0", "500"
+        if os.path.exists(config_path):
+            try:
+                import configparser
+                cp = configparser.ConfigParser()
+                cp.read(config_path)
+                if 'Settings' in cp:
+                    fmt = cp['Settings'].get('hour_format', '12')
+                    size = cp['Settings'].get('clock_size', '1.0')
+                    speed = cp['Settings'].get('animation_speed', '500')
+            except Exception:
+                pass
+        query_string = f"?format={fmt}&size={size}&speed={speed}"
+        self.webview.load_uri("file://" + os.path.abspath(html_path) + query_string)
         
         # Signals
         self.connect("destroy", Gtk.main_quit)

@@ -50,7 +50,7 @@ def get_idle_time(display, root, info_ptr):
 
 def main():
     parser = argparse.ArgumentParser(description="Screensaver Clock Daemon")
-    parser.add_argument("--timeout", type=int, default=180, help="Idle timeout in seconds (default: 180)")
+    parser.add_argument("--timeout", type=int, default=120, help="Idle timeout in seconds (default: 120)")
     args = parser.parse_args()
 
     display = x11.XOpenDisplay(None)

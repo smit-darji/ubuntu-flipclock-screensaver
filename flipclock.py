@@ -7,6 +7,7 @@ import ctypes
 import math
 import argparse
 import configparser
+import re
 import gi
 
 # Initialize GI namespaces
@@ -246,11 +247,11 @@ class FlipClockSettingsWindow(Gtk.Window):
         
     def on_save_clicked(self, button):
         fmt = self.combo_format.get_active_id() or "12"
-        timeout_str = self.combo_timeout.get_active_id() or "180"
+        timeout_str = self.combo_timeout.get_active_id() or "120"
         try:
             timeout = int(timeout_str)
         except ValueError:
-            timeout = 180
+            timeout = 120
         size = f"{self.scale_size.get_value():.1f}"
         
         self.manager.config['hour_format'] = fmt
@@ -415,7 +416,7 @@ class FlipClockManager:
         Gtk.main()
 
     def get_system_idle_time_ms(self):
-        """Gets system idle time in milliseconds using GNOME DBus IdleMonitor or X11 XScreenSaver fallback."""
+        """Gets system idle time in milliseconds using GNOME DBus IdleMonitor, xprintidle, or X11 libXss fallback."""
         # 1. Try GNOME Mutter DBus IdleMonitor (works on both Wayland and X11)
         try:
             res = subprocess.run(
@@ -425,13 +426,21 @@ class FlipClockManager:
                 capture_output=True, text=True, timeout=1
             )
             if res.returncode == 0 and res.stdout:
-                clean_str = res.stdout.strip().replace('(', '').replace(')', '').replace('uint64', '').replace(',', '').strip()
-                if clean_str.isdigit():
-                    return int(clean_str)
+                match = re.search(r'\b(\d+)\b', res.stdout)
+                if match:
+                    return int(match.group(1))
         except Exception:
             pass
 
-        # 2. Try X11 libXss fallback
+        # 2. Try xprintidle fallback command
+        try:
+            res = subprocess.run(["xprintidle"], capture_output=True, text=True, timeout=1)
+            if res.returncode == 0 and res.stdout.strip().isdigit():
+                return int(res.stdout.strip())
+        except Exception:
+            pass
+
+        # 3. Try X11 libXss fallback
         if X11_AVAILABLE:
             try:
                 display = x11.XOpenDisplay(None)
@@ -455,15 +464,18 @@ class FlipClockManager:
         proc = None
         last_exit_time = 0
         
-        print(f"Flip Clock screensaver daemon started. Timeout: {self.config['idle_timeout']}s.")
+        print(f"Flip Clock screensaver daemon started. Default timeout: {self.config.get('idle_timeout', 120)}s.")
         
         try:
             while True:
+                # Reload config on each tick to apply live setting updates
+                self.load_config()
+                
                 idle_ms = self.get_system_idle_time_ms()
                 try:
-                    idle_limit_ms = int(self.config['idle_timeout']) * 1000
+                    idle_limit_ms = int(self.config.get('idle_timeout', 120)) * 1000
                 except (ValueError, TypeError):
-                    idle_limit_ms = 120000 # fallback 2 min
+                    idle_limit_ms = 120000 # fallback 2 min (120 sec)
                     
                 now = time.time()
                 
