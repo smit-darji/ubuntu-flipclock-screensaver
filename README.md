@@ -38,14 +38,17 @@ Click the button below to download the official `.deb` package file:
 Download `flipclock-screensaver_1.0.0_all.deb` and install it using `apt` (which automatically fetches required dependencies):
 
 ```bash
-# Download package file via terminal (or click the Download button above)
+# 1. Download package file via terminal (or click the Download button above)
 wget https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/flipclock-screensaver_1.0.0_all.deb
 
-# Install package
+# 2. Ensure read permissions for installer
+chmod 644 flipclock-screensaver_1.0.0_all.deb
+
+# 3. Install package
 sudo apt update
 sudo apt install ./flipclock-screensaver_1.0.0_all.deb
 ```
-*(Alternatively, double-click the downloaded `flipclock-screensaver_1.0.0_all.deb` file to install via Ubuntu Software Center / GDebi).*
+*(Or install directly via dpkg: `sudo dpkg -i flipclock-screensaver_1.0.0_all.deb && sudo apt install -f`)*
 
 #### 2. Configure & Save Settings (Per User)
 Any logged-in user on the system can configure and save their personalized screensaver settings:
