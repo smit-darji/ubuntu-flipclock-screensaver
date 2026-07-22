@@ -75,12 +75,21 @@ class ScreensaverWindow(Gtk.Window):
     def on_motion_event(self, widget, event):
         global initial_x, initial_y
         
-        # Get absolute cursor position across all displays
-        display = Gdk.Display.get_default()
-        seat = display.get_default_seat()
-        pointer = seat.get_pointer()
-        _, x, y = pointer.get_position()
+        x = getattr(event, 'x_root', None)
+        y = getattr(event, 'y_root', None)
         
+        if x is None or y is None:
+            display = Gdk.Display.get_default()
+            if display:
+                seat = display.get_default_seat()
+                if seat:
+                    pointer = seat.get_pointer()
+                    if pointer:
+                        _, x, y = pointer.get_position()
+                        
+        if x is None or y is None:
+            return True
+            
         if initial_x is None or initial_y is None:
             initial_x = x
             initial_y = y

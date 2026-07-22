@@ -66,17 +66,10 @@ tracking_enabled = False
 
 def enable_mouse_tracking():
     global tracking_enabled, initial_x, initial_y
-    display = Gdk.Display.get_default()
-    if display:
-        seat = display.get_default_seat()
-        if seat:
-            pointer = seat.get_pointer()
-            if pointer:
-                _, x, y = pointer.get_position()
-                initial_x = x
-                initial_y = y
     tracking_enabled = True
-    print(f"Mouse motion tracking activated at base: ({initial_x}, {initial_y})")
+    initial_x = None
+    initial_y = None
+    print("Mouse motion tracking activated.")
     return False # Run once
 
 class FlipClockWindow(Gtk.Window):
@@ -147,10 +140,20 @@ class FlipClockWindow(Gtk.Window):
         if not tracking_enabled:
             return True
             
-        display = Gdk.Display.get_default()
-        seat = display.get_default_seat()
-        pointer = seat.get_pointer()
-        _, x, y = pointer.get_position()
+        x = getattr(event, 'x_root', None)
+        y = getattr(event, 'y_root', None)
+        
+        if x is None or y is None:
+            display = Gdk.Display.get_default()
+            if display:
+                seat = display.get_default_seat()
+                if seat:
+                    pointer = seat.get_pointer()
+                    if pointer:
+                        _, x, y = pointer.get_position()
+                        
+        if x is None or y is None:
+            return True
         
         if initial_x is None or initial_y is None:
             initial_x = x
@@ -411,45 +414,76 @@ class FlipClockManager:
             
         Gtk.main()
 
+    def get_system_idle_time_ms(self):
+        """Gets system idle time in milliseconds using GNOME DBus IdleMonitor or X11 XScreenSaver fallback."""
+        # 1. Try GNOME Mutter DBus IdleMonitor (works on both Wayland and X11)
+        try:
+            res = subprocess.run(
+                ["gdbus", "call", "--session", "--dest", "org.gnome.Mutter.IdleMonitor",
+                 "--object-path", "/org/gnome/Mutter/IdleMonitor/Core",
+                 "--method", "org.gnome.Mutter.IdleMonitor.GetIdletime"],
+                capture_output=True, text=True, timeout=1
+            )
+            if res.returncode == 0 and res.stdout:
+                clean_str = res.stdout.strip().replace('(', '').replace(')', '').replace('uint64', '').replace(',', '').strip()
+                if clean_str.isdigit():
+                    return int(clean_str)
+        except Exception:
+            pass
+
+        # 2. Try X11 libXss fallback
+        if X11_AVAILABLE:
+            try:
+                display = x11.XOpenDisplay(None)
+                if display:
+                    root = x11.XDefaultRootWindow(display)
+                    info_ptr = xss.XScreenSaverAllocInfo()
+                    if xss.XScreenSaverQueryInfo(display, root, info_ptr) != 0:
+                        idle_ms = info_ptr.contents.idle
+                        x11.XFree(info_ptr)
+                        x11.XCloseDisplay(display)
+                        return idle_ms
+                    x11.XFree(info_ptr)
+                    x11.XCloseDisplay(display)
+            except Exception:
+                pass
+
+        return 0
+
     def run_daemon(self):
         """Monitors idle time and launches/kills screensaver window dynamically."""
-        if not X11_AVAILABLE:
-            print("X11 is required for daemon idle detection. Exiting.")
-            sys.exit(1)
-            
-        display = x11.XOpenDisplay(None)
-        if not display:
-            print("Cannot open X11 Display. Is DISPLAY environment variable set?")
-            sys.exit(1)
-            
-        root = x11.XDefaultRootWindow(display)
-        info_ptr = xss.XScreenSaverAllocInfo()
-        
         proc = None
-        idle_limit_ms = self.config['idle_timeout'] * 1000
+        last_exit_time = 0
         
         print(f"Flip Clock screensaver daemon started. Timeout: {self.config['idle_timeout']}s.")
         
         try:
             while True:
-                if xss.XScreenSaverQueryInfo(display, root, info_ptr) != 0:
-                    idle_ms = info_ptr.contents.idle
-                else:
-                    idle_ms = 0
+                idle_ms = self.get_system_idle_time_ms()
+                try:
+                    idle_limit_ms = int(self.config['idle_timeout']) * 1000
+                except (ValueError, TypeError):
+                    idle_limit_ms = 120000 # fallback 2 min
                     
+                now = time.time()
+                
                 if idle_ms >= idle_limit_ms:
                     if proc is None:
-                        print(f"System idle for {idle_ms/1000:.1f}s. Spawning screensaver windows...")
-                        
-                        # Stop xscreensaver to avoid overlapping conflicts
-                        subprocess.run(["xscreensaver-command", "-exit"], capture_output=True)
-                        
-                        # Launch screensaver wrapper
-                        script_path = os.path.realpath(__file__)
-                        proc = subprocess.Popen([sys.executable, script_path, "--run"])
+                        # Enforce a 5-second cooldown after previous exit before respawning
+                        if (now - last_exit_time) > 5.0:
+                            print(f"System idle for {idle_ms/1000:.1f}s. Spawning screensaver windows...")
+                            
+                            # Stop xscreensaver to avoid overlapping conflicts
+                            subprocess.run(["xscreensaver-command", "-exit"], capture_output=True)
+                            
+                            # Launch screensaver wrapper
+                            script_path = os.path.realpath(__file__)
+                            proc = subprocess.Popen([sys.executable, script_path, "--run"])
                     else:
                         if proc.poll() is not None:
-                            proc = None # Screensaver exited internally
+                            print("Screensaver exited.")
+                            proc = None
+                            last_exit_time = time.time()
                 else:
                     if proc is not None:
                         if proc.poll() is None:
@@ -460,15 +494,14 @@ class FlipClockManager:
                             except subprocess.TimeoutExpired:
                                 proc.kill()
                         proc = None
+                        last_exit_time = time.time()
                         
-                time.sleep(0.5)
+                time.sleep(1.0)
         except KeyboardInterrupt:
             print("\nStopping daemon.")
         finally:
             if proc and proc.poll() is None:
                 proc.terminate()
-            x11.XFree(info_ptr)
-            x11.XCloseDisplay(display)
 
 
 if __name__ == "__main__":
