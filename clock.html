@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flip Clock Screensaver</title>
+    <!-- Google Font: Outfit for bold premium numbers and Inter for AM/PM -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Outfit', 'Inter', -apple-system, sans-serif;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            cursor: default;
+            position: relative;
+        }
+
+        /* Screen Saver Container (Steady at center, no movement) */
+        .screensaver-container {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4vh;
+            will-change: transform;
+            white-space: nowrap;
+        }
+
+        /* Clock Row */
+        .clock-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5vh;
+        }
+
+        /* Flip Card Base - Large sized to fill the screen */
+        .flip-card {
+            position: relative;
+            width: 60vh;
+            height: 78vh;
+            background-color: #1a1a1a;
+            border-radius: 6vh;
+            perspective: 1500px;
+            box-shadow: 0 6vh 12vh rgba(0, 0, 0, 0.95),
+                        0 1.5vh 3vh rgba(0, 0, 0, 0.4),
+                        inset 0 0.15vh 0.3vh rgba(255, 255, 255, 0.08);
+            border: 0.25vh solid #333333;
+        }
+
+        /* Card Halves */
+        .card-half {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            background-color: #1a1a1a;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        .card-top {
+            top: 0;
+            border-top-left-radius: 6vh;
+            border-top-right-radius: 6vh;
+            align-items: flex-end;
+            background: linear-gradient(to bottom, #222222 0%, #1a1a1a 100%);
+            border-bottom: 0.2vh solid rgba(0, 0, 0, 0.5);
+        }
+
+        .card-bottom {
+            bottom: 0;
+            border-bottom-left-radius: 6vh;
+            border-bottom-right-radius: 6vh;
+            align-items: flex-start;
+            background: linear-gradient(to bottom, #1a1a1a 0%, #141414 100%);
+            border-top: 0.2vh solid rgba(255, 255, 255, 0.03);
+        }
+
+        /* The horizontal crease line and shadows */
+        .card-divider {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 0.3vh;
+            background-color: #050505;
+            z-index: 10;
+            box-shadow: 0 0.15vh 0.3vh rgba(255, 255, 255, 0.05);
+        }
+
+        /* Text inside card */
+        .digit-text {
+            font-size: 50vh;
+            font-weight: 800;
+            color: #e2e2e2;
+            letter-spacing: -1vh;
+            line-height: 1;
+            font-family: 'Outfit', 'Inter', -apple-system, sans-serif;
+            text-align: center;
+        }
+
+        /* Adjust positions of digits so they align in the split */
+        .card-top .digit-text, .flipper-top .digit-text {
+            transform: translateY(50%);
+        }
+
+        .card-bottom .digit-text, .flipper-bottom .digit-text {
+            transform: translateY(-50%);
+        }
+
+        /* AM/PM Indicator inside Hour Card */
+        .ampm-indicator {
+            position: absolute;
+            top: 6%;
+            left: 8%;
+            font-size: 3.5vh;
+            font-weight: 800;
+            color: #333333;
+            text-transform: uppercase;
+            letter-spacing: 0.1vh;
+            line-height: 1.1;
+            z-index: 5;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .ampm-active {
+            color: #b5b5b5;
+        }
+
+        /* Flipping animation layers */
+        .flipper {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            z-index: 4;
+            transform-origin: bottom center;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        .flipper-top {
+            top: 0;
+            border-top-left-radius: 6vh;
+            border-top-right-radius: 6vh;
+            align-items: flex-end;
+            background: linear-gradient(to bottom, #161616 0%, #111111 100%);
+            border-bottom: 0.2vh solid rgba(0, 0, 0, 0.5);
+        }
+
+        .flipper-bottom {
+            bottom: 0;
+            border-bottom-left-radius: 6vh;
+            border-bottom-right-radius: 6vh;
+            align-items: flex-start;
+            background: linear-gradient(to bottom, #111111 0%, #0d0d0d 100%);
+            border-top: 0.2vh solid rgba(255, 255, 255, 0.03);
+            transform-origin: top center;
+        }
+
+        /* Animation classes */
+        .flip-top {
+            animation: flipTop 0.5s cubic-bezier(0.37, 0.01, 0.63, 1) forwards;
+        }
+
+        .flip-bottom {
+            animation: flipBottom 0.5s cubic-bezier(0.37, 0.01, 0.63, 1) forwards;
+        }
+
+        @keyframes flipTop {
+            0% {
+                transform: rotateX(0deg);
+            }
+            100% {
+                transform: rotateX(-90deg);
+            }
+        }
+
+        @keyframes flipBottom {
+            0% {
+                transform: rotateX(90deg);
+            }
+            100% {
+                transform: rotateX(0deg);
+            }
+        }
+
+        /* Small Card for Seconds */
+        .flip-card-small {
+            width: 30vh;
+            height: 39vh;
+            border-radius: 3vh;
+            border: 0.15vh solid #333333;
+            box-shadow: 0 3vh 6vh rgba(0, 0, 0, 0.95),
+                        0 0.75vh 1.5vh rgba(0, 0, 0, 0.4),
+                        inset 0 0.08vh 0.15vh rgba(255, 255, 255, 0.08);
+        }
+
+        .flip-card-small .card-half {
+            border-radius: 0;
+            background-color: #1a1a1a;
+        }
+
+        .flip-card-small .card-top {
+            border-top-left-radius: 3vh;
+            border-top-right-radius: 3vh;
+            background: linear-gradient(to bottom, #222222 0%, #1a1a1a 100%);
+        }
+
+        .flip-card-small .card-bottom {
+            border-bottom-left-radius: 3vh;
+            border-bottom-right-radius: 3vh;
+            background: linear-gradient(to bottom, #1a1a1a 0%, #141414 100%);
+        }
+
+        .flip-card-small .flipper-top {
+            border-top-left-radius: 3vh;
+            border-top-right-radius: 3vh;
+            background: linear-gradient(to bottom, #222222 0%, #1a1a1a 100%);
+        }
+
+        .flip-card-small .flipper-bottom {
+            border-bottom-left-radius: 3vh;
+            border-bottom-right-radius: 3vh;
+            background: linear-gradient(to bottom, #1a1a1a 0%, #141414 100%);
+        }
+
+        .flip-card-small .digit-text {
+            font-size: 25vh;
+            letter-spacing: -0.5vh;
+        }
+
+        .flip-card-small .card-divider {
+            height: 0.15vh;
+            box-shadow: 0 0.08vh 0.15vh rgba(255, 255, 255, 0.05);
+        }
+
+        /* Date Display (Simple and Elegant) */
+        .date-display {
+            font-size: 4.5vh;
+            font-weight: 600;
+            color: #888888;
+            letter-spacing: 0.8vh;
+            font-family: 'Inter', -apple-system, sans-serif;
+            text-align: center;
+            text-transform: uppercase;
+            margin-top: 3vh;
+            text-shadow: 0 0.2vh 0.4vh rgba(0, 0, 0, 0.5);
+            padding-bottom: 2vh;
+        }
+    </style>
+</head>
+<body>
+    <div class="screensaver-container">
+        <!-- Clock Row -->
+        <div class="clock-row">
+            <!-- HOUR CARD -->
+            <div class="flip-card" id="hours-card">
+                <!-- AM/PM Indicator inside top half -->
+                <div class="ampm-indicator">
+                    <span id="am-indicator">AM</span><br>
+                    <span id="pm-indicator">PM</span>
+                </div>
+                
+                <!-- Static top half -->
+                <div class="card-half card-top">
+                    <span class="digit-text" id="hours-top">09</span>
+                </div>
+                
+                <!-- Static bottom half -->
+                <div class="card-half card-bottom">
+                    <span class="digit-text" id="hours-bottom">09</span>
+                </div>
+                
+                <!-- Middle crease -->
+                <div class="card-divider"></div>
+            </div>
+            
+            <!-- MINUTE CARD -->
+            <div class="flip-card" id="minutes-card">
+                <!-- Static top half -->
+                <div class="card-half card-top">
+                    <span class="digit-text" id="minutes-top">00</span>
+                </div>
+                
+                <!-- Static bottom half -->
+                <div class="card-half card-bottom">
+                    <span class="digit-text" id="minutes-bottom">00</span>
+                </div>
+                
+                <!-- Middle crease -->
+                <div class="card-divider"></div>
+            </div>
+
+            <!-- SECOND CARD (Smaller size, continuously flipping) -->
+            <div class="flip-card flip-card-small" id="seconds-card">
+                <!-- Static top half -->
+                <div class="card-half card-top">
+                    <span class="digit-text" id="seconds-top">00</span>
+                </div>
+                
+                <!-- Static bottom half -->
+                <div class="card-half card-bottom">
+                    <span class="digit-text" id="seconds-bottom">00</span>
+                </div>
+                
+                <!-- Middle crease -->
+                <div class="card-divider"></div>
+            </div>
+        </div>
+
+        <!-- Date Display (Simple and Elegant) -->
+        <div class="date-display" id="date-display">WEDNESDAY, 22 JULY</div>
+    </div>
+
+    <script>
+        // Read configuration from URL query params
+        const urlParams = new URLSearchParams(window.location.search);
+        const format = urlParams.get('format') || '12';
+        const speedVal = parseInt(urlParams.get('speed') || '500', 10);
+        const clockSize = urlParams.get('size') || '1.0';
+        
+        // Dynamically override animation durations based on speed config
+        const animStyle = document.createElement('style');
+        animStyle.textContent = `
+            .flip-top { animation-duration: ${speedVal}ms; }
+            .flip-bottom { animation-duration: ${speedVal}ms; }
+        `;
+        document.head.appendChild(animStyle);
+
+        // Aspect-ratio auto-scaling function
+        function adjustClockScale() {
+            const container = document.querySelector('.screensaver-container');
+            if (!container) return;
+            
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            
+            // Calculate scale to fit width (165vh is the total layout width with margin)
+            const scaleWidth = width / (165 * (height / 100));
+            const scaleHeight = 1.0;
+            
+            let scale = Math.min(scaleWidth, scaleHeight);
+            
+            // Apply user's custom scale factor from config
+            const userScale = parseFloat(clockSize);
+            if (!isNaN(userScale)) {
+                scale *= userScale;
+            }
+            
+            container.style.transform = `translate(-50%, -50%) scale(${scale})`;
+        }
+
+        window.addEventListener('resize', adjustClockScale);
+
+        // Track current displayed state
+        let currentHours = "";
+        let currentMinutes = "";
+        let currentSeconds = "";
+        let currentDate = "";
+        let currentAmPm = "";
+
+        function getIstTimeAndDate() {
+            const now = new Date();
+            
+            // Format time options
+            const timeOptions = {
+                timeZone: 'Asia/Kolkata',
+                hour: 'numeric',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: format === '12'
+            };
+            
+            const timeFormatter = new Intl.DateTimeFormat('en-US', timeOptions);
+            const timeParts = timeFormatter.formatToParts(now);
+            
+            let hourVal = "";
+            let minuteVal = "";
+            let secondVal = "";
+            let ampmVal = "";
+            
+            for (const part of timeParts) {
+                if (part.type === 'hour') hourVal = part.value;
+                else if (part.type === 'minute') minuteVal = part.value;
+                else if (part.type === 'second') secondVal = part.value;
+                else if (part.type === 'dayPeriod') ampmVal = part.value.toUpperCase();
+            }
+            
+            // Format hour: if 12h, single digit. if 24h, double digit.
+            if (format === '24') {
+                hourVal = parseInt(hourVal, 10).toString().padStart(2, '0');
+                const indicator = document.querySelector('.ampm-indicator');
+                if (indicator) indicator.style.display = 'none';
+            } else {
+                hourVal = parseInt(hourVal, 10).toString();
+                const indicator = document.querySelector('.ampm-indicator');
+                if (indicator) indicator.style.display = 'block';
+            }
+            
+            // Format date in Asia/Kolkata: "WEDNESDAY, 22 JULY"
+            const dateOptions = {
+                timeZone: 'Asia/Kolkata',
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long'
+            };
+            const dateFormatter = new Intl.DateTimeFormat('en-US', dateOptions);
+            let dateVal = dateFormatter.format(now).toUpperCase();
+            
+            return {
+                hours: hourVal,
+                minutes: minuteVal,
+                seconds: secondVal,
+                dateStr: dateVal,
+                ampm: ampmVal
+            };
+        }
+
+        function createFlipperElement(parent, text, isTop) {
+            const flipper = document.createElement('div');
+            flipper.className = `card-half flipper ${isTop ? 'flipper-top' : 'flipper-bottom'}`;
+            
+            const span = document.createElement('span');
+            span.className = 'digit-text';
+            span.textContent = text;
+            flipper.appendChild(span);
+            
+            parent.appendChild(flipper);
+            return flipper;
+        }
+
+        function animateCard(cardId, oldVal, newVal, type) {
+            const card = document.getElementById(cardId);
+            if (!card) return;
+            
+            // Create the flipping cards
+            const flipTop = createFlipperElement(card, oldVal, true);
+            const flipBottom = createFlipperElement(card, newVal, false);
+            
+            // Set initial state of bottom flipper rotated out of view
+            flipBottom.style.transform = "rotateX(90deg)";
+            
+            // Trigger the top flip animation
+            flipTop.classList.add('flip-top');
+            
+            // Determine text id prefixes based on type
+            let topTextId = "";
+            let bottomTextId = "";
+            if (type === 'hours') {
+                topTextId = 'hours-top';
+                bottomTextId = 'hours-bottom';
+            } else if (type === 'minutes') {
+                topTextId = 'minutes-top';
+                bottomTextId = 'minutes-bottom';
+            } else if (type === 'seconds') {
+                topTextId = 'seconds-top';
+                bottomTextId = 'seconds-bottom';
+            }
+            
+            const halfSpeed = speedVal / 2;
+            
+            // halfway through top animation, hide top, start bottom flip
+            setTimeout(() => {
+                flipTop.remove();
+                
+                // Update static top half to show new value
+                const topTextEl = document.getElementById(topTextId);
+                if (topTextEl) topTextEl.textContent = newVal;
+                
+                // Trigger the bottom flip down
+                flipBottom.classList.add('flip-bottom');
+            }, halfSpeed);
+            
+            // When entire flip finishes, clean up and sync bottom static
+            setTimeout(() => {
+                flipBottom.remove();
+                
+                // Update static bottom half to show new value
+                const bottomTextEl = document.getElementById(bottomTextId);
+                if (bottomTextEl) bottomTextEl.textContent = newVal;
+            }, speedVal);
+        }
+
+        function updateClock(init = false) {
+            const { hours, minutes, seconds, dateStr, ampm } = getIstTimeAndDate();
+            
+            // AM/PM highlight
+            if (format === '12' && (ampm !== currentAmPm || init)) {
+                currentAmPm = ampm;
+                const amIndicator = document.getElementById('am-indicator');
+                const pmIndicator = document.getElementById('pm-indicator');
+                
+                if (amIndicator && pmIndicator) {
+                    if (ampm.includes('AM')) {
+                        amIndicator.classList.add('ampm-active');
+                        pmIndicator.classList.remove('ampm-active');
+                    } else {
+                        amIndicator.classList.remove('ampm-active');
+                        pmIndicator.classList.add('ampm-active');
+                    }
+                }
+            }
+
+            // Hours card flip
+            if (hours !== currentHours) {
+                if (init) {
+                    document.getElementById('hours-top').textContent = hours;
+                    document.getElementById('hours-bottom').textContent = hours;
+                } else {
+                    animateCard('hours-card', currentHours, hours, 'hours');
+                }
+                currentHours = hours;
+            }
+
+            // Minutes card flip
+            if (minutes !== currentMinutes) {
+                if (init) {
+                    document.getElementById('minutes-top').textContent = minutes;
+                    document.getElementById('minutes-bottom').textContent = minutes;
+                } else {
+                    animateCard('minutes-card', currentMinutes, minutes, 'minutes');
+                }
+                currentMinutes = minutes;
+            }
+
+            // Seconds card flip
+            if (seconds !== currentSeconds) {
+                if (init) {
+                    document.getElementById('seconds-top').textContent = seconds;
+                    document.getElementById('seconds-bottom').textContent = seconds;
+                } else {
+                    animateCard('seconds-card', currentSeconds, seconds, 'seconds');
+                }
+                currentSeconds = seconds;
+            }
+
+            // Date update
+            if (dateStr !== currentDate) {
+                const dateEl = document.getElementById('date-display');
+                if (dateEl) dateEl.textContent = dateStr;
+                currentDate = dateStr;
+            }
+        }
+
+        // Initialize clock instantly
+        updateClock(true);
+        adjustClockScale();
+        
+        // Check time every second
+        setInterval(() => updateClock(false), 1000);
+    </script>
+</body>
+</html>

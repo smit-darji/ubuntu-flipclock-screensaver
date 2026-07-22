@@ -1,0 +1,106 @@
+#!/usr/bin/env python3
+import sys
+import os
+import math
+import gi
+
+gi.require_version('Gtk', '3.0')
+gi.require_version('WebKit2', '4.0')
+from gi.repository import Gtk, Gdk, WebKit2, GLib
+
+# Shared mouse position variables to handle multi-monitor coordinate tracking
+initial_x = None
+initial_y = None
+threshold = 15 # pixels
+
+class ScreensaverWindow(Gtk.Window):
+    def __init__(self, html_path, monitor_idx):
+        super().__init__(title=f"Screensaver Clock - Monitor {monitor_idx}")
+        self.set_decorated(False)
+        self.set_keep_above(True)
+        
+        # Position the window on the correct monitor geometry
+        display = Gdk.Display.get_default()
+        monitor = display.get_monitor(monitor_idx)
+        geom = monitor.get_geometry()
+        self.move(geom.x, geom.y)
+        self.resize(geom.width, geom.height)
+        
+        # Enable event masks
+        self.add_events(Gdk.EventMask.POINTER_MOTION_MASK | 
+                        Gdk.EventMask.BUTTON_PRESS_MASK | 
+                        Gdk.EventMask.KEY_PRESS_MASK |
+                        Gdk.EventMask.SCROLL_MASK)
+        
+        # WebKit WebView
+        self.webview = WebKit2.WebView()
+        self.webview.add_events(Gdk.EventMask.POINTER_MOTION_MASK | 
+                                Gdk.EventMask.BUTTON_PRESS_MASK | 
+                                Gdk.EventMask.KEY_PRESS_MASK |
+                                Gdk.EventMask.SCROLL_MASK)
+        self.add(self.webview)
+        
+        # Load HTML
+        self.webview.load_uri("file://" + os.path.abspath(html_path))
+        
+        # Signals
+        self.connect("destroy", Gtk.main_quit)
+        self.connect("key-press-event", self.on_input_event)
+        self.connect("button-press-event", self.on_input_event)
+        self.connect("motion-notify-event", self.on_motion_event)
+        self.connect("scroll-event", self.on_input_event)
+        
+        self.webview.connect("key-press-event", self.on_input_event)
+        self.webview.connect("button-press-event", self.on_input_event)
+        self.webview.connect("motion-notify-event", self.on_motion_event)
+        self.webview.connect("scroll-event", self.on_input_event)
+        
+        self.show_all()
+        self.fullscreen_on_monitor(self.get_screen(), monitor_idx)
+        
+    def on_input_event(self, widget, event):
+        print(f"Input event detected: {event.type}. Exiting screensaver.")
+        Gtk.main_quit()
+        return True
+
+    def on_motion_event(self, widget, event):
+        global initial_x, initial_y
+        
+        # Get absolute cursor position across all displays
+        display = Gdk.Display.get_default()
+        seat = display.get_default_seat()
+        pointer = seat.get_pointer()
+        _, x, y = pointer.get_position()
+        
+        if initial_x is None or initial_y is None:
+            initial_x = x
+            initial_y = y
+            return True
+            
+        dist = math.sqrt((x - initial_x)**2 + (y - initial_y)**2)
+        if dist > threshold:
+            print(f"Mouse moved past threshold: {dist:.1f}px. Exiting.")
+            Gtk.main_quit()
+        return True
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Usage: screensaver.py <html_file>")
+        sys.exit(1)
+    
+    html_file = sys.argv[1]
+    
+    # Initialize GTK
+    Gtk.init(None)
+    
+    # Spawn a window for each connected monitor
+    display = Gdk.Display.get_default()
+    n_monitors = display.get_n_monitors()
+    print(f"Spawning screensaver clock windows on {n_monitors} monitors...")
+    
+    windows = []
+    for i in range(n_monitors):
+        win = ScreensaverWindow(html_file, monitor_idx=i)
+        windows.append(win)
+        
+    Gtk.main()
