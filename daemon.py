@@ -65,7 +65,12 @@ def main():
     root = x11.XDefaultRootWindow(display)
     info_ptr = xss.XScreenSaverAllocInfo()
     
-    script_dir = os.path.dirname(os.path.abspath(__file__))
+    script_dir = os.path.dirname(os.path.realpath(os.path.abspath(__file__)))
+    if not os.path.exists(os.path.join(script_dir, "screensaver.py")):
+        for candidate_dir in ["/usr/share/flipclock", "/usr/local/share/flipclock", os.path.expanduser("~/.local/share/flipclock"), os.getcwd()]:
+            if os.path.exists(os.path.join(candidate_dir, "screensaver.py")):
+                script_dir = candidate_dir
+                break
     screensaver_path = os.path.join(script_dir, "screensaver.py")
     html_path = os.path.join(script_dir, "clock.html")
     

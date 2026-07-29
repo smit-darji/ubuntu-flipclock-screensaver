@@ -36,15 +36,19 @@ def enable_mouse_input():
 
 def get_html_content(html_path_arg=None):
     candidates = []
-    if html_path_arg:
+    if html_path_arg and os.path.exists(html_path_arg):
         candidates.append(html_path_arg)
         
     script_dir = os.path.dirname(os.path.realpath(__file__))
     candidates.extend([
         os.path.join(script_dir, "clock.html"),
         os.path.join(script_dir, "index.html"),
-        os.path.expanduser("~/.local/share/flipclock/clock.html"),
         "/usr/share/flipclock/clock.html",
+        "/usr/share/flipclock/index.html",
+        "/usr/local/share/flipclock/clock.html",
+        "/usr/local/share/flipclock/index.html",
+        os.path.expanduser("~/.local/share/flipclock/clock.html"),
+        os.path.expanduser("~/.local/share/flipclock/index.html"),
         os.path.join(os.getcwd(), "clock.html"),
         os.path.join(os.getcwd(), "index.html")
     ])

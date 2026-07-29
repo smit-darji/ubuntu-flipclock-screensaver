@@ -75,14 +75,22 @@ You can easily configure screensaver options (12H/24H format, idle timeout, cloc
 
 ---
 
-## 🗑️ Uninstallation
+## 🔄 Reinstallation & Uninstallation
+
+### Reinstall `.deb` Package
+If you want to reinstall or update the package:
+```bash
+sudo apt install --reinstall ./flipclock-screensaver_1.0.0_all.deb
+```
 
 ### Uninstall `.deb` Package (Option 1)
+To completely remove the screensaver package:
 ```bash
 sudo apt remove flipclock-screensaver
 ```
 
 ### Uninstall Source Installation (Option 2)
+If you installed using the local source script:
 ```bash
 cd ubuntu-flipclock-screensaver
 chmod +x uninstall.sh

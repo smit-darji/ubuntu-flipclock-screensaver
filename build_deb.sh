@@ -17,6 +17,8 @@ mkdir -p "$PKG_DIR/etc/xdg/autostart"
 
 mkdir -p "$PKG_DIR/usr/share/pixmaps"
 mkdir -p "$PKG_DIR/usr/share/icons/hicolor/512x512/apps"
+mkdir -p "$PKG_DIR/usr/bin"
+mkdir -p "$PKG_DIR/usr/local/bin"
 
 # Copy application files
 cp clock.html "$PKG_DIR/usr/share/flipclock/"
@@ -33,6 +35,9 @@ if [ -f "flipclock.png" ]; then
     cp flipclock.png "$PKG_DIR/usr/share/pixmaps/flipclock.png"
     cp flipclock.png "$PKG_DIR/usr/share/icons/hicolor/512x512/apps/flipclock.png"
 fi
+
+ln -sf /usr/share/flipclock/flipclock.py "$PKG_DIR/usr/bin/flipclock"
+ln -sf /usr/share/flipclock/flipclock.py "$PKG_DIR/usr/local/bin/flipclock"
 
 # Create DEBIAN/control file
 cat << 'EOF' > "$PKG_DIR/DEBIAN/control"
