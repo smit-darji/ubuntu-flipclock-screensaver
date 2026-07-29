@@ -586,6 +586,31 @@ class FlipClockSettingsWindow(Gtk.Window):
             color: #e4e4e7;
             font-family: 'Inter', system-ui, sans-serif;
         }
+        headerbar {
+            background-color: #18181c;
+            background-image: linear-gradient(180deg, #222226 0%, #18181c 100%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            box-shadow: none;
+        }
+        headerbar .title {
+            color: #ffffff;
+            font-weight: bold;
+        }
+        headerbar .subtitle {
+            color: #d4af37;
+            font-size: 11px;
+        }
+        headerbar button {
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 6px;
+        }
+        headerbar button:hover {
+            background: rgba(255, 255, 255, 0.16);
+            color: #ffffff;
+        }
         .header-box {
             background: linear-gradient(180deg, #1e1e24 0%, #141418 100%);
             padding: 20px 24px;
@@ -620,6 +645,39 @@ class FlipClockSettingsWindow(Gtk.Window):
             font-size: 14px;
             font-weight: 500;
             color: #d4d4d8;
+        }
+        combobox button {
+            background: #24242a;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 6px;
+            padding: 4px 10px;
+        }
+        combobox button:hover {
+            background: #2e2e36;
+            border-color: rgba(212, 175, 55, 0.5);
+        }
+        combobox cellview {
+            color: #ffffff;
+            font-weight: 500;
+        }
+        menu, popover, popover contents {
+            background-color: #1c1c22;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            padding: 4px;
+            color: #ffffff;
+        }
+        menuitem, popover label {
+            color: #f4f4f5;
+            padding: 8px 12px;
+            font-weight: 500;
+            border-radius: 4px;
+        }
+        menuitem:hover, menuitem:selected {
+            background-color: #d4af37;
+            color: #000000;
+            font-weight: bold;
         }
         .btn-primary {
             background: linear-gradient(180deg, #e5c158 0%, #c8a830 100%);
