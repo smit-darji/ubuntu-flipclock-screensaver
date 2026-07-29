@@ -1,7 +1,7 @@
 # Premium Fliqlo-Style Flip Clock Screensaver for Ubuntu
 
 [![Platform](https://img.shields.io/badge/platform-Ubuntu%2020.04%20%7C%2022.04%20%7C%2024.04-orange.svg)](https://ubuntu.com)
-[![Download .deb Package](https://img.shields.io/badge/Download-ubuntu--flipclock--screensaver__2.0.0__all.deb-blue?style=for-the-badge&logo=debian)](https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/ubuntu-flipclock-screensaver_2.0.0_all.deb)
+[![Download .deb Package](https://img.shields.io/badge/Download-flipclock--screensaver__2.0.0__all.deb-blue?style=for-the-badge&logo=debian)](https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/flipclock-screensaver_2.0.0_all.deb)
 [![Language](https://img.shields.io/badge/language-Python%203%20%2B%20GTK3%20%2B%20HTML5-blue.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
@@ -54,7 +54,7 @@ A native, high-fidelity, multi-monitor flip clock screensaver for Ubuntu Linux. 
 
 ### Method 1: Install Debian Package (`.deb`) — *Recommended*
 
-Download `ubuntu-flipclock-screensaver_2.0.0_all.deb` and install via `apt` (which automatically resolves required system dependencies):
+Download `flipclock-screensaver_2.0.0_all.deb` and install via `apt` (which automatically resolves required system dependencies):
 
 ```bash
 # 1. Move to the screensaver project directory
@@ -62,7 +62,7 @@ cd /home/dev1035/dev-1035/smit.softvan.com/screensaver
 
 # 2. Install package using apt
 sudo apt update
-sudo apt install ./ubuntu-flipclock-screensaver_2.0.0_all.deb
+sudo apt install ./flipclock-screensaver_2.0.0_all.deb
 ```
 
 ---
@@ -133,7 +133,7 @@ To build a fresh `.deb` package file locally:
 chmod +x build_deb.sh
 ./build_deb.sh
 ```
-This generates `ubuntu-flipclock-screensaver_2.0.0_all.deb` in the project root directory.
+This generates `flipclock-screensaver_2.0.0_all.deb` in the project root directory.
 
 ---
 

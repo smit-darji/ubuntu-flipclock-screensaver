@@ -4,7 +4,7 @@
 set -e
 
 # Package name and version
-PKG_NAME="ubuntu-flipclock-screensaver"
+PKG_NAME="flipclock-screensaver"
 PKG_VER="2.0.0"
 PKG_DIR="flipclock-build"
 
