@@ -142,7 +142,7 @@ class ScreensaverWindow(Gtk.Window):
             print("Error: Could not locate clock.html or index.html")
             sys.exit(1)
             
-        config_script = f"<script>window.screensaverConfig = {{ format: '{fmt}', size: '{size}', speed: '{speed}' }};</script>"
+        config_script = f"<script>window.screensaverConfig = {{ monitor: '{monitor_idx}', format: '{fmt}', size: '{size}', speed: '{speed}' }};</script>"
         if "</head>" in html_content:
             html_content = html_content.replace("</head>", f"{config_script}</head>")
         else:
@@ -179,7 +179,6 @@ class ScreensaverWindow(Gtk.Window):
         return True
 
     def on_script_message(self, ucm, result):
-        global key_input_enabled, mouse_input_enabled
         reason = "DOM trigger"
         try:
             js_val = result.get_js_value()
@@ -188,9 +187,8 @@ class ScreensaverWindow(Gtk.Window):
         except Exception:
             pass
             
-        if key_input_enabled or mouse_input_enabled:
-            print(f"Script message exit trigger ({reason}). Exiting.")
-            Gtk.main_quit()
+        print(f"Script message exit trigger ({reason}). Exiting.")
+        Gtk.main_quit()
 
     def on_key_event(self, widget, event):
         global key_input_enabled

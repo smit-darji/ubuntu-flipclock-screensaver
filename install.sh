@@ -20,6 +20,9 @@ mkdir -p "$SYSTEMD_USER_DIR"
 # 3. Copy files to installation directory
 cp flipclock.py "$INSTALL_DIR/flipclock.py"
 cp clock.html "$INSTALL_DIR/clock.html"
+if [ -f "index.html" ]; then cp index.html "$INSTALL_DIR/index.html"; fi
+if [ -f "daemon.py" ]; then cp daemon.py "$INSTALL_DIR/daemon.py"; fi
+if [ -f "screensaver.py" ]; then cp screensaver.py "$INSTALL_DIR/screensaver.py"; fi
 chmod +x "$INSTALL_DIR/flipclock.py"
 
 ICON_PATH="preferences-desktop-screensaver"
@@ -97,7 +100,8 @@ Type=simple
 ExecStart=/usr/bin/python3 $INSTALL_DIR/flipclock.py --daemon
 Restart=always
 RestartSec=3
-Environment=DISPLAY=:0
+Environment=DISPLAY=${DISPLAY:-:1}
+Environment=XAUTHORITY=${XAUTHORITY:-/run/user/1000/gdm/Xauthority}
 
 [Install]
 WantedBy=default.target

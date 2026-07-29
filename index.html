@@ -3,446 +3,307 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flip Clock Screensaver</title>
-    <!-- Google Fonts with local fallback -->
+    <title>Premium Flip Clock Screensaver</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Cinzel:wght@700;800;900&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            user-select: none;
-            -webkit-user-select: none;
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; user-select:none; -webkit-user-select:none; }
+        html, body { width:100vw; height:100vh; overflow:hidden; cursor:none; }
+
+        /* ═══ SCENE — PURE BLACK ══════════════════════════ */
+        #scene {
+            position:relative;
+            width:100vw; height:100vh;
+            display:flex; flex-direction:column;
+            align-items:center; justify-content:center;
+            gap:5vh;
+            overflow:hidden;
+            background: #000000;
         }
 
-        html, body {
-            background-color: #000000;
-            color: #ffffff;
-            font-family: 'Outfit', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            height: 100vh;
-            width: 100vw;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            cursor: none;
+        /* Subtle center vignette glow */
+        #scene::before {
+            content:'';
+            position:absolute; inset:0;
+            background: radial-gradient(ellipse 70% 55% at 50% 48%, rgba(255,255,255,0.015) 0%, transparent 70%);
+            pointer-events:none; z-index:0;
         }
 
-        /* Screen Saver Container (Centered) */
-        .screensaver-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4.5vh;
-            will-change: transform;
-        }
-
-        /* Clock Row */
+        /* ═══ CLOCK ROW ═══════════════════════════════════ */
         .clock-row {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 4.5vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:clamp(14px, 3vw, 48px);
+            z-index:10;
+            width:100%;
+            max-width:94vw;
         }
 
-        /* Flip Card Base */
+        /* ═══ FLIP CARD — CHARCOAL + GOLD ═════════════════ */
         .flip-card {
-            position: relative;
-            width: 56vh;
-            height: 74vh;
-            background-color: #1a1a1a;
-            border-radius: 5.5vh;
-            box-shadow: 0 5vh 10vh rgba(0, 0, 0, 0.95),
-                        0 1.2vh 2.5vh rgba(0, 0, 0, 0.4),
-                        inset 0 0.15vh 0.3vh rgba(255, 255, 255, 0.08);
-            border: 0.25vh solid #2d2d2d;
-            overflow: hidden;
-            perspective: 1200px;
+            position:relative;
+            width:  clamp(160px, 36vh, 440px);
+            height: clamp(220px, 52vh, 620px);
+            border-radius: clamp(10px, 1.8vh, 24px);
+            overflow:hidden;
+            perspective:1400px;
+            flex-shrink:0;
+            /* Deep charcoal-black */
+            background: linear-gradient(170deg, #1e1e22 0%, #141418 40%, #0c0c10 100%);
+            /* Gold accent border */
+            border: 1.5px solid rgba(180,155,80,0.3);
+            box-shadow:
+                0 18px 70px rgba(0,0,0,0.95),
+                0 0 0 1px rgba(255,255,255,0.04),
+                inset 0 1px 0 rgba(255,255,255,0.08),
+                inset 0 -1px 0 rgba(0,0,0,0.8);
         }
 
-        /* Card Halves */
-        .card-half {
-            position: absolute;
-            left: 0;
-            width: 100%;
-            height: 50%;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            background-color: #1a1a1a;
-        }
-
+        /* Card halves */
+        .card-half { position:absolute; left:0; width:100%; height:50%; overflow:hidden; }
         .card-top {
-            top: 0;
-            align-items: flex-start;
-            background: linear-gradient(to bottom, #222222 0%, #1a1a1a 100%);
-            border-bottom: 0.2vh solid rgba(0, 0, 0, 0.6);
+            top:0;
+            border-radius: clamp(10px,1.8vh,24px) clamp(10px,1.8vh,24px) 0 0;
+            /* Slightly lighter charcoal — creates the split illusion */
+            background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.015) 100%);
+            border-bottom: 1px solid rgba(0,0,0,0.85);
         }
-
         .card-bottom {
-            bottom: 0;
-            align-items: flex-end;
-            background: linear-gradient(to bottom, #1a1a1a 0%, #121212 100%);
-            border-top: 0.1vh solid rgba(255, 255, 255, 0.03);
+            bottom:0;
+            border-radius: 0 0 clamp(10px,1.8vh,24px) clamp(10px,1.8vh,24px);
+            /* Darker bottom half — depth effect */
+            background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.08) 100%);
         }
 
-        /* Middle crease line */
+        /* Divider line */
         .card-divider {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            height: 0.3vh;
-            background-color: #060606;
-            z-index: 10;
-            box-shadow: 0 0.15vh 0.3vh rgba(255, 255, 255, 0.04);
+            position:absolute; top:50%; left:0;
+            width:100%; height:3px;
+            transform:translateY(-50%);
+            z-index:12;
+            background: #000000;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.95);
         }
+        /* Gold side pins */
+        .card-divider::before, .card-divider::after {
+            content:'';
+            position:absolute; top:50%; transform:translateY(-50%);
+            width:  clamp(5px, 0.7vh, 10px);
+            height: clamp(10px, 1.5vh, 18px);
+            border-radius: clamp(2px, 0.4vh, 5px);
+            background: linear-gradient(180deg, #e8cc70 0%, #b09840 50%, #806820 100%);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.2);
+        }
+        .card-divider::before { left:  clamp(8px, 1.2vh, 16px); }
+        .card-divider::after  { right: clamp(8px, 1.2vh, 16px); }
 
-        /* Text inside card */
+        /* Digit text — CRISP WHITE */
+        .digit-wrapper {
+            position:absolute; left:0; width:100%; height:200%;
+            display:flex; align-items:center; justify-content:center;
+        }
+        .card-top    .digit-wrapper, .flipper-top    .digit-wrapper { top:0; }
+        .card-bottom .digit-wrapper, .flipper-bottom .digit-wrapper { bottom:0; }
+
         .digit-text {
-            font-size: 47vh;
-            font-weight: 800;
-            color: #e2e2e2;
-            letter-spacing: -1vh;
-            line-height: 74vh;
-            font-family: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
-            text-align: center;
+            font-family:'Inter',system-ui,sans-serif;
+            font-size: clamp(90px, 22vh, 310px);
+            font-weight:800;
+            color: #f0f0f0;
+            letter-spacing:-0.02em;
+            line-height:1;
+            text-align:center;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
-        .card-top .digit-text {
-            margin-top: 0;
-        }
-
-        .card-bottom .digit-text {
-            margin-top: -37vh;
-        }
-
-        /* Flipper Animation Elements */
-        .flipper {
-            position: absolute;
-            left: 0;
-            width: 100%;
-            height: 50%;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            z-index: 4;
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-        }
-
+        /* Flip animations */
+        .flipper { position:absolute; left:0; width:100%; overflow:hidden; backface-visibility:hidden; }
         .flipper-top {
-            top: 0;
-            align-items: flex-start;
-            background: linear-gradient(to bottom, #202020 0%, #181818 100%);
-            transform-origin: bottom center;
-            border-bottom: 0.2vh solid rgba(0, 0, 0, 0.6);
+            top:0; height:50%;
+            transform-origin:bottom center;
+            border-radius: clamp(10px,1.8vh,24px) clamp(10px,1.8vh,24px) 0 0;
+            background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.015) 100%);
         }
-
         .flipper-bottom {
-            bottom: 0;
-            align-items: flex-end;
-            background: linear-gradient(to bottom, #181818 0%, #121212 100%);
-            transform-origin: top center;
+            bottom:0; height:50%;
+            transform-origin:top center;
+            border-radius: 0 0 clamp(10px,1.8vh,24px) clamp(10px,1.8vh,24px);
+            background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.08) 100%);
+        }
+        @keyframes flipTopOut    { 0%{transform:rotateX(0deg)}  100%{transform:rotateX(-90deg)} }
+        @keyframes flipBottomIn  { 0%{transform:rotateX(90deg)} 100%{transform:rotateX(0deg)}   }
+        .flip-top-out   { animation: flipTopOut   0.3s cubic-bezier(0.45,0,0.55,1) forwards; }
+        .flip-bottom-in { animation: flipBottomIn 0.3s cubic-bezier(0.45,0,0.55,1) 0.3s forwards; transform:rotateX(90deg); }
+
+        /* ═══ SEPARATOR — GOLD DOTS ═══════════════════════ */
+        .sep {
+            display:flex; flex-direction:column;
+            align-items:center;
+            gap:clamp(14px, 2.8vh, 32px);
+        }
+        .sep-dot {
+            width:  clamp(7px, 1vh, 14px);
+            height: clamp(7px, 1vh, 14px);
+            border-radius:50%;
+            background: radial-gradient(circle at 30% 28%, #f0d860 0%, #c8a830 45%, #806818 100%);
+            box-shadow: 0 0 12px rgba(200,168,48,0.4), 0 0 4px rgba(200,168,48,0.6);
         }
 
-        .flipper-top .digit-text {
-            margin-top: 0;
+        /* ═══ DATE BADGE ══════════════════════════════════ */
+        #date-badge {
+            z-index:10;
+            padding: clamp(7px,1vh,14px) clamp(22px,3.2vw,52px);
+            border-radius:50px;
+            font-family:'Cinzel',serif;
+            font-size:clamp(10px, 1.3vw, 18px);
+            font-weight:700;
+            letter-spacing:0.2em;
+            text-transform:uppercase;
+            color: #c8a830;
+            background: rgba(20,20,24,0.7);
+            border: 1px solid rgba(180,155,80,0.22);
+            box-shadow: 0 6px 30px rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
-        .flipper-bottom .digit-text {
-            margin-top: -37vh;
+        /* ═══ CLOSE BUTTON ════════════════════════════════ */
+        #close-btn {
+            position:fixed;
+            top:18px; right:18px;
+            z-index:9999;
+            width:44px; height:44px;
+            border-radius:50%;
+            border:1.5px solid rgba(180,155,80,0.3);
+            background:rgba(20,20,24,0.85);
+            backdrop-filter:blur(12px);
+            -webkit-backdrop-filter:blur(12px);
+            color:#c8a830;
+            font-size:20px;
+            font-weight:300;
+            font-family:'Inter',sans-serif;
+            cursor:pointer;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            opacity:0;
+            transition: opacity 0.4s ease, background 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
         }
-
-        @keyframes flipTop {
-            0% { transform: rotateX(0deg); }
-            100% { transform: rotateX(-90deg); }
+        #close-btn:hover {
+            background:rgba(200,168,48,0.2);
+            border-color:rgba(200,168,48,0.5);
+            transform:scale(1.1);
         }
-
-        @keyframes flipBottom {
-            0% { transform: rotateX(90deg); }
-            100% { transform: rotateX(0deg); }
-        }
-
-        .flip-top {
-            animation: flipTop 0.25s cubic-bezier(0.37, 0.01, 0.63, 1) forwards;
-        }
-
-        .flip-bottom {
-            animation: flipBottom 0.25s cubic-bezier(0.37, 0.01, 0.63, 1) forwards;
-        }
-
-        /* AM/PM Indicator inside Hour Card */
-        .ampm-indicator {
-            position: absolute;
-            top: 5.5%;
-            left: 7.5%;
-            font-size: 3.2vh;
-            font-weight: 800;
-            color: #333333;
-            text-transform: uppercase;
-            letter-spacing: 0.1vh;
-            line-height: 1.1;
-            z-index: 5;
-            font-family: 'Inter', system-ui, sans-serif;
-        }
-
-        .ampm-active {
-            color: #b5b5b5;
-        }
-
-        /* Small Card for Seconds */
-        .flip-card-small {
-            width: 28vh;
-            height: 37vh;
-            border-radius: 3vh;
-            border: 0.18vh solid #2d2d2d;
-            box-shadow: 0 3vh 6vh rgba(0, 0, 0, 0.95),
-                        0 0.75vh 1.5vh rgba(0, 0, 0, 0.4),
-                        inset 0 0.08vh 0.15vh rgba(255, 255, 255, 0.08);
-        }
-
-        .flip-card-small .digit-text {
-            font-size: 24vh;
-            line-height: 37vh;
-        }
-
-        .flip-card-small .card-top .digit-text {
-            margin-top: 0;
-        }
-
-        .flip-card-small .card-bottom .digit-text {
-            margin-top: -18.5vh;
-        }
-
-        .flip-card-small .flipper-top .digit-text {
-            margin-top: 0;
-        }
-
-        .flip-card-small .flipper-bottom .digit-text {
-            margin-top: -18.5vh;
-        }
-
-        /* Date Display */
-        .date-display {
-            font-size: 4.2vh;
-            font-weight: 600;
-            color: #888888;
-            letter-spacing: 0.8vh;
-            font-family: 'Inter', system-ui, sans-serif;
-            text-align: center;
-            text-transform: uppercase;
-            margin-top: 2.5vh;
-            text-shadow: 0 0.2vh 0.4vh rgba(0, 0, 0, 0.5);
+        #scene.show-close #close-btn {
+            opacity:1;
         }
     </style>
 </head>
 <body>
-    <div class="screensaver-container">
-        <!-- Clock Row -->
-        <div class="clock-row">
-            <!-- HOUR CARD -->
-            <div class="flip-card" id="hours-card">
-                <div class="ampm-indicator">
-                    <span id="am-indicator">AM</span><br>
-                    <span id="pm-indicator">PM</span>
-                </div>
-                
-                <div class="card-half card-top">
-                    <span class="digit-text" id="hours-top">00</span>
-                </div>
-                
-                <div class="card-half card-bottom">
-                    <span class="digit-text" id="hours-bottom">00</span>
-                </div>
-                
-                <div class="card-divider"></div>
-            </div>
-            
-            <!-- MINUTE CARD -->
-            <div class="flip-card" id="minutes-card">
-                <div class="card-half card-top">
-                    <span class="digit-text" id="minutes-top">00</span>
-                </div>
-                
-                <div class="card-half card-bottom">
-                    <span class="digit-text" id="minutes-bottom">00</span>
-                </div>
-                
-                <div class="card-divider"></div>
-            </div>
 
-            <!-- SECOND CARD -->
-            <div class="flip-card flip-card-small" id="seconds-card">
-                <div class="card-half card-top">
-                    <span class="digit-text" id="seconds-top">00</span>
-                </div>
-                
-                <div class="card-half card-bottom">
-                    <span class="digit-text" id="seconds-bottom">00</span>
-                </div>
-                
-                <div class="card-divider"></div>
-            </div>
+<div id="scene">
+    <button id="close-btn" onclick="forceClose()" title="Close Screensaver">✕</button>
+
+    <div class="clock-row">
+        <div class="flip-card" id="fc-h">
+            <div class="card-half card-top"><div class="digit-wrapper"><span class="digit-text" id="fc-h-top">00</span></div></div>
+            <div class="card-half card-bottom"><div class="digit-wrapper"><span class="digit-text" id="fc-h-bot">00</span></div></div>
+            <div class="card-divider"></div>
         </div>
 
-        <!-- Date Display -->
-        <div class="date-display" id="date-display">...</div>
+        <div class="sep"><div class="sep-dot"></div><div class="sep-dot"></div></div>
+
+        <div class="flip-card" id="fc-m">
+            <div class="card-half card-top"><div class="digit-wrapper"><span class="digit-text" id="fc-m-top">00</span></div></div>
+            <div class="card-half card-bottom"><div class="digit-wrapper"><span class="digit-text" id="fc-m-bot">00</span></div></div>
+            <div class="card-divider"></div>
+        </div>
+
+        <div class="sep"><div class="sep-dot"></div><div class="sep-dot"></div></div>
+
+        <div class="flip-card" id="fc-s">
+            <div class="card-half card-top"><div class="digit-wrapper"><span class="digit-text" id="fc-s-top">00</span></div></div>
+            <div class="card-half card-bottom"><div class="digit-wrapper"><span class="digit-text" id="fc-s-bot">00</span></div></div>
+            <div class="card-divider"></div>
+        </div>
     </div>
 
-    <script>
-        // Exit signal to WebKitGTK
-        let enableExit = false;
-        let startX = null;
-        let startY = null;
-        const MOVE_THRESHOLD = 30;
+    <div id="date-badge"></div>
+</div>
 
-        setTimeout(() => { enableExit = true; }, 600);
+<script>
+function updateDate() {
+    const now = new Date();
+    const days   = ['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];
+    const months = ['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'];
+    const b = document.getElementById('date-badge');
+    if (b) b.textContent = `${days[now.getDay()]} \u25C6 ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
+}
 
-        function requestExit(reason) {
-            if (!enableExit) return;
-            console.log("DOM exit:", reason);
-            if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.screensaverExit) {
-                window.webkit.messageHandlers.screensaverExit.postMessage(reason);
-            }
+let pH = -1, pM = -1, pS = -1;
+function updateFlip() {
+    const now = new Date();
+    const h = now.getHours(), m = now.getMinutes(), s = now.getSeconds();
+    const p = n => String(n).padStart(2,'0');
+    if (h !== pH) { doFlip('fc-h', p(h)); pH = h; }
+    if (m !== pM) { doFlip('fc-m', p(m)); pM = m; }
+    if (s !== pS) { doFlip('fc-s', p(s)); pS = s; }
+}
+
+function doFlip(id, val) {
+    const t = document.getElementById(id+'-top');
+    const b = document.getElementById(id+'-bot');
+    const c = document.getElementById(id);
+    if (!t||!b||!c) return;
+    const prev = t.textContent;
+    if (prev === val) return;
+
+    const ft = document.createElement('div');
+    ft.className = 'flipper flipper-top';
+    ft.innerHTML = '<div class="digit-wrapper"><span class="digit-text">'+prev+'</span></div>';
+    const fb = document.createElement('div');
+    fb.className = 'flipper flipper-bottom';
+    fb.innerHTML = '<div class="digit-wrapper"><span class="digit-text">'+val+'</span></div>';
+
+    c.appendChild(ft); c.appendChild(fb);
+    requestAnimationFrame(function() { ft.classList.add('flip-top-out'); fb.classList.add('flip-bottom-in'); });
+    t.textContent = val; b.textContent = val;
+    setTimeout(function() { ft.remove(); fb.remove(); }, 700);
+}
+
+function forceClose() {
+    try {
+        if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.screensaverExit) {
+            window.webkit.messageHandlers.screensaverExit.postMessage("forceClose");
         }
+    } catch(e) {}
+    window.close();
+    try { document.title = 'EXIT_SCREENSAVER'; } catch(e) {}
+}
 
-        window.addEventListener('keydown', (e) => requestExit('keydown:' + e.key));
-        window.addEventListener('mousedown', (e) => requestExit('mousedown'));
-        window.addEventListener('touchstart', (e) => requestExit('touchstart'));
-        window.addEventListener('wheel', (e) => requestExit('wheel'), { passive: true });
+// Show close button on mouse movement, hide after 3s idle
+let hideTimer = null;
+document.addEventListener('mousemove', function() {
+    document.getElementById('scene').classList.add('show-close');
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(function() {
+        document.getElementById('scene').classList.remove('show-close');
+    }, 3000);
+});
 
-        window.addEventListener('mousemove', (e) => {
-            if (startX === null || startY === null) {
-                startX = e.clientX;
-                startY = e.clientY;
-                return;
-            }
-            if (!enableExit) {
-                startX = e.clientX;
-                startY = e.clientY;
-                return;
-            }
-            const dist = Math.hypot(e.clientX - startX, e.clientY - startY);
-            if (dist > MOVE_THRESHOLD) {
-                requestExit(`mousemove (${dist.toFixed(1)}px)`);
-            }
-        });
+// Escape key closes
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') forceClose();
+});
 
-        // Configuration
-        const urlParams = new URLSearchParams(window.location.search);
-        const cfg = window.screensaverConfig || {};
-        const format = cfg.format || urlParams.get('format') || '12';
-
-        let currentHours = "";
-        let currentMinutes = "";
-        let currentSeconds = "";
-
-        function createFlipper(card, text, isTop) {
-            const flipper = document.createElement('div');
-            flipper.className = `flipper ${isTop ? 'flipper-top' : 'flipper-bottom'}`;
-            const span = document.createElement('span');
-            span.className = 'digit-text';
-            span.textContent = text;
-            flipper.appendChild(span);
-            card.appendChild(flipper);
-            return flipper;
-        }
-
-        function animateCard(cardId, oldVal, newVal, topId, bottomId) {
-            const card = document.getElementById(cardId);
-            if (!card) return;
-
-            const flipTop = createFlipper(card, oldVal, true);
-            const flipBottom = createFlipper(card, newVal, false);
-            flipBottom.style.transform = 'rotateX(90deg)';
-
-            flipTop.classList.add('flip-top');
-
-            setTimeout(() => {
-                flipTop.remove();
-                document.getElementById(topId).textContent = newVal;
-                flipBottom.classList.add('flip-bottom');
-            }, 250);
-
-            setTimeout(() => {
-                flipBottom.remove();
-                document.getElementById(bottomId).textContent = newVal;
-            }, 500);
-        }
-
-        function updateClock(init = false) {
-            const now = new Date();
-            let hoursNum = now.getHours();
-            let minutesNum = now.getMinutes();
-            let secondsNum = now.getSeconds();
-            
-            let ampmVal = "";
-            if (format === '12') {
-                ampmVal = hoursNum >= 12 ? 'PM' : 'AM';
-                hoursNum = hoursNum % 12;
-                if (hoursNum === 0) hoursNum = 12;
-            }
-            
-            let hourVal = hoursNum.toString().padStart(2, '0');
-            let minuteVal = minutesNum.toString().padStart(2, '0');
-            let secondVal = secondsNum.toString().padStart(2, '0');
-            
-            const amIndicator = document.getElementById('am-indicator');
-            const pmIndicator = document.getElementById('pm-indicator');
-            const ampmBox = document.querySelector('.ampm-indicator');
-            
-            if (format === '24') {
-                if (ampmBox) ampmBox.style.display = 'none';
-            } else {
-                if (ampmBox) ampmBox.style.display = 'block';
-                if (amIndicator && pmIndicator) {
-                    if (ampmVal.includes('AM')) {
-                        amIndicator.classList.add('ampm-active');
-                        pmIndicator.classList.remove('ampm-active');
-                    } else {
-                        amIndicator.classList.remove('ampm-active');
-                        pmIndicator.classList.add('ampm-active');
-                    }
-                }
-            }
-
-            if (init) {
-                document.getElementById('hours-top').textContent = hourVal;
-                document.getElementById('hours-bottom').textContent = hourVal;
-                document.getElementById('minutes-top').textContent = minuteVal;
-                document.getElementById('minutes-bottom').textContent = minuteVal;
-                document.getElementById('seconds-top').textContent = secondVal;
-                document.getElementById('seconds-bottom').textContent = secondVal;
-            } else {
-                if (hourVal !== currentHours) animateCard('hours-card', currentHours, hourVal, 'hours-top', 'hours-bottom');
-                if (minuteVal !== currentMinutes) animateCard('minutes-card', currentMinutes, minuteVal, 'minutes-top', 'minutes-bottom');
-                if (secondVal !== currentSeconds) animateCard('seconds-card', currentSeconds, secondVal, 'seconds-top', 'seconds-bottom');
-            }
-
-            currentHours = hourVal;
-            currentMinutes = minuteVal;
-            currentSeconds = secondVal;
-
-            const dateOptions = { weekday: 'long', day: 'numeric', month: 'long' };
-            document.getElementById('date-display').textContent = new Intl.DateTimeFormat(undefined, dateOptions).format(now).toUpperCase();
-        }
-
-        // Precision sync loop aligning to system clock top-of-second (000ms)
-        function scheduleNextTick() {
-            const now = new Date();
-            const delay = 1000 - now.getMilliseconds();
-            setTimeout(() => {
-                updateClock(false);
-                scheduleNextTick();
-            }, delay);
-        }
-
-        updateClock(true);
-        scheduleNextTick();
-    </script>
+window.addEventListener('load', function() {
+    updateDate(); updateFlip();
+    setInterval(updateFlip, 1000);
+    setInterval(updateDate, 30000);
+});
+</script>
 </body>
 </html>

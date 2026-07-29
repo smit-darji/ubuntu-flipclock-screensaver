@@ -176,7 +176,7 @@ class FlipClockWindow(Gtk.Window):
         size = config_params.get('clock_size', '1.0')
         speed = config_params.get('animation_speed', 500)
         
-        config_script = f"<script>window.screensaverConfig = {{ format: '{fmt}', size: '{size}', speed: '{speed}' }};</script>"
+        config_script = f"<script>window.screensaverConfig = {{ monitor: '{monitor_idx}', format: '{fmt}', size: '{size}', speed: '{speed}' }};</script>"
         if "</head>" in html_content:
             html_content = html_content.replace("</head>", f"{config_script}</head>")
         else:
@@ -212,7 +212,6 @@ class FlipClockWindow(Gtk.Window):
         return True
 
     def on_script_message(self, ucm, result):
-        global key_input_enabled, mouse_input_enabled
         reason = "DOM trigger"
         try:
             js_val = result.get_js_value()
@@ -221,9 +220,8 @@ class FlipClockWindow(Gtk.Window):
         except Exception:
             pass
             
-        if key_input_enabled or mouse_input_enabled:
-            print(f"Script message exit trigger ({reason}). Exiting.")
-            Gtk.main_quit()
+        print(f"Script message exit trigger ({reason}). Exiting.")
+        Gtk.main_quit()
 
     def on_key_event(self, widget, event):
         global key_input_enabled
@@ -306,6 +304,7 @@ class FlipClockSettingsWindow(Gtk.Window):
         grid.attach(lbl_timeout, 0, 1, 1, 1)
         
         self.combo_timeout = Gtk.ComboBoxText()
+        self.combo_timeout.append("60", "1 Minute")
         self.combo_timeout.append("120", "2 Minutes")
         self.combo_timeout.append("180", "3 Minutes")
         self.combo_timeout.append("240", "4 Minutes")
@@ -315,8 +314,8 @@ class FlipClockSettingsWindow(Gtk.Window):
         self.combo_timeout.append("1800", "30 Minutes")
         self.combo_timeout.append("3600", "1 Hour")
         
-        current_to = str(self.manager.config.get('idle_timeout', 120))
-        if current_to not in ["120", "180", "240", "300", "600", "900", "1800", "3600"]:
+        current_to = str(self.manager.config.get('idle_timeout', 60))
+        if current_to not in ["60", "120", "180", "240", "300", "600", "900", "1800", "3600"]:
             self.combo_timeout.append(current_to, f"{int(current_to)//60} Minutes")
         self.combo_timeout.set_active_id(current_to)
         grid.attach(self.combo_timeout, 1, 1, 1, 1)
@@ -342,11 +341,11 @@ class FlipClockSettingsWindow(Gtk.Window):
         
     def on_save_clicked(self, button):
         fmt = self.combo_format.get_active_id() or "12"
-        timeout_str = self.combo_timeout.get_active_id() or "120"
+        timeout_str = self.combo_timeout.get_active_id() or "60"
         try:
             timeout = int(timeout_str)
         except ValueError:
-            timeout = 120
+            timeout = 60
         size = f"{self.scale_size.get_value():.1f}"
         
         self.manager.config['hour_format'] = fmt
@@ -390,7 +389,7 @@ class FlipClockManager:
         self.html_path = os.path.join(self.script_dir, "clock.html")
         
         self.config = {
-            'idle_timeout': 120,
+            'idle_timeout': 60,
             'hour_format': '12',
             'clock_size': '1.0',
             'animation_speed': 500,
@@ -408,7 +407,7 @@ class FlipClockManager:
                 parser.read(self.config_path)
                 if 'Settings' in parser:
                     settings = parser['Settings']
-                    self.config['idle_timeout'] = settings.getint('idle_timeout', 120)
+                    self.config['idle_timeout'] = settings.getint('idle_timeout', 60)
                     self.config['hour_format'] = settings.get('hour_format', '12')
                     self.config['clock_size'] = settings.get('clock_size', '1.0')
                     self.config['animation_speed'] = settings.getint('animation_speed', 500)
@@ -544,7 +543,7 @@ class FlipClockManager:
         proc = None
         state = "IDLE"  # IDLE, RUNNING, WAIT_USER_ACTIVE
         
-        print(f"Flip Clock screensaver daemon started. Default timeout: {self.config.get('idle_timeout', 120)}s.")
+        print(f"Flip Clock screensaver daemon started. Default timeout: {self.config.get('idle_timeout', 60)}s.")
         
         try:
             while True:
@@ -552,14 +551,17 @@ class FlipClockManager:
                 
                 idle_ms = self.get_system_idle_time_ms()
                 try:
-                    idle_limit_ms = int(self.config.get('idle_timeout', 120)) * 1000
+                    idle_limit_ms = int(self.config.get('idle_timeout', 60)) * 1000
                 except (ValueError, TypeError):
-                    idle_limit_ms = 120000
+                    idle_limit_ms = 60000
                     
                 if state == "IDLE":
                     if idle_ms >= idle_limit_ms:
                         print(f"System idle for {idle_ms/1000:.1f}s. Spawning screensaver windows...")
-                        subprocess.run(["xscreensaver-command", "-exit"], capture_output=True)
+                        try:
+                            subprocess.run(["xscreensaver-command", "-exit"], capture_output=True)
+                        except FileNotFoundError:
+                            pass
                         
                         script_path = os.path.realpath(__file__)
                         proc = subprocess.Popen([sys.executable, script_path, "--run"])

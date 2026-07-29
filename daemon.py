@@ -54,7 +54,7 @@ def get_idle_time(display, root, info_ptr):
 
 def main():
     parser = argparse.ArgumentParser(description="Screensaver Clock Daemon")
-    parser.add_argument("--timeout", type=int, default=120, help="Idle timeout in seconds (default: 120)")
+    parser.add_argument("--timeout", type=int, default=60, help="Idle timeout in seconds (default: 60)")
     args = parser.parse_args()
 
     display = x11.XOpenDisplay(None)
@@ -83,7 +83,10 @@ def main():
             if state == "IDLE":
                 if idle >= idle_limit:
                     print(f"System idle for {idle/1000:.1f}s. Launching screensaver clock...")
-                    subprocess.run(["xscreensaver-command", "-exit"], capture_output=True)
+                    try:
+                        subprocess.run(["xscreensaver-command", "-exit"], capture_output=True)
+                    except FileNotFoundError:
+                        pass
                     proc = subprocess.Popen([sys.executable, screensaver_path, html_path])
                     state = "RUNNING"
             

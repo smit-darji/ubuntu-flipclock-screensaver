@@ -57,6 +57,7 @@ set -e
 chmod +x /usr/share/flipclock/flipclock.py
 
 # Create system bin symlinks
+mkdir -p /usr/bin /usr/local/bin
 ln -sf /usr/share/flipclock/flipclock.py /usr/bin/flipclock
 ln -sf /usr/share/flipclock/flipclock.py /usr/local/bin/flipclock
 
@@ -73,7 +74,7 @@ fi
 
 echo "=========================================================="
 echo " Flip Clock Screensaver successfully installed!"
-echo " The daemon is active and will start after 2 min idle time."
+echo " The daemon is active and will start after idle time."
 echo " To configure settings, run:"
 echo "   flipclock --settings"
 echo " To preview screensaver immediately, run:"
@@ -81,6 +82,17 @@ echo "   flipclock --run"
 echo "=========================================================="
 EOF
 chmod 755 "$PKG_DIR/DEBIAN/postinst"
+
+# Create DEBIAN/prerm (pre-removal script)
+cat << 'EOF' > "$PKG_DIR/DEBIAN/prerm"
+#!/bin/bash
+set -e
+
+# Stop running daemon before removal
+pkill -f "flipclock.*--daemon" || true
+pkill -f "flipclock.py" || true
+EOF
+chmod 755 "$PKG_DIR/DEBIAN/prerm"
 
 # Create DEBIAN/postrm (post-removal script)
 cat << 'EOF' > "$PKG_DIR/DEBIAN/postrm"
@@ -91,6 +103,11 @@ if [ "$1" = "remove" ] || [ "$1" = "purge" ]; then
     # Remove system bin symlinks
     rm -f /usr/bin/flipclock
     rm -f /usr/local/bin/flipclock
+
+    if command -v gtk-update-icon-cache >/dev/null 2>&1; then
+        gtk-update-icon-cache -f /usr/share/icons/hicolor || true
+    fi
+
     echo "Flip Clock Screensaver successfully removed."
 fi
 EOF
