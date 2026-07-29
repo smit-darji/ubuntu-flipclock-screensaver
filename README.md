@@ -7,140 +7,94 @@
 
 ![Flip Clock Screensaver Preview](screenshot.png)
 
-A native, high-fidelity, dual-monitor flip clock screensaver for Ubuntu Linux. It brings a stunning, vintage airport split-flap style retro clock to your workstation, rendering across all connected displays simultaneously with smooth 3D CSS animations and automatic screen size scaling.
+A native, high-fidelity, multi-monitor flip clock screensaver for Ubuntu Linux. It brings a vintage airport split-flap style retro clock to your desktop, rendering across all connected displays simultaneously with smooth 3D CSS animations and automatic screen scaling.
 
 ---
 
-## Key Features
+## 🚀 Quick Download & Installation
 
-* **Vintage split-flap clock UI** — Beautiful Fliqlo-style charcoal cards, subtle border highlights, rounded corners, and realistic card flip shadows.
-* **Dual-monitor & multi-monitor support** — Automatically detects monitor count, geometry, and placement. Spawns independent fullscreen screensaver windows per display.
-* **Aspect ratio auto-scaling** — Dynamically adjusts visual scale using CSS transforms. Adapts to ultra-wide, standard, and portrait (vertical) monitors without any cut-offs or side cropping.
-* **Graphical settings application** — Simple desktop GUI to adjust:
-  * **Time format** (12-Hour AM/PM vs 24-Hour).
-  * **Idle timeout** (2, 3, 4, 5, 10, 15, 30 minutes, or 1 hour).
-  * **Clock size** (slider from `0.5x` to `2.0x` scale).
-* **Safe input listener** — Instantly shuts down the screensaver when keyboard activity, mouse clicks, mouse scrolls, or mouse movements (exceeding a small threshold to avoid accidental bumps) are registered.
-* **Visible cursor** — Keeps the default mouse pointer visible on start for easy navigation and interactive control.
-* **Ultra-lightweight** — Uses a native background daemon querying the low-level X11 Screen Saver extension (`libXss` via `ctypes`), resulting in **0.0% idle CPU utilization** and near-zero power consumption.
+### Option 1: Direct `.deb` Package Download (Recommended)
 
----
-
-## Installation Methods
-
-### Method 1: Download & Install Debian Package (`flipclock-screensaver_1.0.0_all.deb`) — *Recommended*
-
-Click the button below to download the official `.deb` package file:
-
-[<img src="https://img.shields.io/badge/Download-flipclock--screensaver__1.0.0__all.deb-2088FF?style=for-the-badge&logo=debian&logoColor=white" height="42">](https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/flipclock-screensaver_1.0.0_all.deb)
-
-#### 1. Download & Install via Terminal or GUI
-Download `flipclock-screensaver_1.0.0_all.deb` and install it using `apt` (which automatically fetches required dependencies):
+Download the `.deb` file directly from GitHub and install with `apt`:
 
 ```bash
-# 1. Download package file via terminal (or click the Download button above)
+# 1. Download the latest .deb package from GitHub
 wget https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/flipclock-screensaver_1.0.0_all.deb
 
-# 2. Ensure read permissions for installer
-chmod 644 flipclock-screensaver_1.0.0_all.deb
-
-# 3. Install package
+# 2. Install the package (automatically handles dependencies)
 sudo apt update
 sudo apt install ./flipclock-screensaver_1.0.0_all.deb
 ```
-*(Or install directly via dpkg: `sudo dpkg -i flipclock-screensaver_1.0.0_all.deb && sudo apt install -f`)*
-
-#### 2. Configure & Save Settings (Per User)
-Any logged-in user on the system can configure and save their personalized screensaver settings:
-* Open **"Flip Clock Settings"** from the Ubuntu Applications menu, or run in terminal:
-  ```bash
-  flipclock --settings
-  ```
-* Custom options include **Time Format** (12-Hour AM/PM vs 24-Hour), **Idle Timeout** (2, 3, 5, 10, 15, 30 min, 1 hour), and **Clock Scaling**.
-* Click **"Save & Apply"** to write settings to `~/.config/flipclock/flipclock.conf` and restart the idle daemon for your account.
-
-#### 3. Perform / Run Screensaver
-* **Automatic Idle Screen**: The background daemon starts automatically at login and triggers the flip clock screensaver after your configured idle duration.
-* **Manual Trigger**: Launch **"Flip Clock Screensaver"** from the Applications menu or run:
-  ```bash
-  flipclock --run
-  ```
 
 ---
 
-### Method 2: Installing from Source (Local Script)
+### Option 2: Clone GitHub Repository & Install from Source
 
-If you prefer to install it locally inside your user profile directory without using `apt`:
+If you prefer to clone the repository and run the local installation script:
 
-#### 1. Install System Dependencies
-Make sure you have the required Python GI binding and WebKit library:
 ```bash
+# 1. Clone the repository
+git clone https://github.com/smit-darji/ubuntu-flipclock-screensaver.git
+cd ubuntu-flipclock-screensaver
+
+# 2. Install required system dependencies
 sudo apt update
 sudo apt install python3 python3-gi gir1.2-gtk-3.0 gir1.2-webkit2-4.0 libxss1
-```
-*(Note: Newer systems like Ubuntu 24.04 use `gir1.2-webkit2-4.1` which is automatically supported by our dynamic loader).*
 
-#### 2. Run the Local Installer
-Run the local `install.sh` script:
-```bash
+# 3. Run the installer
 chmod +x install.sh
 ./install.sh
 ```
 
 ---
 
-## Usage & Commands
+## ⚙️ Setup & Configuration
 
-Once installed via the Debian package, the commands are added to your global user path:
+You can easily configure screensaver options (12H/24H format, idle timeout, clock scaling):
 
-| Command | Action |
-|---|---|
-| `flipclock` or `flipclock --run` | Previews/starts the screensaver windows immediately. |
-| `flipclock --settings` | Opens the graphical settings panel (also searchable as **"Flip Clock Settings"** in the Applications menu). |
-| `flipclock --daemon` | Starts the background idle monitor daemon. |
-| `pkill -f "flipclock.*--daemon"` | Stops the background idle monitor daemon. |
-
----
-
-## Package Security & Verification
-
-We value system security. The `.deb` package compiles standard sandboxed dependencies and operates with the following security guidelines:
-* **Fully offline operation** — The screensaver tracks time locally and does not establish network connections.
-* **No sudo needed at runtime** — The background daemon and configuration editor run entirely in user-space under the active user's permissions.
-* **System packages only** — Relies exclusively on official, security-maintained Ubuntu repository libraries (`libX11`, `libXss`, `WebKitGTK`).
-* **Source inspection** — Inspect the packaging script anytime:
+* **Open Graphical Settings**:
+  Search for **"Flip Clock Settings"** in Ubuntu Applications menu or run in terminal:
   ```bash
-  cat build_deb.sh
+  flipclock --settings
+  ```
+* **Test / Preview Immediately**:
+  ```bash
+  flipclock --run
   ```
 
 ---
 
-## Configuration
+## 💡 Usage & Commands
 
-Settings are saved in the standard user config path at `~/.config/flipclock/flipclock.conf`. You can edit this file manually or use the Settings GUI application:
-
-```ini
-[Settings]
-idle_timeout = 180        # Idle duration in seconds before screensaver starts (e.g., 180 = 3 minutes)
-hour_format = 24          # Time format: 12 (AM/PM style) or 24 (24-hour style)
-clock_size = 1.0          # Scaling factor (0.5 to 2.0)
-animation_speed = 500     # Flipping transition duration in milliseconds
-monitors = all            # Spawning targets: "all" or specific monitor indices (e.g., "0,1")
-```
+| Command | Action |
+|---|---|
+| `flipclock` or `flipclock --run` | Launches the screensaver preview immediately |
+| `flipclock --settings` | Opens the GUI settings window |
+| `flipclock --daemon` | Runs the background idle monitor daemon |
+| `pkill -f "flipclock.*--daemon"` | Stops the background idle monitor daemon |
 
 ---
 
-## Uninstallation
+## 🗑️ Uninstallation
 
-### Package Uninstall (Method 1)
-To completely remove the package, launcher entries, and clean up system symlinks:
+### Uninstall `.deb` Package (Option 1)
 ```bash
 sudo apt remove flipclock-screensaver
 ```
 
-### Local Script Uninstall (Method 2)
-If you installed using the local source script:
+### Uninstall Source Installation (Option 2)
 ```bash
+cd ubuntu-flipclock-screensaver
 chmod +x uninstall.sh
 ./uninstall.sh
 ```
+
+---
+
+## ✨ Key Features
+
+* **Split-Flap Retro Clock UI**: Fliqlo-style charcoal cards with realistic flip animations.
+* **Multi-Monitor Support**: Automatically detects all monitors and displays full-screen clock windows per display.
+* **Auto Aspect-Ratio Scaling**: Adapts seamlessly to ultra-wide, standard, and vertical portrait screens.
+* **Instant Exit on Input**: Exits immediately when keyboard keys or mouse movements/clicks are detected.
+* **Zero CPU Overhead**: Idle monitoring daemon runs via native X11 Screen Saver extension with 0.0% CPU usage.
