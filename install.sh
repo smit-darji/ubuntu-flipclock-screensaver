@@ -40,11 +40,16 @@ if [ ! -f "$CONFIG_DIR/flipclock.conf" ]; then
     echo "Creating default configuration file..."
     cat <<EOF > "$CONFIG_DIR/flipclock.conf"
 [Settings]
-idle_timeout = 120
+idle_timeout = 60
 hour_format = 12
 clock_size = 1.0
 animation_speed = 500
 monitors = all
+theme = dark_gold
+show_seconds = true
+show_date = true
+bg_style = vignette
+custom_credit = Customized by Antigravity AI
 EOF
 fi
 
