@@ -44,9 +44,9 @@ ln -sf /usr/share/flipclock/flipclock.py "$PKG_DIR/usr/bin/flipclock"
 ln -sf /usr/share/flipclock/flipclock.py "$PKG_DIR/usr/local/bin/flipclock"
 
 # Create DEBIAN/control file
-cat << 'EOF' > "$PKG_DIR/DEBIAN/control"
+cat << EOF > "$PKG_DIR/DEBIAN/control"
 Package: flipclock-screensaver
-Version: 1.0.0
+Version: $PKG_VER
 Section: utils
 Priority: optional
 Architecture: all
