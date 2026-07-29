@@ -5,7 +5,7 @@ set -e
 
 # Package name and version
 PKG_NAME="flipclock-screensaver"
-PKG_VER="1.1.1-dev"
+PKG_VER="1.2.0"
 PKG_DIR="flipclock-build"
 
 echo "Creating Debian package structure..."

@@ -26,7 +26,7 @@ except ValueError:
         sys.exit(1)
 from gi.repository import Gtk, Gdk, WebKit2, GLib
 
-APP_VERSION = "1.1.1-dev"
+APP_VERSION = "1.2.0"
 
 # X11 Idle time struct and ctypes declarations
 class XScreenSaverInfo(ctypes.Structure):
