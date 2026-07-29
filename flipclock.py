@@ -1145,10 +1145,13 @@ if __name__ == "__main__":
     parser.add_argument("--run", action="store_true", help="Launch fullscreen flip clock windows directly")
     parser.add_argument("--daemon", action="store_true", help="Start background idle monitor daemon")
     parser.add_argument("--settings", action="store_true", help="Configure Flip Clock settings")
+    parser.add_argument("--theme", choices=["dark_gold", "midnight_cyber", "emerald_oled", "sunset_glow", "minimal_light", "classic_retro"], help="Test theme directly")
     parser.add_argument("--version", action="version", version=f"Flip Clock Screensaver v{APP_VERSION} (Customized by Antigravity AI)")
     args = parser.parse_args()
     
     manager = FlipClockManager()
+    if args.theme:
+        manager.config['theme'] = args.theme
     
     if args.daemon:
         manager.run_daemon()
