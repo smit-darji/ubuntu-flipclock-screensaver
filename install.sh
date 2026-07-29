@@ -45,9 +45,11 @@ hour_format = 12
 clock_size = 1.0
 animation_speed = 500
 monitors = all
-theme = dark_gold
+theme = classic_retro
 show_seconds = true
 show_date = true
+show_greeting = true
+user_name = 
 bg_style = vignette
 custom_credit = Customized by Antigravity AI
 EOF

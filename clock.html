@@ -17,7 +17,7 @@
             width:100vw; height:100vh;
             display:flex; flex-direction:column;
             align-items:center; justify-content:center;
-            gap:4vh;
+            gap:3.5vh;
             overflow:hidden;
             background: #000000;
             transition: background 0.5s ease;
@@ -28,6 +28,20 @@
             position:absolute; inset:0;
             background: radial-gradient(ellipse 70% 55% at 50% 48%, var(--vignette-color, rgba(255,255,255,0.02)) 0%, transparent 75%);
             pointer-events:none; z-index:0;
+        }
+
+        /* ═══ GREETING BADGE ═══════════════════════════════ */
+        #greeting-badge {
+            z-index:10;
+            font-family:'Cinzel',serif;
+            font-size:clamp(12px, 1.6vw, 22px);
+            font-weight:800;
+            letter-spacing:0.25em;
+            text-transform:uppercase;
+            color: var(--accent-color, #ffffff);
+            opacity:0.95;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            transition: all 0.4s ease;
         }
 
         /* ═══ CLOCK ROW ═══════════════════════════════════ */
@@ -51,8 +65,8 @@
             overflow:hidden;
             perspective:1400px;
             flex-shrink:0;
-            background: var(--card-bg, linear-gradient(170deg, #1e1e22 0%, #141418 40%, #0c0c10 100%));
-            border: 1.5px solid var(--card-border, rgba(180,155,80,0.35));
+            background: var(--card-bg, linear-gradient(170deg, #1f1f1f 0%, #161616 50%, #0d0d0d 100%));
+            border: 1.5px solid var(--card-border, rgba(255,255,255,0.12));
             box-shadow:
                 0 18px 70px rgba(0,0,0,0.95),
                 0 0 0 1px rgba(255,255,255,0.04),
@@ -65,13 +79,13 @@
         .card-top {
             top:0;
             border-radius: clamp(10px,1.8vh,24px) clamp(10px,1.8vh,24px) 0 0;
-            background: var(--card-top-bg, linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.015) 100%));
+            background: var(--card-top-bg, linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%));
             border-bottom: 1px solid var(--divider-border, rgba(0,0,0,0.85));
         }
         .card-bottom {
             bottom:0;
             border-radius: 0 0 clamp(10px,1.8vh,24px) clamp(10px,1.8vh,24px);
-            background: var(--card-bot-bg, linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.08) 100%));
+            background: var(--card-bot-bg, linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 100%));
         }
 
         /* Divider line */
@@ -90,7 +104,7 @@
             width:  clamp(5px, 0.7vh, 10px);
             height: clamp(10px, 1.5vh, 18px);
             border-radius: clamp(2px, 0.4vh, 5px);
-            background: var(--pin-bg, linear-gradient(180deg, #e8cc70 0%, #b09840 50%, #806820 100%));
+            background: var(--pin-bg, linear-gradient(180deg, #a3a3a3 0%, #737373 50%, #404040 100%));
             box-shadow: 0 1px 3px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.2);
         }
         .card-divider::before { left:  clamp(8px, 1.2vh, 16px); }
@@ -108,11 +122,11 @@
             font-family:'Inter',system-ui,sans-serif;
             font-size: clamp(85px, 21vh, 300px);
             font-weight:800;
-            color: var(--digit-color, #f0f0f0);
+            color: var(--digit-color, #ffffff);
             letter-spacing:-0.02em;
             line-height:1;
             text-align:center;
-            text-shadow: var(--digit-shadow, 0 2px 10px rgba(0,0,0,0.5));
+            text-shadow: var(--digit-shadow, 0 2px 10px rgba(0,0,0,0.9));
         }
 
         /* AM/PM Badge inside hours card */
@@ -124,7 +138,7 @@
             font-size:clamp(10px, 1.4vh, 18px);
             font-weight:700;
             letter-spacing:0.1em;
-            color: var(--accent-color, #c8a830);
+            color: var(--accent-color, #ffffff);
             text-transform:uppercase;
             opacity:0.9;
         }
@@ -135,13 +149,13 @@
             top:0; height:50%;
             transform-origin:bottom center;
             border-radius: clamp(10px,1.8vh,24px) clamp(10px,1.8vh,24px) 0 0;
-            background: var(--card-top-bg, linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.015) 100%));
+            background: var(--card-top-bg, linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%));
         }
         .flipper-bottom {
             bottom:0; height:50%;
             transform-origin:top center;
             border-radius: 0 0 clamp(10px,1.8vh,24px) clamp(10px,1.8vh,24px);
-            background: var(--card-bot-bg, linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.08) 100%));
+            background: var(--card-bot-bg, linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 100%));
         }
         @keyframes flipTopOut    { 0%{transform:rotateX(0deg)}  100%{transform:rotateX(-90deg)} }
         @keyframes flipBottomIn  { 0%{transform:rotateX(90deg)} 100%{transform:rotateX(0deg)}   }
@@ -158,8 +172,8 @@
             width:  clamp(7px, 1vh, 14px);
             height: clamp(7px, 1vh, 14px);
             border-radius:50%;
-            background: var(--dot-bg, radial-gradient(circle at 30% 28%, #f0d860 0%, #c8a830 45%, #806818 100%));
-            box-shadow: var(--dot-shadow, 0 0 12px rgba(200,168,48,0.4));
+            background: var(--dot-bg, radial-gradient(circle at 30% 28%, #ffffff 0%, #d4d4d4 50%, #a3a3a3 100%));
+            box-shadow: var(--dot-shadow, 0 0 10px rgba(255,255,255,0.4));
         }
 
         /* ═══ DATE BADGE ══════════════════════════════════ */
@@ -172,9 +186,9 @@
             font-weight:700;
             letter-spacing:0.2em;
             text-transform:uppercase;
-            color: var(--badge-color, #c8a830);
-            background: var(--badge-bg, rgba(20,20,24,0.7));
-            border: 1px solid var(--badge-border, rgba(180,155,80,0.25));
+            color: var(--badge-color, #e5e5e5);
+            background: var(--badge-bg, rgba(26,26,26,0.85));
+            border: 1px solid var(--badge-border, rgba(255,255,255,0.15));
             box-shadow: 0 6px 30px rgba(0,0,0,0.7);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -202,11 +216,11 @@
             z-index:9999;
             width:44px; height:44px;
             border-radius:50%;
-            border:1.5px solid var(--card-border, rgba(180,155,80,0.3));
+            border:1.5px solid var(--card-border, rgba(255,255,255,0.2));
             background:var(--badge-bg, rgba(20,20,24,0.85));
             backdrop-filter:blur(12px);
             -webkit-backdrop-filter:blur(12px);
-            color:var(--accent-color, #c8a830);
+            color:var(--accent-color, #ffffff);
             font-size:20px;
             font-weight:300;
             font-family:'Inter',sans-serif;
@@ -219,7 +233,7 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.6);
         }
         #close-btn:hover {
-            background:rgba(200,168,48,0.25);
+            background:rgba(255,255,255,0.2);
             transform:scale(1.1);
         }
         #scene.show-close #close-btn {
@@ -227,107 +241,7 @@
         }
 
         /* ═══ THEME PRESETS ═══════════════════════════════ */
-        /* 1. Dark Luxury Gold (Default) */
-        .theme-dark_gold {
-            --vignette-color: rgba(255, 215, 0, 0.025);
-            --card-bg: linear-gradient(170deg, #1e1e22 0%, #141418 40%, #0c0c10 100%);
-            --card-border: rgba(212, 175, 55, 0.4);
-            --card-top-bg: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.015) 100%);
-            --card-bot-bg: linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.1) 100%);
-            --divider-line: #000000;
-            --pin-bg: linear-gradient(180deg, #e8cc70 0%, #b09840 50%, #806820 100%);
-            --digit-color: #f5f5f5;
-            --digit-shadow: 0 2px 12px rgba(0,0,0,0.8);
-            --dot-bg: radial-gradient(circle at 30% 28%, #f0d860 0%, #c8a830 45%, #806818 100%);
-            --dot-shadow: 0 0 12px rgba(200,168,48,0.5);
-            --accent-color: #d4af37;
-            --badge-color: #e5c158;
-            --badge-bg: rgba(20,20,24,0.8);
-            --badge-border: rgba(212,175,55,0.3);
-            --branding-color: rgba(212, 175, 55, 0.45);
-        }
-
-        /* 2. Midnight Cyber Neon */
-        .theme-midnight_cyber {
-            --vignette-color: rgba(56, 189, 248, 0.04);
-            --card-bg: linear-gradient(170deg, #0f172a 0%, #090d16 50%, #020617 100%);
-            --card-border: rgba(56, 189, 248, 0.45);
-            --card-top-bg: linear-gradient(180deg, rgba(56,189,248,0.08) 0%, rgba(56,189,248,0.02) 100%);
-            --card-bot-bg: linear-gradient(180deg, rgba(2,6,23,0.4) 0%, rgba(2,6,23,0.1) 100%);
-            --divider-line: #020617;
-            --pin-bg: linear-gradient(180deg, #7dd3fc 0%, #38bdf8 50%, #0284c7 100%);
-            --digit-color: #e0f2fe;
-            --digit-shadow: 0 0 20px rgba(56,189,248,0.35);
-            --dot-bg: radial-gradient(circle at 30% 28%, #7dd3fc 0%, #38bdf8 50%, #0284c7 100%);
-            --dot-shadow: 0 0 14px rgba(56,189,248,0.6);
-            --accent-color: #38bdf8;
-            --badge-color: #38bdf8;
-            --badge-bg: rgba(15,23,42,0.85);
-            --badge-border: rgba(56,189,248,0.35);
-            --branding-color: rgba(56, 189, 248, 0.5);
-        }
-
-        /* 3. Emerald OLED */
-        .theme-emerald_oled {
-            --vignette-color: rgba(52, 211, 153, 0.03);
-            --card-bg: linear-gradient(170deg, #0d1117 0%, #040d08 50%, #010409 100%);
-            --card-border: rgba(52, 211, 153, 0.45);
-            --card-top-bg: linear-gradient(180deg, rgba(52,211,153,0.08) 0%, rgba(52,211,153,0.02) 100%);
-            --card-bot-bg: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 100%);
-            --divider-line: #000000;
-            --pin-bg: linear-gradient(180deg, #6ee7b7 0%, #34d399 50%, #059669 100%);
-            --digit-color: #a7f3d0;
-            --digit-shadow: 0 0 20px rgba(52,211,153,0.4);
-            --dot-bg: radial-gradient(circle at 30% 28%, #6ee7b7 0%, #34d399 50%, #059669 100%);
-            --dot-shadow: 0 0 14px rgba(52,211,153,0.6);
-            --accent-color: #34d399;
-            --badge-color: #34d399;
-            --badge-bg: rgba(13,17,23,0.85);
-            --badge-border: rgba(52,211,153,0.35);
-            --branding-color: rgba(52, 211, 153, 0.5);
-        }
-
-        /* 4. Sunset Glow */
-        .theme-sunset_glow {
-            --vignette-color: rgba(251, 146, 60, 0.04);
-            --card-bg: linear-gradient(170deg, #241419 0%, #170b10 50%, #0d0508 100%);
-            --card-border: rgba(251, 146, 60, 0.45);
-            --card-top-bg: linear-gradient(180deg, rgba(251,146,60,0.08) 0%, rgba(251,146,60,0.02) 100%);
-            --card-bot-bg: linear-gradient(180deg, rgba(13,5,8,0.5) 0%, rgba(13,5,8,0.2) 100%);
-            --divider-line: #0d0508;
-            --pin-bg: linear-gradient(180deg, #ffedd5 0%, #fb923c 50%, #ea580c 100%);
-            --digit-color: #fff7ed;
-            --digit-shadow: 0 0 20px rgba(251,146,60,0.35);
-            --dot-bg: radial-gradient(circle at 30% 28%, #fdba74 0%, #fb923c 50%, #ea580c 100%);
-            --dot-shadow: 0 0 14px rgba(251,146,60,0.6);
-            --accent-color: #fb923c;
-            --badge-color: #fb923c;
-            --badge-bg: rgba(36,20,25,0.85);
-            --badge-border: rgba(251,146,60,0.35);
-            --branding-color: rgba(251, 146, 60, 0.5);
-        }
-
-        /* 5. Minimalist Light */
-        .theme-minimal_light {
-            --vignette-color: rgba(0, 0, 0, 0.02);
-            --card-bg: linear-gradient(170deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
-            --card-border: rgba(148, 163, 184, 0.4);
-            --card-top-bg: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(241,245,249,0.5) 100%);
-            --card-bot-bg: linear-gradient(180deg, rgba(226,232,240,0.6) 0%, rgba(203,213,225,0.3) 100%);
-            --divider-line: #cbd5e1;
-            --pin-bg: linear-gradient(180deg, #64748b 0%, #475569 50%, #1e293b 100%);
-            --digit-color: #0f172a;
-            --digit-shadow: 0 1px 3px rgba(0,0,0,0.15);
-            --dot-bg: radial-gradient(circle at 30% 28%, #94a3b8 0%, #475569 100%);
-            --dot-shadow: 0 0 8px rgba(71,85,105,0.3);
-            --accent-color: #334155;
-            --badge-color: #1e293b;
-            --badge-bg: rgba(255,255,255,0.9);
-            --badge-border: rgba(148,163,184,0.4);
-            --branding-color: rgba(30, 41, 59, 0.5);
-        }
-
-        /* 6. Classic Retro (Fliqlo Style) */
+        /* 1. Classic Retro (Fliqlo Style) - DEFAULT */
         .theme-classic_retro {
             --vignette-color: rgba(255, 255, 255, 0.01);
             --card-bg: linear-gradient(170deg, #1f1f1f 0%, #161616 50%, #0d0d0d 100%);
@@ -347,15 +261,118 @@
             --branding-color: rgba(255, 255, 255, 0.4);
         }
 
+        /* 2. Dark Luxury Gold */
+        .theme-dark_gold {
+            --vignette-color: rgba(255, 215, 0, 0.025);
+            --card-bg: linear-gradient(170deg, #1e1e22 0%, #141418 40%, #0c0c10 100%);
+            --card-border: rgba(212, 175, 55, 0.4);
+            --card-top-bg: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.015) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.1) 100%);
+            --divider-line: #000000;
+            --pin-bg: linear-gradient(180deg, #e8cc70 0%, #b09840 50%, #806820 100%);
+            --digit-color: #f5f5f5;
+            --digit-shadow: 0 2px 12px rgba(0,0,0,0.8);
+            --dot-bg: radial-gradient(circle at 30% 28%, #f0d860 0%, #c8a830 45%, #806818 100%);
+            --dot-shadow: 0 0 12px rgba(200,168,48,0.5);
+            --accent-color: #d4af37;
+            --badge-color: #e5c158;
+            --badge-bg: rgba(20,20,24,0.8);
+            --badge-border: rgba(212,175,55,0.3);
+            --branding-color: rgba(212, 175, 55, 0.45);
+        }
+
+        /* 3. Midnight Cyber Neon */
+        .theme-midnight_cyber {
+            --vignette-color: rgba(56, 189, 248, 0.04);
+            --card-bg: linear-gradient(170deg, #0f172a 0%, #090d16 50%, #020617 100%);
+            --card-border: rgba(56, 189, 248, 0.45);
+            --card-top-bg: linear-gradient(180deg, rgba(56,189,248,0.08) 0%, rgba(56,189,248,0.02) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(2,6,23,0.4) 0%, rgba(2,6,23,0.1) 100%);
+            --divider-line: #020617;
+            --pin-bg: linear-gradient(180deg, #7dd3fc 0%, #38bdf8 50%, #0284c7 100%);
+            --digit-color: #e0f2fe;
+            --digit-shadow: 0 0 20px rgba(56,189,248,0.35);
+            --dot-bg: radial-gradient(circle at 30% 28%, #7dd3fc 0%, #38bdf8 50%, #0284c7 100%);
+            --dot-shadow: 0 0 14px rgba(56,189,248,0.6);
+            --accent-color: #38bdf8;
+            --badge-color: #38bdf8;
+            --badge-bg: rgba(15,23,42,0.85);
+            --badge-border: rgba(56,189,248,0.35);
+            --branding-color: rgba(56, 189, 248, 0.5);
+        }
+
+        /* 4. Emerald OLED */
+        .theme-emerald_oled {
+            --vignette-color: rgba(52, 211, 153, 0.03);
+            --card-bg: linear-gradient(170deg, #0d1117 0%, #040d08 50%, #010409 100%);
+            --card-border: rgba(52, 211, 153, 0.45);
+            --card-top-bg: linear-gradient(180deg, rgba(52,211,153,0.08) 0%, rgba(52,211,153,0.02) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 100%);
+            --divider-line: #000000;
+            --pin-bg: linear-gradient(180deg, #6ee7b7 0%, #34d399 50%, #059669 100%);
+            --digit-color: #a7f3d0;
+            --digit-shadow: 0 0 20px rgba(52,211,153,0.4);
+            --dot-bg: radial-gradient(circle at 30% 28%, #6ee7b7 0%, #34d399 50%, #059669 100%);
+            --dot-shadow: 0 0 14px rgba(52,211,153,0.6);
+            --accent-color: #34d399;
+            --badge-color: #34d399;
+            --badge-bg: rgba(13,17,23,0.85);
+            --badge-border: rgba(52,211,153,0.35);
+            --branding-color: rgba(52, 211, 153, 0.5);
+        }
+
+        /* 5. Sunset Glow */
+        .theme-sunset_glow {
+            --vignette-color: rgba(251, 146, 60, 0.04);
+            --card-bg: linear-gradient(170deg, #241419 0%, #170b10 50%, #0d0508 100%);
+            --card-border: rgba(251, 146, 60, 0.45);
+            --card-top-bg: linear-gradient(180deg, rgba(251,146,60,0.08) 0%, rgba(251,146,60,0.02) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(13,5,8,0.5) 0%, rgba(13,5,8,0.2) 100%);
+            --divider-line: #0d0508;
+            --pin-bg: linear-gradient(180deg, #ffedd5 0%, #fb923c 50%, #ea580c 100%);
+            --digit-color: #fff7ed;
+            --digit-shadow: 0 0 20px rgba(251,146,60,0.35);
+            --dot-bg: radial-gradient(circle at 30% 28%, #fdba74 0%, #fb923c 50%, #ea580c 100%);
+            --dot-shadow: 0 0 14px rgba(251,146,60,0.6);
+            --accent-color: #fb923c;
+            --badge-color: #fb923c;
+            --badge-bg: rgba(36,20,25,0.85);
+            --badge-border: rgba(251,146,60,0.35);
+            --branding-color: rgba(251, 146, 60, 0.5);
+        }
+
+        /* 6. Minimalist Light */
+        .theme-minimal_light {
+            --vignette-color: rgba(0, 0, 0, 0.02);
+            --card-bg: linear-gradient(170deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+            --card-border: rgba(148, 163, 184, 0.4);
+            --card-top-bg: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(241,245,249,0.5) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(226,232,240,0.6) 0%, rgba(203,213,225,0.3) 100%);
+            --divider-line: #cbd5e1;
+            --pin-bg: linear-gradient(180deg, #64748b 0%, #475569 50%, #1e293b 100%);
+            --digit-color: #0f172a;
+            --digit-shadow: 0 1px 3px rgba(0,0,0,0.15);
+            --dot-bg: radial-gradient(circle at 30% 28%, #94a3b8 0%, #475569 100%);
+            --dot-shadow: 0 0 8px rgba(71,85,105,0.3);
+            --accent-color: #334155;
+            --badge-color: #1e293b;
+            --badge-bg: rgba(255,255,255,0.9);
+            --badge-border: rgba(148,163,184,0.4);
+            --branding-color: rgba(30, 41, 59, 0.5);
+        }
+
         /* Hide elements when toggled off */
         .hide-seconds #fc-s, .hide-seconds #sep-s { display:none !important; }
         .hide-date #date-badge { display:none !important; }
+        .hide-greeting #greeting-badge { display:none !important; }
     </style>
 </head>
-<body class="theme-dark_gold">
+<body class="theme-classic_retro">
 
 <div id="scene">
     <button id="close-btn" onclick="forceClose()" title="Close Screensaver">✕</button>
+
+    <div id="greeting-badge">GOOD MORNING</div>
 
     <div class="clock-row" id="clock-row">
         <!-- Hours Card -->
@@ -391,10 +408,12 @@
 
 <script>
 let config = window.screensaverConfig || {};
-let themeName = config.theme || 'dark_gold';
+let themeName = config.theme || 'classic_retro';
 let hourFormat = config.format || '12';
 let showSeconds = config.show_seconds !== 'false';
 let showDate = config.show_date !== 'false';
+let showGreeting = config.show_greeting !== 'false';
+let userName = config.user_name || '';
 let clockScale = parseFloat(config.size || '1.0');
 let customCredit = config.custom_credit || 'Customized by Antigravity AI';
 
@@ -409,6 +428,9 @@ function applyConfiguration() {
 
     if (!showDate) scene.classList.add('hide-date');
     else scene.classList.remove('hide-date');
+
+    if (!showGreeting) scene.classList.add('hide-greeting');
+    else scene.classList.remove('hide-greeting');
 
     // 3. Clock Scale
     const row = document.getElementById('clock-row');
@@ -425,6 +447,24 @@ function applyConfiguration() {
         scene.style.background = '#f1f5f9';
     } else {
         scene.style.background = '#000000';
+    }
+}
+
+function updateGreeting() {
+    const h = new Date().getHours();
+    let period = 'MORNING';
+    if (h >= 12 && h < 17) period = 'AFTERNOON';
+    else if (h >= 17 && h < 22) period = 'EVENING';
+    else if (h >= 22 || h < 5) period = 'NIGHT';
+
+    const gEl = document.getElementById('greeting-badge');
+    if (!gEl) return;
+
+    const nameStr = userName ? userName.trim().toUpperCase() : '';
+    if (nameStr) {
+        gEl.textContent = `GOOD ${period}, ${nameStr}`;
+    } else {
+        gEl.textContent = `GOOD ${period}`;
     }
 }
 
@@ -507,8 +547,10 @@ document.addEventListener('keydown', function(e) {
 
 window.addEventListener('load', function() {
     applyConfiguration();
+    updateGreeting();
     updateDate(); updateFlip();
     setInterval(updateFlip, 1000);
+    setInterval(updateGreeting, 10000);
     setInterval(updateDate, 30000);
 });
 </script>

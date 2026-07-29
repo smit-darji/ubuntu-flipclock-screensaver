@@ -26,7 +26,7 @@ except ValueError:
         sys.exit(1)
 from gi.repository import Gtk, Gdk, WebKit2, GLib
 
-APP_VERSION = "1.1.0-dev"
+APP_VERSION = "1.1.1-dev"
 
 # X11 Idle time struct and ctypes declarations
 class XScreenSaverInfo(ctypes.Structure):
@@ -475,12 +475,14 @@ class FlipClockWindow(Gtk.Window):
         fmt = config_params.get('hour_format', '12')
         size = config_params.get('clock_size', '1.0')
         speed = config_params.get('animation_speed', 500)
-        theme = config_params.get('theme', 'dark_gold')
+        theme = config_params.get('theme', 'classic_retro')
         show_seconds = str(config_params.get('show_seconds', 'true')).lower()
         show_date = str(config_params.get('show_date', 'true')).lower()
+        show_greeting = str(config_params.get('show_greeting', 'true')).lower()
+        user_name = config_params.get('user_name', '').replace("'", "\\'")
         custom_credit = config_params.get('custom_credit', 'Customized by Antigravity AI')
         
-        config_script = f"<script>window.screensaverConfig = {{ monitor: '{monitor_idx}', format: '{fmt}', size: '{size}', speed: '{speed}', theme: '{theme}', show_seconds: '{show_seconds}', show_date: '{show_date}', custom_credit: '{custom_credit}' }};</script>"
+        config_script = f"<script>window.screensaverConfig = {{ monitor: '{monitor_idx}', format: '{fmt}', size: '{size}', speed: '{speed}', theme: '{theme}', show_seconds: '{show_seconds}', show_date: '{show_date}', show_greeting: '{show_greeting}', user_name: '{user_name}', custom_credit: '{custom_credit}' }};</script>"
         if "</head>" in html_content:
             html_content = html_content.replace("</head>", f"{config_script}</head>")
         else:
@@ -773,21 +775,60 @@ class FlipClockSettingsWindow(Gtk.Window):
         grid_t.attach(lbl_t_choice, 0, 0, 1, 1)
 
         self.combo_theme = Gtk.ComboBoxText()
-        self.combo_theme.append("dark_gold", "Dark Luxury (Gold Accent) ★ Default")
+        self.combo_theme.append("classic_retro", "Classic Retro (Fliqlo Style) ★ Default")
+        self.combo_theme.append("dark_gold", "Dark Luxury (Gold Accent)")
         self.combo_theme.append("midnight_cyber", "Midnight Cyber (Neon Blue)")
         self.combo_theme.append("emerald_oled", "Emerald OLED (Matrix Green)")
         self.combo_theme.append("sunset_glow", "Sunset Glow (Amber / Crimson)")
         self.combo_theme.append("minimal_light", "Minimalist Light (Clean Silver)")
-        self.combo_theme.append("classic_retro", "Classic Retro (Fliqlo Style)")
         
-        cur_theme = self.manager.config.get('theme', 'dark_gold')
+        cur_theme = self.manager.config.get('theme', 'classic_retro')
         self.combo_theme.set_active_id(cur_theme)
         self.combo_theme.set_hexpand(True)
         grid_t.attach(self.combo_theme, 1, 0, 1, 1)
 
         content_vbox.pack_start(sec_theme, False, False, 0)
 
-        # SECTION 2: DISPLAY OPTIONS
+        # SECTION 2: PERSONALIZATION & GREETINGS
+        sec_greet = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
+        sec_greet.get_style_context().add_class("section-box")
+        
+        lbl_sec_g = Gtk.Label(label="Personalization & Greetings")
+        lbl_sec_g.get_style_context().add_class("section-header")
+        lbl_sec_g.set_xalign(0)
+        sec_greet.pack_start(lbl_sec_g, False, False, 0)
+
+        grid_g = Gtk.Grid()
+        grid_g.set_column_spacing(16)
+        grid_g.set_row_spacing(12)
+        sec_greet.pack_start(grid_g, False, False, 0)
+
+        # Show Greeting Toggle
+        lbl_g_toggle = Gtk.Label(label="Display Time Greeting:")
+        lbl_g_toggle.get_style_context().add_class("field-label")
+        lbl_g_toggle.set_xalign(0)
+        grid_g.attach(lbl_g_toggle, 0, 0, 1, 1)
+
+        self.switch_greeting = Gtk.Switch()
+        self.switch_greeting.set_active(str(self.manager.config.get('show_greeting', 'true')).lower() == 'true')
+        self.switch_greeting.set_halign(Gtk.Align.END)
+        grid_g.attach(self.switch_greeting, 1, 0, 1, 1)
+
+        # Custom User Name Input
+        lbl_name = Gtk.Label(label="Your Custom Name:")
+        lbl_name.get_style_context().add_class("field-label")
+        lbl_name.set_xalign(0)
+        grid_g.attach(lbl_name, 0, 1, 1, 1)
+
+        self.entry_name = Gtk.Entry()
+        self.entry_name.set_placeholder_text("e.g. Smit (Leave empty for generic greeting)")
+        self.entry_name.set_text(self.manager.config.get('user_name', ''))
+        self.entry_name.set_hexpand(True)
+        grid_g.attach(self.entry_name, 1, 1, 1, 1)
+
+        content_vbox.pack_start(sec_greet, False, False, 0)
+
+        # SECTION 3: DISPLAY OPTIONS
         sec_disp = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
         sec_disp.get_style_context().add_class("section-box")
         
@@ -921,7 +962,7 @@ class FlipClockSettingsWindow(Gtk.Window):
         self.show_all()
 
     def update_config_from_ui(self):
-        theme = self.combo_theme.get_active_id() or "dark_gold"
+        theme = self.combo_theme.get_active_id() or "classic_retro"
         fmt = self.combo_format.get_active_id() or "12"
         timeout_str = self.combo_timeout.get_active_id() or "60"
         try:
@@ -931,6 +972,8 @@ class FlipClockSettingsWindow(Gtk.Window):
         size = f"{self.scale_size.get_value():.1f}"
         show_sec = 'true' if self.switch_seconds.get_active() else 'false'
         show_dt = 'true' if self.switch_date.get_active() else 'false'
+        show_greet = 'true' if self.switch_greeting.get_active() else 'false'
+        uname = self.entry_name.get_text().strip()
 
         self.manager.config['theme'] = theme
         self.manager.config['hour_format'] = fmt
@@ -938,6 +981,8 @@ class FlipClockSettingsWindow(Gtk.Window):
         self.manager.config['clock_size'] = size
         self.manager.config['show_seconds'] = show_sec
         self.manager.config['show_date'] = show_dt
+        self.manager.config['show_greeting'] = show_greet
+        self.manager.config['user_name'] = uname
         self.manager.config['custom_credit'] = 'Customized by Antigravity AI'
 
     def on_preview_clicked(self, button):
@@ -993,9 +1038,11 @@ class FlipClockManager:
             'clock_size': '1.0',
             'animation_speed': 500,
             'monitors': 'all',
-            'theme': 'dark_gold',
+            'theme': 'classic_retro',
             'show_seconds': 'true',
             'show_date': 'true',
+            'show_greeting': 'true',
+            'user_name': '',
             'bg_style': 'vignette',
             'custom_credit': 'Customized by Antigravity AI'
         }
@@ -1016,9 +1063,11 @@ class FlipClockManager:
                     self.config['clock_size'] = settings.get('clock_size', '1.0')
                     self.config['animation_speed'] = settings.getint('animation_speed', 500)
                     self.config['monitors'] = settings.get('monitors', 'all')
-                    self.config['theme'] = settings.get('theme', 'dark_gold')
+                    self.config['theme'] = settings.get('theme', 'classic_retro')
                     self.config['show_seconds'] = settings.get('show_seconds', 'true')
                     self.config['show_date'] = settings.get('show_date', 'true')
+                    self.config['show_greeting'] = settings.get('show_greeting', 'true')
+                    self.config['user_name'] = settings.get('user_name', '')
                     self.config['bg_style'] = settings.get('bg_style', 'vignette')
                     self.config['custom_credit'] = settings.get('custom_credit', 'Customized by Antigravity AI')
             except Exception as e:
@@ -1034,9 +1083,11 @@ class FlipClockManager:
             'clock_size': str(self.config.get('clock_size', '1.0')),
             'animation_speed': str(self.config.get('animation_speed', 500)),
             'monitors': str(self.config.get('monitors', 'all')),
-            'theme': str(self.config.get('theme', 'dark_gold')),
+            'theme': str(self.config.get('theme', 'classic_retro')),
             'show_seconds': str(self.config.get('show_seconds', 'true')),
             'show_date': str(self.config.get('show_date', 'true')),
+            'show_greeting': str(self.config.get('show_greeting', 'true')),
+            'user_name': str(self.config.get('user_name', '')),
             'bg_style': str(self.config.get('bg_style', 'vignette')),
             'custom_credit': str(self.config.get('custom_credit', 'Customized by Antigravity AI'))
         }
