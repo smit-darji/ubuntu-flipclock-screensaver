@@ -1,7 +1,7 @@
 # Premium Fliqlo-Style Flip Clock Screensaver for Ubuntu
 
 [![Platform](https://img.shields.io/badge/platform-Ubuntu%2020.04%20%7C%2022.04%20%7C%2024.04-orange.svg)](https://ubuntu.com)
-[![Download .deb Package](https://img.shields.io/badge/Download-flipclock--screensaver__1.0.0__all.deb-blue?style=for-the-badge&logo=debian)](https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/flipclock-screensaver_1.0.0_all.deb)
+[![Download .deb Package](https://img.shields.io/badge/Download-flipclock--screensaver__2.0.0__all.deb-blue?style=for-the-badge&logo=debian)](https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/flipclock-screensaver_2.0.0_all.deb)
 [![Language](https://img.shields.io/badge/language-Python%203%20%2B%20GTK3%20%2B%20HTML5-blue.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
@@ -11,44 +11,56 @@
 
 ![Flip Clock Screensaver Fullscreen Preview](screenshot.png)
 
-A native, high-fidelity, multi-monitor flip clock screensaver for Ubuntu Linux. It brings a vintage airport split-flap style retro clock to your workstation, rendering across all connected displays simultaneously with smooth 3D CSS animations and automatic screen size scaling.
+A native, high-fidelity, multi-monitor flip clock screensaver for Ubuntu Linux. It brings a vintage airport split-flap style retro clock to your workstation, rendering across all connected displays simultaneously with smooth 3D CSS animations, dynamic time-based greetings, and multi-theme personalization.
 
 ---
 
 ## ✨ Key Features
 
-* **Vintage Split-Flap Clock UI**: Fliqlo-style charcoal cards, subtle border highlights, rounded corners, and realistic card flip shadows.
+* **Vintage Split-Flap Clock UI**: Fliqlo-style charcoal cards, subtle border highlights, rounded corners, and realistic 3D card flip shadows.
+* **Time-based Personalized Greetings**:
+  - Automatically displays greetings based on time of day: `GOOD MORNING`, `GOOD AFTERNOON`, `GOOD EVENING`, `GOOD NIGHT`.
+  - Personalize with your custom name (e.g. `GOOD MORNING, SMIT`).
+  - Toggle greeting visibility on or off via checkbox/switch in settings.
+* **6 Premium Visual Themes & Color Layouts**:
+  1. **Classic Retro (Fliqlo Style)** (*Default Theme*) - Pitch black background, matte dark cards, crisp white digits.
+  2. **Dark Luxury (Gold Accent)** - Deep charcoal plates, metallic gold hinges & separator dots.
+  3. **Midnight Cyber (Neon Blue)** - Slate navy plates, neon cyan glowing accents.
+  4. **Emerald OLED (Matrix Green)** - True pitch black cards, emerald green digits & side pins.
+  5. **Sunset Glow (Amber / Crimson)** - Warm dusk gradient background with glowing copper/orange accents.
+  6. **Minimalist Light (Clean Silver)** - Light frosted glass cards, dark charcoal numbers, clean silver pins.
 * **Multi-Monitor Support**: Automatically detects monitor count, geometry, and placement to spawn independent full-screen screensaver windows per display.
-* **Auto Aspect-Ratio Scaling**: Dynamically adjusts visual scale using CSS transforms. Adapts seamlessly to ultra-wide, standard, and portrait (vertical) monitors without cut-offs.
-* **Graphical Settings Application**: Simple desktop GUI to adjust:
-  * **Time Format** (12-Hour AM/PM vs 24-Hour).
-  * **Idle Timeout** (1, 2, 3, 4, 5, 10, 15, 30 minutes, or 1 hour).
-  * **Clock Scale** (slider from `0.5x` to `2.0x` zoom).
-* **Safe Input Listener**: Instantly exits the screensaver upon keyboard activity, mouse clicks, scrolls, or deliberate mouse movements.
-* **Zero CPU Overhead**: Idle monitoring daemon queries native X11 Screen Saver extension (`libXss` via `ctypes`) resulting in **0.0% idle CPU utilization**.
+* **Aspect-Ratio Scaling**: Dynamically adjusts visual scale using CSS transforms. Adapts seamlessly to ultra-wide, standard, and portrait (vertical) monitors without cut-offs.
+* **Modern Dark GTK Settings Application**:
+  - **Active Theme Selector**
+  - **Display Time Greeting** toggle & **Custom User Name** input
+  - **Time Format** (12-Hour AM/PM vs 24-Hour)
+  - **Seconds Display** toggle & **Date Badge** toggle
+  - **Clock Scale Slider** (`0.5x` to `2.0x`)
+  - **Idle Timeout Selector** (1, 2, 3, 5, 10, 15, 30 min, 1 hr)
+  - **Test Preview** & **Save & Apply** buttons
+* **Zero CPU Overhead**: Background idle monitoring daemon queries native X11 Screen Saver extension (`libXss` via `ctypes`) resulting in **0.0% idle CPU utilization**.
 
 ---
 
 ## 🚀 Installation Methods
 
-### Method 1: Download & Install Debian Package (`.deb`) — *Recommended*
+### Method 1: Install Debian Package (`.deb`) — *Recommended*
 
-Download `flipclock-screensaver_1.0.0_all.deb` directly from GitHub and install via `apt` (which automatically resolves required system dependencies):
+Download `flipclock-screensaver_2.0.0_all.deb` and install via `apt` (which automatically resolves required system dependencies):
 
 ```bash
-# 1. Download the latest .deb package from GitHub
-wget https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/flipclock-screensaver_1.0.0_all.deb
+# 1. Move to the screensaver project directory
+cd /home/dev1035/dev-1035/smit.softvan.com/screensaver
 
 # 2. Install package using apt
 sudo apt update
-sudo apt install ./flipclock-screensaver_1.0.0_all.deb
+sudo apt install ./flipclock-screensaver_2.0.0_all.deb
 ```
 
 ---
 
-### Method 2: Clone GitHub Repository & Install from Source
-
-If you prefer to clone the repository and run the local installation script:
+### Method 2: Install from Source
 
 ```bash
 # 1. Clone the repository
@@ -66,52 +78,28 @@ chmod +x install.sh
 
 ---
 
-## 🔄 Updating / Upgrading
-
-To update to the latest version of Flip Clock Screensaver:
-
-```bash
-# 1. Download the updated .deb package
-wget https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/flipclock-screensaver_1.0.0_all.deb
-
-# 2. Install/Upgrade package
-sudo apt update
-sudo apt install --only-upgrade ./flipclock-screensaver_1.0.0_all.deb
-```
-*(Or simply re-run `sudo apt install ./flipclock-screensaver_1.0.0_all.deb`)*
-
----
-
-## 🔁 Reinstalling
-
-If you need to repair or reinstall the package files:
-
-```bash
-# Reinstall the package completely
-sudo apt install --reinstall ./flipclock-screensaver_1.0.0_all.deb
-```
-
----
-
 ## ⚙️ Configuration & GUI Settings
 
-Settings can be customized per logged-in user via the Graphical Settings application or by editing the config file directly:
+Open **"Flip Clock Settings"** from Ubuntu Applications menu, or run in terminal:
+```bash
+flipclock --settings
+```
 
-* **Graphical Settings GUI**:
-  Open **"Flip Clock Settings"** from Ubuntu Applications menu, or run in terminal:
-  ```bash
-  flipclock --settings
-  ```
-* **Configuration File Path**:
-  Saved at `~/.config/flipclock/flipclock.conf`:
-  ```ini
-  [Settings]
-  idle_timeout = 120        # Idle time in seconds before screensaver starts (e.g., 120 = 2 minutes)
-  hour_format = 12          # Time format: 12 (AM/PM) or 24 (24-Hour)
-  clock_size = 1.0          # Scaling factor (0.5 to 2.0)
-  animation_speed = 500     # Flip transition duration in ms
-  monitors = all            # Targets: "all" or specific monitor indices (e.g. "0,1")
-  ```
+### Configuration File (`~/.config/flipclock/flipclock.conf`)
+```ini
+[Settings]
+idle_timeout = 60         # Idle time in seconds before screensaver starts (e.g., 60 = 1 minute)
+hour_format = 12           # Time format: 12 (AM/PM) or 24 (24-Hour)
+clock_size = 1.0           # Scaling factor (0.5 to 2.0)
+animation_speed = 500      # Flip transition duration in ms
+monitors = all             # Targets: "all" or specific monitor indices (e.g. "0,1")
+theme = classic_retro      # Active theme: classic_retro, dark_gold, midnight_cyber, emerald_oled, sunset_glow, minimal_light
+show_seconds = true        # Toggle seconds flip card visibility
+show_date = true           # Toggle date badge visibility
+show_greeting = true       # Toggle time-based greeting visibility
+user_name = Smit           # Custom name for greeting (e.g. GOOD MORNING, SMIT)
+custom_credit = Customized by Antigravity AI
+```
 
 ---
 
@@ -123,36 +111,10 @@ Once installed, the following commands are available globally in your terminal:
 |---|---|
 | `flipclock` or `flipclock --run` | Previews/launches screensaver full-screen windows immediately |
 | `flipclock --settings` | Opens the graphical settings configuration window |
+| `flipclock --theme <theme_id> --run` | Previews specific theme directly (`classic_retro`, `dark_gold`, `midnight_cyber`, `emerald_oled`, `sunset_glow`, `minimal_light`) |
+| `flipclock --version` | Outputs current software version (`v2.0.0`) |
 | `flipclock --daemon` | Starts the background idle monitor daemon |
 | `pkill -f "flipclock.*--daemon"` | Stops the background idle monitor daemon |
-
----
-
-## 🗑️ Uninstallation Guide
-
-### Option A: Remove Debian (`.deb`) Package
-
-To completely remove the application package, system symlinks, launchers, and autostart entries:
-
-```bash
-# Remove application package
-sudo apt remove flipclock-screensaver
-
-# Optional: Purge remaining package configurations
-sudo apt purge flipclock-screensaver
-```
-
----
-
-### Option B: Remove Source Installation
-
-If you installed using the local `install.sh` source script:
-
-```bash
-cd ubuntu-flipclock-screensaver
-chmod +x uninstall.sh
-./uninstall.sh
-```
 
 ---
 
@@ -164,4 +126,15 @@ To build a fresh `.deb` package file locally:
 chmod +x build_deb.sh
 ./build_deb.sh
 ```
-This generates `flipclock-screensaver_1.0.0_all.deb` in the project root directory.
+This generates `flipclock-screensaver_2.0.0_all.deb` in the project root directory.
+
+---
+
+## 🗑️ Uninstallation Guide
+
+To completely remove the application package, system symlinks, launchers, and autostart entries:
+
+```bash
+sudo apt remove flipclock-screensaver
+sudo apt purge flipclock-screensaver
+```
