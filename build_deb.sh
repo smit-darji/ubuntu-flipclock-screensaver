@@ -12,6 +12,7 @@ echo "Creating Debian package structure..."
 rm -rf "$PKG_DIR"
 mkdir -p "$PKG_DIR/DEBIAN"
 mkdir -p "$PKG_DIR/usr/share/flipclock"
+mkdir -p "$PKG_DIR/usr/local/share/flipclock"
 mkdir -p "$PKG_DIR/usr/share/applications"
 mkdir -p "$PKG_DIR/etc/xdg/autostart"
 
@@ -22,10 +23,13 @@ mkdir -p "$PKG_DIR/usr/local/bin"
 
 # Copy application files
 cp clock.html "$PKG_DIR/usr/share/flipclock/"
+cp clock.html "$PKG_DIR/usr/local/share/flipclock/"
 if [ -f "index.html" ]; then
     cp index.html "$PKG_DIR/usr/share/flipclock/"
+    cp index.html "$PKG_DIR/usr/local/share/flipclock/"
 else
     cp clock.html "$PKG_DIR/usr/share/flipclock/index.html"
+    cp clock.html "$PKG_DIR/usr/local/share/flipclock/index.html"
 fi
 cp flipclock.py "$PKG_DIR/usr/share/flipclock/"
 if [ -f "daemon.py" ]; then cp daemon.py "$PKG_DIR/usr/share/flipclock/"; fi
