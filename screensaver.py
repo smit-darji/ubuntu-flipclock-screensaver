@@ -432,15 +432,24 @@ class ScreensaverWindow(Gtk.Window):
                     fmt = cp['Settings'].get('hour_format', '12')
                     size = cp['Settings'].get('clock_size', '1.0')
                     speed = cp['Settings'].get('animation_speed', '500')
+                    theme = cp['Settings'].get('theme', 'dark_gold')
+                    show_seconds = cp['Settings'].get('show_seconds', 'true')
+                    show_date = cp['Settings'].get('show_date', 'true')
+                    custom_credit = cp['Settings'].get('custom_credit', 'Customized by Antigravity AI')
             except Exception:
                 pass
+        else:
+            theme = 'dark_gold'
+            show_seconds = 'true'
+            show_date = 'true'
+            custom_credit = 'Customized by Antigravity AI'
                 
         html_content, base_dir = get_html_content(html_path)
         if not html_content:
             print("Error: Could not locate clock.html or index.html")
             sys.exit(1)
             
-        config_script = f"<script>window.screensaverConfig = {{ monitor: '{monitor_idx}', format: '{fmt}', size: '{size}', speed: '{speed}' }};</script>"
+        config_script = f"<script>window.screensaverConfig = {{ monitor: '{monitor_idx}', format: '{fmt}', size: '{size}', speed: '{speed}', theme: '{theme}', show_seconds: '{show_seconds}', show_date: '{show_date}', custom_credit: '{custom_credit}' }};</script>"
         if "</head>" in html_content:
             html_content = html_content.replace("</head>", f"{config_script}</head>")
         else:

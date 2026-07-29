@@ -26,6 +26,8 @@ except ValueError:
         sys.exit(1)
 from gi.repository import Gtk, Gdk, WebKit2, GLib
 
+APP_VERSION = "1.1.0-dev"
+
 # X11 Idle time struct and ctypes declarations
 class XScreenSaverInfo(ctypes.Structure):
     _fields_ = [
@@ -473,8 +475,12 @@ class FlipClockWindow(Gtk.Window):
         fmt = config_params.get('hour_format', '12')
         size = config_params.get('clock_size', '1.0')
         speed = config_params.get('animation_speed', 500)
+        theme = config_params.get('theme', 'dark_gold')
+        show_seconds = str(config_params.get('show_seconds', 'true')).lower()
+        show_date = str(config_params.get('show_date', 'true')).lower()
+        custom_credit = config_params.get('custom_credit', 'Customized by Antigravity AI')
         
-        config_script = f"<script>window.screensaverConfig = {{ monitor: '{monitor_idx}', format: '{fmt}', size: '{size}', speed: '{speed}' }};</script>"
+        config_script = f"<script>window.screensaverConfig = {{ monitor: '{monitor_idx}', format: '{fmt}', size: '{size}', speed: '{speed}', theme: '{theme}', show_seconds: '{show_seconds}', show_date: '{show_date}', custom_credit: '{custom_credit}' }};</script>"
         if "</head>" in html_content:
             html_content = html_content.replace("</head>", f"{config_script}</head>")
         else:
@@ -563,81 +569,301 @@ class FlipClockWindow(Gtk.Window):
             print(f"Mouse moved {dist:.1f}px. Exiting.")
             Gtk.main_quit()
         return True
-
-
 class FlipClockSettingsWindow(Gtk.Window):
-    """Configuration GUI window for Flip Clock Screensaver."""
+    """Modern configuration GUI window for Flip Clock Screensaver."""
     def __init__(self, manager):
         super().__init__(title="Flip Clock Settings")
         self.manager = manager
-        self.set_default_size(350, 250)
-        self.set_border_width(15)
+        self.set_default_size(520, 640)
+        self.set_border_width(0)
         self.set_position(Gtk.WindowPosition.CENTER)
         
+        # Apply custom GTK3 CSS for professional modern dark theme layout
+        css_provider = Gtk.CssProvider()
+        css_data = b"""
+        window {
+            background-color: #121215;
+            color: #e4e4e7;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+        .header-box {
+            background: linear-gradient(180deg, #1e1e24 0%, #141418 100%);
+            padding: 20px 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .app-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #ffffff;
+        }
+        .app-subtitle {
+            font-size: 12px;
+            font-weight: 700;
+            color: #d4af37;
+            letter-spacing: 0.05em;
+        }
+        .section-box {
+            background-color: #18181c;
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 8px 16px;
+        }
+        .section-header {
+            font-size: 12px;
+            font-weight: 800;
+            color: #d4af37;
+            letter-spacing: 0.1em;
+            margin-bottom: 12px;
+        }
+        .field-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #d4d4d8;
+        }
+        .btn-primary {
+            background: linear-gradient(180deg, #e5c158 0%, #c8a830 100%);
+            color: #000000;
+            font-weight: 800;
+            font-size: 14px;
+            border-radius: 8px;
+            padding: 10px 24px;
+            border: none;
+            box-shadow: 0 4px 14px rgba(200,168,48,0.3);
+        }
+        .btn-primary:hover {
+            background: linear-gradient(180deg, #f0d860 0%, #d4af37 100%);
+        }
+        .btn-secondary {
+            background: rgba(255,255,255,0.06);
+            color: #f4f4f5;
+            font-weight: 600;
+            font-size: 14px;
+            border-radius: 8px;
+            padding: 10px 20px;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.12);
+        }
+        .branding-footer {
+            font-size: 11px;
+            font-weight: 600;
+            color: #a1a1aa;
+            letter-spacing: 0.08em;
+        }
+        """
+        css_provider.load_from_data(css_data)
+        Gtk.StyleContext.add_provider_for_screen(
+            Gdk.Screen.get_default(),
+            css_provider,
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+        )
+
         hb = Gtk.HeaderBar()
         hb.set_show_close_button(True)
         hb.set_title("Flip Clock Settings")
+        hb.set_subtitle("Customized by Antigravity AI")
         self.set_titlebar(hb)
+
+        main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        self.add(main_box)
+
+        # Header Banner
+        header_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
+        header_box.get_style_context().add_class("header-box")
         
-        grid = Gtk.Grid()
-        grid.set_column_spacing(15)
-        grid.set_row_spacing(15)
-        grid.set_halign(Gtk.Align.CENTER)
-        grid.set_valign(Gtk.Align.CENTER)
-        self.add(grid)
+        lbl_title = Gtk.Label(label="Flip Clock Screensaver")
+        lbl_title.get_style_context().add_class("app-title")
+        lbl_title.set_xalign(0)
+        header_box.pack_start(lbl_title, False, False, 0)
         
-        lbl_format = Gtk.Label(label="Time Format:")
-        lbl_format.set_xalign(0)
-        grid.attach(lbl_format, 0, 0, 1, 1)
+        lbl_sub = Gtk.Label(label="✦ Customized by Antigravity AI")
+        lbl_sub.get_style_context().add_class("app-subtitle")
+        lbl_sub.set_xalign(0)
+        header_box.pack_start(lbl_sub, False, False, 0)
         
+        main_box.pack_start(header_box, False, False, 0)
+
+        # Scrollable container for settings sections
+        scrolled = Gtk.ScrolledWindow()
+        scrolled.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        main_box.pack_start(scrolled, True, True, 0)
+
+        content_vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
+        content_vbox.set_margin_top(10)
+        content_vbox.set_margin_bottom(10)
+        scrolled.add(content_vbox)
+
+        # SECTION 1: THEMES & VISUAL PRESETS
+        sec_theme = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
+        sec_theme.get_style_context().add_class("section-box")
+        
+        lbl_sec1 = Gtk.Label(label="Theme Layout & Visual Preset")
+        lbl_sec1.get_style_context().add_class("section-header")
+        lbl_sec1.set_xalign(0)
+        sec_theme.pack_start(lbl_sec1, False, False, 0)
+
+        grid_t = Gtk.Grid()
+        grid_t.set_column_spacing(16)
+        grid_t.set_row_spacing(10)
+        sec_theme.pack_start(grid_t, False, False, 0)
+
+        lbl_t_choice = Gtk.Label(label="Active Theme:")
+        lbl_t_choice.get_style_context().add_class("field-label")
+        lbl_t_choice.set_xalign(0)
+        grid_t.attach(lbl_t_choice, 0, 0, 1, 1)
+
+        self.combo_theme = Gtk.ComboBoxText()
+        self.combo_theme.append("dark_gold", "Dark Luxury (Gold Accent) ★ Default")
+        self.combo_theme.append("midnight_cyber", "Midnight Cyber (Neon Blue)")
+        self.combo_theme.append("emerald_oled", "Emerald OLED (Matrix Green)")
+        self.combo_theme.append("sunset_glow", "Sunset Glow (Amber / Crimson)")
+        self.combo_theme.append("minimal_light", "Minimalist Light (Clean Silver)")
+        self.combo_theme.append("classic_retro", "Classic Retro (Fliqlo Style)")
+        
+        cur_theme = self.manager.config.get('theme', 'dark_gold')
+        self.combo_theme.set_active_id(cur_theme)
+        self.combo_theme.set_hexpand(True)
+        grid_t.attach(self.combo_theme, 1, 0, 1, 1)
+
+        content_vbox.pack_start(sec_theme, False, False, 0)
+
+        # SECTION 2: DISPLAY OPTIONS
+        sec_disp = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
+        sec_disp.get_style_context().add_class("section-box")
+        
+        lbl_sec2 = Gtk.Label(label="Display & Clock Customization")
+        lbl_sec2.get_style_context().add_class("section-header")
+        lbl_sec2.set_xalign(0)
+        sec_disp.pack_start(lbl_sec2, False, False, 0)
+
+        grid_d = Gtk.Grid()
+        grid_d.set_column_spacing(16)
+        grid_d.set_row_spacing(12)
+        sec_disp.pack_start(grid_d, False, False, 0)
+
+        # Time Format
+        lbl_fmt = Gtk.Label(label="Time Format:")
+        lbl_fmt.get_style_context().add_class("field-label")
+        lbl_fmt.set_xalign(0)
+        grid_d.attach(lbl_fmt, 0, 0, 1, 1)
+
         self.combo_format = Gtk.ComboBoxText()
         self.combo_format.append("12", "12-Hour (AM/PM)")
-        self.combo_format.append("24", "24-Hour")
-        current_fmt = self.manager.config.get('hour_format', '12')
-        self.combo_format.set_active_id(current_fmt)
-        grid.attach(self.combo_format, 1, 0, 1, 1)
+        self.combo_format.append("24", "24-Hour (24:00)")
+        self.combo_format.set_active_id(self.manager.config.get('hour_format', '12'))
+        self.combo_format.set_hexpand(True)
+        grid_d.attach(self.combo_format, 1, 0, 1, 1)
+
+        # Show Seconds Toggle
+        lbl_sec_toggle = Gtk.Label(label="Display Seconds Card:")
+        lbl_sec_toggle.get_style_context().add_class("field-label")
+        lbl_sec_toggle.set_xalign(0)
+        grid_d.attach(lbl_sec_toggle, 0, 1, 1, 1)
+
+        self.switch_seconds = Gtk.Switch()
+        self.switch_seconds.set_active(str(self.manager.config.get('show_seconds', 'true')).lower() == 'true')
+        self.switch_seconds.set_halign(Gtk.Align.END)
+        grid_d.attach(self.switch_seconds, 1, 1, 1, 1)
+
+        # Show Date Badge Toggle
+        lbl_date_toggle = Gtk.Label(label="Display Date Badge:")
+        lbl_date_toggle.get_style_context().add_class("field-label")
+        lbl_date_toggle.set_xalign(0)
+        grid_d.attach(lbl_date_toggle, 0, 2, 1, 1)
+
+        self.switch_date = Gtk.Switch()
+        self.switch_date.set_active(str(self.manager.config.get('show_date', 'true')).lower() == 'true')
+        self.switch_date.set_halign(Gtk.Align.END)
+        grid_d.attach(self.switch_date, 1, 2, 1, 1)
+
+        # Clock Scale Slider
+        lbl_scale = Gtk.Label(label="Clock Scale / Size:")
+        lbl_scale.get_style_context().add_class("field-label")
+        lbl_scale.set_xalign(0)
+        grid_d.attach(lbl_scale, 0, 3, 1, 1)
+
+        cur_scale = float(self.manager.config.get('clock_size', '1.0'))
+        self.adj_size = Gtk.Adjustment(value=cur_scale, lower=0.5, upper=2.0, step_increment=0.1, page_increment=0.5, page_size=0)
+        self.scale_size = Gtk.Scale(orientation=Gtk.Orientation.HORIZONTAL, adjustment=self.adj_size)
+        self.scale_size.set_digits(1)
+        self.scale_size.set_hexpand(True)
+        grid_d.attach(self.scale_size, 1, 3, 1, 1)
+
+        content_vbox.pack_start(sec_disp, False, False, 0)
+
+        # SECTION 3: IDLE TIMEOUT & BEHAVIOR
+        sec_idle = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
+        sec_idle.get_style_context().add_class("section-box")
         
-        lbl_timeout = Gtk.Label(label="Idle Timeout:")
-        lbl_timeout.set_xalign(0)
-        grid.attach(lbl_timeout, 0, 1, 1, 1)
-        
+        lbl_sec3 = Gtk.Label(label="Idle Timeout & Behavior")
+        lbl_sec3.get_style_context().add_class("section-header")
+        lbl_sec3.set_xalign(0)
+        sec_idle.pack_start(lbl_sec3, False, False, 0)
+
+        grid_i = Gtk.Grid()
+        grid_i.set_column_spacing(16)
+        grid_i.set_row_spacing(10)
+        sec_idle.pack_start(grid_i, False, False, 0)
+
+        lbl_to = Gtk.Label(label="Idle Timeout:")
+        lbl_to.get_style_context().add_class("field-label")
+        lbl_to.set_xalign(0)
+        grid_i.attach(lbl_to, 0, 0, 1, 1)
+
         self.combo_timeout = Gtk.ComboBoxText()
         self.combo_timeout.append("60", "1 Minute")
         self.combo_timeout.append("120", "2 Minutes")
         self.combo_timeout.append("180", "3 Minutes")
-        self.combo_timeout.append("240", "4 Minutes")
         self.combo_timeout.append("300", "5 Minutes")
         self.combo_timeout.append("600", "10 Minutes")
         self.combo_timeout.append("900", "15 Minutes")
         self.combo_timeout.append("1800", "30 Minutes")
         self.combo_timeout.append("3600", "1 Hour")
-        
-        current_to = str(self.manager.config.get('idle_timeout', 60))
-        if current_to not in ["60", "120", "180", "240", "300", "600", "900", "1800", "3600"]:
-            self.combo_timeout.append(current_to, f"{int(current_to)//60} Minutes")
-        self.combo_timeout.set_active_id(current_to)
-        grid.attach(self.combo_timeout, 1, 1, 1, 1)
-        
-        lbl_size = Gtk.Label(label="Clock Size:")
-        lbl_size.set_xalign(0)
-        grid.attach(lbl_size, 0, 2, 1, 1)
-        
-        current_size = float(self.manager.config.get('clock_size', '1.0'))
-        self.adj_size = Gtk.Adjustment(value=current_size, lower=0.5, upper=2.0, step_increment=0.1, page_increment=0.5, page_size=0)
-        self.scale_size = Gtk.Scale(orientation=Gtk.Orientation.HORIZONTAL, adjustment=self.adj_size)
-        self.scale_size.set_digits(1)
-        self.scale_size.set_hexpand(True)
-        self.scale_size.set_size_request(150, -1)
-        grid.attach(self.scale_size, 1, 2, 1, 1)
-        
+
+        cur_to = str(self.manager.config.get('idle_timeout', 60))
+        if cur_to not in ["60", "120", "180", "300", "600", "900", "1800", "3600"]:
+            self.combo_timeout.append(cur_to, f"{int(cur_to)//60} Minutes")
+        self.combo_timeout.set_active_id(cur_to)
+        self.combo_timeout.set_hexpand(True)
+        grid_i.attach(self.combo_timeout, 1, 0, 1, 1)
+
+        content_vbox.pack_start(sec_idle, False, False, 0)
+
+        # ACTION BUTTONS & FOOTER
+        action_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
+        action_box.set_margin_left(16)
+        action_box.set_margin_right(16)
+        action_box.set_margin_bottom(16)
+
+        btn_row = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=12)
+        btn_row.set_halign(Gtk.Align.END)
+
+        self.btn_preview = Gtk.Button(label="Test Preview")
+        self.btn_preview.get_style_context().add_class("btn-secondary")
+        self.btn_preview.connect("clicked", self.on_preview_clicked)
+        btn_row.pack_start(self.btn_preview, False, False, 0)
+
         self.btn_save = Gtk.Button(label="Save & Apply")
+        self.btn_save.get_style_context().add_class("btn-primary")
         self.btn_save.connect("clicked", self.on_save_clicked)
-        grid.attach(self.btn_save, 0, 3, 2, 1)
-        
+        btn_row.pack_start(self.btn_save, False, False, 0)
+
+        action_box.pack_start(btn_row, False, False, 0)
+
+        lbl_footer = Gtk.Label(label=f"Designed & Customized by Antigravity AI • v{APP_VERSION}")
+        lbl_footer.get_style_context().add_class("branding-footer")
+        lbl_footer.set_xalign(0.5)
+        action_box.pack_start(lbl_footer, False, False, 0)
+
+        main_box.pack_start(action_box, False, False, 0)
+
         self.connect("destroy", Gtk.main_quit)
         self.show_all()
-        
-    def on_save_clicked(self, button):
+
+    def update_config_from_ui(self):
+        theme = self.combo_theme.get_active_id() or "dark_gold"
         fmt = self.combo_format.get_active_id() or "12"
         timeout_str = self.combo_timeout.get_active_id() or "60"
         try:
@@ -645,11 +871,28 @@ class FlipClockSettingsWindow(Gtk.Window):
         except ValueError:
             timeout = 60
         size = f"{self.scale_size.get_value():.1f}"
-        
+        show_sec = 'true' if self.switch_seconds.get_active() else 'false'
+        show_dt = 'true' if self.switch_date.get_active() else 'false'
+
+        self.manager.config['theme'] = theme
         self.manager.config['hour_format'] = fmt
         self.manager.config['idle_timeout'] = timeout
         self.manager.config['clock_size'] = size
-        
+        self.manager.config['show_seconds'] = show_sec
+        self.manager.config['show_date'] = show_dt
+        self.manager.config['custom_credit'] = 'Customized by Antigravity AI'
+
+    def on_preview_clicked(self, button):
+        self.update_config_from_ui()
+        self.manager.save_config()
+        try:
+            script_path = os.path.realpath(__file__)
+            subprocess.Popen([sys.executable, script_path, "--run"])
+        except Exception as e:
+            print(f"Error starting preview: {e}")
+
+    def on_save_clicked(self, button):
+        self.update_config_from_ui()
         self.manager.save_config()
         self.manager.restart_daemon()
         
@@ -658,20 +901,15 @@ class FlipClockSettingsWindow(Gtk.Window):
             flags=0,
             message_type=Gtk.MessageType.INFO,
             buttons=Gtk.ButtonsType.OK,
-            text="Settings Saved!",
+            text="Settings Saved Successfully!",
         )
-        dialog.format_secondary_text("Configuration applied and screensaver daemon restarted.\n\nThe screensaver preview will start now.")
+        dialog.format_secondary_text("Your theme layout & settings have been applied.\nDaemon restarted. Launching screensaver preview...")
         dialog.run()
         dialog.destroy()
         
         try:
-            if os.path.exists("/usr/bin/flipclock"):
-                subprocess.Popen(["/usr/bin/flipclock", "--run"])
-            elif os.path.exists("/usr/share/flipclock/flipclock.py"):
-                subprocess.Popen([sys.executable, "/usr/share/flipclock/flipclock.py", "--run"])
-            else:
-                script_path = os.path.realpath(__file__)
-                subprocess.Popen([sys.executable, script_path, "--run"])
+            script_path = os.path.realpath(__file__)
+            subprocess.Popen([sys.executable, script_path, "--run"])
         except Exception as e:
             print(f"Error starting preview: {e}")
             
@@ -696,7 +934,12 @@ class FlipClockManager:
             'hour_format': '12',
             'clock_size': '1.0',
             'animation_speed': 500,
-            'monitors': 'all'
+            'monitors': 'all',
+            'theme': 'dark_gold',
+            'show_seconds': 'true',
+            'show_date': 'true',
+            'bg_style': 'vignette',
+            'custom_credit': 'Customized by Antigravity AI'
         }
         self.load_config()
 
@@ -715,30 +958,29 @@ class FlipClockManager:
                     self.config['clock_size'] = settings.get('clock_size', '1.0')
                     self.config['animation_speed'] = settings.getint('animation_speed', 500)
                     self.config['monitors'] = settings.get('monitors', 'all')
+                    self.config['theme'] = settings.get('theme', 'dark_gold')
+                    self.config['show_seconds'] = settings.get('show_seconds', 'true')
+                    self.config['show_date'] = settings.get('show_date', 'true')
+                    self.config['bg_style'] = settings.get('bg_style', 'vignette')
+                    self.config['custom_credit'] = settings.get('custom_credit', 'Customized by Antigravity AI')
             except Exception as e:
                 print(f"Error reading config, using defaults: {e}")
         else:
-            parser['Settings'] = {
-                'idle_timeout': str(self.config['idle_timeout']),
-                'hour_format': self.config['hour_format'],
-                'clock_size': self.config['clock_size'],
-                'animation_speed': str(self.config['animation_speed']),
-                'monitors': self.config['monitors']
-            }
-            try:
-                with open(self.config_path, 'w') as f:
-                    parser.write(f)
-            except Exception as e:
-                print(f"Could not write default configuration: {e}")
+            self.save_config()
 
     def save_config(self):
         parser = configparser.ConfigParser()
         parser['Settings'] = {
-            'idle_timeout': str(self.config['idle_timeout']),
-            'hour_format': self.config['hour_format'],
-            'clock_size': self.config['clock_size'],
-            'animation_speed': str(self.config['animation_speed']),
-            'monitors': self.config['monitors']
+            'idle_timeout': str(self.config.get('idle_timeout', 60)),
+            'hour_format': str(self.config.get('hour_format', '12')),
+            'clock_size': str(self.config.get('clock_size', '1.0')),
+            'animation_speed': str(self.config.get('animation_speed', 500)),
+            'monitors': str(self.config.get('monitors', 'all')),
+            'theme': str(self.config.get('theme', 'dark_gold')),
+            'show_seconds': str(self.config.get('show_seconds', 'true')),
+            'show_date': str(self.config.get('show_date', 'true')),
+            'bg_style': str(self.config.get('bg_style', 'vignette')),
+            'custom_credit': str(self.config.get('custom_credit', 'Customized by Antigravity AI'))
         }
         try:
             with open(self.config_path, 'w') as f:
@@ -903,9 +1145,13 @@ if __name__ == "__main__":
     parser.add_argument("--run", action="store_true", help="Launch fullscreen flip clock windows directly")
     parser.add_argument("--daemon", action="store_true", help="Start background idle monitor daemon")
     parser.add_argument("--settings", action="store_true", help="Configure Flip Clock settings")
+    parser.add_argument("--theme", choices=["dark_gold", "midnight_cyber", "emerald_oled", "sunset_glow", "minimal_light", "classic_retro"], help="Test theme directly")
+    parser.add_argument("--version", action="version", version=f"Flip Clock Screensaver v{APP_VERSION} (Customized by Antigravity AI)")
     args = parser.parse_args()
     
     manager = FlipClockManager()
+    if args.theme:
+        manager.config['theme'] = args.theme
     
     if args.daemon:
         manager.run_daemon()
