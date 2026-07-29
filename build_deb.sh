@@ -4,7 +4,7 @@
 set -e
 
 # Package name and version
-PKG_NAME="flipclock-screensaver"
+PKG_NAME="ubuntu-flipclock-screensaver"
 PKG_VER="2.0.0"
 PKG_DIR="flipclock-build"
 
@@ -45,11 +45,13 @@ ln -sf /usr/share/flipclock/flipclock.py "$PKG_DIR/usr/local/bin/flipclock"
 
 # Create DEBIAN/control file
 cat << EOF > "$PKG_DIR/DEBIAN/control"
-Package: flipclock-screensaver
+Package: $PKG_NAME
 Version: $PKG_VER
 Section: utils
 Priority: optional
 Architecture: all
+Provides: flipclock-screensaver
+Replaces: flipclock-screensaver
 Maintainer: Antigravity <antigravity@google.com>
 Depends: python3, python3-gi, gir1.2-gtk-3.0, gir1.2-webkit2-4.0 | gir1.2-webkit2-4.1, libxss1
 Description: Premium Fliqlo-style flip clock screensaver for Ubuntu
