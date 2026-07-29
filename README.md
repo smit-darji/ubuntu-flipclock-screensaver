@@ -7,11 +7,18 @@
 
 ---
 
-## 📷 Preview & Screenshots
-
-![Flip Clock Screensaver Fullscreen Preview](screenshot.png)
+## 📷 Themes & Visual Previews
 
 A native, high-fidelity, multi-monitor flip clock screensaver for Ubuntu Linux. It brings a vintage airport split-flap style retro clock to your workstation, rendering across all connected displays simultaneously with smooth 3D CSS animations, dynamic time-based greetings, and multi-theme personalization.
+
+| Theme Name | Visual Screenshot Preview |
+|---|---|
+| **1. Classic Retro (Fliqlo Style)** *(Default)* | ![Classic Retro (Fliqlo Style)](assets/theme_classic_retro.png) |
+| **2. Dark Luxury (Gold Accent)** | ![Dark Luxury Gold](assets/theme_dark_gold.png) |
+| **3. Midnight Cyber (Neon Blue)** | ![Midnight Cyber Neon](assets/theme_midnight_cyber.png) |
+| **4. Emerald OLED (Matrix Green)** | ![Emerald OLED Green](assets/theme_emerald_oled.png) |
+| **5. Sunset Glow (Amber / Crimson)** | ![Sunset Glow Orange](assets/theme_sunset_glow.png) |
+| **6. Minimalist Light (Clean Silver)** | ![Minimalist Light Silver](assets/theme_minimal_light.png) |
 
 ---
 
