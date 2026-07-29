@@ -576,7 +576,7 @@ class FlipClockSettingsWindow(Gtk.Window):
     def __init__(self, manager):
         super().__init__(title="Flip Clock Settings")
         self.manager = manager
-        self.set_default_size(520, 640)
+        self.set_default_size(540, 680)
         self.set_border_width(0)
         self.set_position(Gtk.WindowPosition.CENTER)
         
@@ -931,10 +931,11 @@ class FlipClockSettingsWindow(Gtk.Window):
         content_vbox.pack_start(sec_idle, False, False, 0)
 
         # ACTION BUTTONS & FOOTER
-        action_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
-        action_box.set_margin_left(16)
-        action_box.set_margin_right(16)
-        action_box.set_margin_bottom(16)
+        action_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=14)
+        action_box.set_margin_top(22)
+        action_box.set_margin_bottom(20)
+        action_box.set_margin_start(16)
+        action_box.set_margin_end(16)
 
         btn_row = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=12)
         btn_row.set_halign(Gtk.Align.END)
