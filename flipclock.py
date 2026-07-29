@@ -613,7 +613,6 @@ class FlipClockSettingsWindow(Gtk.Window):
             font-size: 12px;
             font-weight: 800;
             color: #d4af37;
-            text-transform: uppercase;
             letter-spacing: 0.1em;
             margin-bottom: 12px;
         }
