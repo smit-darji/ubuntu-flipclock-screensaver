@@ -26,7 +26,7 @@ except ValueError:
         sys.exit(1)
 from gi.repository import Gtk, Gdk, WebKit2, GLib, GdkPixbuf
 
-APP_VERSION = "2.4.4"
+APP_VERSION = "2.4.5"
 
 THEME_CATEGORIES = {
     "liquid_glass": {
@@ -1936,7 +1936,6 @@ class FlipClockSettingsWindow(Gtk.Window):
             ("arch", "Arch"),
             ("stadium", "Stadium"),
             ("lozenge", "Lozenge"),
-            ("prism", "Prism"),
             ("frame", "Frame"),
             ("panel", "Panel"),
             ("card", "Card"),

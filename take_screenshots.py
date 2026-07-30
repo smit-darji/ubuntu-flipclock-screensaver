@@ -27,7 +27,7 @@ SHAPES = [
     "circle", "oval", "trapezoid", "parallelogram", "rhombus",
     "chamfered", "beveled", "notched", "cut_corner", "chevron",
     "badge", "ticket", "arch", "stadium", "lozenge",
-    "prism", "frame", "panel", "card", "tile"
+    "frame", "panel", "card", "tile"
 ]
 
 def make_temp_html(theme, shape):
