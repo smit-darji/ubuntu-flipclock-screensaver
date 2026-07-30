@@ -1652,9 +1652,25 @@
             if (ampmEl) ampmEl.textContent = ampmText;
 
             const p = n => String(n).padStart(2, '0');
-            if (h !== pH) { doFlip('fc-h', p(h)); pH = h; }
-            if (m !== pM) { doFlip('fc-m', p(m)); pM = m; }
-            if (showSeconds && s !== pS) { doFlip('fc-s', p(s)); pS = s; }
+            const strH = p(h), strM = p(m), strS = p(s);
+
+            if (pH === -1) {
+                setCardVal('fc-h', strH); pH = h;
+                setCardVal('fc-m', strM); pM = m;
+                setCardVal('fc-s', strS); pS = s;
+                return;
+            }
+
+            if (h !== pH) { doFlip('fc-h', strH); pH = h; }
+            if (m !== pM) { doFlip('fc-m', strM); pM = m; }
+            if (showSeconds && s !== pS) { doFlip('fc-s', strS); pS = s; }
+        }
+
+        function setCardVal(id, val) {
+            const t = document.getElementById(id + '-top');
+            const b = document.getElementById(id + '-bot');
+            if (t) t.innerHTML = '<span>' + val[0] + '</span><span>' + val[1] + '</span>';
+            if (b) b.innerHTML = '<span>' + val[0] + '</span><span>' + val[1] + '</span>';
         }
 
         function doFlip(id, val) {

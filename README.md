@@ -198,7 +198,7 @@ Once installed, the following commands are available globally in your terminal:
 |---|---|
 | `flipclock` or `flipclock --run` | Previews/launches screensaver full-screen windows immediately |
 | `flipclock --settings` | Opens the graphical settings configuration window |
-| `flipclock --version` | Outputs current software version (`v2.4.3`) |
+| `flipclock --version` | Outputs current software version (`v2.4.4`) |
 | `flipclock --daemon` | Starts the background idle monitor daemon |
 | `pkill -f "flipclock.*--daemon"` | Stops the background idle monitor daemon |
 
@@ -212,7 +212,7 @@ To build a fresh `.deb` package file locally:
 chmod +x build_deb.sh
 ./build_deb.sh
 ```
-This generates `flipclock-screensaver.deb` (and `flipclock-screensaver_2.4.3_all.deb`) in the project root directory.
+This generates `flipclock-screensaver.deb` (and `flipclock-screensaver_2.4.4_all.deb`) in the project root directory.
 
 ---
 
