@@ -29,6 +29,10 @@ from gi.repository import Gtk, Gdk, WebKit2, GLib, GdkPixbuf
 APP_VERSION = "2.4.0"
 
 THEME_CATEGORIES = {
+    "liquid_glass": {
+        "label": "💧 Liquid Glass & Crystal Dark",
+        "themes": ["liquid_glass", "luxury_black_gold", "obsidian_titanium", "arctic_ice", "ocean_cyan"]
+    },
     "executive": {
         "label": "🏆 Executive Dark & Gold",
         "themes": ["luxury_black_gold", "obsidian_titanium", "platinum_silver", "champagne_gold", "matte_black_diamond"]
@@ -52,6 +56,16 @@ THEME_CATEGORIES = {
 }
 
 PRESET_THEMES = {
+    "liquid_glass": {
+        "name": "💧 Liquid Glass Dark",
+        "bg_color": "#060810",
+        "card_color": "#0F172A",
+        "digit_color": "#FFFFFF",
+        "accent_color": "#38BDF8",
+        "border_color": "#1E293B",
+        "digit_font": "Audiowide",
+        "label_font": "Outfit"
+    },
     "luxury_black_gold": {
         "name": "🥇 Luxury Black Gold",
         "bg_color": "#000000",
@@ -818,6 +832,25 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
             --badge-bg: rgba(255,255,255,0.9);
             --badge-border: rgba(148,163,184,0.4);
             --branding-color: rgba(30, 41, 59, 0.5);
+        }
+
+        .theme-liquid_glass {
+            --vignette-color: rgba(56, 189, 248, 0.08);
+            --card-bg: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.5) 100%);
+            --card-border: rgba(56, 189, 248, 0.4);
+            --card-top-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.03) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(15, 23, 42, 0.6) 0%, rgba(2, 6, 23, 0.4) 100%);
+            --divider-line: rgba(56, 189, 248, 0.35);
+            --pin-bg: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+            --digit-color: #ffffff;
+            --digit-shadow: 0 0 20px rgba(56, 189, 248, 0.45), 0 2px 10px rgba(0,0,0,0.9);
+            --dot-bg: radial-gradient(circle at 30% 28%, #7dd3fc 0%, #38bdf8 50%, #0284c7 100%);
+            --dot-shadow: 0 0 14px rgba(56, 189, 248, 0.8);
+            --accent-color: #38bdf8;
+            --badge-color: #f1f5f9;
+            --badge-bg: rgba(15, 23, 42, 0.85);
+            --badge-border: rgba(56, 189, 248, 0.4);
+            --branding-color: rgba(56, 189, 248, 0.6);
         }
 
         .theme-custom {
@@ -1883,14 +1916,17 @@ class FlipClockSettingsWindow(Gtk.Window):
             return
         preset = PRESET_THEMES[t_id]
         if t_id != 'custom':
-            self.btn_bg_color.set_rgba(hex_to_rgba(preset['bg_color']))
-            self.btn_card_color.set_rgba(hex_to_rgba(preset['card_color']))
-            self.btn_digit_color.set_rgba(hex_to_rgba(preset['digit_color']))
-            self.btn_accent_color.set_rgba(hex_to_rgba(preset['accent_color']))
-            self.btn_border_color.set_rgba(hex_to_rgba(preset['border_color']))
+            if hasattr(self, 'btn_bg_color'):
+                self.btn_bg_color.set_rgba(hex_to_rgba(preset['bg_color']))
+                self.btn_card_color.set_rgba(hex_to_rgba(preset['card_color']))
+                self.btn_digit_color.set_rgba(hex_to_rgba(preset['digit_color']))
+                self.btn_accent_color.set_rgba(hex_to_rgba(preset['accent_color']))
+                self.btn_border_color.set_rgba(hex_to_rgba(preset['border_color']))
             
-            self.combo_digit_font.set_active_id(preset['digit_font'])
-            self.combo_label_font.set_active_id(preset['label_font'])
+            if hasattr(self, 'combo_digit_font'):
+                self.combo_digit_font.set_active_id(preset['digit_font'])
+            if hasattr(self, 'combo_label_font'):
+                self.combo_label_font.set_active_id(preset['label_font'])
             
         self.update_palette_preview_swatches(preset)
         self.update_theme_preview_image(t_id)

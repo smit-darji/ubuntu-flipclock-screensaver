@@ -3,6 +3,19 @@ import os
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 THEMES = {
+    "liquid_glass": {
+        "title": "💧 Liquid Glass Dark",
+        "bg_color": (6, 8, 16, 255),
+        "card_top": (25, 40, 70, 255),
+        "card_bot": (15, 23, 42, 255),
+        "border_color": (56, 189, 248, 200),
+        "digit_color": (255, 255, 255, 255),
+        "pin_color": (56, 189, 248, 255),
+        "accent_color": (56, 189, 248, 255),
+        "badge_bg": (15, 23, 42, 220),
+        "badge_border": (56, 189, 248, 140),
+        "greeting": "GOOD MORNING"
+    },
     "luxury_black_gold": {
         "title": "🥇 Luxury Black Gold",
         "bg_color": (0, 0, 0, 255),
