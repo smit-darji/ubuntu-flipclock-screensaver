@@ -1272,8 +1272,9 @@ class FlipClockWindow(Gtk.Window):
         custom_digit_color = config_params.get('custom_digit_color', '#ffffff').replace("'", "\\'")
         custom_accent_color = config_params.get('custom_accent_color', '#d4af37').replace("'", "\\'")
         custom_border_color = config_params.get('custom_border_color', '#333333').replace("'", "\\'")
+        card_shape = config_params.get('card_shape', 'rounded')
         
-        config_script = f"<script>window.screensaverConfig = {{ monitor: '{monitor_idx}', format: '{fmt}', size: '{size}', speed: '{speed}', theme: '{theme}', show_seconds: '{show_seconds}', show_date: '{show_date}', show_greeting: '{show_greeting}', user_name: '{user_name}', custom_credit: '{custom_credit}', digit_font: '{digit_font}', label_font: '{label_font}', custom_bg_color: '{custom_bg_color}', custom_card_color: '{custom_card_color}', custom_digit_color: '{custom_digit_color}', custom_accent_color: '{custom_accent_color}', custom_border_color: '{custom_border_color}' }};</script>"
+        config_script = f"<script>window.screensaverConfig = {{ monitor: '{monitor_idx}', format: '{fmt}', size: '{size}', speed: '{speed}', theme: '{theme}', card_shape: '{card_shape}', show_seconds: '{show_seconds}', show_date: '{show_date}', show_greeting: '{show_greeting}', user_name: '{user_name}', custom_credit: '{custom_credit}', digit_font: '{digit_font}', label_font: '{label_font}', custom_bg_color: '{custom_bg_color}', custom_card_color: '{custom_card_color}', custom_digit_color: '{custom_digit_color}', custom_accent_color: '{custom_accent_color}', custom_border_color: '{custom_border_color}' }};</script>"
         if "</head>" in html_content:
             html_content = html_content.replace("</head>", f"{config_script}</head>")
         else:
