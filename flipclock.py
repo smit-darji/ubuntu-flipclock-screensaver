@@ -793,50 +793,53 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
 <div id="scene">
     <button id="close-btn" onclick="forceClose()" title="Close Screensaver">✕</button>
 
-    <div id="greeting-badge">GOOD MORNING</div>
+    <div id="clock-container">
+        <div id="greeting-badge">GOOD MORNING</div>
 
-    <div class="clock-row" id="clock-row">
-        <!-- Hours Card -->
-        <div class="flip-card" id="fc-h">
-            <span class="ampm-badge" id="ampm-badge"></span>
-            <div class="card-half card-top"><div class="digit-wrapper"><span class="digit-text" id="fc-h-top">00</span></div></div>
-            <div class="card-half card-bottom"><div class="digit-wrapper"><span class="digit-text" id="fc-h-bot">00</span></div></div>
-            <div class="card-divider"></div>
+        <div class="clock-row" id="clock-row">
+            <!-- Hours Card -->
+            <div class="flip-card" id="fc-h">
+                <span class="ampm-badge" id="ampm-badge"></span>
+                <div class="card-half card-top"><div class="digit-wrapper"><span class="digit-text" id="fc-h-top">00</span></div></div>
+                <div class="card-half card-bottom"><div class="digit-wrapper"><span class="digit-text" id="fc-h-bot">00</span></div></div>
+                <div class="card-divider"></div>
+            </div>
+
+            <div class="sep" id="sep-m"><div class="sep-dot"></div><div class="sep-dot"></div></div>
+
+            <!-- Minutes Card -->
+            <div class="flip-card" id="fc-m">
+                <div class="card-half card-top"><div class="digit-wrapper"><span class="digit-text" id="fc-m-top">00</span></div></div>
+                <div class="card-half card-bottom"><div class="digit-wrapper"><span class="digit-text" id="fc-m-bot">00</span></div></div>
+                <div class="card-divider"></div>
+            </div>
+
+            <div class="sep" id="sep-s"><div class="sep-dot"></div><div class="sep-dot"></div></div>
+
+            <!-- Seconds Card -->
+            <div class="flip-card" id="fc-s">
+                <div class="card-half card-top"><div class="digit-wrapper"><span class="digit-text" id="fc-s-top">00</span></div></div>
+                <div class="card-half card-bottom"><div class="digit-wrapper"><span class="digit-text" id="fc-s-bot">00</span></div></div>
+                <div class="card-divider"></div>
+            </div>
         </div>
 
-        <div class="sep" id="sep-m"><div class="sep-dot"></div><div class="sep-dot"></div></div>
-
-        <!-- Minutes Card -->
-        <div class="flip-card" id="fc-m">
-            <div class="card-half card-top"><div class="digit-wrapper"><span class="digit-text" id="fc-m-top">00</span></div></div>
-            <div class="card-half card-bottom"><div class="digit-wrapper"><span class="digit-text" id="fc-m-bot">00</span></div></div>
-            <div class="card-divider"></div>
-        </div>
-
-        <div class="sep" id="sep-s"><div class="sep-dot"></div><div class="sep-dot"></div></div>
-
-        <!-- Seconds Card -->
-        <div class="flip-card" id="fc-s">
-            <div class="card-half card-top"><div class="digit-wrapper"><span class="digit-text" id="fc-s-top">00</span></div></div>
-            <div class="card-half card-bottom"><div class="digit-wrapper"><span class="digit-text" id="fc-s-bot">00</span></div></div>
-            <div class="card-divider"></div>
-        </div>
+        <div id="date-badge"></div>
     </div>
 
-    <div id="date-badge"></div>
-    <div id="branding-tag">Customized by Antigravity AI</div>
+    <div id="branding-tag">FLIP CLOCK SCREENSAVER</div>
 </div>
 
 <script>
 let config = window.screensaverConfig || {};
-let themeName = config.theme || 'classic_retro';
+let themeName = config.theme || 'luxury_black_gold';
 let hourFormat = config.format || '12';
 let showSeconds = config.show_seconds !== 'false';
 let showDate = config.show_date !== 'false';
 let showGreeting = config.show_greeting !== 'false';
 let userName = config.user_name || '';
 let clockScale = parseFloat(config.size || '1.0');
-let customCredit = config.custom_credit || 'Customized by Antigravity AI';
+let customCredit = config.custom_credit || 'FLIP CLOCK SCREENSAVER';
 let digitFont = config.digit_font || 'Inter';
 let labelFont = config.label_font || 'Cinzel';
 let customBgColor = config.custom_bg_color || '#000000';
@@ -867,9 +870,9 @@ function applyConfiguration() {
     if (!showGreeting) scene.classList.add('hide-greeting');
     else scene.classList.remove('hide-greeting');
 
-    const row = document.getElementById('clock-row');
-    if (row && clockScale !== 1.0) {
-        row.style.transform = `scale(${clockScale})`;
+    const container = document.getElementById('clock-container');
+    if (container && clockScale !== 1.0) {
+        container.style.transform = `scale(${clockScale})`;
     }
 
     const brandEl = document.getElementById('branding-tag');
