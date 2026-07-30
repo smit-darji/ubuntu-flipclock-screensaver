@@ -1523,7 +1523,6 @@ class FlipClockSettingsWindow(Gtk.Window):
         grid_t.attach(lbl_t_choice, 0, 0, 1, 1)
 
         self.combo_theme = Gtk.ComboBoxText()
-        self.combo_theme.set_wrap_width(2)
         for t_key, t_info in PRESET_THEMES.items():
             self.combo_theme.append(t_key, t_info["name"])
 
@@ -1594,6 +1593,9 @@ class FlipClockSettingsWindow(Gtk.Window):
         self.btn_digit_color = create_color_row("Digit Text:", 'custom_digit_color', '#F5F5F7', grid_c, 0, 2)
         self.btn_accent_color = create_color_row("Accent & Pin:", 'custom_accent_color', '#D4AF37', grid_c, 0, 3)
         self.btn_border_color = create_color_row("Card Border:", 'custom_border_color', '#4A4A4A', grid_c, 0, 4)
+
+        # Render initial live swatches and theme screenshot preview
+        self.on_theme_combo_changed(self.combo_theme)
 
         content_vbox.pack_start(sec_colors, False, False, 0)
 
@@ -1845,29 +1847,32 @@ class FlipClockSettingsWindow(Gtk.Window):
             self.preview_swatches_box.remove(child)
             
         colors = [
-            ("Bg", preset.get("bg_color", "#000000")),
-            ("Card", preset.get("card_color", "#1C1C1E")),
-            ("Digit", preset.get("digit_color", "#F5F5F7")),
-            ("Accent", preset.get("accent_color", "#D4AF37")),
-            ("Border", preset.get("border_color", "#4A4A4A")),
+            ("Bg", preset.get("bg_color", "#000000"), getattr(self, 'btn_bg_color', None)),
+            ("Card", preset.get("card_color", "#1C1C1E"), getattr(self, 'btn_card_color', None)),
+            ("Digit", preset.get("digit_color", "#F5F5F7"), getattr(self, 'btn_digit_color', None)),
+            ("Accent", preset.get("accent_color", "#D4AF37"), getattr(self, 'btn_accent_color', None)),
+            ("Border", preset.get("border_color", "#4A4A4A"), getattr(self, 'btn_border_color', None)),
         ]
         
-        for name, hex_c in colors:
+        for name, hex_c, target_btn in colors:
             chip = Gtk.EventBox()
-            chip.set_tooltip_text(f"{name}: {hex_c}")
+            chip.set_tooltip_text(f"Click to edit {name} color ({hex_c})")
             
             lbl = Gtk.Label(label=f" {name} ")
             lbl.get_style_context().add_class("field-label")
             chip.add(lbl)
             
             provider = Gtk.CssProvider()
-            css_b = f"eventbox {{ background-color: {hex_c}; border-radius: 4px; padding: 2px 6px; border: 1px solid rgba(255,255,255,0.25); }}".encode('utf-8')
+            css_b = f"eventbox {{ background-color: {hex_c}; border-radius: 6px; padding: 4px 10px; border: 1px solid rgba(255,255,255,0.3); }}".encode('utf-8')
             try:
                 provider.load_from_data(css_b)
                 chip.get_style_context().add_provider(provider, Gtk.STYLE_PROVIDER_PRIORITY_USER)
             except Exception:
                 pass
                 
+            if target_btn:
+                chip.connect("button-press-event", lambda w, e, btn=target_btn: btn.emit("clicked"))
+
             self.preview_swatches_box.pack_start(chip, False, False, 0)
             
         self.preview_swatches_box.show_all()
