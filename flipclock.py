@@ -24,7 +24,7 @@ except ValueError:
     except ValueError:
         print("Error: WebKit2 namespace not found. Please install gir1.2-webkit2-4.0 or gir1.2-webkit2-4.1.")
         sys.exit(1)
-from gi.repository import Gtk, Gdk, WebKit2, GLib
+from gi.repository import Gtk, Gdk, WebKit2, GLib, GdkPixbuf
 
 APP_VERSION = "2.3.0"
 
@@ -252,13 +252,33 @@ PRESET_THEMES = {
         "digit_font": "Inter",
         "label_font": "Inter"
     },
+    "classic_retro": {
+        "name": "📜 Classic Retro",
+        "bg_color": "#0A0A0C",
+        "card_color": "#1C1C1E",
+        "digit_color": "#FFFFFF",
+        "accent_color": "#E5E5E5",
+        "border_color": "#4A4A4A",
+        "digit_font": "Inter",
+        "label_font": "Cinzel"
+    },
+    "minimal_light": {
+        "name": "☀️ Minimalist Light",
+        "bg_color": "#F1F5F9",
+        "card_color": "#FFFFFF",
+        "digit_color": "#0F172A",
+        "accent_color": "#1E293B",
+        "border_color": "#94A3B8",
+        "digit_font": "Roboto",
+        "label_font": "Roboto"
+    },
     "custom": {
         "name": "🎨 Custom Theme",
         "bg_color": "#000000",
-        "card_color": "#1c1c1e",
-        "digit_color": "#ffffff",
-        "accent_color": "#d4af37",
-        "border_color": "#4a4a4a",
+        "card_color": "#1C1C1E",
+        "digit_color": "#FFFFFF",
+        "accent_color": "#D4AF37",
+        "border_color": "#4A4A4A",
         "digit_font": "Inter",
         "label_font": "Cinzel"
     }
@@ -395,7 +415,7 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
     <title>Premium Flip Clock Screensaver</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Courier+Prime:wght@400;700&family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@700;800;900&family=Oswald:wght@500;700&family=Outfit:wght@600;800&family=Roboto:wght@500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Bebas+Neue&family=Chakra+Petch:wght@600;700&family=Cinzel:wght@700;800;900&family=Courier+Prime:wght@400;700&family=Exo+2:wght@600;800&family=IBM+Plex+Sans:wght@500;700&family=Inter:wght@300;400;500;600;700;800;900&family=Michroma&family=Orbitron:wght@700;800;900&family=Oswald:wght@500;700&family=Outfit:wght@600;800&family=Oxanium:wght@600;800&family=Rajdhani:wght@600;700&family=Roboto:wght@500;700;900&family=Share+Tech+Mono&family=Teko:wght@600;700&family=VT323&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; user-select:none; -webkit-user-select:none; }
         html, body { width:100vw; height:100vh; overflow:hidden; cursor:none; font-family:var(--digit-font, 'Inter',system-ui,sans-serif); }
@@ -1456,6 +1476,21 @@ class FlipClockSettingsWindow(Gtk.Window):
         self.preview_swatches_box.set_halign(Gtk.Align.START)
         grid_t.attach(self.preview_swatches_box, 1, 1, 1, 1)
 
+        # Theme Screenshot Visual Preview
+        lbl_img_prev = Gtk.Label(label="Theme Visual Preview:")
+        lbl_img_prev.get_style_context().add_class("field-label")
+        lbl_img_prev.set_xalign(0)
+        lbl_img_prev.set_valign(Gtk.Align.START)
+        grid_t.attach(lbl_img_prev, 0, 2, 1, 1)
+
+        self.preview_img_frame = Gtk.Frame()
+        self.preview_img_frame.set_shadow_type(Gtk.ShadowType.IN)
+        self.preview_img_frame.set_halign(Gtk.Align.START)
+        
+        self.img_theme_preview = Gtk.Image()
+        self.preview_img_frame.add(self.img_theme_preview)
+        grid_t.attach(self.preview_img_frame, 1, 2, 1, 1)
+
         content_vbox.pack_start(sec_theme, False, False, 0)
 
         # SECTION 1.5: CUSTOM COLORS & PALETTE (Compact & Minimal Swatches)
@@ -1483,6 +1518,7 @@ class FlipClockSettingsWindow(Gtk.Window):
             btn.set_rgba(hex_to_rgba(self.manager.config.get(config_key, default_hex)))
             btn.set_size_request(80, 32)
             btn.set_halign(Gtk.Align.END)
+            btn.connect("color-set", self.on_color_button_changed)
             grid_obj.attach(btn, left_col + 1, top_row, 1, 1)
             return btn
 
@@ -1517,14 +1553,21 @@ class FlipClockSettingsWindow(Gtk.Window):
             ("Cinzel", "Cinzel (Serif)"),
             ("Inter", "Inter (Sans)"),
             ("Roboto", "Roboto (Clean)"),
-            ("Orbitron", "Orbitron (Digital)"),
-            ("Outfit", "Outfit (Bold)"),
+            ("Orbitron", "Orbitron (Digital LED)"),
+            ("Outfit", "Outfit (Bold Sans)"),
             ("Oswald", "Oswald (Condensed)"),
-            ("Courier Prime", "Courier (Mono)"),
-            ("Rajdhani", "Rajdhani (Tech)"),
-            ("Exo 2", "Exo 2 (Geometric)"),
-            ("Oxanium", "Oxanium (Display)"),
-            ("Bebas Neue", "Bebas Neue (Headline)")
+            ("Courier Prime", "Courier (Vintage Mono)"),
+            ("Rajdhani", "Rajdhani (Tech Digits)"),
+            ("Exo 2", "Exo 2 (Geometric Tech)"),
+            ("Oxanium", "Oxanium (Modern Display)"),
+            ("Bebas Neue", "Bebas Neue (Tall Headline)"),
+            ("IBM Plex Sans", "IBM Plex Sans (Pro Dashboard)"),
+            ("Audiowide", "Audiowide (Futuristic LCD Clock)"),
+            ("Teko", "Teko (Ultra-Tall Flip Digits)"),
+            ("Share Tech Mono", "Share Tech Mono (Tech Clock)"),
+            ("VT323", "VT323 (Retro Digital LED Clock)"),
+            ("Chakra Petch", "Chakra Petch (Cyber Clock)"),
+            ("Michroma", "Michroma (Cockpit Clock)")
         ]
 
         self.combo_digit_font = Gtk.ComboBoxText()
@@ -1778,6 +1821,45 @@ class FlipClockSettingsWindow(Gtk.Window):
             self.combo_label_font.set_active_id(preset['label_font'])
             
         self.update_palette_preview_swatches(preset)
+        self.update_theme_preview_image(t_id)
+
+    def update_theme_preview_image(self, t_id):
+        img_path = os.path.join(self.manager.script_dir, "assets", f"theme_{t_id}.png")
+        if not os.path.exists(img_path):
+            img_path = os.path.join(os.getcwd(), "assets", f"theme_{t_id}.png")
+        if os.path.exists(img_path):
+            try:
+                pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(img_path, 340, 200, True)
+                self.img_theme_preview.set_from_pixbuf(pixbuf)
+                self.preview_img_frame.show_all()
+                return
+            except Exception as e:
+                print(f"Error loading preview pixbuf: {e}")
+        self.img_theme_preview.clear()
+        self.preview_img_frame.hide()
+
+    def on_color_button_changed(self, button):
+        bg_hex = rgba_to_hex(self.btn_bg_color.get_rgba()).upper()
+        matched_theme = None
+        for t_key, t_info in PRESET_THEMES.items():
+            if t_key == 'custom':
+                continue
+            if t_info['bg_color'].upper() == bg_hex:
+                matched_theme = t_key
+                break
+
+        if matched_theme and matched_theme != self.combo_theme.get_active_id():
+            self.combo_theme.set_active_id(matched_theme)
+        elif not matched_theme:
+            if self.combo_theme.get_active_id() != 'custom':
+                self.combo_theme.set_active_id('custom')
+            self.update_palette_preview_swatches({
+                "bg_color": rgba_to_hex(self.btn_bg_color.get_rgba()),
+                "card_color": rgba_to_hex(self.btn_card_color.get_rgba()),
+                "digit_color": rgba_to_hex(self.btn_digit_color.get_rgba()),
+                "accent_color": rgba_to_hex(self.btn_accent_color.get_rgba()),
+                "border_color": rgba_to_hex(self.btn_border_color.get_rgba())
+            })
 
     def update_config_from_ui(self):
         theme = self.combo_theme.get_active_id() or "luxury_black_gold"

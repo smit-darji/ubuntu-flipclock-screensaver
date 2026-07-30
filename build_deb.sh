@@ -34,6 +34,7 @@ fi
 cp flipclock.py "$PKG_DIR/usr/share/flipclock/"
 if [ -f "daemon.py" ]; then cp daemon.py "$PKG_DIR/usr/share/flipclock/"; fi
 if [ -f "screensaver.py" ]; then cp screensaver.py "$PKG_DIR/usr/share/flipclock/"; fi
+if [ -d "assets" ]; then cp -r assets "$PKG_DIR/usr/share/flipclock/"; fi
 
 if [ -f "flipclock.png" ]; then
     cp flipclock.png "$PKG_DIR/usr/share/pixmaps/flipclock.png"
@@ -52,7 +53,7 @@ Priority: optional
 Architecture: all
 Provides: flipclock-screensaver
 Replaces: flipclock-screensaver
-Maintainer: Antigravity <antigravity@google.com>
+Maintainer: Flip Clock Screensaver Team
 Depends: python3, python3-gi, gir1.2-gtk-3.0, gir1.2-webkit2-4.0 | gir1.2-webkit2-4.1, libxss1
 Description: Premium Fliqlo-style flip clock screensaver for Ubuntu
  A high-aesthetic, multi-monitor flip clock screensaver designed for Ubuntu Linux.

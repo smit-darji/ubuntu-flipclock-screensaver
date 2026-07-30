@@ -13,19 +13,29 @@ A native, high-fidelity, multi-monitor flip clock screensaver for Ubuntu Linux. 
 
 | Theme Name | Visual Style |
 |---|---|
-| **1. 🥇 Luxury Black Gold** *(Executive Rolex / Bentley)* | Pitch black background, gold accent highlights, Cinzel typography |
-| **2. 🥈 Obsidian Titanium** *(Apple Pro / Tesla)* | Obsidian dark plates, titanium gray border highlights |
-| **3. 🥉 Dark Emerald** *(Luxury Finance)* | Rich deep emerald cards, gold digits & pins |
-| **4. 🌲 Forest Green Executive** | Deep forest green background & card accents |
-| **5. 🏎️ British Racing Green** *(Aston Martin)* | Dark racing green cards with metallic yellow accents |
-| **6. 💎 Ruby Executive** *(Royal Red)* | Crimson ruby dark plates, vivid red highlights |
-| **7. 🍷 Burgundy Prestige** *(Wine & Leather)* | Rich deep burgundy background & cards |
-| **8. 🏎️ Crimson Royal** *(Scuderia Ferrari)* | Matte crimson red cards with gold trim |
-| **9. 🚙 Royal Sapphire** *(Executive Blue)* | Deep navy blue cards with vibrant sapphire accents |
-| **10. ⚓ Midnight Navy** | Pitch dark navy cards with soft ice blue digits |
-| **11. 🔮 Amethyst Elite** *(Royal Purple)* | Deep amethyst violet background & gold digits |
-| **12. 🪙 Platinum Silver** | Ultra-clean platinum silver cards & dark slate digits |
-| **13. 🎨 Custom Theme** | Full custom theme builder with live color pickers & font selection |
+| **1. 🥇 Luxury Black Gold** *(Executive Rolex / Bentley)* | Pitch black background `#000000`, gold accent `#D4AF37` highlights, Cinzel typography |
+| **2. 🥈 Obsidian Titanium** *(Apple Pro / Tesla)* | Obsidian dark plates `#050505`, titanium gray `#AEB5BD` border highlights, Inter font |
+| **3. 🥉 Dark Emerald** *(Luxury Finance)* | Rich deep emerald cards `#122118`, vivid green `#00C853` accents, Cinzel font |
+| **4. 🌲 Forest Green Executive** | Deep forest green `#08110A` background & green `#4CAF50` accents, Inter font |
+| **5. 🏎️ British Racing Green** *(Aston Martin)* | Dark racing green cards `#0E2017` with metallic green `#0B8F57` accents, Cinzel font |
+| **6. 💎 Ruby Executive** *(Royal Red)* | Crimson ruby dark plates `#221515`, vivid red `#D32F2F` highlights, Outfit font |
+| **7. 🍷 Burgundy Prestige** *(Wine & Leather)* | Rich deep burgundy background `#120808` & wine `#8E2430` cards, Cinzel font |
+| **8. 🏎️ Crimson Royal** *(Ferrari Dashboard)* | Matte crimson red cards `#231313` with red `#C62828` trim, Outfit font |
+| **9. 🚙 Royal Sapphire** *(BMW Cockpit)* | Deep navy blue cards `#162033` with vibrant sapphire `#2E7DFF` accents, Orbitron font |
+| **10. ⚓ Midnight Navy** | Pitch dark navy cards `#182336` with ice blue `#4F8BFF` digits, Inter font |
+| **11. ❄️ Arctic Ice** | Dark arctic plates `#172126` with cyan ice `#38D9FF` digits, Roboto font |
+| **12. 🌊 Ocean Cyan** | Deep ocean cyan `#172B33` with bright cyan `#00BCD4` accents, Orbitron font |
+| **13. 👑 Royal Purple** | Imperial purple `#1F1930` with neon purple `#8E44FF` accents, Outfit font |
+| **14. 🔮 Amethyst Elite** *(Royal Violet)* | Deep amethyst violet background `#0C0712` & `#A259FF` digits, Cinzel font |
+| **15. 🪙 Platinum Silver** | Ultra-clean platinum silver `#262626` cards & silver `#C7CCD4` digits, Inter font |
+| **16. ⚙️ Graphite Gray** | Executive graphite gray `#2A2A2A` cards & metallic gray `#9E9E9E` accents, Roboto font |
+| **17. 🧱 Copper Elite** | Deep metallic copper `#201A18` cards & warm bronze `#B87333` accents, Cinzel font |
+| **18. 🌹 Rose Gold** | Soft rose gold `#241C1B` cards & blush gold `#E8A87C` accents, Outfit font |
+| **19. 🥂 Champagne Gold** | Refined champagne gold `#24221D` cards & soft gold `#E5C07B` accents, Cinzel font |
+| **20. ✨ Matte Black Diamond** | Ultra-minimal black diamond `#181818` plates with crisp `#F0F0F0` digits, Inter font |
+| **21. 📜 Classic Retro** *(Fliqlo Airport)* | Classic vintage split-flap airport flip clock, charcoal plates, Inter font |
+| **22. ☀️ Minimalist Light** | Bright clean light theme `#F1F5F9` with dark slate digits `#0F172A`, Roboto font |
+| **23. 🎨 Custom Theme** | Full custom theme builder with live color pickers & font selection |
 
 ---
 
