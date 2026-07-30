@@ -228,14 +228,25 @@
 
         .digit-text {
             font-family: var(--digit-font, 'Inter', system-ui, sans-serif);
-            font-size: clamp(90px, 22vh, 310px);
+            font-size: clamp(80px, 18vh, 260px);
             font-weight: 800;
             color: var(--digit-color, #ffffff);
-            letter-spacing: -0.02em;
+            letter-spacing: normal;
             line-height: 1;
             text-align: center;
+            white-space: nowrap;
+            display: block !important;
             text-shadow: var(--digit-shadow, 0 2px 10px rgba(0, 0, 0, 0.9));
             transition: color 0.4s ease, font-family 0.4s ease;
+        }
+
+        .digit-text span {
+            display: inline-block !important;
+            position: static !important;
+            width: 0.55em !important;
+            text-align: center !important;
+            margin: 0 !important;
+            background: transparent !important;
         }
 
         /* Flip animations */
@@ -1373,6 +1384,30 @@
                 border-radius: 0;
             }
 
+            /* Draw crisp outer borders around all clipped shapes using stacked drop-shadows */
+            .shape-octagon .card-top, .shape-octagon .flipper-top, .shape-octagon .card-bottom, .shape-octagon .flipper-bottom,
+            .shape-hexagon .card-top, .shape-hexagon .flipper-top, .shape-hexagon .card-bottom, .shape-hexagon .flipper-bottom,
+            .shape-pentagon .card-top, .shape-pentagon .flipper-top, .shape-pentagon .card-bottom, .shape-pentagon .flipper-bottom,
+            .shape-diamond .card-top, .shape-diamond .flipper-top, .shape-diamond .card-bottom, .shape-diamond .flipper-bottom,
+            .shape-shield .card-top, .shape-shield .flipper-top, .shape-shield .card-bottom, .shape-shield .flipper-bottom,
+            .shape-trapezoid .card-top, .shape-trapezoid .flipper-top, .shape-trapezoid .card-bottom, .shape-trapezoid .flipper-bottom,
+            .shape-parallelogram .card-top, .shape-parallelogram .flipper-top, .shape-parallelogram .card-bottom, .shape-parallelogram .flipper-bottom,
+            .shape-rhombus .card-top, .shape-rhombus .flipper-top, .shape-rhombus .card-bottom, .shape-rhombus .flipper-bottom,
+            .shape-chamfered .card-top, .shape-chamfered .flipper-top, .shape-chamfered .card-bottom, .shape-chamfered .flipper-bottom,
+            .shape-beveled .card-top, .shape-beveled .flipper-top, .shape-beveled .card-bottom, .shape-beveled .flipper-bottom,
+            .shape-notched .card-top, .shape-notched .flipper-top, .shape-notched .card-bottom, .shape-notched .flipper-bottom,
+            .shape-cut_corner .card-top, .shape-cut_corner .flipper-top, .shape-cut_corner .card-bottom, .shape-cut_corner .flipper-bottom,
+            .shape-chevron .card-top, .shape-chevron .flipper-top, .shape-chevron .card-bottom, .shape-chevron .flipper-bottom,
+            .shape-badge .card-top, .shape-badge .flipper-top, .shape-badge .card-bottom, .shape-badge .flipper-bottom,
+            .shape-ticket .card-top, .shape-ticket .flipper-top, .shape-ticket .card-bottom, .shape-ticket .flipper-bottom,
+            .shape-arch .card-top, .shape-arch .flipper-top, .shape-arch .card-bottom, .shape-arch .flipper-bottom,
+            .shape-prism .card-top, .shape-prism .flipper-top, .shape-prism .card-bottom, .shape-prism .flipper-bottom,
+            .shape-frame .card-top, .shape-frame .flipper-top, .shape-frame .card-bottom, .shape-frame .flipper-bottom,
+            .shape-panel .card-top, .shape-panel .flipper-top, .shape-panel .card-bottom, .shape-panel .flipper-bottom,
+            .shape-premium_bevel .card-top, .shape-premium_bevel .flipper-top, .shape-premium_bevel .card-bottom, .shape-premium_bevel .flipper-bottom {
+                filter: drop-shadow(1.5px 0 0 var(--card-border)) drop-shadow(-1.5px 0 0 var(--card-border)) drop-shadow(0 1.5px 0 var(--card-border)) drop-shadow(0 -1.5px 0 var(--card-border));
+            }
+
             /* Custom User Theme Override */
             .theme-custom {
                 --vignette-color: rgba(255, 255, 255, 0.02);
@@ -1422,10 +1457,10 @@
                 <div class="flip-card" id="fc-h">
                     <span class="ampm-badge" id="ampm-badge"></span>
                     <div class="card-half card-top">
-                        <div class="digit-wrapper"><span class="digit-text" id="fc-h-top">00</span></div>
+                        <div class="digit-wrapper"><div class="digit-text" id="fc-h-top"><span>0</span><span>0</span></div></div>
                     </div>
                     <div class="card-half card-bottom">
-                        <div class="digit-wrapper"><span class="digit-text" id="fc-h-bot">00</span></div>
+                        <div class="digit-wrapper"><div class="digit-text" id="fc-h-bot"><span>0</span><span>0</span></div></div>
                     </div>
                     <div class="card-divider">
                         <div class="divider-dot"></div>
@@ -1440,10 +1475,10 @@
                 <!-- Minutes Card -->
                 <div class="flip-card" id="fc-m">
                     <div class="card-half card-top">
-                        <div class="digit-wrapper"><span class="digit-text" id="fc-m-top">00</span></div>
+                        <div class="digit-wrapper"><div class="digit-text" id="fc-m-top"><span>0</span><span>0</span></div></div>
                     </div>
                     <div class="card-half card-bottom">
-                        <div class="digit-wrapper"><span class="digit-text" id="fc-m-bot">00</span></div>
+                        <div class="digit-wrapper"><div class="digit-text" id="fc-m-bot"><span>0</span><span>0</span></div></div>
                     </div>
                     <div class="card-divider">
                         <div class="divider-dot"></div>
@@ -1458,10 +1493,10 @@
                 <!-- Seconds Card -->
                 <div class="flip-card" id="fc-s">
                     <div class="card-half card-top">
-                        <div class="digit-wrapper"><span class="digit-text" id="fc-s-top">00</span></div>
+                        <div class="digit-wrapper"><div class="digit-text" id="fc-s-top"><span>0</span><span>0</span></div></div>
                     </div>
                     <div class="card-half card-bottom">
-                        <div class="digit-wrapper"><span class="digit-text" id="fc-s-bot">00</span></div>
+                        <div class="digit-wrapper"><div class="digit-text" id="fc-s-bot"><span>0</span><span>0</span></div></div>
                     </div>
                     <div class="card-divider">
                         <div class="divider-dot"></div>
@@ -1632,14 +1667,15 @@
 
             const ft = document.createElement('div');
             ft.className = 'flipper flipper-top';
-            ft.innerHTML = '<div class="digit-wrapper"><span class="digit-text">' + prev + '</span></div>';
+            ft.innerHTML = '<div class="digit-wrapper"><div class="digit-text"><span>' + prev[0] + '</span><span>' + prev[1] + '</span></div></div>';
             const fb = document.createElement('div');
             fb.className = 'flipper flipper-bottom';
-            fb.innerHTML = '<div class="digit-wrapper"><span class="digit-text">' + val + '</span></div>';
+            fb.innerHTML = '<div class="digit-wrapper"><div class="digit-text"><span>' + val[0] + '</span><span>' + val[1] + '</span></div></div>';
 
             c.appendChild(ft); c.appendChild(fb);
             requestAnimationFrame(function () { ft.classList.add('flip-top-out'); fb.classList.add('flip-bottom-in'); });
-            t.textContent = val; b.textContent = val;
+            t.innerHTML = '<span>' + val[0] + '</span><span>' + val[1] + '</span>';
+            b.innerHTML = '<span>' + val[0] + '</span><span>' + val[1] + '</span>';
             setTimeout(function () { ft.remove(); fb.remove(); }, 650);
         }
 

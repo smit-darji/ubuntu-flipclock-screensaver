@@ -44,12 +44,16 @@ def screenshot(html_path, outfile):
         f"--screenshot={outfile}", "--window-size=1920,1080",
         "--hide-scrollbars", f"file://{html_path}"
     ]
-    subprocess.run(cmd, capture_output=True, timeout=20)
+    res = subprocess.run(cmd, capture_output=True, timeout=20)
+    if not os.path.exists(outfile):
+        print(f"❌ Failed to create {outfile}!")
+        print("Stdout:", res.stdout.decode())
+        print("Stderr:", res.stderr.decode())
 
 # Theme screenshots (with soft_squircle shape)
 for theme in THEMES:
     outfile = os.path.join(SCREENSHOT_DIR, f"theme_{theme}.png")
-    tmp = make_temp_html(theme, "soft_squircle")
+    tmp = make_temp_html(theme, "squircle")
     print(f"📸 Theme: {theme}...")
     screenshot(tmp, outfile)
     os.unlink(tmp)

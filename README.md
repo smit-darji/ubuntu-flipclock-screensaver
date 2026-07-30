@@ -178,14 +178,14 @@ clock_size = 1.0               # Scale factor (0.5 to 2.0)
 animation_speed = 500          # Flip animation duration in ms
 monitors = all                 # "all" or specific index (e.g. "0,1")
 theme = luxury_black_gold      # Active theme preset ID
-card_shape = soft_squircle     # Card shape (10 options)
+card_shape = squircle            # Card shape (30 options)
 show_seconds = true            # Toggle seconds card
 show_date = true               # Toggle date badge
 show_greeting = true           # Toggle greeting capsule
 user_name = Smit               # Custom name for greeting
 digit_font = Cinzel            # Digit font family
 label_font = Cinzel            # Label font family
-custom_credit = Customized by Antigravity AI
+custom_credit = FLIP CLOCK SCREENSAVER
 ```
 
 ---
@@ -198,7 +198,7 @@ Once installed, the following commands are available globally in your terminal:
 |---|---|
 | `flipclock` or `flipclock --run` | Previews/launches screensaver full-screen windows immediately |
 | `flipclock --settings` | Opens the graphical settings configuration window |
-| `flipclock --version` | Outputs current software version (`v2.4.2`) |
+| `flipclock --version` | Outputs current software version (`v2.4.3`) |
 | `flipclock --daemon` | Starts the background idle monitor daemon |
 | `pkill -f "flipclock.*--daemon"` | Stops the background idle monitor daemon |
 
@@ -212,7 +212,7 @@ To build a fresh `.deb` package file locally:
 chmod +x build_deb.sh
 ./build_deb.sh
 ```
-This generates `flipclock-screensaver.deb` (and `flipclock-screensaver_2.4.2_all.deb`) in the project root directory.
+This generates `flipclock-screensaver.deb` (and `flipclock-screensaver_2.4.3_all.deb`) in the project root directory.
 
 ---
 

@@ -26,7 +26,7 @@ except ValueError:
         sys.exit(1)
 from gi.repository import Gtk, Gdk, WebKit2, GLib, GdkPixbuf
 
-APP_VERSION = "2.4.2"
+APP_VERSION = "2.4.3"
 
 THEME_CATEGORIES = {
     "liquid_glass": {
@@ -1477,16 +1477,18 @@ class FlipClockSettingsWindow(Gtk.Window):
             border: 1px solid rgba(212, 175, 55, 0.5);
             border-radius: 8px;
             box-shadow: none;
+            min-height: 38px;
         }
         combobox button {
             background-color: transparent;
             background-image: none;
             color: #ffffff;
             border: none;
-            padding: 6px 12px;
+            padding: 0 12px;
             font-size: 14px;
             font-weight: 600;
             box-shadow: none;
+            min-height: 36px;
         }
         combobox button:hover {
             background-color: #2e2e38;
@@ -2177,7 +2179,7 @@ class FlipClockSettingsWindow(Gtk.Window):
         show_dt = 'true' if self.switch_date.get_active() else 'false'
         show_greet = 'true' if self.switch_greeting.get_active() else 'false'
         uname = self.entry_name.get_text().strip()
-        card_shape = self.combo_card_shape.get_active_id() or "soft_squircle"
+        card_shape = self.combo_card_shape.get_active_id() or "squircle"
 
         dfont = self.combo_digit_font.get_active_id() or "Cinzel"
         lfont = self.combo_label_font.get_active_id() or "Cinzel"
@@ -2215,7 +2217,18 @@ class FlipClockSettingsWindow(Gtk.Window):
         self.switch_date.set_active(str(self.manager.config.get('show_date', 'true')).lower() == 'true')
         self.switch_greeting.set_active(str(self.manager.config.get('show_greeting', 'true')).lower() == 'true')
         self.entry_name.set_text(self.manager.config.get('user_name', ''))
-        self.combo_card_shape.set_active_id(self.manager.config.get('card_shape', 'soft_squircle'))
+        cur_shape = self.manager.config.get('card_shape', 'squircle')
+        legacy_map = {
+            'soft_squircle': 'squircle',
+            'neo_rounded': 'rounded_rectangle',
+            'glass_floating': 'hexagon',
+            'premium_bevel': 'beveled',
+            'fold_corner': 'cut_corner',
+            'split_flip': 'rectangle'
+        }
+        if cur_shape in legacy_map:
+            cur_shape = legacy_map[cur_shape]
+        self.combo_card_shape.set_active_id(cur_shape)
         
         try:
             sz = float(self.manager.config.get('clock_size', '1.0'))
