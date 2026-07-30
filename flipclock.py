@@ -1366,60 +1366,50 @@ class FlipClockSettingsWindow(Gtk.Window):
             color: #d4d4d8;
         }
         combobox,
-        combobox button,
-        combobox button:focus,
-        combobox button:active,
-        combobox button:checked,
-        combobox button:hover,
-        combobox button:backdrop {
-            background-color: #22222a !important;
-            background-image: none !important;
-            color: #ffffff !important;
-            border: 1px solid rgba(212, 175, 55, 0.5) !important;
-            border-radius: 8px !important;
-            padding: 6px 12px !important;
-            font-size: 14px !important;
-            font-weight: 600 !important;
-            box-shadow: none !important;
+        combobox button {
+            background-color: #22222a;
+            background-image: none;
+            color: #ffffff;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: none;
         }
         combobox button:hover {
-            background-color: #2e2e38 !important;
-            border-color: #d4af37 !important;
+            background-color: #2e2e38;
+            border-color: #d4af37;
         }
-        combobox cellview,
-        combobox cellview *,
-        combobox label {
-            color: #ffffff !important;
-            background: transparent !important;
-            font-weight: 600 !important;
-            font-size: 14px !important;
+        combobox cellview {
+            color: #ffffff;
+            background-color: transparent;
+            font-weight: 600;
+            font-size: 14px;
         }
         combobox arrow {
-            color: #d4af37 !important;
+            color: #d4af37;
             min-width: 14px;
             min-height: 14px;
         }
         menu {
-            background-color: #16161b !important;
-            border: 1px solid #d4af37 !important;
-            border-radius: 8px !important;
-            padding: 4px 0px !important;
-            color: #ffffff !important;
+            background-color: #16161b;
+            border: 1px solid #d4af37;
+            border-radius: 8px;
+            padding: 4px 0px;
+            color: #ffffff;
         }
         menuitem {
-            color: #f4f4f5 !important;
-            background-color: #16161b !important;
-            padding: 6px 14px !important;
-            font-weight: 600 !important;
-            font-size: 13px !important;
+            color: #f4f4f5;
+            background-color: #16161b;
+            padding: 6px 14px;
+            font-weight: 600;
+            font-size: 13px;
         }
-        menuitem:hover, menuitem:selected, menuitem:focus {
-            background-color: #d4af37 !important;
-            color: #000000 !important;
-            font-weight: 800 !important;
-        }
-        menuitem label {
-            color: inherit !important;
+        menuitem:hover, menuitem:selected {
+            background-color: #d4af37;
+            color: #000000;
+            font-weight: 800;
         }
         .custom-dark-dialog {
             background-color: #141419;
