@@ -1365,42 +1365,41 @@ class FlipClockSettingsWindow(Gtk.Window):
             font-weight: 500;
             color: #d4d4d8;
         }
-        combobox, combobox button, combobox box {
+        combobox button {
             background-color: #22222a;
             color: #ffffff;
             border: 1px solid rgba(212, 175, 55, 0.45);
             border-radius: 8px;
-            padding: 5px 10px;
+            padding: 6px 12px;
             font-size: 14px;
             font-weight: 600;
         }
-        combobox:hover, combobox button:hover {
+        combobox button:hover {
             background-color: #2a2a34;
             border-color: #d4af37;
         }
-        combobox cellview, combobox cellview * {
+        combobox cellview {
             color: #ffffff;
             font-weight: 600;
             font-size: 14px;
         }
         combobox arrow {
             color: #d4af37;
-            min-width: 16px;
-            min-height: 16px;
+            min-width: 14px;
+            min-height: 14px;
         }
-        menu, popover, popover contents {
+        menu {
             background-color: #16161b;
             border: 1px solid #d4af37;
-            border-radius: 10px;
-            padding: 6px;
+            border-radius: 8px;
+            padding: 2px 0px;
             color: #ffffff;
         }
-        menuitem, popover label {
+        menuitem {
             color: #f4f4f5;
-            padding: 10px 16px;
+            padding: 6px 14px;
             font-weight: 600;
-            font-size: 14px;
-            border-radius: 6px;
+            font-size: 13px;
         }
         menuitem:hover, menuitem:selected {
             background-color: #d4af37;
