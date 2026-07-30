@@ -29,10 +29,6 @@ from gi.repository import Gtk, Gdk, WebKit2, GLib, GdkPixbuf
 APP_VERSION = "2.4.0"
 
 THEME_CATEGORIES = {
-    "liquid_glass": {
-        "label": "💧 Liquid Glass & Crystal Dark",
-        "themes": ["liquid_glass", "luxury_black_gold", "obsidian_titanium", "arctic_ice", "ocean_cyan"]
-    },
     "executive": {
         "label": "🏆 Executive Dark & Gold",
         "themes": ["luxury_black_gold", "obsidian_titanium", "platinum_silver", "champagne_gold", "matte_black_diamond"]
@@ -56,16 +52,6 @@ THEME_CATEGORIES = {
 }
 
 PRESET_THEMES = {
-    "liquid_glass": {
-        "name": "💧 Liquid Glass Dark",
-        "bg_color": "#060810",
-        "card_color": "#0F172A",
-        "digit_color": "#FFFFFF",
-        "accent_color": "#38BDF8",
-        "border_color": "#1E293B",
-        "digit_font": "Audiowide",
-        "label_font": "Outfit"
-    },
     "luxury_black_gold": {
         "name": "🥇 Luxury Black Gold",
         "bg_color": "#000000",
@@ -834,23 +820,33 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
             --branding-color: rgba(30, 41, 59, 0.5);
         }
 
-        .theme-liquid_glass {
-            --vignette-color: rgba(56, 189, 248, 0.08);
-            --card-bg: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.5) 100%);
-            --card-border: rgba(56, 189, 248, 0.4);
-            --card-top-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.03) 100%);
-            --card-bot-bg: linear-gradient(180deg, rgba(15, 23, 42, 0.6) 0%, rgba(2, 6, 23, 0.4) 100%);
-            --divider-line: rgba(56, 189, 248, 0.35);
-            --pin-bg: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
-            --digit-color: #ffffff;
-            --digit-shadow: 0 0 20px rgba(56, 189, 248, 0.45), 0 2px 10px rgba(0,0,0,0.9);
-            --dot-bg: radial-gradient(circle at 30% 28%, #7dd3fc 0%, #38bdf8 50%, #0284c7 100%);
-            --dot-shadow: 0 0 14px rgba(56, 189, 248, 0.8);
-            --accent-color: #38bdf8;
-            --badge-color: #f1f5f9;
-            --badge-bg: rgba(15, 23, 42, 0.85);
-            --badge-border: rgba(56, 189, 248, 0.4);
-            --branding-color: rgba(56, 189, 248, 0.6);
+        /* ═══ CARD SHAPE STYLES & CORNER DESIGNS ═══ */
+        /* 1. Octagon / 8-Corner Chamfer Cut */
+        .shape-octagon .card-top {
+            clip-path: polygon(16px 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%, 0 16px);
+            border-radius: 0 !important;
+        }
+        .shape-octagon .card-bottom {
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 16px 100%, 0 calc(100% - 16px));
+            border-radius: 0 !important;
+        }
+
+        /* 2. Squircle / Soft Pill */
+        .shape-squircle .card-top { border-radius: clamp(28px,4vh,48px) clamp(28px,4vh,48px) 0 0 !important; }
+        .shape-squircle .card-bottom { border-radius: 0 0 clamp(28px,4vh,48px) clamp(28px,4vh,48px) !important; }
+
+        /* 3. Sharp Executive */
+        .shape-sharp .card-top { border-radius: 4px 4px 0 0 !important; }
+        .shape-sharp .card-bottom { border-radius: 0 0 4px 4px !important; }
+
+        /* 4. Cyber Notch Cut */
+        .shape-cyber .card-top {
+            clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 0 100%);
+            border-radius: 0 !important;
+        }
+        .shape-cyber .card-bottom {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 22px 100%, 0 calc(100% - 22px));
+            border-radius: 0 !important;
         }
 
         .theme-custom {
@@ -922,6 +918,7 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
 <script>
 let config = window.screensaverConfig || {};
 let themeName = config.theme || 'luxury_black_gold';
+let cardShape = config.card_shape || 'rounded';
 let hourFormat = config.format || '12';
 let showSeconds = config.show_seconds !== 'false';
 let showDate = config.show_date !== 'false';
@@ -950,6 +947,7 @@ function applyConfiguration() {
     document.body.className = `theme-${themeName}`;
 
     const scene = document.getElementById('scene');
+    if (scene) scene.className = `shape-${cardShape}`;
     if (!showSeconds) scene.classList.add('hide-seconds');
     else scene.classList.remove('hide-seconds');
 
@@ -1777,6 +1775,22 @@ class FlipClockSettingsWindow(Gtk.Window):
         self.scale_size.set_hexpand(True)
         grid_d.attach(self.scale_size, 1, 3, 1, 1)
 
+        # Flip Card Corner Shape Selection
+        lbl_shape = Gtk.Label(label="Flip Card Design / Shape:")
+        lbl_shape.get_style_context().add_class("field-label")
+        lbl_shape.set_xalign(0)
+        grid_d.attach(lbl_shape, 0, 4, 1, 1)
+
+        self.combo_card_shape = Gtk.ComboBoxText()
+        self.combo_card_shape.append("rounded", "Classic Rounded (Default)")
+        self.combo_card_shape.append("octagon", "Octagon / 8-Corner Chamfer")
+        self.combo_card_shape.append("squircle", "Squircle / Soft Pill")
+        self.combo_card_shape.append("sharp", "Sharp Executive Rectangle")
+        self.combo_card_shape.append("cyber", "Cyber Notch Cut")
+        self.combo_card_shape.set_active_id(self.manager.config.get('card_shape', 'rounded'))
+        self.combo_card_shape.set_hexpand(True)
+        grid_d.attach(self.combo_card_shape, 1, 4, 1, 1)
+
         content_vbox.pack_start(sec_disp, False, False, 0)
 
         # SECTION 3: IDLE TIMEOUT & BEHAVIOR
@@ -1908,6 +1922,7 @@ class FlipClockSettingsWindow(Gtk.Window):
         show_dt = 'true' if self.switch_date.get_active() else 'false'
         show_greet = 'true' if self.switch_greeting.get_active() else 'false'
         uname = self.entry_name.get_text().strip()
+        card_shape = self.combo_card_shape.get_active_id() or "rounded"
 
         dfont = self.combo_digit_font.get_active_id() or "Cinzel"
         lfont = self.combo_label_font.get_active_id() or "Cinzel"
@@ -1925,6 +1940,7 @@ class FlipClockSettingsWindow(Gtk.Window):
         self.manager.config['show_date'] = show_dt
         self.manager.config['show_greeting'] = show_greet
         self.manager.config['user_name'] = uname
+        self.manager.config['card_shape'] = card_shape
         self.manager.config['custom_credit'] = 'FLIP CLOCK SCREENSAVER'
         self.manager.config['digit_font'] = dfont
         self.manager.config['label_font'] = lfont
@@ -1944,6 +1960,7 @@ class FlipClockSettingsWindow(Gtk.Window):
         self.switch_date.set_active(str(self.manager.config.get('show_date', 'true')).lower() == 'true')
         self.switch_greeting.set_active(str(self.manager.config.get('show_greeting', 'true')).lower() == 'true')
         self.entry_name.set_text(self.manager.config.get('user_name', ''))
+        self.combo_card_shape.set_active_id(self.manager.config.get('card_shape', 'rounded'))
         
         try:
             sz = float(self.manager.config.get('clock_size', '1.0'))

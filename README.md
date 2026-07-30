@@ -41,18 +41,24 @@ A native, high-fidelity, multi-monitor flip clock screensaver for Ubuntu Linux. 
 
 ## ✨ Key Features
 
-* **Vintage Split-Flap Clock UI**: Fliqlo-style charcoal cards, subtle border highlights, rounded corners, and realistic 3D card flip shadows.
-* **21 Executive Luxury Dark Themes**: Rolex Black Gold, Obsidian Titanium, Dark Emerald, Racing Green, Ruby Executive, Royal Sapphire, Amethyst Elite, and custom palette fine-tuning.
-* **Live Color Palette Preview**: Displays live color swatches (`Bg`, `Card`, `Digit`, `Accent`, `Border`) inside settings.
-* **Time-based Personalized Greetings**:
-  - Automatically displays greetings based on time of day: `GOOD MORNING`, `GOOD AFTERNOON`, `GOOD EVENING`, `GOOD NIGHT`.
+* **Vintage Split-Flap Clock UI**: Fliqlo-style charcoal cards, subtle border highlights, glassmorphic capsule badges, and realistic 3D card flip shadows.
+* **Flip Card Corner Shapes & Designs**:
+  - **Octagon / 8-Corner Chamfer** *(Custom 8-corner chamfer cut)*
+  - **Squircle / Soft Pill** *(Ultra smooth curved luxury pill edges)*
+  - **Sharp Executive** *(Clean sharp architectural rectangle)*
+  - **Cyber Notch Cut** *(Futuristic cybernetic notched corners)*
+  - **Classic Rounded** *(Standard Fliqlo rounded corners)*
+* **22 Executive Luxury Dark Themes**: Rolex Black Gold, Obsidian Titanium, Dark Emerald, Racing Green, Ruby Executive, Royal Sapphire, Amethyst Elite, and custom palette fine-tuning.
+* **Executive Glassmorphic Greeting Capsule**:
+  - Time-of-day greetings (`GOOD MORNING`, `GOOD AFTERNOON`, `GOOD EVENING`, `GOOD NIGHT`) enclosed inside a translucent glass capsule badge with gold `✦` sparkles.
   - Personalize with your custom name (e.g. `GOOD MORNING, SMIT`).
-  - Toggle greeting visibility on or off via checkbox/switch in settings.
-* **Multi-Monitor Support**: Automatically detects monitor count, geometry, and placement to spawn independent full-screen screensaver windows per display.
-* **Aspect-Ratio Scaling**: Dynamically adjusts visual scale using CSS transforms. Adapts seamlessly to ultra-wide, standard, and portrait (vertical) monitors without cut-offs.
+* **Multi-Segment Split Date & Weekday Badge**:
+  - Highlighted weekday segment (`WEDNESDAY`), glass number card (`30`), and crisp month/year display (`JULY 2026`).
+* **Multi-Monitor & Aspect-Ratio Scaling**: Automatically detects all displays and scales seamlessly across 4K, ultra-wide, standard, and vertical portrait screens.
 * **Modern Executive GTK Settings Application**:
-  - **Direct Active Theme Selector** with 2-column compact grid
-  - **Live Palette Color Swatches Preview**
+  - **Active Theme Preset Selector** with side-by-side multi-column grid dropdown
+  - **Flip Card Shape / Design Selector** (Octagon, Squircle, Sharp, Cyber, Rounded)
+  - **18 Special Clock & Executive Fonts** (Audiowide, Teko, Share Tech Mono, VT323, Chakra Petch, Michroma, Cinzel, Inter, etc.)
   - **Display Time Greeting** toggle & **Custom User Name** input
   - **Time Format** (12-Hour AM/PM vs 24-Hour)
   - **Seconds Display** toggle & **Date Badge** toggle
