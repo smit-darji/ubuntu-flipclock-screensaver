@@ -1,6 +1,7 @@
 # Premium Fliqlo-Style Flip Clock Screensaver for Ubuntu
 
 [![Platform](https://img.shields.io/badge/Platform-Ubuntu%2020.04%20%7C%2022.04%20%7C%2024.04-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)](https://ubuntu.com)
+[![Version](https://img.shields.io/badge/Version-v2.4.5-blue?style=for-the-badge)](https://github.com/smit-darji/ubuntu-flipclock-screensaver/releases)
 [![Download .deb Package](https://img.shields.io/badge/Download-flipclock--screensaver.deb-10B981?style=for-the-badge&logo=debian&logoColor=white)](https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/flipclock-screensaver.deb)
 [![Language](https://img.shields.io/badge/Language-Python%203%20%2B%20GTK3-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-MIT-6D28D9?style=for-the-badge)](LICENSE)
@@ -9,7 +10,7 @@
 
 ## 📷 Default Theme Preview — Luxury Black Gold + Soft Squircle
 
-A native, high-fidelity, multi-monitor flip clock screensaver for Ubuntu Linux. It brings a vintage airport split-flap style retro clock to your workstation, rendering across all connected displays simultaneously with smooth 3D CSS animations, dynamic time-based greetings, and **24 premium color themes** with **10 card shape designs**.
+A native, high-fidelity, multi-monitor flip clock screensaver for Ubuntu Linux. It brings a vintage airport split-flap style retro clock to your workstation, rendering across all connected displays simultaneously with smooth 3D CSS animations, dynamic time-based greetings, and **23 premium color themes** with **29 card shape designs**.
 
 ![Default Theme — Luxury Black Gold](screenshots/theme_luxury_black_gold.png)
 
