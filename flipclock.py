@@ -1023,9 +1023,9 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
 </div>
 
 <script>
-let config = window.screensaverConfig || {};
-let themeName = config.theme || 'luxury_black_gold';
-let cardShape = config.card_shape || 'soft_squircle';
+let rawShape = config.card_shape || 'squircle';
+let legacyMap = { 'soft_squircle': 'squircle', 'neo_rounded': 'rounded_rectangle', 'glass_floating': 'card', 'fold_corner': 'notched', 'split_flip': 'rectangle', 'premium_bevel': 'beveled' };
+let cardShape = legacyMap[rawShape] || rawShape;
 let hourFormat = config.format || '12';
 let showSeconds = config.show_seconds !== 'false';
 let showDate = config.show_date !== 'false';
@@ -1302,7 +1302,9 @@ class FlipClockWindow(Gtk.Window):
         custom_digit_color = config_params.get('custom_digit_color', '#ffffff').replace("'", "\\'")
         custom_accent_color = config_params.get('custom_accent_color', '#d4af37').replace("'", "\\'")
         custom_border_color = config_params.get('custom_border_color', '#333333').replace("'", "\\'")
-        card_shape = config_params.get('card_shape', 'soft_squircle')
+        raw_shape = config_params.get('card_shape', 'squircle')
+        legacy_shape_map = {'soft_squircle': 'squircle', 'neo_rounded': 'rounded_rectangle', 'glass_floating': 'card', 'fold_corner': 'notched', 'split_flip': 'rectangle', 'premium_bevel': 'beveled'}
+        card_shape = legacy_shape_map.get(raw_shape, raw_shape)
         
         config_script = f"<script>window.screensaverConfig = {{ monitor: '{monitor_idx}', format: '{fmt}', size: '{size}', speed: '{speed}', theme: '{theme}', card_shape: '{card_shape}', show_seconds: '{show_seconds}', show_date: '{show_date}', show_greeting: '{show_greeting}', user_name: '{user_name}', custom_credit: '{custom_credit}', digit_font: '{digit_font}', label_font: '{label_font}', custom_bg_color: '{custom_bg_color}', custom_card_color: '{custom_card_color}', custom_digit_color: '{custom_digit_color}', custom_accent_color: '{custom_accent_color}', custom_border_color: '{custom_border_color}' }};</script>"
         if "</head>" in html_content:
@@ -1398,7 +1400,7 @@ class FlipClockSettingsWindow(Gtk.Window):
     def __init__(self, manager):
         super().__init__(title="Flip Clock Settings")
         self.manager = manager
-        self.set_default_size(560, 640)
+        self.set_default_size(680, 720)
         self.set_border_width(0)
         self.set_position(Gtk.WindowPosition.CENTER)
         
@@ -1467,28 +1469,29 @@ class FlipClockSettingsWindow(Gtk.Window):
             margin-bottom: 12px;
         }
         .field-label {
-            font-size: 14px;
-            font-weight: 500;
-            color: #d4d4d8;
+            font-size: 15px;
+            font-weight: 600;
+            color: #e4e4e7;
         }
         combobox {
             background-color: #22222a;
             background-image: none;
-            border: 1px solid rgba(212, 175, 55, 0.5);
-            border-radius: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.7);
+            border-radius: 10px;
             box-shadow: none;
-            min-height: 38px;
+            min-height: 48px;
+            min-width: 320px;
         }
         combobox button {
             background-color: transparent;
             background-image: none;
             color: #ffffff;
             border: none;
-            padding: 0 12px;
-            font-size: 14px;
-            font-weight: 600;
+            padding: 0 20px;
+            font-size: 16px;
+            font-weight: 700;
             box-shadow: none;
-            min-height: 36px;
+            min-height: 46px;
         }
         combobox button:hover {
             background-color: #2e2e38;
@@ -1496,27 +1499,27 @@ class FlipClockSettingsWindow(Gtk.Window):
         combobox cellview {
             color: #ffffff;
             background-color: transparent;
-            font-weight: 600;
-            font-size: 14px;
+            font-weight: 700;
+            font-size: 16px;
         }
         combobox arrow {
             color: #d4af37;
-            min-width: 14px;
-            min-height: 14px;
+            min-width: 18px;
+            min-height: 18px;
         }
         menu {
             background-color: #16161b;
             border: 1px solid #d4af37;
-            border-radius: 8px;
-            padding: 4px 0px;
+            border-radius: 10px;
+            padding: 8px 0px;
             color: #ffffff;
         }
         menuitem {
             color: #f4f4f5;
             background-color: #16161b;
-            padding: 6px 14px;
+            padding: 12px 22px;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 16px;
         }
         menuitem:hover, menuitem:selected {
             background-color: #d4af37;

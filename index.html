@@ -228,14 +228,17 @@
 
         .digit-text {
             font-family: var(--digit-font, 'Inter', system-ui, sans-serif);
-            font-size: clamp(80px, 18vh, 260px);
+            font-size: clamp(110px, 24vh, 340px);
             font-weight: 800;
             color: var(--digit-color, #ffffff);
             letter-spacing: normal;
             line-height: 1;
             text-align: center;
             white-space: nowrap;
-            display: block !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            gap: 0.02em !important;
             text-shadow: var(--digit-shadow, 0 2px 10px rgba(0, 0, 0, 0.9));
             transition: color 0.4s ease, font-family 0.4s ease;
         }
@@ -243,7 +246,7 @@
         .digit-text span {
             display: inline-block !important;
             position: static !important;
-            width: 0.55em !important;
+            min-width: 0.5em !important;
             text-align: center !important;
             margin: 0 !important;
             background: transparent !important;
@@ -1493,8 +1496,16 @@
 
     <script>
         let config = window.screensaverConfig || {};
-        let themeName = config.theme || 'luxury_black_gold';
-        let cardShape = config.card_shape || 'soft_squircle';
+        let rawShape = config.card_shape || 'squircle';
+        const legacyShapeMap = {
+            'soft_squircle': 'squircle',
+            'neo_rounded': 'rounded_rectangle',
+            'glass_floating': 'card',
+            'fold_corner': 'notched',
+            'split_flip': 'rectangle',
+            'premium_bevel': 'beveled'
+        };
+        let cardShape = legacyShapeMap[rawShape] || rawShape;
         let hourFormat = config.format || '12';
         let showSeconds = config.show_seconds !== 'false';
         let showDate = config.show_date !== 'false';
