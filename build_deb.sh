@@ -5,7 +5,7 @@ set -e
 
 # Package name and version
 PKG_NAME="flipclock-screensaver"
-PKG_VER="2.0.0"
+PKG_VER="2.3.0"
 PKG_DIR="flipclock-build"
 
 echo "Creating Debian package structure..."
@@ -168,8 +168,9 @@ chmod 755 "$PKG_DIR/usr/share/flipclock/flipclock.py"
 
 echo "Building Debian package using dpkg-deb..."
 dpkg-deb --build "$PKG_DIR" "${PKG_NAME}_${PKG_VER}_all.deb"
+cp -f "${PKG_NAME}_${PKG_VER}_all.deb" "${PKG_NAME}.deb"
 
 echo "Cleaning up temporary files..."
 rm -rf "$PKG_DIR"
 
-echo "Debian package created: ${PKG_NAME}_${PKG_VER}_all.deb"
+echo "Debian package created: ${PKG_NAME}_${PKG_VER}_all.deb -> ${PKG_NAME}.deb"

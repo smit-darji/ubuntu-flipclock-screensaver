@@ -1,195 +1,290 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Premium Flip Clock Screensaver</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Cinzel:wght@700;800;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Courier+Prime:wght@400;700&family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@700;800;900&family=Oswald:wght@500;700&family=Outfit:wght@600;800&family=Roboto:wght@500;700;900&display=swap"
+        rel="stylesheet">
     <style>
-        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; user-select:none; -webkit-user-select:none; }
-        html, body { width:100vw; height:100vh; overflow:hidden; cursor:none; font-family:'Inter',system-ui,sans-serif; }
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        html,
+        body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            cursor: none;
+            font-family: var(--digit-font, 'Inter', system-ui, sans-serif);
+        }
 
         /* ═══ BASE SCENE ═══════════════════════════════════ */
         #scene {
-            position:relative;
-            width:100vw; height:100vh;
-            display:flex; flex-direction:column;
-            align-items:center; justify-content:center;
-            gap:3.5vh;
-            overflow:hidden;
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3.5vh;
+            overflow: hidden;
             background: #000000;
             transition: background 0.5s ease;
         }
 
         #scene::before {
-            content:'';
-            position:absolute; inset:0;
-            background: radial-gradient(ellipse 70% 55% at 50% 48%, var(--vignette-color, rgba(255,255,255,0.02)) 0%, transparent 75%);
-            pointer-events:none; z-index:0;
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 70% 55% at 50% 48%, var(--vignette-color, rgba(255, 255, 255, 0.02)) 0%, transparent 75%);
+            pointer-events: none;
+            z-index: 0;
         }
 
         /* ═══ GREETING BADGE ═══════════════════════════════ */
         #greeting-badge {
-            z-index:10;
-            font-family:'Cinzel',serif;
-            font-size:clamp(12px, 1.6vw, 22px);
-            font-weight:800;
-            letter-spacing:0.25em;
-            text-transform:uppercase;
+            z-index: 10;
+            font-family: var(--label-font, 'Cinzel', serif);
+            font-size: clamp(12px, 1.6vw, 22px);
+            font-weight: 800;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
             color: var(--accent-color, #ffffff);
-            opacity:0.95;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            opacity: 0.95;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
             transition: all 0.4s ease;
         }
 
         /* ═══ CLOCK ROW ═══════════════════════════════════ */
         .clock-row {
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            gap:clamp(12px, 2.5vw, 44px);
-            z-index:10;
-            width:100%;
-            max-width:96vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(12px, 2.5vw, 44px);
+            z-index: 10;
+            width: 100%;
+            max-width: 96vw;
             transition: transform 0.3s ease;
         }
 
         /* ═══ FLIP CARD ═══════════════════════════════════ */
         .flip-card {
-            position:relative;
-            width:  clamp(150px, 34vh, 420px);
+            position: relative;
+            width: clamp(150px, 34vh, 420px);
             height: clamp(210px, 50vh, 600px);
             border-radius: clamp(10px, 1.8vh, 24px);
-            overflow:hidden;
-            perspective:1400px;
-            flex-shrink:0;
+            overflow: hidden;
+            perspective: 1400px;
+            flex-shrink: 0;
             background: var(--card-bg, linear-gradient(170deg, #1f1f1f 0%, #161616 50%, #0d0d0d 100%));
-            border: 1.5px solid var(--card-border, rgba(255,255,255,0.12));
+            border: 1.5px solid var(--card-border, rgba(255, 255, 255, 0.12));
             box-shadow:
-                0 18px 70px rgba(0,0,0,0.95),
-                0 0 0 1px rgba(255,255,255,0.04),
-                inset 0 1px 0 rgba(255,255,255,0.08),
-                inset 0 -1px 0 rgba(0,0,0,0.8);
+                0 18px 70px rgba(0, 0, 0, 0.95),
+                0 0 0 1px rgba(255, 255, 255, 0.04),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.8);
             transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
         }
 
-        .card-half { position:absolute; left:0; width:100%; height:50%; overflow:hidden; }
-        .card-top {
-            top:0;
-            border-radius: clamp(10px,1.8vh,24px) clamp(10px,1.8vh,24px) 0 0;
-            background: var(--card-top-bg, linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%));
-            border-bottom: 1px solid var(--divider-border, rgba(0,0,0,0.85));
+        .card-half {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            overflow: hidden;
         }
+
+        .card-top {
+            top: 0;
+            border-radius: clamp(10px, 1.8vh, 24px) clamp(10px, 1.8vh, 24px) 0 0;
+            background: var(--card-top-bg, linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%));
+            border-bottom: 1px solid var(--divider-border, rgba(0, 0, 0, 0.85));
+        }
+
         .card-bottom {
-            bottom:0;
-            border-radius: 0 0 clamp(10px,1.8vh,24px) clamp(10px,1.8vh,24px);
-            background: var(--card-bot-bg, linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 100%));
+            bottom: 0;
+            border-radius: 0 0 clamp(10px, 1.8vh, 24px) clamp(10px, 1.8vh, 24px);
+            background: var(--card-bot-bg, linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%));
         }
 
         /* Divider line */
         .card-divider {
-            position:absolute; top:50%; left:0;
-            width:100%; height:3px;
-            transform:translateY(-50%);
-            z-index:12;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            transform: translateY(-50%);
+            z-index: 12;
             background: var(--divider-line, #000000);
-            box-shadow: 0 1px 4px rgba(0,0,0,0.95);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.95);
         }
+
         /* Side hinges/pins */
-        .card-divider::before, .card-divider::after {
-            content:'';
-            position:absolute; top:50%; transform:translateY(-50%);
-            width:  clamp(5px, 0.7vh, 10px);
+        .card-divider::before,
+        .card-divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: clamp(5px, 0.7vh, 10px);
             height: clamp(10px, 1.5vh, 18px);
             border-radius: clamp(2px, 0.4vh, 5px);
             background: var(--pin-bg, linear-gradient(180deg, #a3a3a3 0%, #737373 50%, #404040 100%));
-            box-shadow: 0 1px 3px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.2);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
-        .card-divider::before { left:  clamp(8px, 1.2vh, 16px); }
-        .card-divider::after  { right: clamp(8px, 1.2vh, 16px); }
+
+        .card-divider::before {
+            left: clamp(8px, 1.2vh, 16px);
+        }
+
+        .card-divider::after {
+            right: clamp(8px, 1.2vh, 16px);
+        }
 
         /* Digit text */
         .digit-wrapper {
-            position:absolute; left:0; width:100%; height:200%;
-            display:flex; align-items:center; justify-content:center;
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 200%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .card-top    .digit-wrapper, .flipper-top    .digit-wrapper { top:0; }
-        .card-bottom .digit-wrapper, .flipper-bottom .digit-wrapper { bottom:0; }
+
+        .card-top .digit-wrapper,
+        .flipper-top .digit-wrapper {
+            top: 0;
+        }
+
+        .card-bottom .digit-wrapper,
+        .flipper-bottom .digit-wrapper {
+            bottom: 0;
+        }
 
         .digit-text {
-            font-family:'Inter',system-ui,sans-serif;
+            font-family: 'Inter', system-ui, sans-serif;
             font-size: clamp(85px, 21vh, 300px);
-            font-weight:800;
+            font-weight: 800;
             color: var(--digit-color, #ffffff);
-            letter-spacing:-0.02em;
-            line-height:1;
-            text-align:center;
-            text-shadow: var(--digit-shadow, 0 2px 10px rgba(0,0,0,0.9));
+            letter-spacing: -0.02em;
+            line-height: 1;
+            text-align: center;
+            text-shadow: var(--digit-shadow, 0 2px 10px rgba(0, 0, 0, 0.9));
         }
 
         /* AM/PM Badge inside hours card */
         .ampm-badge {
-            position:absolute;
-            bottom:clamp(8px, 1.5vh, 20px);
-            left:clamp(12px, 2vh, 24px);
-            z-index:15;
-            font-size:clamp(10px, 1.4vh, 18px);
-            font-weight:700;
-            letter-spacing:0.1em;
+            position: absolute;
+            bottom: clamp(8px, 1.5vh, 20px);
+            left: clamp(12px, 2vh, 24px);
+            z-index: 15;
+            font-size: clamp(10px, 1.4vh, 18px);
+            font-weight: 700;
+            letter-spacing: 0.1em;
             color: var(--accent-color, #ffffff);
-            text-transform:uppercase;
-            opacity:0.9;
+            text-transform: uppercase;
+            opacity: 0.9;
         }
 
         /* Flip animations */
-        .flipper { position:absolute; left:0; width:100%; overflow:hidden; backface-visibility:hidden; }
+        .flipper {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            backface-visibility: hidden;
+        }
+
         .flipper-top {
-            top:0; height:50%;
-            transform-origin:bottom center;
-            border-radius: clamp(10px,1.8vh,24px) clamp(10px,1.8vh,24px) 0 0;
-            background: var(--card-top-bg, linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%));
+            top: 0;
+            height: 50%;
+            transform-origin: bottom center;
+            border-radius: clamp(10px, 1.8vh, 24px) clamp(10px, 1.8vh, 24px) 0 0;
+            background: var(--card-top-bg, linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%));
         }
+
         .flipper-bottom {
-            bottom:0; height:50%;
-            transform-origin:top center;
-            border-radius: 0 0 clamp(10px,1.8vh,24px) clamp(10px,1.8vh,24px);
-            background: var(--card-bot-bg, linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 100%));
+            bottom: 0;
+            height: 50%;
+            transform-origin: top center;
+            border-radius: 0 0 clamp(10px, 1.8vh, 24px) clamp(10px, 1.8vh, 24px);
+            background: var(--card-bot-bg, linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%));
         }
-        @keyframes flipTopOut    { 0%{transform:rotateX(0deg)}  100%{transform:rotateX(-90deg)} }
-        @keyframes flipBottomIn  { 0%{transform:rotateX(90deg)} 100%{transform:rotateX(0deg)}   }
-        .flip-top-out   { animation: flipTopOut   0.3s cubic-bezier(0.45,0,0.55,1) forwards; }
-        .flip-bottom-in { animation: flipBottomIn 0.3s cubic-bezier(0.45,0,0.55,1) 0.3s forwards; transform:rotateX(90deg); }
+
+        @keyframes flipTopOut {
+            0% {
+                transform: rotateX(0deg)
+            }
+
+            100% {
+                transform: rotateX(-90deg)
+            }
+        }
+
+        @keyframes flipBottomIn {
+            0% {
+                transform: rotateX(90deg)
+            }
+
+            100% {
+                transform: rotateX(0deg)
+            }
+        }
+
+        .flip-top-out {
+            animation: flipTopOut 0.3s cubic-bezier(0.45, 0, 0.55, 1) forwards;
+        }
+
+        .flip-bottom-in {
+            animation: flipBottomIn 0.3s cubic-bezier(0.45, 0, 0.55, 1) 0.3s forwards;
+            transform: rotateX(90deg);
+        }
 
         /* ═══ SEPARATOR ═══════════════════════════════════ */
         .sep {
-            display:flex; flex-direction:column;
-            align-items:center;
-            gap:clamp(12px, 2.6vh, 30px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: clamp(12px, 2.6vh, 30px);
         }
+
         .sep-dot {
-            width:  clamp(7px, 1vh, 14px);
+            width: clamp(7px, 1vh, 14px);
             height: clamp(7px, 1vh, 14px);
-            border-radius:50%;
+            border-radius: 50%;
             background: var(--dot-bg, radial-gradient(circle at 30% 28%, #ffffff 0%, #d4d4d4 50%, #a3a3a3 100%));
-            box-shadow: var(--dot-shadow, 0 0 10px rgba(255,255,255,0.4));
+            box-shadow: var(--dot-shadow, 0 0 10px rgba(255, 255, 255, 0.4));
         }
 
         /* ═══ DATE BADGE ══════════════════════════════════ */
         #date-badge {
-            z-index:10;
-            padding: clamp(7px,1vh,14px) clamp(22px,3.2vw,52px);
-            border-radius:50px;
-            font-family:'Cinzel',serif;
-            font-size:clamp(10px, 1.3vw, 18px);
-            font-weight:700;
-            letter-spacing:0.2em;
-            text-transform:uppercase;
+            z-index: 10;
+            padding: clamp(7px, 1vh, 14px) clamp(22px, 3.2vw, 52px);
+            border-radius: 50px;
+            font-family: 'Cinzel', serif;
+            font-size: clamp(10px, 1.3vw, 18px);
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
             color: var(--badge-color, #e5e5e5);
-            background: var(--badge-bg, rgba(26,26,26,0.85));
-            border: 1px solid var(--badge-border, rgba(255,255,255,0.15));
-            box-shadow: 0 6px 30px rgba(0,0,0,0.7);
+            background: var(--badge-bg, rgba(26, 26, 26, 0.85));
+            border: 1px solid var(--badge-border, rgba(255, 255, 255, 0.15));
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             transition: all 0.4s ease;
@@ -197,47 +292,51 @@
 
         /* ═══ BRANDING WATERMARK FOOTER ════════════════════ */
         #branding-tag {
-            position:fixed;
-            bottom:14px;
-            z-index:10;
-            font-size:11px;
-            letter-spacing:0.12em;
-            text-transform:uppercase;
-            font-weight:600;
-            color: var(--branding-color, rgba(255,255,255,0.35));
-            opacity:0.6;
+            position: fixed;
+            bottom: 14px;
+            z-index: 10;
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--branding-color, rgba(255, 255, 255, 0.35));
+            opacity: 0.6;
             transition: opacity 0.3s ease;
         }
 
         /* ═══ CLOSE BUTTON ════════════════════════════════ */
         #close-btn {
-            position:fixed;
-            top:18px; right:18px;
-            z-index:9999;
-            width:44px; height:44px;
-            border-radius:50%;
-            border:1.5px solid var(--card-border, rgba(255,255,255,0.2));
-            background:var(--badge-bg, rgba(20,20,24,0.85));
-            backdrop-filter:blur(12px);
-            -webkit-backdrop-filter:blur(12px);
-            color:var(--accent-color, #ffffff);
-            font-size:20px;
-            font-weight:300;
-            font-family:'Inter',sans-serif;
-            cursor:pointer;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            opacity:0;
+            position: fixed;
+            top: 18px;
+            right: 18px;
+            z-index: 9999;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1.5px solid var(--card-border, rgba(255, 255, 255, 0.2));
+            background: var(--badge-bg, rgba(20, 20, 24, 0.85));
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: var(--accent-color, #ffffff);
+            font-size: 20px;
+            font-weight: 300;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
             transition: opacity 0.4s ease, background 0.3s ease, transform 0.3s ease;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
         }
+
         #close-btn:hover {
-            background:rgba(255,255,255,0.2);
-            transform:scale(1.1);
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
         }
+
         #scene.show-close #close-btn {
-            opacity:1;
+            opacity: 1;
         }
 
         /* ═══ THEME PRESETS ═══════════════════════════════ */
@@ -246,18 +345,18 @@
             --vignette-color: rgba(255, 255, 255, 0.01);
             --card-bg: linear-gradient(170deg, #1f1f1f 0%, #161616 50%, #0d0d0d 100%);
             --card-border: rgba(255, 255, 255, 0.12);
-            --card-top-bg: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
-            --card-bot-bg: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 100%);
+            --card-top-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%);
             --divider-line: #000000;
             --pin-bg: linear-gradient(180deg, #a3a3a3 0%, #737373 50%, #404040 100%);
             --digit-color: #ffffff;
-            --digit-shadow: 0 2px 10px rgba(0,0,0,0.9);
+            --digit-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
             --dot-bg: radial-gradient(circle at 30% 28%, #ffffff 0%, #d4d4d4 50%, #a3a3a3 100%);
-            --dot-shadow: 0 0 10px rgba(255,255,255,0.4);
+            --dot-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
             --accent-color: #ffffff;
             --badge-color: #e5e5e5;
-            --badge-bg: rgba(26,26,26,0.85);
-            --badge-border: rgba(255,255,255,0.15);
+            --badge-bg: rgba(26, 26, 26, 0.85);
+            --badge-border: rgba(255, 255, 255, 0.15);
             --branding-color: rgba(255, 255, 255, 0.4);
         }
 
@@ -266,18 +365,18 @@
             --vignette-color: rgba(255, 215, 0, 0.025);
             --card-bg: linear-gradient(170deg, #1e1e22 0%, #141418 40%, #0c0c10 100%);
             --card-border: rgba(212, 175, 55, 0.4);
-            --card-top-bg: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.015) 100%);
-            --card-bot-bg: linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.1) 100%);
+            --card-top-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.015) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.1) 100%);
             --divider-line: #000000;
             --pin-bg: linear-gradient(180deg, #e8cc70 0%, #b09840 50%, #806820 100%);
             --digit-color: #f5f5f5;
-            --digit-shadow: 0 2px 12px rgba(0,0,0,0.8);
+            --digit-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
             --dot-bg: radial-gradient(circle at 30% 28%, #f0d860 0%, #c8a830 45%, #806818 100%);
-            --dot-shadow: 0 0 12px rgba(200,168,48,0.5);
+            --dot-shadow: 0 0 12px rgba(200, 168, 48, 0.5);
             --accent-color: #d4af37;
             --badge-color: #e5c158;
-            --badge-bg: rgba(20,20,24,0.8);
-            --badge-border: rgba(212,175,55,0.3);
+            --badge-bg: rgba(20, 20, 24, 0.8);
+            --badge-border: rgba(212, 175, 55, 0.3);
             --branding-color: rgba(212, 175, 55, 0.45);
         }
 
@@ -286,18 +385,18 @@
             --vignette-color: rgba(56, 189, 248, 0.04);
             --card-bg: linear-gradient(170deg, #0f172a 0%, #090d16 50%, #020617 100%);
             --card-border: rgba(56, 189, 248, 0.45);
-            --card-top-bg: linear-gradient(180deg, rgba(56,189,248,0.08) 0%, rgba(56,189,248,0.02) 100%);
-            --card-bot-bg: linear-gradient(180deg, rgba(2,6,23,0.4) 0%, rgba(2,6,23,0.1) 100%);
+            --card-top-bg: linear-gradient(180deg, rgba(56, 189, 248, 0.08) 0%, rgba(56, 189, 248, 0.02) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(2, 6, 23, 0.4) 0%, rgba(2, 6, 23, 0.1) 100%);
             --divider-line: #020617;
             --pin-bg: linear-gradient(180deg, #7dd3fc 0%, #38bdf8 50%, #0284c7 100%);
             --digit-color: #e0f2fe;
-            --digit-shadow: 0 0 20px rgba(56,189,248,0.35);
+            --digit-shadow: 0 0 20px rgba(56, 189, 248, 0.35);
             --dot-bg: radial-gradient(circle at 30% 28%, #7dd3fc 0%, #38bdf8 50%, #0284c7 100%);
-            --dot-shadow: 0 0 14px rgba(56,189,248,0.6);
+            --dot-shadow: 0 0 14px rgba(56, 189, 248, 0.6);
             --accent-color: #38bdf8;
             --badge-color: #38bdf8;
-            --badge-bg: rgba(15,23,42,0.85);
-            --badge-border: rgba(56,189,248,0.35);
+            --badge-bg: rgba(15, 23, 42, 0.85);
+            --badge-border: rgba(56, 189, 248, 0.35);
             --branding-color: rgba(56, 189, 248, 0.5);
         }
 
@@ -306,18 +405,18 @@
             --vignette-color: rgba(52, 211, 153, 0.03);
             --card-bg: linear-gradient(170deg, #0d1117 0%, #040d08 50%, #010409 100%);
             --card-border: rgba(52, 211, 153, 0.45);
-            --card-top-bg: linear-gradient(180deg, rgba(52,211,153,0.08) 0%, rgba(52,211,153,0.02) 100%);
-            --card-bot-bg: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 100%);
+            --card-top-bg: linear-gradient(180deg, rgba(52, 211, 153, 0.08) 0%, rgba(52, 211, 153, 0.02) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.2) 100%);
             --divider-line: #000000;
             --pin-bg: linear-gradient(180deg, #6ee7b7 0%, #34d399 50%, #059669 100%);
             --digit-color: #a7f3d0;
-            --digit-shadow: 0 0 20px rgba(52,211,153,0.4);
+            --digit-shadow: 0 0 20px rgba(52, 211, 153, 0.4);
             --dot-bg: radial-gradient(circle at 30% 28%, #6ee7b7 0%, #34d399 50%, #059669 100%);
-            --dot-shadow: 0 0 14px rgba(52,211,153,0.6);
+            --dot-shadow: 0 0 14px rgba(52, 211, 153, 0.6);
             --accent-color: #34d399;
             --badge-color: #34d399;
-            --badge-bg: rgba(13,17,23,0.85);
-            --badge-border: rgba(52,211,153,0.35);
+            --badge-bg: rgba(13, 17, 23, 0.85);
+            --badge-border: rgba(52, 211, 153, 0.35);
             --branding-color: rgba(52, 211, 153, 0.5);
         }
 
@@ -326,18 +425,18 @@
             --vignette-color: rgba(251, 146, 60, 0.04);
             --card-bg: linear-gradient(170deg, #241419 0%, #170b10 50%, #0d0508 100%);
             --card-border: rgba(251, 146, 60, 0.45);
-            --card-top-bg: linear-gradient(180deg, rgba(251,146,60,0.08) 0%, rgba(251,146,60,0.02) 100%);
-            --card-bot-bg: linear-gradient(180deg, rgba(13,5,8,0.5) 0%, rgba(13,5,8,0.2) 100%);
+            --card-top-bg: linear-gradient(180deg, rgba(251, 146, 60, 0.08) 0%, rgba(251, 146, 60, 0.02) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(13, 5, 8, 0.5) 0%, rgba(13, 5, 8, 0.2) 100%);
             --divider-line: #0d0508;
             --pin-bg: linear-gradient(180deg, #ffedd5 0%, #fb923c 50%, #ea580c 100%);
             --digit-color: #fff7ed;
-            --digit-shadow: 0 0 20px rgba(251,146,60,0.35);
+            --digit-shadow: 0 0 20px rgba(251, 146, 60, 0.35);
             --dot-bg: radial-gradient(circle at 30% 28%, #fdba74 0%, #fb923c 50%, #ea580c 100%);
-            --dot-shadow: 0 0 14px rgba(251,146,60,0.6);
+            --dot-shadow: 0 0 14px rgba(251, 146, 60, 0.6);
             --accent-color: #fb923c;
             --badge-color: #fb923c;
-            --badge-bg: rgba(36,20,25,0.85);
-            --badge-border: rgba(251,146,60,0.35);
+            --badge-bg: rgba(36, 20, 25, 0.85);
+            --badge-border: rgba(251, 146, 60, 0.35);
             --branding-color: rgba(251, 146, 60, 0.5);
         }
 
@@ -346,213 +445,281 @@
             --vignette-color: rgba(0, 0, 0, 0.02);
             --card-bg: linear-gradient(170deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
             --card-border: rgba(148, 163, 184, 0.4);
-            --card-top-bg: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(241,245,249,0.5) 100%);
-            --card-bot-bg: linear-gradient(180deg, rgba(226,232,240,0.6) 0%, rgba(203,213,225,0.3) 100%);
+            --card-top-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(241, 245, 249, 0.5) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(226, 232, 240, 0.6) 0%, rgba(203, 213, 225, 0.3) 100%);
             --divider-line: #cbd5e1;
             --pin-bg: linear-gradient(180deg, #64748b 0%, #475569 50%, #1e293b 100%);
             --digit-color: #0f172a;
-            --digit-shadow: 0 1px 3px rgba(0,0,0,0.15);
+            --digit-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
             --dot-bg: radial-gradient(circle at 30% 28%, #94a3b8 0%, #475569 100%);
-            --dot-shadow: 0 0 8px rgba(71,85,105,0.3);
+            --dot-shadow: 0 0 8px rgba(71, 85, 105, 0.3);
             --accent-color: #334155;
             --badge-color: #1e293b;
-            --badge-bg: rgba(255,255,255,0.9);
-            --badge-border: rgba(148,163,184,0.4);
+            --badge-bg: rgba(255, 255, 255, 0.9);
+            --badge-border: rgba(148, 163, 184, 0.4);
             --branding-color: rgba(30, 41, 59, 0.5);
         }
 
+        /* 7. Custom User Theme */
+        .theme-custom {
+            --vignette-color: rgba(255, 255, 255, 0.02);
+            --card-bg: var(--custom-card-color, #1e1e22);
+            --card-border: var(--custom-border-color, rgba(255, 255, 255, 0.2));
+            --card-top-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.015) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%);
+            --divider-line: #000000;
+            --pin-bg: var(--custom-accent-color, #d4af37);
+            --digit-color: var(--custom-digit-color, #ffffff);
+            --digit-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+            --dot-bg: var(--custom-accent-color, #d4af37);
+            --dot-shadow: 0 0 10px var(--custom-accent-color, rgba(255, 255, 255, 0.4));
+            --accent-color: var(--custom-accent-color, #d4af37);
+            --badge-color: var(--custom-digit-color, #ffffff);
+            --badge-bg: rgba(20, 20, 24, 0.85);
+            --badge-border: var(--custom-border-color, rgba(255, 255, 255, 0.2));
+            --branding-color: var(--custom-accent-color, rgba(255, 255, 255, 0.4));
+        }
+
         /* Hide elements when toggled off */
-        .hide-seconds #fc-s, .hide-seconds #sep-s { display:none !important; }
-        .hide-date #date-badge { display:none !important; }
-        .hide-greeting #greeting-badge { display:none !important; }
+        .hide-seconds #fc-s,
+        .hide-seconds #sep-s {
+            display: none !important;
+        }
+
+        .hide-date #date-badge {
+            display: none !important;
+        }
+
+        .hide-greeting #greeting-badge {
+            display: none !important;
+        }
     </style>
 </head>
+
 <body class="theme-classic_retro">
 
-<div id="scene">
-    <button id="close-btn" onclick="forceClose()" title="Close Screensaver">✕</button>
+    <div id="scene">
+        <button id="close-btn" onclick="forceClose()" title="Close Screensaver">✕</button>
 
-    <div id="greeting-badge">GOOD MORNING</div>
+        <div id="greeting-badge">GOOD MORNING</div>
 
-    <div class="clock-row" id="clock-row">
-        <!-- Hours Card -->
-        <div class="flip-card" id="fc-h">
-            <span class="ampm-badge" id="ampm-badge"></span>
-            <div class="card-half card-top"><div class="digit-wrapper"><span class="digit-text" id="fc-h-top">00</span></div></div>
-            <div class="card-half card-bottom"><div class="digit-wrapper"><span class="digit-text" id="fc-h-bot">00</span></div></div>
-            <div class="card-divider"></div>
+        <div class="clock-row" id="clock-row">
+            <!-- Hours Card -->
+            <div class="flip-card" id="fc-h">
+                <span class="ampm-badge" id="ampm-badge"></span>
+                <div class="card-half card-top">
+                    <div class="digit-wrapper"><span class="digit-text" id="fc-h-top">00</span></div>
+                </div>
+                <div class="card-half card-bottom">
+                    <div class="digit-wrapper"><span class="digit-text" id="fc-h-bot">00</span></div>
+                </div>
+                <div class="card-divider"></div>
+            </div>
+
+            <div class="sep" id="sep-m">
+                <div class="sep-dot"></div>
+                <div class="sep-dot"></div>
+            </div>
+
+            <!-- Minutes Card -->
+            <div class="flip-card" id="fc-m">
+                <div class="card-half card-top">
+                    <div class="digit-wrapper"><span class="digit-text" id="fc-m-top">00</span></div>
+                </div>
+                <div class="card-half card-bottom">
+                    <div class="digit-wrapper"><span class="digit-text" id="fc-m-bot">00</span></div>
+                </div>
+                <div class="card-divider"></div>
+            </div>
+
+            <div class="sep" id="sep-s">
+                <div class="sep-dot"></div>
+                <div class="sep-dot"></div>
+            </div>
+
+            <!-- Seconds Card -->
+            <div class="flip-card" id="fc-s">
+                <div class="card-half card-top">
+                    <div class="digit-wrapper"><span class="digit-text" id="fc-s-top">00</span></div>
+                </div>
+                <div class="card-half card-bottom">
+                    <div class="digit-wrapper"><span class="digit-text" id="fc-s-bot">00</span></div>
+                </div>
+                <div class="card-divider"></div>
+            </div>
         </div>
 
-        <div class="sep" id="sep-m"><div class="sep-dot"></div><div class="sep-dot"></div></div>
-
-        <!-- Minutes Card -->
-        <div class="flip-card" id="fc-m">
-            <div class="card-half card-top"><div class="digit-wrapper"><span class="digit-text" id="fc-m-top">00</span></div></div>
-            <div class="card-half card-bottom"><div class="digit-wrapper"><span class="digit-text" id="fc-m-bot">00</span></div></div>
-            <div class="card-divider"></div>
-        </div>
-
-        <div class="sep" id="sep-s"><div class="sep-dot"></div><div class="sep-dot"></div></div>
-
-        <!-- Seconds Card -->
-        <div class="flip-card" id="fc-s">
-            <div class="card-half card-top"><div class="digit-wrapper"><span class="digit-text" id="fc-s-top">00</span></div></div>
-            <div class="card-half card-bottom"><div class="digit-wrapper"><span class="digit-text" id="fc-s-bot">00</span></div></div>
-            <div class="card-divider"></div>
-        </div>
+        <div id="date-badge"></div>
+        <div id="branding-tag">Customized by Antigravity AI</div>
     </div>
 
-    <div id="date-badge"></div>
-    <div id="branding-tag">Customized by Antigravity AI</div>
-</div>
+    <script>
+        let config = window.screensaverConfig || {};
+        let themeName = config.theme || 'classic_retro';
+        let hourFormat = config.format || '12';
+        let showSeconds = config.show_seconds !== 'false';
+        let showDate = config.show_date !== 'false';
+        let showGreeting = config.show_greeting !== 'false';
+        let userName = config.user_name || '';
+        let clockScale = parseFloat(config.size || '1.0');
+        let customCredit = config.custom_credit || 'Customized by Antigravity AI';
+        let digitFont = config.digit_font || 'Inter';
+        let labelFont = config.label_font || 'Cinzel';
+        let customBgColor = config.custom_bg_color || '#000000';
+        let customCardColor = config.custom_card_color || '#1e1e22';
+        let customDigitColor = config.custom_digit_color || '#ffffff';
+        let customAccentColor = config.custom_accent_color || '#d4af37';
+        let customBorderColor = config.custom_border_color || '#333333';
 
-<script>
-let config = window.screensaverConfig || {};
-let themeName = config.theme || 'classic_retro';
-let hourFormat = config.format || '12';
-let showSeconds = config.show_seconds !== 'false';
-let showDate = config.show_date !== 'false';
-let showGreeting = config.show_greeting !== 'false';
-let userName = config.user_name || '';
-let clockScale = parseFloat(config.size || '1.0');
-let customCredit = config.custom_credit || 'Customized by Antigravity AI';
+        function applyConfiguration() {
+            // 0. Fonts
+            document.documentElement.style.setProperty('--digit-font', `'${digitFont}', system-ui, sans-serif`);
+            document.documentElement.style.setProperty('--label-font', `'${labelFont}', serif`);
 
-function applyConfiguration() {
-    // 1. Theme class
-    document.body.className = `theme-${themeName}`;
+            // 1. Custom colors & Theme class
+            document.documentElement.style.setProperty('--custom-bg-color', customBgColor);
+            document.documentElement.style.setProperty('--custom-card-color', customCardColor);
+            document.documentElement.style.setProperty('--custom-digit-color', customDigitColor);
+            document.documentElement.style.setProperty('--custom-accent-color', customAccentColor);
+            document.documentElement.style.setProperty('--custom-border-color', customBorderColor);
 
-    // 2. Toggles
-    const scene = document.getElementById('scene');
-    if (!showSeconds) scene.classList.add('hide-seconds');
-    else scene.classList.remove('hide-seconds');
+            document.body.className = `theme-${themeName}`;
 
-    if (!showDate) scene.classList.add('hide-date');
-    else scene.classList.remove('hide-date');
+            // 2. Toggles
+            const scene = document.getElementById('scene');
+            if (!showSeconds) scene.classList.add('hide-seconds');
+            else scene.classList.remove('hide-seconds');
 
-    if (!showGreeting) scene.classList.add('hide-greeting');
-    else scene.classList.remove('hide-greeting');
+            if (!showDate) scene.classList.add('hide-date');
+            else scene.classList.remove('hide-date');
 
-    // 3. Clock Scale
-    const row = document.getElementById('clock-row');
-    if (row && clockScale !== 1.0) {
-        row.style.transform = `scale(${clockScale})`;
-    }
+            if (!showGreeting) scene.classList.add('hide-greeting');
+            else scene.classList.remove('hide-greeting');
 
-    // 4. Branding credit text
-    const brandEl = document.getElementById('branding-tag');
-    if (brandEl) brandEl.textContent = customCredit;
+            // 3. Clock Scale
+            const row = document.getElementById('clock-row');
+            if (row && clockScale !== 1.0) {
+                row.style.transform = `scale(${clockScale})`;
+            }
 
-    // Adjust light theme background body color
-    if (themeName === 'minimal_light') {
-        scene.style.background = '#f1f5f9';
-    } else {
-        scene.style.background = '#000000';
-    }
-}
+            // 4. Branding credit text
+            const brandEl = document.getElementById('branding-tag');
+            if (brandEl) brandEl.textContent = customCredit;
 
-function updateGreeting() {
-    const h = new Date().getHours();
-    let period = 'MORNING';
-    if (h >= 12 && h < 17) period = 'AFTERNOON';
-    else if (h >= 17 && h < 22) period = 'EVENING';
-    else if (h >= 22 || h < 5) period = 'NIGHT';
-
-    const gEl = document.getElementById('greeting-badge');
-    if (!gEl) return;
-
-    const nameStr = userName ? userName.trim().toUpperCase() : '';
-    if (nameStr) {
-        gEl.textContent = `GOOD ${period}, ${nameStr}`;
-    } else {
-        gEl.textContent = `GOOD ${period}`;
-    }
-}
-
-function updateDate() {
-    const now = new Date();
-    const days   = ['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];
-    const months = ['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'];
-    const b = document.getElementById('date-badge');
-    if (b) b.textContent = `${days[now.getDay()]} \u25C6 ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
-}
-
-let pH = -1, pM = -1, pS = -1;
-function updateFlip() {
-    const now = new Date();
-    let h = now.getHours();
-    const m = now.getMinutes();
-    const s = now.getSeconds();
-
-    let ampmText = '';
-    if (hourFormat === '12') {
-        ampmText = h >= 12 ? 'PM' : 'AM';
-        h = h % 12;
-        if (h === 0) h = 12;
-    }
-
-    const ampmEl = document.getElementById('ampm-badge');
-    if (ampmEl) ampmEl.textContent = ampmText;
-
-    const p = n => String(n).padStart(2,'0');
-    if (h !== pH) { doFlip('fc-h', p(h)); pH = h; }
-    if (m !== pM) { doFlip('fc-m', p(m)); pM = m; }
-    if (showSeconds && s !== pS) { doFlip('fc-s', p(s)); pS = s; }
-}
-
-function doFlip(id, val) {
-    const t = document.getElementById(id+'-top');
-    const b = document.getElementById(id+'-bot');
-    const c = document.getElementById(id);
-    if (!t||!b||!c) return;
-    const prev = t.textContent;
-    if (prev === val) return;
-
-    const ft = document.createElement('div');
-    ft.className = 'flipper flipper-top';
-    ft.innerHTML = '<div class="digit-wrapper"><span class="digit-text">'+prev+'</span></div>';
-    const fb = document.createElement('div');
-    fb.className = 'flipper flipper-bottom';
-    fb.innerHTML = '<div class="digit-wrapper"><span class="digit-text">'+val+'</span></div>';
-
-    c.appendChild(ft); c.appendChild(fb);
-    requestAnimationFrame(function() { ft.classList.add('flip-top-out'); fb.classList.add('flip-bottom-in'); });
-    t.textContent = val; b.textContent = val;
-    setTimeout(function() { ft.remove(); fb.remove(); }, 650);
-}
-
-function forceClose() {
-    try {
-        if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.screensaverExit) {
-            window.webkit.messageHandlers.screensaverExit.postMessage("forceClose");
+            // Adjust background body color
+            if (themeName === 'custom') {
+                scene.style.background = customBgColor;
+            } else if (themeName === 'minimal_light') {
+                scene.style.background = '#f1f5f9';
+            } else {
+                scene.style.background = '#000000';
+            }
         }
-    } catch(e) {}
-    window.close();
-    try { document.title = 'EXIT_SCREENSAVER'; } catch(e) {}
-}
 
-// Show close button on mouse movement, hide after 3s idle
-let hideTimer = null;
-document.addEventListener('mousemove', function() {
-    document.getElementById('scene').classList.add('show-close');
-    clearTimeout(hideTimer);
-    hideTimer = setTimeout(function() {
-        document.getElementById('scene').classList.remove('show-close');
-    }, 3000);
-});
+        function updateGreeting() {
+            const h = new Date().getHours();
+            let period = 'MORNING';
+            if (h >= 12 && h < 17) period = 'AFTERNOON';
+            else if (h >= 17 && h < 22) period = 'EVENING';
+            else if (h >= 22 || h < 5) period = 'NIGHT';
 
-// Escape key closes
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') forceClose();
-});
+            const gEl = document.getElementById('greeting-badge');
+            if (!gEl) return;
 
-window.addEventListener('load', function() {
-    applyConfiguration();
-    updateGreeting();
-    updateDate(); updateFlip();
-    setInterval(updateFlip, 1000);
-    setInterval(updateGreeting, 10000);
-    setInterval(updateDate, 30000);
-});
-</script>
+            const nameStr = userName ? userName.trim().toUpperCase() : '';
+            if (nameStr) {
+                gEl.textContent = `GOOD ${period}, ${nameStr}`;
+            } else {
+                gEl.textContent = `GOOD ${period}`;
+            }
+        }
+
+        function updateDate() {
+            const now = new Date();
+            const days = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
+            const months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'];
+            const b = document.getElementById('date-badge');
+            if (b) b.textContent = `${days[now.getDay()]} \u25C6 ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
+        }
+
+        let pH = -1, pM = -1, pS = -1;
+        function updateFlip() {
+            const now = new Date();
+            let h = now.getHours();
+            const m = now.getMinutes();
+            const s = now.getSeconds();
+
+            let ampmText = '';
+            if (hourFormat === '12') {
+                ampmText = h >= 12 ? 'PM' : 'AM';
+                h = h % 12;
+                if (h === 0) h = 12;
+            }
+
+            const ampmEl = document.getElementById('ampm-badge');
+            if (ampmEl) ampmEl.textContent = ampmText;
+
+            const p = n => String(n).padStart(2, '0');
+            if (h !== pH) { doFlip('fc-h', p(h)); pH = h; }
+            if (m !== pM) { doFlip('fc-m', p(m)); pM = m; }
+            if (showSeconds && s !== pS) { doFlip('fc-s', p(s)); pS = s; }
+        }
+
+        function doFlip(id, val) {
+            const t = document.getElementById(id + '-top');
+            const b = document.getElementById(id + '-bot');
+            const c = document.getElementById(id);
+            if (!t || !b || !c) return;
+            const prev = t.textContent;
+            if (prev === val) return;
+
+            const ft = document.createElement('div');
+            ft.className = 'flipper flipper-top';
+            ft.innerHTML = '<div class="digit-wrapper"><span class="digit-text">' + prev + '</span></div>';
+            const fb = document.createElement('div');
+            fb.className = 'flipper flipper-bottom';
+            fb.innerHTML = '<div class="digit-wrapper"><span class="digit-text">' + val + '</span></div>';
+
+            c.appendChild(ft); c.appendChild(fb);
+            requestAnimationFrame(function () { ft.classList.add('flip-top-out'); fb.classList.add('flip-bottom-in'); });
+            t.textContent = val; b.textContent = val;
+            setTimeout(function () { ft.remove(); fb.remove(); }, 650);
+        }
+
+        function forceClose() {
+            try {
+                if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.screensaverExit) {
+                    window.webkit.messageHandlers.screensaverExit.postMessage("forceClose");
+                }
+            } catch (e) { }
+            window.close();
+            try { document.title = 'EXIT_SCREENSAVER'; } catch (e) { }
+        }
+
+        // Show close button on mouse movement, hide after 3s idle
+        let hideTimer = null;
+        document.addEventListener('mousemove', function () {
+            document.getElementById('scene').classList.add('show-close');
+            clearTimeout(hideTimer);
+            hideTimer = setTimeout(function () {
+                document.getElementById('scene').classList.remove('show-close');
+            }, 3000);
+        });
+
+        // Escape key closes
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') forceClose();
+        });
+
+        window.addEventListener('load', function () {
+            applyConfiguration();
+            updateGreeting();
+            updateDate(); updateFlip();
+            setInterval(updateFlip, 1000);
+            setInterval(updateGreeting, 10000);
+            setInterval(updateDate, 30000);
+        });
+    </script>
 </body>
+
 </html>

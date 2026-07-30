@@ -7,6 +7,68 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.3.0] - 2026-07-30 - Minor Release: Executive Theme Collections, Category Filtering & Quick Visual Swatch Tiles
+
+### Added
+- **Executive Theme Collections Categorization**: Re-organized theme presets into 5 clean categories to eliminate long scrolling dropdown lists:
+  1. 🏆 *Executive Dark & Gold*
+  2. 🌿 *Executive Greens*
+  3. 💎 *Ruby & Crimson Reds*
+  4. 🚙 *Sapphire & Ocean Blues*
+  5. 🔮 *Purple, Graphite & Custom*
+- **Dynamic Category Theme Dropdown Filter**: Selecting a theme category filters the preset dropdown to show only the 3-5 themes in that category.
+- **Quick Visual Theme Swatch Pill Buttons**: Added visual quick-select swatch buttons (`theme-tile-btn`) for 1-click theme selection.
+
+---
+
+## [2.2.0] - 2026-07-30 - Major Release: 20 Executive Dark Themes, Auto Palette Selection & Custom GTK Popups
+
+### Added
+- **20 Curated Executive Dark Themes**: Added 20 luxury dark color presets:
+  1. *🥇 Luxury Black Gold (Executive Rolex / Bentley)*
+  2. *🥈 Obsidian Titanium (Apple Pro / Tesla)*
+  3. *🥉 Dark Emerald Premium (Luxury Finance)*
+  4. *🌲 Forest Green Executive*
+  5. *🏎️ British Racing Green (Aston Martin)*
+  6. *💎 Ruby Executive (Premium Red)*
+  7. *🍷 Burgundy Prestige (Wine & Leather)*
+  8. *🏎️ Crimson Royal (Ferrari Cockpit)*
+  9. *🚙 Royal Sapphire (BMW Digital Cockpit)*
+  10. *⚓ Midnight Navy*
+  11. *❄️ Arctic Ice*
+  12. *🌊 Ocean Cyan*
+  13. *👑 Royal Purple*
+  14. *🔮 Amethyst Elite*
+  15. *🪙 Platinum Silver*
+  16. *⚙️ Graphite Gray*
+  17. *🧱 Copper Elite*
+  18. *🌹 Rose Gold*
+  19. *🥂 Champagne Gold*
+  20. *✨ Matte Black Diamond (Ultra Minimal)*
+- **Automatic Color Palette & Font Sync**: Selecting any theme preset automatically populates background, card fill, text color, accent color, card border, and harmonized executive fonts (*Cinzel*, *Inter*, *Orbitron*, *Outfit*, *Roboto*, *Rajdhani*, *Exo 2*, *Oxanium*, *Bebas Neue*).
+- **Sleek Minimal Color Pickers Layout**: Redesigned color swatch controls with compact right-aligned swatches instead of full-width bars.
+- **Custom Dark GTK Dialog Popups**: Replaced default system dialog popups with custom dark GTK modal windows (`CustomDarkDialog`).
+- **Clean Branding**: Removed all third-party watermark tags and replaced with clean "Flip Clock Screensaver" branding.
+
+---
+
+## [2.1.0] - 2026-07-29 - Feature Release: Custom Themes, Color Pickers & Font Styling
+
+### Added
+- **Custom Theme Engine & Color Pickers**: Full custom color picker support allowing users to pick custom hex/RGBA colors via `Gtk.ColorButton` for:
+  - Scene Background Color
+  - Card Background Color
+  - Digit / Text Color
+  - Accent & Pin Color
+  - Card Border Color
+- **Typography & Font Customization**: Dropdown selection for clock digit fonts and label/badge fonts supporting Google Fonts & system fonts:
+  - *Digits Fonts*: Inter, Roboto, Orbitron, Cinzel, Outfit, Oswald, Courier Prime.
+  - *Label Fonts*: Cinzel, Inter, Roboto, Orbitron, Outfit, Oswald, Courier Prime.
+- **One-Click Reset to Defaults**: Prominent warning action button (`btn-reset`) in the GTK Settings Window to instantly restore all theme, color, font, and display options back to initial default values with dialog confirmation.
+- **Enhanced Settings UI Layout & Visibility**: Re-architected GTK settings page with dedicated sections for *Custom Colors & Palette* and *Typography Customization*, real-time widget updates, and scrollable container optimization.
+
+---
+
 ## [2.0.0] - 2026-07-29 - Major Release
 
 ### Added

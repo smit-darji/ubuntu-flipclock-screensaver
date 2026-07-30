@@ -423,6 +423,20 @@ class ScreensaverWindow(Gtk.Window):
         # Load config if present
         config_path = os.path.expanduser("~/.config/flipclock/flipclock.conf")
         fmt, size, speed = "12", "1.0", "500"
+        theme = "luxury_black_gold"
+        show_seconds = "true"
+        show_date = "true"
+        show_greeting = "true"
+        user_name = ""
+        custom_credit = "FLIP CLOCK SCREENSAVER"
+        digit_font = "Cinzel"
+        label_font = "Cinzel"
+        custom_bg_color = "#000000"
+        custom_card_color = "#1C1C1E"
+        custom_digit_color = "#F5F5F7"
+        custom_accent_color = "#D4AF37"
+        custom_border_color = "#4A4A4A"
+        
         if os.path.exists(config_path):
             try:
                 import configparser
@@ -432,24 +446,28 @@ class ScreensaverWindow(Gtk.Window):
                     fmt = cp['Settings'].get('hour_format', '12')
                     size = cp['Settings'].get('clock_size', '1.0')
                     speed = cp['Settings'].get('animation_speed', '500')
-                    theme = cp['Settings'].get('theme', 'dark_gold')
+                    theme = cp['Settings'].get('theme', 'luxury_black_gold')
                     show_seconds = cp['Settings'].get('show_seconds', 'true')
                     show_date = cp['Settings'].get('show_date', 'true')
-                    custom_credit = cp['Settings'].get('custom_credit', 'Customized by Antigravity AI')
+                    show_greeting = cp['Settings'].get('show_greeting', 'true')
+                    user_name = cp['Settings'].get('user_name', '').replace("'", "\\'")
+                    custom_credit = cp['Settings'].get('custom_credit', 'FLIP CLOCK SCREENSAVER')
+                    digit_font = cp['Settings'].get('digit_font', 'Cinzel').replace("'", "\\'")
+                    label_font = cp['Settings'].get('label_font', 'Cinzel').replace("'", "\\'")
+                    custom_bg_color = cp['Settings'].get('custom_bg_color', '#000000').replace("'", "\\'")
+                    custom_card_color = cp['Settings'].get('custom_card_color', '#1C1C1E').replace("'", "\\'")
+                    custom_digit_color = cp['Settings'].get('custom_digit_color', '#F5F5F7').replace("'", "\\'")
+                    custom_accent_color = cp['Settings'].get('custom_accent_color', '#D4AF37').replace("'", "\\'")
+                    custom_border_color = cp['Settings'].get('custom_border_color', '#4A4A4A').replace("'", "\\'")
             except Exception:
                 pass
-        else:
-            theme = 'dark_gold'
-            show_seconds = 'true'
-            show_date = 'true'
-            custom_credit = 'Customized by Antigravity AI'
                 
         html_content, base_dir = get_html_content(html_path)
         if not html_content:
             print("Error: Could not locate clock.html or index.html")
             sys.exit(1)
             
-        config_script = f"<script>window.screensaverConfig = {{ monitor: '{monitor_idx}', format: '{fmt}', size: '{size}', speed: '{speed}', theme: '{theme}', show_seconds: '{show_seconds}', show_date: '{show_date}', custom_credit: '{custom_credit}' }};</script>"
+        config_script = f"<script>window.screensaverConfig = {{ monitor: '{monitor_idx}', format: '{fmt}', size: '{size}', speed: '{speed}', theme: '{theme}', show_seconds: '{show_seconds}', show_date: '{show_date}', show_greeting: '{show_greeting}', user_name: '{user_name}', custom_credit: '{custom_credit}', digit_font: '{digit_font}', label_font: '{label_font}', custom_bg_color: '{custom_bg_color}', custom_card_color: '{custom_card_color}', custom_digit_color: '{custom_digit_color}', custom_accent_color: '{custom_accent_color}', custom_border_color: '{custom_border_color}' }};</script>"
         if "</head>" in html_content:
             html_content = html_content.replace("</head>", f"{config_script}</head>")
         else:

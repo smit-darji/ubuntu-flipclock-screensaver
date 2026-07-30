@@ -45,13 +45,20 @@ hour_format = 12
 clock_size = 1.0
 animation_speed = 500
 monitors = all
-theme = classic_retro
+theme = luxury_black_gold
 show_seconds = true
 show_date = true
 show_greeting = true
 user_name = 
 bg_style = vignette
-custom_credit = Customized by Antigravity AI
+custom_credit = FLIP CLOCK SCREENSAVER
+digit_font = Cinzel
+label_font = Cinzel
+custom_bg_color = #000000
+custom_card_color = #1C1C1E
+custom_digit_color = #F5F5F7
+custom_accent_color = #D4AF37
+custom_border_color = #4A4A4A
 EOF
 fi
 
