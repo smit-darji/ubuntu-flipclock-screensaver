@@ -17,7 +17,7 @@ A native, high-fidelity, multi-monitor flip clock screensaver for Ubuntu Linux. 
 
 ---
 
-## 🎨 24 Premium Color Themes
+## 🎨 23 Premium Color Themes
 
 ### 🏆 Executive Dark & Gold Collection
 
@@ -25,39 +25,43 @@ A native, high-fidelity, multi-monitor flip clock screensaver for Ubuntu Linux. 
 |:---:|:---:|:---:|
 | ![Luxury Black Gold](screenshots/theme_luxury_black_gold.png) | ![Obsidian Titanium](screenshots/theme_obsidian_titanium.png) | ![Champagne Gold](screenshots/theme_champagne_gold.png) |
 
-| Platinum Silver | Matte Black Diamond | Carbon Fiber |
+| Platinum Silver | Matte Black Diamond | Graphite Gray |
 |:---:|:---:|:---:|
-| ![Platinum Silver](screenshots/theme_platinum_silver.png) | ![Matte Black Diamond](screenshots/theme_matte_black_diamond.png) | ![Carbon Fiber](screenshots/theme_carbon_fiber.png) |
+| ![Platinum Silver](screenshots/theme_platinum_silver.png) | ![Matte Black Diamond](screenshots/theme_matte_black_diamond.png) | ![Graphite Gray](screenshots/theme_graphite_gray.png) |
 
 ### 🌊 Ocean, Ice & Blue Collection
 
-| Arctic Ice | Ocean Cyan | Midnight Blue |
+| Arctic Ice | Ocean Cyan | Midnight Navy |
 |:---:|:---:|:---:|
-| ![Arctic Ice](screenshots/theme_arctic_ice.png) | ![Ocean Cyan](screenshots/theme_ocean_cyan.png) | ![Midnight Blue](screenshots/theme_midnight_blue.png) |
+| ![Arctic Ice](screenshots/theme_arctic_ice.png) | ![Ocean Cyan](screenshots/theme_ocean_cyan.png) | ![Midnight Navy](screenshots/theme_midnight_navy.png) |
 
-| Electric Blue | Deep Space Nebula | Aurora Borealis |
+| Royal Sapphire | Amethyst Elite |
+|:---:|:---:|
+| ![Royal Sapphire](screenshots/theme_royal_sapphire.png) | ![Amethyst Elite](screenshots/theme_amethyst_elite.png) |
+
+### 🔥 Warm & Corporate Collection
+
+| Rose Gold | Copper Elite | Ruby Executive |
 |:---:|:---:|:---:|
-| ![Electric Blue](screenshots/theme_electric_blue.png) | ![Deep Space Nebula](screenshots/theme_deep_space_nebula.png) | ![Aurora Borealis](screenshots/theme_aurora_borealis.png) |
+| ![Rose Gold](screenshots/theme_rose_gold.png) | ![Copper Elite](screenshots/theme_copper_elite.png) | ![Ruby Executive](screenshots/theme_ruby_executive.png) |
 
-### 🔥 Warm & Vibrant Collection
-
-| Rose Gold Blush | Sunset Gradient | Volcanic Ember |
+| Minimalist Light | Royal Purple | Burgundy Prestige |
 |:---:|:---:|:---:|
-| ![Rose Gold Blush](screenshots/theme_rose_gold_blush.png) | ![Sunset Gradient](screenshots/theme_sunset_gradient.png) | ![Volcanic Ember](screenshots/theme_volcanic_ember.png) |
+| ![Minimalist Light](screenshots/theme_minimal_light.png) | ![Royal Purple](screenshots/theme_royal_purple.png) | ![Burgundy Prestige](screenshots/theme_burgundy_prestige.png) |
 
-| Ivory Cream | Royal Purple | Neon Cyberpunk |
+| Crimson Royal |
+|:---:|
+| ![Crimson Royal](screenshots/theme_crimson_royal.png) |
+
+### 🌿 Nature & Retro Collection
+
+| Dark Emerald | Forest Green | British Racing Green |
 |:---:|:---:|:---:|
-| ![Ivory Cream](screenshots/theme_ivory_cream.png) | ![Royal Purple](screenshots/theme_royal_purple.png) | ![Neon Cyberpunk](screenshots/theme_neon_cyberpunk.png) |
+| ![Dark Emerald](screenshots/theme_dark_emerald.png) | ![Forest Green](screenshots/theme_forest_green.png) | ![British Racing Green](screenshots/theme_racing_green.png) |
 
-### 🌿 Nature & Code Collection
-
-| Forest Emerald | Classic Retro | Liquid Glass |
-|:---:|:---:|:---:|
-| ![Forest Emerald](screenshots/theme_forest_emerald.png) | ![Classic Retro](screenshots/theme_classic_retro.png) | ![Liquid Glass](screenshots/theme_liquid_glass.png) |
-
-| Monokai Dark | Solarized Dark | Dracula |
-|:---:|:---:|:---:|
-| ![Monokai Dark](screenshots/theme_monokai_dark.png) | ![Solarized Dark](screenshots/theme_solarized_dark.png) | ![Dracula](screenshots/theme_dracula.png) |
+| Classic Retro | Liquid Glass |
+|:---:|:---:|
+| ![Classic Retro](screenshots/theme_classic_retro.png) | ![Liquid Glass](screenshots/theme_liquid_glass.png) |
 
 ---
 
@@ -194,7 +198,7 @@ Once installed, the following commands are available globally in your terminal:
 |---|---|
 | `flipclock` or `flipclock --run` | Previews/launches screensaver full-screen windows immediately |
 | `flipclock --settings` | Opens the graphical settings configuration window |
-| `flipclock --version` | Outputs current software version (`v2.4.0`) |
+| `flipclock --version` | Outputs current software version (`v2.4.2`) |
 | `flipclock --daemon` | Starts the background idle monitor daemon |
 | `pkill -f "flipclock.*--daemon"` | Stops the background idle monitor daemon |
 
@@ -208,7 +212,7 @@ To build a fresh `.deb` package file locally:
 chmod +x build_deb.sh
 ./build_deb.sh
 ```
-This generates `flipclock-screensaver.deb` (and `flipclock-screensaver_2.4.0_all.deb`) in the project root directory.
+This generates `flipclock-screensaver.deb` (and `flipclock-screensaver_2.4.2_all.deb`) in the project root directory.
 
 ---
 

@@ -13,17 +13,21 @@ with open(BASE_HTML, "r") as f:
     base_html = f.read()
 
 THEMES = [
-    "luxury_black_gold", "obsidian_titanium", "arctic_ice", "ocean_cyan",
-    "platinum_silver", "champagne_gold", "matte_black_diamond", "rose_gold_blush",
-    "deep_space_nebula", "neon_cyberpunk", "midnight_blue", "forest_emerald",
-    "sunset_gradient", "volcanic_ember", "royal_purple", "liquid_glass",
-    "carbon_fiber", "ivory_cream", "electric_blue", "aurora_borealis",
-    "classic_retro", "monokai_dark", "solarized_dark", "dracula",
+    "luxury_black_gold", "obsidian_titanium", "dark_emerald", "forest_green",
+    "racing_green", "ruby_executive", "burgundy_prestige", "crimson_royal",
+    "royal_sapphire", "midnight_navy", "arctic_ice", "ocean_cyan",
+    "royal_purple", "amethyst_elite", "platinum_silver", "graphite_gray",
+    "copper_elite", "rose_gold", "champagne_gold", "matte_black_diamond",
+    "classic_retro", "minimal_light", "liquid_glass"
 ]
 
 SHAPES = [
-    "soft_squircle", "split_flip", "glass_floating", "capsule", "ticket",
-    "octagon", "fold_corner", "neo_rounded", "stadium", "premium_bevel",
+    "rectangle", "rounded_rectangle", "squircle", "octagon", "hexagon",
+    "pentagon", "diamond", "shield", "capsule", "pill",
+    "circle", "oval", "trapezoid", "parallelogram", "rhombus",
+    "chamfered", "beveled", "notched", "cut_corner", "chevron",
+    "badge", "ticket", "arch", "stadium", "lozenge",
+    "prism", "frame", "panel", "card", "tile"
 ]
 
 def make_temp_html(theme, shape):

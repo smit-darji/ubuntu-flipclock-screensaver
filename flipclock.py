@@ -26,7 +26,7 @@ except ValueError:
         sys.exit(1)
 from gi.repository import Gtk, Gdk, WebKit2, GLib, GdkPixbuf
 
-APP_VERSION = "2.4.0"
+APP_VERSION = "2.4.2"
 
 THEME_CATEGORIES = {
     "liquid_glass": {
@@ -1294,7 +1294,7 @@ class FlipClockWindow(Gtk.Window):
         show_date = str(config_params.get('show_date', 'true')).lower()
         show_greeting = str(config_params.get('show_greeting', 'true')).lower()
         user_name = config_params.get('user_name', '').replace("'", "\\'")
-        custom_credit = config_params.get('custom_credit', 'Customized by Antigravity AI')
+        custom_credit = config_params.get('custom_credit', 'FLIP CLOCK SCREENSAVER')
         digit_font = config_params.get('digit_font', 'Inter').replace("'", "\\'")
         label_font = config_params.get('label_font', 'Cinzel').replace("'", "\\'")
         custom_bg_color = config_params.get('custom_bg_color', '#000000').replace("'", "\\'")
@@ -1471,13 +1471,18 @@ class FlipClockSettingsWindow(Gtk.Window):
             font-weight: 500;
             color: #d4d4d8;
         }
-        combobox,
-        combobox button {
+        combobox {
             background-color: #22222a;
             background-image: none;
-            color: #ffffff;
             border: 1px solid rgba(212, 175, 55, 0.5);
             border-radius: 8px;
+            box-shadow: none;
+        }
+        combobox button {
+            background-color: transparent;
+            background-image: none;
+            color: #ffffff;
+            border: none;
             padding: 6px 12px;
             font-size: 14px;
             font-weight: 600;
@@ -1485,7 +1490,6 @@ class FlipClockSettingsWindow(Gtk.Window):
         }
         combobox button:hover {
             background-color: #2e2e38;
-            border-color: #d4af37;
         }
         combobox cellview {
             color: #ffffff;
@@ -1729,12 +1733,13 @@ class FlipClockSettingsWindow(Gtk.Window):
 
         grid_f = Gtk.Grid()
         grid_f.set_column_spacing(16)
-        grid_f.set_row_spacing(10)
+        grid_f.set_row_spacing(12)
         sec_fonts.pack_start(grid_f, False, False, 0)
 
         lbl_dfont = Gtk.Label(label="Clock Digits Font:")
         lbl_dfont.get_style_context().add_class("field-label")
         lbl_dfont.set_xalign(0)
+        lbl_dfont.set_valign(Gtk.Align.CENTER)
         grid_f.attach(lbl_dfont, 0, 0, 1, 1)
 
         font_options = [
@@ -1765,11 +1770,13 @@ class FlipClockSettingsWindow(Gtk.Window):
         cur_dfont = self.manager.config.get('digit_font', 'Cinzel')
         self.combo_digit_font.set_active_id(cur_dfont if any(cur_dfont == f[0] for f in font_options) else "Cinzel")
         self.combo_digit_font.set_hexpand(True)
+        self.combo_digit_font.set_valign(Gtk.Align.CENTER)
         grid_f.attach(self.combo_digit_font, 1, 0, 1, 1)
 
         lbl_lfont = Gtk.Label(label="Badges & Greetings Font:")
         lbl_lfont.get_style_context().add_class("field-label")
         lbl_lfont.set_xalign(0)
+        lbl_lfont.set_valign(Gtk.Align.CENTER)
         grid_f.attach(lbl_lfont, 0, 1, 1, 1)
 
         self.combo_label_font = Gtk.ComboBoxText()
@@ -1779,6 +1786,7 @@ class FlipClockSettingsWindow(Gtk.Window):
         cur_lfont = self.manager.config.get('label_font', 'Cinzel')
         self.combo_label_font.set_active_id(cur_lfont if any(cur_lfont == f[0] for f in font_options) else "Cinzel")
         self.combo_label_font.set_hexpand(True)
+        self.combo_label_font.set_valign(Gtk.Align.CENTER)
         grid_f.attach(self.combo_label_font, 1, 1, 1, 1)
 
         content_vbox.pack_start(sec_fonts, False, False, 0)
@@ -1840,6 +1848,7 @@ class FlipClockSettingsWindow(Gtk.Window):
         lbl_fmt = Gtk.Label(label="Time Format:")
         lbl_fmt.get_style_context().add_class("field-label")
         lbl_fmt.set_xalign(0)
+        lbl_fmt.set_valign(Gtk.Align.CENTER)
         grid_d.attach(lbl_fmt, 0, 0, 1, 1)
 
         self.combo_format = Gtk.ComboBoxText()
@@ -1847,34 +1856,40 @@ class FlipClockSettingsWindow(Gtk.Window):
         self.combo_format.append("24", "24-Hour (24:00)")
         self.combo_format.set_active_id(self.manager.config.get('hour_format', '12'))
         self.combo_format.set_hexpand(True)
+        self.combo_format.set_valign(Gtk.Align.CENTER)
         grid_d.attach(self.combo_format, 1, 0, 1, 1)
 
         # Show Seconds Toggle
         lbl_sec_toggle = Gtk.Label(label="Display Seconds Card:")
         lbl_sec_toggle.get_style_context().add_class("field-label")
         lbl_sec_toggle.set_xalign(0)
+        lbl_sec_toggle.set_valign(Gtk.Align.CENTER)
         grid_d.attach(lbl_sec_toggle, 0, 1, 1, 1)
 
         self.switch_seconds = Gtk.Switch()
         self.switch_seconds.set_active(str(self.manager.config.get('show_seconds', 'true')).lower() == 'true')
         self.switch_seconds.set_halign(Gtk.Align.END)
+        self.switch_seconds.set_valign(Gtk.Align.CENTER)
         grid_d.attach(self.switch_seconds, 1, 1, 1, 1)
 
         # Show Date Badge Toggle
         lbl_date_toggle = Gtk.Label(label="Display Date Badge:")
         lbl_date_toggle.get_style_context().add_class("field-label")
         lbl_date_toggle.set_xalign(0)
+        lbl_date_toggle.set_valign(Gtk.Align.CENTER)
         grid_d.attach(lbl_date_toggle, 0, 2, 1, 1)
 
         self.switch_date = Gtk.Switch()
         self.switch_date.set_active(str(self.manager.config.get('show_date', 'true')).lower() == 'true')
         self.switch_date.set_halign(Gtk.Align.END)
+        self.switch_date.set_valign(Gtk.Align.CENTER)
         grid_d.attach(self.switch_date, 1, 2, 1, 1)
 
         # Clock Scale Slider
         lbl_scale = Gtk.Label(label="Clock Scale / Size:")
         lbl_scale.get_style_context().add_class("field-label")
         lbl_scale.set_xalign(0)
+        lbl_scale.set_valign(Gtk.Align.CENTER)
         grid_d.attach(lbl_scale, 0, 3, 1, 1)
 
         cur_scale = float(self.manager.config.get('clock_size', '1.0'))
@@ -1882,27 +1897,68 @@ class FlipClockSettingsWindow(Gtk.Window):
         self.scale_size = Gtk.Scale(orientation=Gtk.Orientation.HORIZONTAL, adjustment=self.adj_size)
         self.scale_size.set_digits(1)
         self.scale_size.set_hexpand(True)
+        self.scale_size.set_valign(Gtk.Align.CENTER)
         grid_d.attach(self.scale_size, 1, 3, 1, 1)
 
         # Flip Card Corner Shape Selection
         lbl_shape = Gtk.Label(label="Flip Card Design / Shape:")
         lbl_shape.get_style_context().add_class("field-label")
         lbl_shape.set_xalign(0)
+        lbl_shape.set_valign(Gtk.Align.CENTER)
         grid_d.attach(lbl_shape, 0, 4, 1, 1)
 
         self.combo_card_shape = Gtk.ComboBoxText()
-        self.combo_card_shape.append("soft_squircle", "⭐ Soft Squircle (Apple Vision Pro)")
-        self.combo_card_shape.append("split_flip", "⭐ Split Flip Card (Classic Retro)")
-        self.combo_card_shape.append("glass_floating", "⭐ Glass Floating (Hexagonal)")
-        self.combo_card_shape.append("capsule", "Capsule Card (Wide Pill)")
-        self.combo_card_shape.append("ticket", "Ticket Card (Side Notches)")
-        self.combo_card_shape.append("octagon", "⭐ Octagon (8-Corner Chamfer)")
-        self.combo_card_shape.append("fold_corner", "Fold Corner Card")
-        self.combo_card_shape.append("neo_rounded", "⭐ Neo Rounded Rectangle")
-        self.combo_card_shape.append("stadium", "Stadium Vertical (Extreme Pill)")
-        self.combo_card_shape.append("premium_bevel", "⭐ Premium Bevel (Asymmetric)")
-        self.combo_card_shape.set_active_id(self.manager.config.get('card_shape', 'soft_squircle'))
+        shapes_list = [
+            ("rectangle", "Rectangle"),
+            ("rounded_rectangle", "Rounded Rectangle"),
+            ("squircle", "Squircle"),
+            ("octagon", "Octagon"),
+            ("hexagon", "Hexagon"),
+            ("pentagon", "Pentagon"),
+            ("diamond", "Diamond"),
+            ("shield", "Shield"),
+            ("capsule", "Capsule"),
+            ("pill", "Pill"),
+            ("circle", "Circle"),
+            ("oval", "Oval"),
+            ("trapezoid", "Trapezoid"),
+            ("parallelogram", "Parallelogram"),
+            ("rhombus", "Rhombus"),
+            ("chamfered", "Chamfered"),
+            ("beveled", "Beveled"),
+            ("notched", "Notched"),
+            ("cut_corner", "Cut Corner"),
+            ("chevron", "Chevron"),
+            ("badge", "Badge"),
+            ("ticket", "Ticket"),
+            ("arch", "Arch"),
+            ("stadium", "Stadium"),
+            ("lozenge", "Lozenge"),
+            ("prism", "Prism"),
+            ("frame", "Frame"),
+            ("panel", "Panel"),
+            ("card", "Card"),
+            ("tile", "Tile")
+        ]
+        for s_id, s_name in shapes_list:
+            self.combo_card_shape.append(s_id, s_name)
+
+        cur_shape = self.manager.config.get('card_shape', 'squircle')
+        legacy_map = {
+            'soft_squircle': 'squircle',
+            'neo_rounded': 'rounded_rectangle',
+            'glass_floating': 'hexagon',
+            'premium_bevel': 'beveled',
+            'fold_corner': 'cut_corner',
+            'split_flip': 'rectangle'
+        }
+        if cur_shape in legacy_map:
+            cur_shape = legacy_map[cur_shape]
+
+        self.combo_card_shape.set_active_id(cur_shape)
         self.combo_card_shape.set_hexpand(True)
+        self.combo_card_shape.set_valign(Gtk.Align.CENTER)
+        self.combo_card_shape.connect("changed", lambda w: self.update_config_from_ui() or self.manager.save_config())
         grid_d.attach(self.combo_card_shape, 1, 4, 1, 1)
 
         content_vbox.pack_start(sec_disp, False, False, 0)
@@ -2000,28 +2056,113 @@ class FlipClockSettingsWindow(Gtk.Window):
             if hasattr(self, 'combo_label_font'):
                 self.combo_label_font.set_active_id(preset['label_font'])
 
-    def on_color_button_changed(self, button):
-        bg_hex = rgba_to_hex(self.btn_bg_color.get_rgba()).upper()
-        matched_theme = None
+    def get_coordinating_palette(self, bg_hex):
+        best_match = None
+        min_dist = 999999.0
+        try:
+            hex_clean = bg_hex.lstrip('#')
+            r1, g1, b1 = int(hex_clean[0:2], 16), int(hex_clean[2:4], 16), int(hex_clean[4:6], 16)
+        except Exception:
+            return None
+            
         for t_key, t_info in PRESET_THEMES.items():
             if t_key == 'custom':
                 continue
-            if t_info['bg_color'].upper() == bg_hex:
-                matched_theme = t_key
-                break
+            try:
+                th_clean = t_info['bg_color'].lstrip('#')
+                r2, g2, b2 = int(th_clean[0:2], 16), int(th_clean[2:4], 16), int(th_clean[4:6], 16)
+                dist = ((r1 - r2) ** 2 + (g1 - g2) ** 2 + (b1 - b2) ** 2) ** 0.5
+                if dist < min_dist:
+                    min_dist = dist
+                    best_match = t_key
+            except Exception:
+                continue
+                
+        if best_match and min_dist < 15:
+            return PRESET_THEMES[best_match]
+            
+        brightness = (0.299 * r1 + 0.587 * g1 + 0.114 * b1)
+        is_dark = brightness < 128
+        
+        if is_dark:
+            card_r = min(255, r1 + 25)
+            card_g = min(255, g1 + 25)
+            card_b = min(255, b1 + 25)
+            card_hex = f"#{card_r:02X}{card_g:02X}{card_b:02X}"
+            
+            border_r = min(255, card_r + 20)
+            border_g = min(255, card_g + 20)
+            border_b = min(255, card_b + 20)
+            border_hex = f"#{border_r:02X}{border_g:02X}{border_b:02X}"
+            
+            digit_hex = "#F5F5F7"
+            
+            max_val = max(r1, g1, b1)
+            if max_val < 30:
+                accent_hex = "#D4AF37"
+            elif r1 == max_val:
+                accent_hex = "#D32F2F"
+            elif g1 == max_val:
+                accent_hex = "#00C853"
+            elif b1 == max_val:
+                accent_hex = "#2E7DFF"
+            else:
+                accent_hex = "#D4AF37"
+        else:
+            card_r = max(0, r1 - 25)
+            card_g = max(0, g1 - 25)
+            card_b = max(0, b1 - 25)
+            card_hex = f"#{card_r:02X}{card_g:02X}{card_b:02X}"
+            
+            border_r = max(0, card_r - 20)
+            border_g = max(0, card_g - 20)
+            border_b = max(0, card_b - 20)
+            border_hex = f"#{border_r:02X}{border_g:02X}{border_b:02X}"
+            
+            digit_hex = "#0F172A"
+            accent_hex = "#1E293B"
+            
+        return {
+            "bg_color": bg_hex,
+            "card_color": card_hex,
+            "digit_color": digit_hex,
+            "accent_color": accent_hex,
+            "border_color": border_hex,
+            "digit_font": "Inter",
+            "label_font": "Inter"
+        }
 
-        if matched_theme and matched_theme != self.combo_theme.get_active_id():
-            self.combo_theme.set_active_id(matched_theme)
-        elif not matched_theme:
+    def on_color_button_changed(self, button):
+        if button == self.btn_bg_color:
+            bg_hex = rgba_to_hex(self.btn_bg_color.get_rgba()).upper()
+            palette = self.get_coordinating_palette(bg_hex)
+            if palette:
+                self.btn_card_color.set_rgba(hex_to_rgba(palette['card_color']))
+                self.btn_digit_color.set_rgba(hex_to_rgba(palette['digit_color']))
+                self.btn_accent_color.set_rgba(hex_to_rgba(palette['accent_color']))
+                self.btn_border_color.set_rgba(hex_to_rgba(palette['border_color']))
+                if 'digit_font' in palette and hasattr(self, 'combo_digit_font'):
+                    self.combo_digit_font.set_active_id(palette['digit_font'])
+                if 'label_font' in palette and hasattr(self, 'combo_label_font'):
+                    self.combo_label_font.set_active_id(palette['label_font'])
+            
+            matched_theme = None
+            for t_key, t_info in PRESET_THEMES.items():
+                if t_key == 'custom':
+                    continue
+                if t_info['bg_color'].upper() == bg_hex:
+                    matched_theme = t_key
+                    break
+            
+            if matched_theme:
+                if self.combo_theme.get_active_id() != matched_theme:
+                    self.combo_theme.set_active_id(matched_theme)
+            else:
+                if self.combo_theme.get_active_id() != 'custom':
+                    self.combo_theme.set_active_id('custom')
+        else:
             if self.combo_theme.get_active_id() != 'custom':
                 self.combo_theme.set_active_id('custom')
-            self.update_palette_preview_swatches({
-                "bg_color": rgba_to_hex(self.btn_bg_color.get_rgba()),
-                "card_color": rgba_to_hex(self.btn_card_color.get_rgba()),
-                "digit_color": rgba_to_hex(self.btn_digit_color.get_rgba()),
-                "accent_color": rgba_to_hex(self.btn_accent_color.get_rgba()),
-                "border_color": rgba_to_hex(self.btn_border_color.get_rgba())
-            })
 
     def update_config_from_ui(self):
         theme = self.combo_theme.get_active_id() or "luxury_black_gold"
@@ -2432,7 +2573,7 @@ if __name__ == "__main__":
     parser.add_argument("--daemon", action="store_true", help="Start background idle monitor daemon")
     parser.add_argument("--settings", action="store_true", help="Configure Flip Clock settings")
     parser.add_argument("--theme", choices=["dark_gold", "midnight_cyber", "emerald_oled", "sunset_glow", "minimal_light", "classic_retro"], help="Test theme directly")
-    parser.add_argument("--version", action="version", version=f"Flip Clock Screensaver v{APP_VERSION} (Customized by Antigravity AI)")
+    parser.add_argument("--version", action="version", version=f"Flip Clock Screensaver v{APP_VERSION}")
     args = parser.parse_args()
     
     manager = FlipClockManager()

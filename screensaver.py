@@ -436,6 +436,7 @@ class ScreensaverWindow(Gtk.Window):
         custom_digit_color = "#F5F5F7"
         custom_accent_color = "#D4AF37"
         custom_border_color = "#4A4A4A"
+        card_shape = "soft_squircle"
         
         if os.path.exists(config_path):
             try:
@@ -459,6 +460,7 @@ class ScreensaverWindow(Gtk.Window):
                     custom_digit_color = cp['Settings'].get('custom_digit_color', '#F5F5F7').replace("'", "\\'")
                     custom_accent_color = cp['Settings'].get('custom_accent_color', '#D4AF37').replace("'", "\\'")
                     custom_border_color = cp['Settings'].get('custom_border_color', '#4A4A4A').replace("'", "\\'")
+                    card_shape = cp['Settings'].get('card_shape', 'soft_squircle').replace("'", "\\'")
             except Exception:
                 pass
                 
@@ -467,7 +469,7 @@ class ScreensaverWindow(Gtk.Window):
             print("Error: Could not locate clock.html or index.html")
             sys.exit(1)
             
-        config_script = f"<script>window.screensaverConfig = {{ monitor: '{monitor_idx}', format: '{fmt}', size: '{size}', speed: '{speed}', theme: '{theme}', show_seconds: '{show_seconds}', show_date: '{show_date}', show_greeting: '{show_greeting}', user_name: '{user_name}', custom_credit: '{custom_credit}', digit_font: '{digit_font}', label_font: '{label_font}', custom_bg_color: '{custom_bg_color}', custom_card_color: '{custom_card_color}', custom_digit_color: '{custom_digit_color}', custom_accent_color: '{custom_accent_color}', custom_border_color: '{custom_border_color}' }};</script>"
+        config_script = f"<script>window.screensaverConfig = {{ monitor: '{monitor_idx}', format: '{fmt}', size: '{size}', speed: '{speed}', theme: '{theme}', card_shape: '{card_shape}', show_seconds: '{show_seconds}', show_date: '{show_date}', show_greeting: '{show_greeting}', user_name: '{user_name}', custom_credit: '{custom_credit}', digit_font: '{digit_font}', label_font: '{label_font}', custom_bg_color: '{custom_bg_color}', custom_card_color: '{custom_card_color}', custom_digit_color: '{custom_digit_color}', custom_accent_color: '{custom_accent_color}', custom_border_color: '{custom_border_color}' }};</script>"
         if "</head>" in html_content:
             html_content = html_content.replace("</head>", f"{config_script}</head>")
         else:
