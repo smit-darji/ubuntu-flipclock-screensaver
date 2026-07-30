@@ -26,7 +26,7 @@ except ValueError:
         sys.exit(1)
 from gi.repository import Gtk, Gdk, WebKit2, GLib, GdkPixbuf
 
-APP_VERSION = "2.3.0"
+APP_VERSION = "2.4.0"
 
 THEME_CATEGORIES = {
     "executive": {
@@ -1470,7 +1470,7 @@ class FlipClockSettingsWindow(Gtk.Window):
         hb = Gtk.HeaderBar()
         hb.set_show_close_button(True)
         hb.set_title("Flip Clock Settings")
-        hb.set_subtitle("Executive Edition v2.3.0")
+        hb.set_subtitle(f"Executive Edition v{APP_VERSION}")
         self.set_titlebar(hb)
 
         main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
