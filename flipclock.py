@@ -1365,46 +1365,61 @@ class FlipClockSettingsWindow(Gtk.Window):
             font-weight: 500;
             color: #d4d4d8;
         }
-        combobox button {
-            background-color: #22222a;
-            color: #ffffff;
-            border: 1px solid rgba(212, 175, 55, 0.45);
-            border-radius: 8px;
-            padding: 6px 12px;
-            font-size: 14px;
-            font-weight: 600;
+        combobox,
+        combobox button,
+        combobox button:focus,
+        combobox button:active,
+        combobox button:checked,
+        combobox button:hover,
+        combobox button:backdrop {
+            background-color: #22222a !important;
+            background-image: none !important;
+            color: #ffffff !important;
+            border: 1px solid rgba(212, 175, 55, 0.5) !important;
+            border-radius: 8px !important;
+            padding: 6px 12px !important;
+            font-size: 14px !important;
+            font-weight: 600 !important;
+            box-shadow: none !important;
         }
         combobox button:hover {
-            background-color: #2a2a34;
-            border-color: #d4af37;
+            background-color: #2e2e38 !important;
+            border-color: #d4af37 !important;
         }
-        combobox cellview {
-            color: #ffffff;
-            font-weight: 600;
-            font-size: 14px;
+        combobox cellview,
+        combobox cellview *,
+        combobox label {
+            color: #ffffff !important;
+            background: transparent !important;
+            font-weight: 600 !important;
+            font-size: 14px !important;
         }
         combobox arrow {
-            color: #d4af37;
+            color: #d4af37 !important;
             min-width: 14px;
             min-height: 14px;
         }
         menu {
-            background-color: #16161b;
-            border: 1px solid #d4af37;
-            border-radius: 8px;
-            padding: 2px 0px;
-            color: #ffffff;
+            background-color: #16161b !important;
+            border: 1px solid #d4af37 !important;
+            border-radius: 8px !important;
+            padding: 4px 0px !important;
+            color: #ffffff !important;
         }
         menuitem {
-            color: #f4f4f5;
-            padding: 6px 14px;
-            font-weight: 600;
-            font-size: 13px;
+            color: #f4f4f5 !important;
+            background-color: #16161b !important;
+            padding: 6px 14px !important;
+            font-weight: 600 !important;
+            font-size: 13px !important;
         }
-        menuitem:hover, menuitem:selected {
-            background-color: #d4af37;
-            color: #000000;
-            font-weight: 800;
+        menuitem:hover, menuitem:selected, menuitem:focus {
+            background-color: #d4af37 !important;
+            color: #000000 !important;
+            font-weight: 800 !important;
+        }
+        menuitem label {
+            color: inherit !important;
         }
         .custom-dark-dialog {
             background-color: #141419;
@@ -1563,31 +1578,6 @@ class FlipClockSettingsWindow(Gtk.Window):
         self.combo_theme.set_hexpand(True)
         self.combo_theme.connect("changed", self.on_theme_combo_changed)
         grid_t.attach(self.combo_theme, 1, 0, 1, 1)
-
-        # Visual Live Palette Swatches Preview
-        lbl_palette_prev = Gtk.Label(label="Live Palette Preview:")
-        lbl_palette_prev.get_style_context().add_class("field-label")
-        lbl_palette_prev.set_xalign(0)
-        grid_t.attach(lbl_palette_prev, 0, 1, 1, 1)
-
-        self.preview_swatches_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-        self.preview_swatches_box.set_halign(Gtk.Align.START)
-        grid_t.attach(self.preview_swatches_box, 1, 1, 1, 1)
-
-        # Theme Screenshot Visual Preview
-        lbl_img_prev = Gtk.Label(label="Theme Visual Preview:")
-        lbl_img_prev.get_style_context().add_class("field-label")
-        lbl_img_prev.set_xalign(0)
-        lbl_img_prev.set_valign(Gtk.Align.START)
-        grid_t.attach(lbl_img_prev, 0, 2, 1, 1)
-
-        self.preview_img_frame = Gtk.Frame()
-        self.preview_img_frame.set_shadow_type(Gtk.ShadowType.IN)
-        self.preview_img_frame.set_halign(Gtk.Align.START)
-        
-        self.img_theme_preview = Gtk.Image()
-        self.preview_img_frame.add(self.img_theme_preview)
-        grid_t.attach(self.preview_img_frame, 1, 2, 1, 1)
 
         content_vbox.pack_start(sec_theme, False, False, 0)
 
@@ -1874,41 +1864,6 @@ class FlipClockSettingsWindow(Gtk.Window):
         self.connect("destroy", Gtk.main_quit)
         self.show_all()
 
-    def update_palette_preview_swatches(self, preset):
-        for child in self.preview_swatches_box.get_children():
-            self.preview_swatches_box.remove(child)
-            
-        colors = [
-            ("Bg", preset.get("bg_color", "#000000"), getattr(self, 'btn_bg_color', None)),
-            ("Card", preset.get("card_color", "#1C1C1E"), getattr(self, 'btn_card_color', None)),
-            ("Digit", preset.get("digit_color", "#F5F5F7"), getattr(self, 'btn_digit_color', None)),
-            ("Accent", preset.get("accent_color", "#D4AF37"), getattr(self, 'btn_accent_color', None)),
-            ("Border", preset.get("border_color", "#4A4A4A"), getattr(self, 'btn_border_color', None)),
-        ]
-        
-        for name, hex_c, target_btn in colors:
-            chip = Gtk.EventBox()
-            chip.set_tooltip_text(f"Click to edit {name} color ({hex_c})")
-            
-            lbl = Gtk.Label(label=f" {name} ")
-            lbl.get_style_context().add_class("field-label")
-            chip.add(lbl)
-            
-            provider = Gtk.CssProvider()
-            css_b = f"eventbox {{ background-color: {hex_c}; border-radius: 6px; padding: 4px 10px; border: 1px solid rgba(255,255,255,0.3); }}".encode('utf-8')
-            try:
-                provider.load_from_data(css_b)
-                chip.get_style_context().add_provider(provider, Gtk.STYLE_PROVIDER_PRIORITY_USER)
-            except Exception:
-                pass
-                
-            if target_btn:
-                chip.connect("button-press-event", lambda w, e, btn=target_btn: btn.emit("clicked"))
-
-            self.preview_swatches_box.pack_start(chip, False, False, 0)
-            
-        self.preview_swatches_box.show_all()
-
     def on_theme_combo_changed(self, widget):
         t_id = widget.get_active_id()
         if not t_id or t_id not in PRESET_THEMES:
@@ -1926,24 +1881,6 @@ class FlipClockSettingsWindow(Gtk.Window):
                 self.combo_digit_font.set_active_id(preset['digit_font'])
             if hasattr(self, 'combo_label_font'):
                 self.combo_label_font.set_active_id(preset['label_font'])
-            
-        self.update_palette_preview_swatches(preset)
-        self.update_theme_preview_image(t_id)
-
-    def update_theme_preview_image(self, t_id):
-        img_path = os.path.join(self.manager.script_dir, "assets", f"theme_{t_id}.png")
-        if not os.path.exists(img_path):
-            img_path = os.path.join(os.getcwd(), "assets", f"theme_{t_id}.png")
-        if os.path.exists(img_path):
-            try:
-                pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(img_path, 340, 200, True)
-                self.img_theme_preview.set_from_pixbuf(pixbuf)
-                self.preview_img_frame.show_all()
-                return
-            except Exception as e:
-                print(f"Error loading preview pixbuf: {e}")
-        self.img_theme_preview.clear()
-        self.preview_img_frame.hide()
 
     def on_color_button_changed(self, button):
         bg_hex = rgba_to_hex(self.btn_bg_color.get_rgba()).upper()
