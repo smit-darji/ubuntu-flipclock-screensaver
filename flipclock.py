@@ -855,31 +855,74 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
         }
 
         /* ═══ CARD SHAPE STYLES & CORNER DESIGNS ═══ */
-        /* 1. Octagon / 8-Corner Chamfer Cut */
-        .shape-octagon .card-top {
-            clip-path: polygon(16px 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%, 0 16px);
+
+        /* 1. Classic Rounded (Default) */
+        .shape-rounded .flip-card {
+            border-radius: clamp(14px, 2.2vh, 32px) !important;
+            clip-path: none !important;
+        }
+        .shape-rounded .card-top, .shape-rounded .flipper-top {
+            border-radius: clamp(14px, 2.2vh, 32px) clamp(14px, 2.2vh, 32px) 0 0 !important;
+            clip-path: none !important;
+        }
+        .shape-rounded .card-bottom, .shape-rounded .flipper-bottom {
+            border-radius: 0 0 clamp(14px, 2.2vh, 32px) clamp(14px, 2.2vh, 32px) !important;
+            clip-path: none !important;
+        }
+
+        /* 2. Octagon / 8-Corner Chamfer Cut */
+        .shape-octagon .flip-card {
+            clip-path: polygon(18px 0, calc(100% - 18px) 0, 100% 18px, 100% calc(100% - 18px), calc(100% - 18px) 100%, 18px 100%, 0 calc(100% - 18px), 0 18px) !important;
             border-radius: 0 !important;
         }
-        .shape-octagon .card-bottom {
-            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 16px 100%, 0 calc(100% - 16px));
+        .shape-octagon .card-top, .shape-octagon .flipper-top {
+            clip-path: polygon(18px 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%, 0 18px) !important;
+            border-radius: 0 !important;
+        }
+        .shape-octagon .card-bottom, .shape-octagon .flipper-bottom {
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 18px 100%, 0 calc(100% - 18px)) !important;
             border-radius: 0 !important;
         }
 
-        /* 2. Squircle / Soft Pill */
-        .shape-squircle .card-top { border-radius: clamp(28px,4vh,48px) clamp(28px,4vh,48px) 0 0 !important; }
-        .shape-squircle .card-bottom { border-radius: 0 0 clamp(28px,4vh,48px) clamp(28px,4vh,48px) !important; }
+        /* 3. Squircle / Soft Pill (Ultra Curved) */
+        .shape-squircle .flip-card {
+            border-radius: clamp(32px, 5vh, 60px) !important;
+            clip-path: none !important;
+        }
+        .shape-squircle .card-top, .shape-squircle .flipper-top {
+            border-radius: clamp(32px, 5vh, 60px) clamp(32px, 5vh, 60px) 0 0 !important;
+            clip-path: none !important;
+        }
+        .shape-squircle .card-bottom, .shape-squircle .flipper-bottom {
+            border-radius: 0 0 clamp(32px, 5vh, 60px) clamp(32px, 5vh, 60px) !important;
+            clip-path: none !important;
+        }
 
-        /* 3. Sharp Executive */
-        .shape-sharp .card-top { border-radius: 4px 4px 0 0 !important; }
-        .shape-sharp .card-bottom { border-radius: 0 0 4px 4px !important; }
+        /* 4. Sharp Executive Rectangle */
+        .shape-sharp .flip-card {
+            border-radius: 3px !important;
+            clip-path: none !important;
+        }
+        .shape-sharp .card-top, .shape-sharp .flipper-top {
+            border-radius: 3px 3px 0 0 !important;
+            clip-path: none !important;
+        }
+        .shape-sharp .card-bottom, .shape-sharp .flipper-bottom {
+            border-radius: 0 0 3px 3px !important;
+            clip-path: none !important;
+        }
 
-        /* 4. Cyber Notch Cut */
-        .shape-cyber .card-top {
-            clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 0 100%);
+        /* 5. Cyber Notch Cut (Notched Cybernetic Corners) */
+        .shape-cyber .flip-card {
+            clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px)) !important;
             border-radius: 0 !important;
         }
-        .shape-cyber .card-bottom {
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 22px 100%, 0 calc(100% - 22px));
+        .shape-cyber .card-top, .shape-cyber .flipper-top {
+            clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 0 100%) !important;
+            border-radius: 0 !important;
+        }
+        .shape-cyber .card-bottom, .shape-cyber .flipper-bottom {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 24px 100%, 0 calc(100% - 24px)) !important;
             border-radius: 0 !important;
         }
 
