@@ -8,13 +8,13 @@
 
 ---
 
-## 📷 Default Theme Preview — Luxury Black Gold + Soft Squircle
+## 📷 Default Theme Preview — Luxury Black Gold + Squircle
 
 A native, high-fidelity, multi-monitor flip clock screensaver for Ubuntu Linux. It brings a vintage airport split-flap style retro clock to your workstation, rendering across all connected displays simultaneously with smooth 3D CSS animations, dynamic time-based greetings, and **23 premium color themes** with **29 card shape designs**.
 
 ![Default Theme — Luxury Black Gold](screenshots/theme_luxury_black_gold.png)
 
-> **Default Premium Setup:** Luxury Black Gold theme • Soft Squircle card shape • Cinzel typography • 12-hour format with seconds
+> **Default Premium Setup:** Luxury Black Gold theme • Squircle card shape • Cinzel typography • 12-hour format with seconds
 
 ---
 
@@ -66,47 +66,93 @@ A native, high-fidelity, multi-monitor flip clock screensaver for Ubuntu Linux. 
 
 ---
 
-## 🃏 10 Premium Card Shape Designs
+## 🃏 29 Premium Card Shape Designs
 
-Choose from 10 unique flip card shapes — from Apple Vision Pro–style squircles to cybernetic notches and hexagonal glass:
+Choose from **29 unique flip card shapes** — from Apple Vision Pro–style squircles to geometric polygons and vintage ticket cutouts:
 
-| ⭐ Soft Squircle | ⭐ Split Flip Card | ⭐ Glass Floating |
+### 🏆 Classic & Rounded Shapes
+
+| ⭐ Squircle | Rounded Rectangle | Rectangle |
 |:---:|:---:|:---:|
-| ![Soft Squircle](screenshots/shape_soft_squircle.png) | ![Split Flip](screenshots/shape_split_flip.png) | ![Glass Floating](screenshots/shape_glass_floating.png) |
-| *Apple Vision Pro style (28px radius)* | *Classic retro airport flip* | *Hexagonal angled sides* |
+| ![Squircle](screenshots/shape_squircle.png) | ![Rounded Rectangle](screenshots/shape_rounded_rectangle.png) | ![Rectangle](screenshots/shape_rectangle.png) |
+| *Apple Vision Pro style* | *Modern clean radius* | *Classic sharp corners* |
 
-| Capsule Card | Ticket Card | ⭐ Octagon |
+| Card | Panel | Tile |
 |:---:|:---:|:---:|
-| ![Capsule](screenshots/shape_capsule.png) | ![Ticket](screenshots/shape_ticket.png) | ![Octagon](screenshots/shape_octagon.png) |
-| *Wide pill / stadium horizontal* | *Side notch cutouts* | *8-corner chamfer cut* |
+| ![Card](screenshots/shape_card.png) | ![Panel](screenshots/shape_panel.png) | ![Tile](screenshots/shape_tile.png) |
+| *Standard card preset* | *Flat panel style* | *Tile grid design* |
 
-| Fold Corner | ⭐ Neo Rounded | Stadium Vertical |
+### 💎 Geometric Polygon Shapes
+
+| Octagon | Hexagon | Pentagon |
 |:---:|:---:|:---:|
-| ![Fold Corner](screenshots/shape_fold_corner.png) | ![Neo Rounded](screenshots/shape_neo_rounded.png) | ![Stadium](screenshots/shape_stadium.png) |
-| *Folded page corner* | *Modern 16px clean* | *Extreme top/bottom pill* |
+| ![Octagon](screenshots/shape_octagon.png) | ![Hexagon](screenshots/shape_hexagon.png) | ![Pentagon](screenshots/shape_pentagon.png) |
+| *8-corner chamfer cut* | *Angled hex sides* | *5-sided polygon* |
 
-| ⭐ Premium Bevel |
-|:---:|
-| ![Premium Bevel](screenshots/shape_premium_bevel.png) |
-| *Asymmetric diagonal TL + BR cut* |
+| Diamond | Shield | Rhombus |
+|:---:|:---:|:---:|
+| ![Diamond](screenshots/shape_diamond.png) | ![Shield](screenshots/shape_shield.png) | ![Rhombus](screenshots/shape_rhombus.png) |
+| *45° rotated square* | *Heraldic shield shape* | *Tilted parallelogram* |
+
+| Trapezoid | Parallelogram | Chevron |
+|:---:|:---:|:---:|
+| ![Trapezoid](screenshots/shape_trapezoid.png) | ![Parallelogram](screenshots/shape_parallelogram.png) | ![Chevron](screenshots/shape_chevron.png) |
+| *Tapered top edge* | *Slanted sides* | *Arrow-point shape* |
+
+### 💊 Pill & Capsule Shapes
+
+| Capsule | Pill | Circle |
+|:---:|:---:|:---:|
+| ![Capsule](screenshots/shape_capsule.png) | ![Pill](screenshots/shape_pill.png) | ![Circle](screenshots/shape_circle.png) |
+| *Wide horizontal pill* | *Rounded pill shape* | *Fully round* |
+
+| Oval | Stadium | Lozenge |
+|:---:|:---:|:---:|
+| ![Oval](screenshots/shape_oval.png) | ![Stadium](screenshots/shape_stadium.png) | ![Lozenge](screenshots/shape_lozenge.png) |
+| *Elliptical stretch* | *Extreme top/bottom pill* | *Elongated diamond* |
+
+### ✂️ Cut & Notch Shapes
+
+| Chamfered | Beveled | Notched |
+|:---:|:---:|:---:|
+| ![Chamfered](screenshots/shape_chamfered.png) | ![Beveled](screenshots/shape_beveled.png) | ![Notched](screenshots/shape_notched.png) |
+| *Flat angled corners* | *Asymmetric diagonal cut* | *Corner notch cutout* |
+
+| Cut Corner | Badge | Ticket |
+|:---:|:---:|:---:|
+| ![Cut Corner](screenshots/shape_cut_corner.png) | ![Badge](screenshots/shape_badge.png) | ![Ticket](screenshots/shape_ticket.png) |
+| *Diagonal corner trim* | *Decorative badge shape* | *Side notch cutouts* |
+
+### 🏛️ Architectural Shapes
+
+| Arch | Frame |
+|:---:|:---:|
+| ![Arch](screenshots/shape_arch.png) | ![Frame](screenshots/shape_frame.png) |
+| *Rounded arch top* | *Bordered frame style* |
 
 ---
 
 ## ✨ Key Features
 
 * **Vintage Split-Flap Clock UI**: Fliqlo-style charcoal cards, subtle border highlights, glassmorphic capsule badges, and realistic 3D card flip shadows.
-* **24 Premium Color Themes**: Luxury Black Gold, Obsidian Titanium, Arctic Ice, Liquid Glass, Neon Cyberpunk, Dracula, Monokai Dark, Solarized Dark, and more — plus a fully custom theme builder with live color pickers.
-* **10 Premium Flip Card Shapes**:
-  - ⭐ **Soft Squircle** — Apple Vision Pro ultra-smooth 28px corners *(Default)*
-  - ⭐ **Split Flip Card** — Classic retro airport flip with thick divider
-  - ⭐ **Glass Floating** — Hexagonal angled sides
-  - **Capsule Card** — Wide pill / horizontal stadium shape
-  - **Ticket Card** — Side notch cutouts for vintage ticket look
-  - ⭐ **Octagon** — Classic 8-corner chamfer cut
-  - **Fold Corner** — Top-right folded page corner effect
-  - ⭐ **Neo Rounded Rectangle** — Modern clean 16px radius
-  - **Stadium Vertical** — Extreme top/bottom pill rounding
-  - ⭐ **Premium Bevel** — Asymmetric diagonal cut (top-left + bottom-right)
+* **23 Premium Color Themes**: Luxury Black Gold, Obsidian Titanium, Arctic Ice, Liquid Glass, Rose Gold, Champagne Gold, and more — plus a fully custom theme builder with live color pickers.
+* **29 Premium Flip Card Shapes**:
+  - ⭐ **Squircle** — Apple Vision Pro ultra-smooth corners *(Default)*
+  - **Rounded Rectangle** — Modern clean radius
+  - **Rectangle** — Classic sharp corners
+  - **Octagon** — 8-corner chamfer cut
+  - **Hexagon** — Angled hex sides
+  - **Pentagon** — 5-sided polygon
+  - **Diamond** — 45° rotated square
+  - **Shield** — Heraldic shield shape
+  - **Capsule** — Wide horizontal pill
+  - **Pill** — Rounded pill shape
+  - **Circle** — Fully round
+  - **Oval** — Elliptical stretch
+  - **Trapezoid**, **Parallelogram**, **Rhombus**, **Chevron**
+  - **Chamfered**, **Beveled**, **Notched**, **Cut Corner**
+  - **Badge**, **Ticket**, **Arch**, **Stadium**, **Lozenge**
+  - **Frame**, **Panel**, **Card**, **Tile**
 * **Executive Glassmorphic Greeting Capsule**:
   - Time-of-day greetings (`GOOD MORNING`, `GOOD AFTERNOON`, `GOOD EVENING`, `GOOD NIGHT`) enclosed inside a translucent glass capsule badge with gold `✦` sparkles.
   - Personalize with your custom name (e.g. `GOOD MORNING, SMIT`).
@@ -116,7 +162,7 @@ Choose from 10 unique flip card shapes — from Apple Vision Pro–style squircl
 * **18 Premium Fonts**: Audiowide, Teko, Share Tech Mono, VT323, Chakra Petch, Michroma, Cinzel, Inter, Outfit, Orbitron, Roboto, and more.
 * **Modern Executive GTK Settings Application**:
   - **Active Theme Preset Selector** with side-by-side liquid glass dropdown
-  - **Flip Card Shape / Design Selector** (10 premium shapes)
+  - **Flip Card Shape / Design Selector** (29 premium shapes)
   - **18 Special Clock & Executive Fonts** with separate digit & label font selection
   - **Display Time Greeting** toggle & **Custom User Name** input
   - **Time Format** (12-Hour AM/PM vs 24-Hour)

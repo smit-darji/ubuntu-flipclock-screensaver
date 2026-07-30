@@ -1026,6 +1026,9 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
 let rawShape = config.card_shape || 'squircle';
 let legacyMap = { 'soft_squircle': 'squircle', 'neo_rounded': 'rounded_rectangle', 'glass_floating': 'card', 'fold_corner': 'notched', 'split_flip': 'rectangle', 'premium_bevel': 'beveled' };
 let cardShape = legacyMap[rawShape] || rawShape;
+let rawShape = config.card_shape || 'squircle';
+let legacyMap = { 'soft_squircle': 'squircle', 'neo_rounded': 'rounded_rectangle', 'glass_floating': 'card', 'fold_corner': 'notched', 'split_flip': 'rectangle', 'premium_bevel': 'beveled' };
+let cardShape = legacyMap[rawShape] || rawShape;
 let hourFormat = config.format || '12';
 let showSeconds = config.show_seconds !== 'false';
 let showDate = config.show_date !== 'false';
@@ -1401,6 +1404,7 @@ class FlipClockSettingsWindow(Gtk.Window):
         super().__init__(title="Flip Clock Settings")
         self.manager = manager
         self.set_default_size(680, 720)
+        self.set_default_size(680, 720)
         self.set_border_width(0)
         self.set_position(Gtk.WindowPosition.CENTER)
         
@@ -1469,6 +1473,9 @@ class FlipClockSettingsWindow(Gtk.Window):
             margin-bottom: 12px;
         }
         .field-label {
+            font-size: 15px;
+            font-weight: 600;
+            color: #e4e4e7;
             font-size: 15px;
             font-weight: 600;
             color: #e4e4e7;
