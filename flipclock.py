@@ -854,76 +854,106 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
             --branding-color: rgba(56, 189, 248, 0.6);
         }
 
-        /* ═══ CARD SHAPE STYLES & CORNER DESIGNS ═══ */
+        /* ═══ 10 PREMIUM CARD SHAPE STYLES ═══ */
 
-        /* 1. Classic Rounded (Default) */
-        .shape-rounded .flip-card {
-            border-radius: clamp(14px, 2.2vh, 32px) !important;
-            clip-path: none !important;
+        /* 1. Soft Squircle ⭐ (Apple Vision Pro — 28px ultra-smooth) */
+        .shape-soft_squircle .flip-card { border-radius: clamp(24px, 3.5vh, 42px); }
+        .shape-soft_squircle .card-top, .shape-soft_squircle .flipper-top { border-radius: clamp(24px,3.5vh,42px) clamp(24px,3.5vh,42px) 0 0; }
+        .shape-soft_squircle .card-bottom, .shape-soft_squircle .flipper-bottom { border-radius: 0 0 clamp(24px,3.5vh,42px) clamp(24px,3.5vh,42px); }
+
+        /* 2. Split Flip Card ⭐ (Classic retro airport flip) */
+        .shape-split_flip .flip-card { border-radius: clamp(10px,1.6vh,20px); }
+        .shape-split_flip .card-top, .shape-split_flip .flipper-top { border-radius: clamp(10px,1.6vh,20px) clamp(10px,1.6vh,20px) 0 0; }
+        .shape-split_flip .card-bottom, .shape-split_flip .flipper-bottom { border-radius: 0 0 clamp(10px,1.6vh,20px) clamp(10px,1.6vh,20px); }
+        .shape-split_flip .card-divider { height: 5px; box-shadow: 0 2px 8px rgba(0,0,0,1); }
+
+        /* 3. Glass Floating Card ⭐ (Hexagonal angled sides) */
+        .shape-glass_floating .flip-card {
+            clip-path: polygon(12% 0, 88% 0, 100% 15%, 100% 85%, 88% 100%, 12% 100%, 0 85%, 0 15%);
+            border-radius: 0;
         }
-        .shape-rounded .card-top, .shape-rounded .flipper-top {
-            border-radius: clamp(14px, 2.2vh, 32px) clamp(14px, 2.2vh, 32px) 0 0 !important;
-            clip-path: none !important;
+        .shape-glass_floating .card-top, .shape-glass_floating .flipper-top {
+            clip-path: polygon(12% 0, 88% 0, 100% 30%, 100% 100%, 0 100%, 0 30%);
+            border-radius: 0;
         }
-        .shape-rounded .card-bottom, .shape-rounded .flipper-bottom {
-            border-radius: 0 0 clamp(14px, 2.2vh, 32px) clamp(14px, 2.2vh, 32px) !important;
-            clip-path: none !important;
+        .shape-glass_floating .card-bottom, .shape-glass_floating .flipper-bottom {
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 88% 100%, 12% 100%, 0 70%);
+            border-radius: 0;
         }
 
-        /* 2. Octagon / 8-Corner Chamfer Cut */
+        /* 4. Capsule Card (Wide pill / stadium horizontal) */
+        .shape-capsule .flip-card { border-radius: clamp(40px,8vh,90px); }
+        .shape-capsule .card-top, .shape-capsule .flipper-top { border-radius: clamp(40px,8vh,90px) clamp(40px,8vh,90px) 0 0; }
+        .shape-capsule .card-bottom, .shape-capsule .flipper-bottom { border-radius: 0 0 clamp(40px,8vh,90px) clamp(40px,8vh,90px); }
+
+        /* 5. Ticket Card (Side notch cutouts) */
+        .shape-ticket .flip-card {
+            clip-path: polygon(
+                0 8%, 4% 0, 96% 0, 100% 8%,
+                100% 42%, 96% 50%, 100% 58%,
+                100% 92%, 96% 100%, 4% 100%, 0 92%,
+                0 58%, 4% 50%, 0 42%
+            );
+            border-radius: 0;
+        }
+        .shape-ticket .card-top, .shape-ticket .flipper-top {
+            clip-path: polygon(0 16%, 4% 0, 96% 0, 100% 16%, 100% 84%, 96% 100%, 4% 100%, 0 84%);
+            border-radius: 0;
+        }
+        .shape-ticket .card-bottom, .shape-ticket .flipper-bottom {
+            clip-path: polygon(0 0, 4% 0, 96% 0, 100% 0, 100% 84%, 96% 100%, 4% 100%, 0 84%);
+            border-radius: 0;
+        }
+
+        /* 6. Octagon Card ⭐ (Classic 8-corner chamfer) */
         .shape-octagon .flip-card {
-            clip-path: polygon(18px 0, calc(100% - 18px) 0, 100% 18px, 100% calc(100% - 18px), calc(100% - 18px) 100%, 18px 100%, 0 calc(100% - 18px), 0 18px) !important;
-            border-radius: 0 !important;
+            clip-path: polygon(18px 0, calc(100% - 18px) 0, 100% 18px, 100% calc(100% - 18px), calc(100% - 18px) 100%, 18px 100%, 0 calc(100% - 18px), 0 18px);
+            border-radius: 0;
         }
         .shape-octagon .card-top, .shape-octagon .flipper-top {
-            clip-path: polygon(18px 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%, 0 18px) !important;
-            border-radius: 0 !important;
+            clip-path: polygon(18px 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%, 0 18px);
+            border-radius: 0;
         }
         .shape-octagon .card-bottom, .shape-octagon .flipper-bottom {
-            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 18px 100%, 0 calc(100% - 18px)) !important;
-            border-radius: 0 !important;
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 18px 100%, 0 calc(100% - 18px));
+            border-radius: 0;
         }
 
-        /* 3. Squircle / Soft Pill (Ultra Curved) */
-        .shape-squircle .flip-card {
-            border-radius: clamp(32px, 5vh, 60px) !important;
-            clip-path: none !important;
+        /* 7. Fold Corner Card (Top-right folded page corner) */
+        .shape-fold_corner .flip-card {
+            clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 0 100%);
+            border-radius: 0;
         }
-        .shape-squircle .card-top, .shape-squircle .flipper-top {
-            border-radius: clamp(32px, 5vh, 60px) clamp(32px, 5vh, 60px) 0 0 !important;
-            clip-path: none !important;
+        .shape-fold_corner .card-top, .shape-fold_corner .flipper-top {
+            clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 0 100%);
+            border-radius: 0;
         }
-        .shape-squircle .card-bottom, .shape-squircle .flipper-bottom {
-            border-radius: 0 0 clamp(32px, 5vh, 60px) clamp(32px, 5vh, 60px) !important;
-            clip-path: none !important;
-        }
-
-        /* 4. Sharp Executive Rectangle */
-        .shape-sharp .flip-card {
-            border-radius: 3px !important;
-            clip-path: none !important;
-        }
-        .shape-sharp .card-top, .shape-sharp .flipper-top {
-            border-radius: 3px 3px 0 0 !important;
-            clip-path: none !important;
-        }
-        .shape-sharp .card-bottom, .shape-sharp .flipper-bottom {
-            border-radius: 0 0 3px 3px !important;
-            clip-path: none !important;
+        .shape-fold_corner .card-bottom, .shape-fold_corner .flipper-bottom {
+            border-radius: 0;
         }
 
-        /* 5. Cyber Notch Cut (Notched Cybernetic Corners) */
-        .shape-cyber .flip-card {
-            clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px)) !important;
-            border-radius: 0 !important;
+        /* 8. Neo Rounded Rectangle ⭐ (Modern 16px clean) */
+        .shape-neo_rounded .flip-card { border-radius: clamp(14px, 2vh, 24px); }
+        .shape-neo_rounded .card-top, .shape-neo_rounded .flipper-top { border-radius: clamp(14px,2vh,24px) clamp(14px,2vh,24px) 0 0; }
+        .shape-neo_rounded .card-bottom, .shape-neo_rounded .flipper-bottom { border-radius: 0 0 clamp(14px,2vh,24px) clamp(14px,2vh,24px); }
+
+        /* 9. Stadium Vertical (Extreme top/bottom pill rounding) */
+        .shape-stadium .flip-card { border-radius: clamp(60px,14vh,140px) / clamp(40px,6vh,80px); }
+        .shape-stadium .card-top, .shape-stadium .flipper-top { border-radius: clamp(60px,14vh,140px) clamp(60px,14vh,140px) 0 0 / clamp(40px,6vh,80px) clamp(40px,6vh,80px) 0 0; }
+        .shape-stadium .card-bottom, .shape-stadium .flipper-bottom { border-radius: 0 0 clamp(60px,14vh,140px) clamp(60px,14vh,140px) / 0 0 clamp(40px,6vh,80px) clamp(40px,6vh,80px); }
+
+        /* 10. Premium Bevel Card ⭐ (Asymmetric diagonal TL + BR) */
+        .shape-premium_bevel .flip-card {
+            clip-path: polygon(24px 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0 24px);
+            border-radius: 0;
         }
-        .shape-cyber .card-top, .shape-cyber .flipper-top {
-            clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 0 100%) !important;
-            border-radius: 0 !important;
+        .shape-premium_bevel .card-top, .shape-premium_bevel .flipper-top {
+            clip-path: polygon(24px 0, 100% 0, 100% 100%, 0 100%, 0 24px);
+            border-radius: 0;
         }
-        .shape-cyber .card-bottom, .shape-cyber .flipper-bottom {
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 24px 100%, 0 calc(100% - 24px)) !important;
-            border-radius: 0 !important;
+        .shape-premium_bevel .card-bottom, .shape-premium_bevel .flipper-bottom {
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%);
+            border-radius: 0;
         }
 
         .theme-custom {
@@ -995,7 +1025,7 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
 <script>
 let config = window.screensaverConfig || {};
 let themeName = config.theme || 'luxury_black_gold';
-let cardShape = config.card_shape || 'rounded';
+let cardShape = config.card_shape || 'soft_squircle';
 let hourFormat = config.format || '12';
 let showSeconds = config.show_seconds !== 'false';
 let showDate = config.show_date !== 'false';
@@ -1272,7 +1302,7 @@ class FlipClockWindow(Gtk.Window):
         custom_digit_color = config_params.get('custom_digit_color', '#ffffff').replace("'", "\\'")
         custom_accent_color = config_params.get('custom_accent_color', '#d4af37').replace("'", "\\'")
         custom_border_color = config_params.get('custom_border_color', '#333333').replace("'", "\\'")
-        card_shape = config_params.get('card_shape', 'rounded')
+        card_shape = config_params.get('card_shape', 'soft_squircle')
         
         config_script = f"<script>window.screensaverConfig = {{ monitor: '{monitor_idx}', format: '{fmt}', size: '{size}', speed: '{speed}', theme: '{theme}', card_shape: '{card_shape}', show_seconds: '{show_seconds}', show_date: '{show_date}', show_greeting: '{show_greeting}', user_name: '{user_name}', custom_credit: '{custom_credit}', digit_font: '{digit_font}', label_font: '{label_font}', custom_bg_color: '{custom_bg_color}', custom_card_color: '{custom_card_color}', custom_digit_color: '{custom_digit_color}', custom_accent_color: '{custom_accent_color}', custom_border_color: '{custom_border_color}' }};</script>"
         if "</head>" in html_content:
@@ -1861,12 +1891,17 @@ class FlipClockSettingsWindow(Gtk.Window):
         grid_d.attach(lbl_shape, 0, 4, 1, 1)
 
         self.combo_card_shape = Gtk.ComboBoxText()
-        self.combo_card_shape.append("rounded", "Classic Rounded (Default)")
-        self.combo_card_shape.append("octagon", "Octagon / 8-Corner Chamfer")
-        self.combo_card_shape.append("squircle", "Squircle / Soft Pill")
-        self.combo_card_shape.append("sharp", "Sharp Executive Rectangle")
-        self.combo_card_shape.append("cyber", "Cyber Notch Cut")
-        self.combo_card_shape.set_active_id(self.manager.config.get('card_shape', 'rounded'))
+        self.combo_card_shape.append("soft_squircle", "⭐ Soft Squircle (Apple Vision Pro)")
+        self.combo_card_shape.append("split_flip", "⭐ Split Flip Card (Classic Retro)")
+        self.combo_card_shape.append("glass_floating", "⭐ Glass Floating (Hexagonal)")
+        self.combo_card_shape.append("capsule", "Capsule Card (Wide Pill)")
+        self.combo_card_shape.append("ticket", "Ticket Card (Side Notches)")
+        self.combo_card_shape.append("octagon", "⭐ Octagon (8-Corner Chamfer)")
+        self.combo_card_shape.append("fold_corner", "Fold Corner Card")
+        self.combo_card_shape.append("neo_rounded", "⭐ Neo Rounded Rectangle")
+        self.combo_card_shape.append("stadium", "Stadium Vertical (Extreme Pill)")
+        self.combo_card_shape.append("premium_bevel", "⭐ Premium Bevel (Asymmetric)")
+        self.combo_card_shape.set_active_id(self.manager.config.get('card_shape', 'soft_squircle'))
         self.combo_card_shape.set_hexpand(True)
         grid_d.attach(self.combo_card_shape, 1, 4, 1, 1)
 
@@ -2001,7 +2036,7 @@ class FlipClockSettingsWindow(Gtk.Window):
         show_dt = 'true' if self.switch_date.get_active() else 'false'
         show_greet = 'true' if self.switch_greeting.get_active() else 'false'
         uname = self.entry_name.get_text().strip()
-        card_shape = self.combo_card_shape.get_active_id() or "rounded"
+        card_shape = self.combo_card_shape.get_active_id() or "soft_squircle"
 
         dfont = self.combo_digit_font.get_active_id() or "Cinzel"
         lfont = self.combo_label_font.get_active_id() or "Cinzel"
@@ -2039,7 +2074,7 @@ class FlipClockSettingsWindow(Gtk.Window):
         self.switch_date.set_active(str(self.manager.config.get('show_date', 'true')).lower() == 'true')
         self.switch_greeting.set_active(str(self.manager.config.get('show_greeting', 'true')).lower() == 'true')
         self.entry_name.set_text(self.manager.config.get('user_name', ''))
-        self.combo_card_shape.set_active_id(self.manager.config.get('card_shape', 'rounded'))
+        self.combo_card_shape.set_active_id(self.manager.config.get('card_shape', 'soft_squircle'))
         
         try:
             sz = float(self.manager.config.get('clock_size', '1.0'))

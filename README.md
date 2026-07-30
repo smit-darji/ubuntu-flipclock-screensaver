@@ -7,58 +7,112 @@
 
 ---
 
-## 📷 Themes & Visual Previews
+## 📷 Default Theme Preview — Luxury Black Gold + Soft Squircle
 
-A native, high-fidelity, multi-monitor flip clock screensaver for Ubuntu Linux. It brings a vintage airport split-flap style retro clock to your workstation, rendering across all connected displays simultaneously with smooth 3D CSS animations, dynamic time-based greetings, and 21 executive color theme collections.
+A native, high-fidelity, multi-monitor flip clock screensaver for Ubuntu Linux. It brings a vintage airport split-flap style retro clock to your workstation, rendering across all connected displays simultaneously with smooth 3D CSS animations, dynamic time-based greetings, and **24 premium color themes** with **10 card shape designs**.
 
-| Theme Name | Visual Style |
-|---|---|
-| **1. 🥇 Luxury Black Gold** *(Executive Rolex / Bentley)* | Pitch black background `#000000`, gold accent `#D4AF37` highlights, Cinzel typography |
-| **2. 🥈 Obsidian Titanium** *(Apple Pro / Tesla)* | Obsidian dark plates `#050505`, titanium gray `#AEB5BD` border highlights, Inter font |
-| **3. 🥉 Dark Emerald** *(Luxury Finance)* | Rich deep emerald cards `#122118`, vivid green `#00C853` accents, Cinzel font |
-| **4. 🌲 Forest Green Executive** | Deep forest green `#08110A` background & green `#4CAF50` accents, Inter font |
-| **5. 🏎️ British Racing Green** *(Aston Martin)* | Dark racing green cards `#0E2017` with metallic green `#0B8F57` accents, Cinzel font |
-| **6. 💎 Ruby Executive** *(Royal Red)* | Crimson ruby dark plates `#221515`, vivid red `#D32F2F` highlights, Outfit font |
-| **7. 🍷 Burgundy Prestige** *(Wine & Leather)* | Rich deep burgundy background `#120808` & wine `#8E2430` cards, Cinzel font |
-| **8. 🏎️ Crimson Royal** *(Ferrari Dashboard)* | Matte crimson red cards `#231313` with red `#C62828` trim, Outfit font |
-| **9. 🚙 Royal Sapphire** *(BMW Cockpit)* | Deep navy blue cards `#162033` with vibrant sapphire `#2E7DFF` accents, Orbitron font |
-| **10. ⚓ Midnight Navy** | Pitch dark navy cards `#182336` with ice blue `#4F8BFF` digits, Inter font |
-| **11. ❄️ Arctic Ice** | Dark arctic plates `#172126` with cyan ice `#38D9FF` digits, Roboto font |
-| **12. 🌊 Ocean Cyan** | Deep ocean cyan `#172B33` with bright cyan `#00BCD4` accents, Orbitron font |
-| **13. 👑 Royal Purple** | Imperial purple `#1F1930` with neon purple `#8E44FF` accents, Outfit font |
-| **14. 🔮 Amethyst Elite** *(Royal Violet)* | Deep amethyst violet background `#0C0712` & `#A259FF` digits, Cinzel font |
-| **15. 🪙 Platinum Silver** | Ultra-clean platinum silver `#262626` cards & silver `#C7CCD4` digits, Inter font |
-| **16. ⚙️ Graphite Gray** | Executive graphite gray `#2A2A2A` cards & metallic gray `#9E9E9E` accents, Roboto font |
-| **17. 🧱 Copper Elite** | Deep metallic copper `#201A18` cards & warm bronze `#B87333` accents, Cinzel font |
-| **18. 🌹 Rose Gold** | Soft rose gold `#241C1B` cards & blush gold `#E8A87C` accents, Outfit font |
-| **19. 🥂 Champagne Gold** | Refined champagne gold `#24221D` cards & soft gold `#E5C07B` accents, Cinzel font |
-| **20. ✨ Matte Black Diamond** | Ultra-minimal black diamond `#181818` plates with crisp `#F0F0F0` digits, Inter font |
-| **21. 📜 Classic Retro** *(Fliqlo Airport)* | Classic vintage split-flap airport flip clock, charcoal plates, Inter font |
-| **22. ☀️ Minimalist Light** | Bright clean light theme `#F1F5F9` with dark slate digits `#0F172A`, Roboto font |
-| **23. 🎨 Custom Theme** | Full custom theme builder with live color pickers & font selection |
+![Default Theme — Luxury Black Gold](screenshots/theme_luxury_black_gold.png)
+
+> **Default Premium Setup:** Luxury Black Gold theme • Soft Squircle card shape • Cinzel typography • 12-hour format with seconds
+
+---
+
+## 🎨 24 Premium Color Themes
+
+### 🏆 Executive Dark & Gold Collection
+
+| Luxury Black Gold | Obsidian Titanium | Champagne Gold |
+|:---:|:---:|:---:|
+| ![Luxury Black Gold](screenshots/theme_luxury_black_gold.png) | ![Obsidian Titanium](screenshots/theme_obsidian_titanium.png) | ![Champagne Gold](screenshots/theme_champagne_gold.png) |
+
+| Platinum Silver | Matte Black Diamond | Carbon Fiber |
+|:---:|:---:|:---:|
+| ![Platinum Silver](screenshots/theme_platinum_silver.png) | ![Matte Black Diamond](screenshots/theme_matte_black_diamond.png) | ![Carbon Fiber](screenshots/theme_carbon_fiber.png) |
+
+### 🌊 Ocean, Ice & Blue Collection
+
+| Arctic Ice | Ocean Cyan | Midnight Blue |
+|:---:|:---:|:---:|
+| ![Arctic Ice](screenshots/theme_arctic_ice.png) | ![Ocean Cyan](screenshots/theme_ocean_cyan.png) | ![Midnight Blue](screenshots/theme_midnight_blue.png) |
+
+| Electric Blue | Deep Space Nebula | Aurora Borealis |
+|:---:|:---:|:---:|
+| ![Electric Blue](screenshots/theme_electric_blue.png) | ![Deep Space Nebula](screenshots/theme_deep_space_nebula.png) | ![Aurora Borealis](screenshots/theme_aurora_borealis.png) |
+
+### 🔥 Warm & Vibrant Collection
+
+| Rose Gold Blush | Sunset Gradient | Volcanic Ember |
+|:---:|:---:|:---:|
+| ![Rose Gold Blush](screenshots/theme_rose_gold_blush.png) | ![Sunset Gradient](screenshots/theme_sunset_gradient.png) | ![Volcanic Ember](screenshots/theme_volcanic_ember.png) |
+
+| Ivory Cream | Royal Purple | Neon Cyberpunk |
+|:---:|:---:|:---:|
+| ![Ivory Cream](screenshots/theme_ivory_cream.png) | ![Royal Purple](screenshots/theme_royal_purple.png) | ![Neon Cyberpunk](screenshots/theme_neon_cyberpunk.png) |
+
+### 🌿 Nature & Code Collection
+
+| Forest Emerald | Classic Retro | Liquid Glass |
+|:---:|:---:|:---:|
+| ![Forest Emerald](screenshots/theme_forest_emerald.png) | ![Classic Retro](screenshots/theme_classic_retro.png) | ![Liquid Glass](screenshots/theme_liquid_glass.png) |
+
+| Monokai Dark | Solarized Dark | Dracula |
+|:---:|:---:|:---:|
+| ![Monokai Dark](screenshots/theme_monokai_dark.png) | ![Solarized Dark](screenshots/theme_solarized_dark.png) | ![Dracula](screenshots/theme_dracula.png) |
+
+---
+
+## 🃏 10 Premium Card Shape Designs
+
+Choose from 10 unique flip card shapes — from Apple Vision Pro–style squircles to cybernetic notches and hexagonal glass:
+
+| ⭐ Soft Squircle | ⭐ Split Flip Card | ⭐ Glass Floating |
+|:---:|:---:|:---:|
+| ![Soft Squircle](screenshots/shape_soft_squircle.png) | ![Split Flip](screenshots/shape_split_flip.png) | ![Glass Floating](screenshots/shape_glass_floating.png) |
+| *Apple Vision Pro style (28px radius)* | *Classic retro airport flip* | *Hexagonal angled sides* |
+
+| Capsule Card | Ticket Card | ⭐ Octagon |
+|:---:|:---:|:---:|
+| ![Capsule](screenshots/shape_capsule.png) | ![Ticket](screenshots/shape_ticket.png) | ![Octagon](screenshots/shape_octagon.png) |
+| *Wide pill / stadium horizontal* | *Side notch cutouts* | *8-corner chamfer cut* |
+
+| Fold Corner | ⭐ Neo Rounded | Stadium Vertical |
+|:---:|:---:|:---:|
+| ![Fold Corner](screenshots/shape_fold_corner.png) | ![Neo Rounded](screenshots/shape_neo_rounded.png) | ![Stadium](screenshots/shape_stadium.png) |
+| *Folded page corner* | *Modern 16px clean* | *Extreme top/bottom pill* |
+
+| ⭐ Premium Bevel |
+|:---:|
+| ![Premium Bevel](screenshots/shape_premium_bevel.png) |
+| *Asymmetric diagonal TL + BR cut* |
 
 ---
 
 ## ✨ Key Features
 
 * **Vintage Split-Flap Clock UI**: Fliqlo-style charcoal cards, subtle border highlights, glassmorphic capsule badges, and realistic 3D card flip shadows.
-* **Flip Card Corner Shapes & Designs**:
-  - **Octagon / 8-Corner Chamfer** *(Custom 8-corner chamfer cut)*
-  - **Squircle / Soft Pill** *(Ultra smooth curved luxury pill edges)*
-  - **Sharp Executive** *(Clean sharp architectural rectangle)*
-  - **Cyber Notch Cut** *(Futuristic cybernetic notched corners)*
-  - **Classic Rounded** *(Standard Fliqlo rounded corners)*
-* **22 Executive Luxury Dark Themes**: Rolex Black Gold, Obsidian Titanium, Dark Emerald, Racing Green, Ruby Executive, Royal Sapphire, Amethyst Elite, and custom palette fine-tuning.
+* **24 Premium Color Themes**: Luxury Black Gold, Obsidian Titanium, Arctic Ice, Liquid Glass, Neon Cyberpunk, Dracula, Monokai Dark, Solarized Dark, and more — plus a fully custom theme builder with live color pickers.
+* **10 Premium Flip Card Shapes**:
+  - ⭐ **Soft Squircle** — Apple Vision Pro ultra-smooth 28px corners *(Default)*
+  - ⭐ **Split Flip Card** — Classic retro airport flip with thick divider
+  - ⭐ **Glass Floating** — Hexagonal angled sides
+  - **Capsule Card** — Wide pill / horizontal stadium shape
+  - **Ticket Card** — Side notch cutouts for vintage ticket look
+  - ⭐ **Octagon** — Classic 8-corner chamfer cut
+  - **Fold Corner** — Top-right folded page corner effect
+  - ⭐ **Neo Rounded Rectangle** — Modern clean 16px radius
+  - **Stadium Vertical** — Extreme top/bottom pill rounding
+  - ⭐ **Premium Bevel** — Asymmetric diagonal cut (top-left + bottom-right)
 * **Executive Glassmorphic Greeting Capsule**:
   - Time-of-day greetings (`GOOD MORNING`, `GOOD AFTERNOON`, `GOOD EVENING`, `GOOD NIGHT`) enclosed inside a translucent glass capsule badge with gold `✦` sparkles.
   - Personalize with your custom name (e.g. `GOOD MORNING, SMIT`).
 * **Multi-Segment Split Date & Weekday Badge**:
   - Highlighted weekday segment (`WEDNESDAY`), glass number card (`30`), and crisp month/year display (`JULY 2026`).
 * **Multi-Monitor & Aspect-Ratio Scaling**: Automatically detects all displays and scales seamlessly across 4K, ultra-wide, standard, and vertical portrait screens.
+* **18 Premium Fonts**: Audiowide, Teko, Share Tech Mono, VT323, Chakra Petch, Michroma, Cinzel, Inter, Outfit, Orbitron, Roboto, and more.
 * **Modern Executive GTK Settings Application**:
-  - **Active Theme Preset Selector** with side-by-side multi-column grid dropdown
-  - **Flip Card Shape / Design Selector** (Octagon, Squircle, Sharp, Cyber, Rounded)
-  - **18 Special Clock & Executive Fonts** (Audiowide, Teko, Share Tech Mono, VT323, Chakra Petch, Michroma, Cinzel, Inter, etc.)
+  - **Active Theme Preset Selector** with side-by-side liquid glass dropdown
+  - **Flip Card Shape / Design Selector** (10 premium shapes)
+  - **18 Special Clock & Executive Fonts** with separate digit & label font selection
   - **Display Time Greeting** toggle & **Custom User Name** input
   - **Time Format** (12-Hour AM/PM vs 24-Hour)
   - **Seconds Display** toggle & **Date Badge** toggle
@@ -114,16 +168,19 @@ flipclock --settings
 ### Configuration File (`~/.config/flipclock/flipclock.conf`)
 ```ini
 [Settings]
-idle_timeout = 60         # Idle time in seconds before screensaver starts (e.g., 60 = 1 minute)
-hour_format = 12           # Time format: 12 (AM/PM) or 24 (24-Hour)
-clock_size = 1.0           # Scaling factor (0.5 to 2.0)
-animation_speed = 500      # Flip transition duration in ms
-monitors = all             # Targets: "all" or specific monitor indices (e.g. "0,1")
-theme = luxury_black_gold  # Active theme preset ID
-show_seconds = true        # Toggle seconds flip card visibility
-show_date = true           # Toggle date badge visibility
-show_greeting = true       # Toggle time-based greeting visibility
-user_name = Smit           # Custom name for greeting (e.g. GOOD MORNING, SMIT)
+idle_timeout = 60              # Idle time in seconds (60 = 1 minute)
+hour_format = 12               # 12 (AM/PM) or 24 (24-Hour)
+clock_size = 1.0               # Scale factor (0.5 to 2.0)
+animation_speed = 500          # Flip animation duration in ms
+monitors = all                 # "all" or specific index (e.g. "0,1")
+theme = luxury_black_gold      # Active theme preset ID
+card_shape = soft_squircle     # Card shape (10 options)
+show_seconds = true            # Toggle seconds card
+show_date = true               # Toggle date badge
+show_greeting = true           # Toggle greeting capsule
+user_name = Smit               # Custom name for greeting
+digit_font = Cinzel            # Digit font family
+label_font = Cinzel            # Label font family
 custom_credit = Customized by Antigravity AI
 ```
 
