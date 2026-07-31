@@ -27,12 +27,7 @@ jobs:
       - name: Detect version changes & update documentation
         run: |
           NEW_VERSION=$(grep -o 'APP_VERSION = "[^"]*"' flipclock.py | cut -d'"' -f2)
-          # Get parent commit version of flipclock.py safely
-          if git rev-parse HEAD~1 >/dev/null 2>&1; then
-            OLD_VERSION=$(git show HEAD~1:flipclock.py | grep -o 'APP_VERSION = "[^"]*"' | cut -d'"' -f2)
-          else
-            OLD_VERSION=""
-          fi
+          OLD_VERSION=$(grep -o 'Version-v[0-9.]*-blue' README.md | sed -E 's/Version-v([0-9.]+)-blue/\1/')
           
           echo "Old Version: $OLD_VERSION"
           echo "New Version: $NEW_VERSION"
@@ -40,9 +35,6 @@ jobs:
           if [ -n "$OLD_VERSION" ] && [ "$OLD_VERSION" != "$NEW_VERSION" ]; then
             echo "Updating version references in README.md from $OLD_VERSION to $NEW_VERSION..."
             sed -i "s/$OLD_VERSION/$NEW_VERSION/g" README.md
-            
-            # If build_deb.sh doesn't match the new version, update it as well
-            sed -i "s/PKG_VER=\"$OLD_VERSION\"/PKG_VER=\"$NEW_VERSION\"/g" build_deb.sh
           fi
 
       - name: Build Debian package

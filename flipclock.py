@@ -26,7 +26,7 @@ except ValueError:
         sys.exit(1)
 from gi.repository import Gtk, Gdk, WebKit2, GLib, GdkPixbuf
 
-APP_VERSION = "2.5.2"
+APP_VERSION = "2.5.3"
 
 THEME_CATEGORIES = {
     "liquid_glass": {
@@ -1772,8 +1772,8 @@ class FlipClockSettingsWindow(Gtk.Window):
         sec_fonts.pack_start(lbl_sec_f, False, False, 0)
 
         grid_f = Gtk.Grid()
-        grid_f.set_column_spacing(16)
-        grid_f.set_row_spacing(12)
+        grid_f.set_column_spacing(24)
+        grid_f.set_row_spacing(6)
         sec_fonts.pack_start(grid_f, False, False, 0)
 
         lbl_dfont = Gtk.Label(label="Clock Digits Font:")
@@ -1811,13 +1811,13 @@ class FlipClockSettingsWindow(Gtk.Window):
         self.combo_digit_font.set_active_id(cur_dfont if any(cur_dfont == f[0] for f in font_options) else "Cinzel")
         self.combo_digit_font.set_hexpand(True)
         self.combo_digit_font.set_valign(Gtk.Align.CENTER)
-        grid_f.attach(self.combo_digit_font, 1, 0, 1, 1)
+        grid_f.attach(self.combo_digit_font, 0, 1, 1, 1)
 
         lbl_lfont = Gtk.Label(label="Badges & Greetings Font:")
         lbl_lfont.get_style_context().add_class("field-label")
         lbl_lfont.set_xalign(0)
         lbl_lfont.set_valign(Gtk.Align.CENTER)
-        grid_f.attach(lbl_lfont, 0, 1, 1, 1)
+        grid_f.attach(lbl_lfont, 1, 0, 1, 1)
 
         self.combo_label_font = Gtk.ComboBoxText()
         for f_id, f_label in font_options:

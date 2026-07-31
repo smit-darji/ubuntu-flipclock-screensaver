@@ -5,7 +5,7 @@ set -e
 
 # Package name and version
 PKG_NAME="flipclock-screensaver"
-PKG_VER="2.5.2"
+PKG_VER=$(grep -o 'APP_VERSION = "[^"]*"' flipclock.py | cut -d'"' -f2)
 PKG_DIR="flipclock-build"
 
 echo "Creating Debian package structure..."
@@ -14,7 +14,6 @@ find . -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true
 find . -name "*.pyc" -delete 2>/dev/null || true
 mkdir -p "$PKG_DIR/DEBIAN"
 mkdir -p "$PKG_DIR/usr/share/flipclock"
-mkdir -p "$PKG_DIR/usr/local/share/flipclock"
 mkdir -p "$PKG_DIR/usr/share/applications"
 mkdir -p "$PKG_DIR/etc/xdg/autostart"
 
@@ -25,19 +24,15 @@ mkdir -p "$PKG_DIR/usr/local/bin"
 
 # Copy application files
 cp clock.html "$PKG_DIR/usr/share/flipclock/"
-cp clock.html "$PKG_DIR/usr/local/share/flipclock/"
 if [ -f "index.html" ]; then
     cp index.html "$PKG_DIR/usr/share/flipclock/"
-    cp index.html "$PKG_DIR/usr/local/share/flipclock/"
 else
     cp clock.html "$PKG_DIR/usr/share/flipclock/index.html"
-    cp clock.html "$PKG_DIR/usr/local/share/flipclock/index.html"
 fi
 cp flipclock.py "$PKG_DIR/usr/share/flipclock/"
 if [ -f "daemon.py" ]; then cp daemon.py "$PKG_DIR/usr/share/flipclock/"; fi
 if [ -f "screensaver.py" ]; then cp screensaver.py "$PKG_DIR/usr/share/flipclock/"; fi
-if [ -d "assets" ]; then cp -r assets "$PKG_DIR/usr/share/flipclock/"; cp -r assets "$PKG_DIR/usr/local/share/flipclock/"; fi
-if [ -d "screenshots" ]; then cp -r screenshots "$PKG_DIR/usr/share/flipclock/"; cp -r screenshots "$PKG_DIR/usr/local/share/flipclock/"; fi
+if [ -d "assets" ]; then cp -r assets "$PKG_DIR/usr/share/flipclock/"; fi
 
 if [ -f "flipclock.png" ]; then
     cp flipclock.png "$PKG_DIR/usr/share/pixmaps/flipclock.png"
