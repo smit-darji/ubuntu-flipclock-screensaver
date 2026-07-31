@@ -9,10 +9,10 @@ daemon.log
 
 # Git and package backups
 .git_corrupted_backup/
-flipclock-screensaver-backup.deb
-flipclock-screensaver-working.deb
-flipclock-screensaver_*.deb
-flipclock-screensaver_*.deb.bak
+/flipclock-screensaver-backup.deb
+/flipclock-screensaver-working.deb
+/flipclock-screensaver_*.deb
+/flipclock-screensaver_*.deb.bak
 
 # Duplicate screenshots in assets
 assets/settings_window.png

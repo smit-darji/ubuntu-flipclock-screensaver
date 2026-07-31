@@ -170,10 +170,10 @@ find "$PKG_DIR" -type f -not -path "$PKG_DIR/DEBIAN/*" -exec chmod 644 {} \;
 chmod 755 "$PKG_DIR/usr/share/flipclock/flipclock.py"
 echo "Building Debian package using dpkg-deb..."
 mkdir -p releases
-dpkg-deb --build "$PKG_DIR" "releases/${PKG_NAME}_${PKG_VER}_all.deb"
-cp -f "releases/${PKG_NAME}_${PKG_VER}_all.deb" "releases/${PKG_NAME}.deb"
+dpkg-deb --build "$PKG_DIR" "releases/${PKG_NAME}_${PKG_VER}.deb"
+cp -f "releases/${PKG_NAME}_${PKG_VER}.deb" "releases/${PKG_NAME}.deb"
 
 echo "Cleaning up temporary files..."
 rm -rf "$PKG_DIR"
 
-echo "Debian package created: releases/${PKG_NAME}_${PKG_VER}_all.deb -> releases/${PKG_NAME}.deb"
+echo "Debian package created: releases/${PKG_NAME}_${PKG_VER}.deb -> releases/${PKG_NAME}.deb"

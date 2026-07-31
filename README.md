@@ -1,9 +1,9 @@
 # Premium Fliqlo-Style Flip Clock Screensaver for Ubuntu
 
 [![Platform](https://img.shields.io/badge/Platform-Ubuntu%2020.04%20%7C%2022.04%20%7C%2024.04-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)](https://ubuntu.com)
-[![Version](https://img.shields.io/badge/Version-v2.5.1-blue?style=for-the-badge)](releases/flipclock-screensaver_2.5.1_all.deb)
+[![Version](https://img.shields.io/badge/Version-v2.5.1-blue?style=for-the-badge)](releases/flipclock-screensaver_2.5.1.deb)
 [![Download Latest .deb](https://img.shields.io/badge/Download-flipclock--screensaver.deb-10B981?style=for-the-badge&logo=debian&logoColor=white)](https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver.deb)
-[![Archived Release v2.5.1](https://img.shields.io/badge/Archive-v2.5.1.deb-6366F1?style=for-the-badge&logo=debian&logoColor=white)](https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_2.5.1_all.deb)
+[![Archived Release v2.5.1](https://img.shields.io/badge/Archive-v2.5.1.deb-6366F1?style=for-the-badge&logo=debian&logoColor=white)](https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_2.5.1.deb)
 [![Language](https://img.shields.io/badge/Language-Python%203%20%2B%20GTK3-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-MIT-6D28D9?style=for-the-badge)](LICENSE)
 
@@ -28,7 +28,7 @@ Click the buttons below to download the pre-compiled `.deb` packages directly:
     <img src="https://img.shields.io/badge/DOWNLOAD-Latest%20.deb%20Package-10B981?style=for-the-badge&logo=debian&logoColor=white" height="48" alt="Download Latest .deb Package">
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_2.5.1_all.deb" target="_blank">
+  <a href="https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_2.5.1.deb" target="_blank">
     <img src="https://img.shields.io/badge/DOWNLOAD-Versioned%20v2.5.1%20.deb-6366F1?style=for-the-badge&logo=debian&logoColor=white" height="48" alt="Download Versioned .deb Package">
   </a>
 </p>
@@ -214,11 +214,11 @@ sudo apt install ./flipclock-screensaver.deb
 #### Option B: Install Versioned Release Archive (`v2.5.1`)
 ```bash
 # 1. Download version v2.5.1 from the releases/ directory
-wget https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_2.5.1_all.deb
+wget https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_2.5.1.deb
 
 # 2. Install versioned package via apt
 sudo apt update
-sudo apt install ./flipclock-screensaver_2.5.1_all.deb
+sudo apt install ./flipclock-screensaver_2.5.1.deb
 ```
 
 ---
@@ -291,7 +291,7 @@ To build a fresh `.deb` package file locally:
 chmod +x build_deb.sh
 ./build_deb.sh
 ```
-This generates `flipclock-screensaver.deb` (and `flipclock-screensaver_2.5.1_all.deb`) in the project root directory.
+This generates `flipclock-screensaver.deb` (and `flipclock-screensaver_2.5.1.deb`) in the `releases/` directory.
 
 ---
 
