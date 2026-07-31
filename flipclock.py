@@ -26,7 +26,7 @@ except ValueError:
         sys.exit(1)
 from gi.repository import Gtk, Gdk, WebKit2, GLib, GdkPixbuf
 
-APP_VERSION = "2.4.5"
+APP_VERSION = "2.5.1"
 
 THEME_CATEGORIES = {
     "liquid_glass": {
@@ -1023,9 +1023,8 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
 </div>
 
 <script>
-let rawShape = config.card_shape || 'squircle';
-let legacyMap = { 'soft_squircle': 'squircle', 'neo_rounded': 'rounded_rectangle', 'glass_floating': 'card', 'fold_corner': 'notched', 'split_flip': 'rectangle', 'premium_bevel': 'beveled' };
-let cardShape = legacyMap[rawShape] || rawShape;
+let config = window.screensaverConfig || {};
+let themeName = config.theme || 'classic_retro';
 let rawShape = config.card_shape || 'squircle';
 let legacyMap = { 'soft_squircle': 'squircle', 'neo_rounded': 'rounded_rectangle', 'glass_floating': 'card', 'fold_corner': 'notched', 'split_flip': 'rectangle', 'premium_bevel': 'beveled' };
 let cardShape = legacyMap[rawShape] || rawShape;
@@ -1057,15 +1056,17 @@ function applyConfiguration() {
     document.body.className = `theme-${themeName}`;
 
     const scene = document.getElementById('scene');
-    if (scene) scene.className = `shape-${cardShape}`;
-    if (!showSeconds) scene.classList.add('hide-seconds');
-    else scene.classList.remove('hide-seconds');
+    if (scene) {
+        scene.className = `shape-${cardShape}`;
+        if (!showSeconds) scene.classList.add('hide-seconds');
+        else scene.classList.remove('hide-seconds');
 
-    if (!showDate) scene.classList.add('hide-date');
-    else scene.classList.remove('hide-date');
+        if (!showDate) scene.classList.add('hide-date');
+        else scene.classList.remove('hide-date');
 
-    if (!showGreeting) scene.classList.add('hide-greeting');
-    else scene.classList.remove('hide-greeting');
+        if (!showGreeting) scene.classList.add('hide-greeting');
+        else scene.classList.remove('hide-greeting');
+    }
 
     const container = document.getElementById('clock-container');
     if (container && clockScale !== 1.0) {
@@ -1219,6 +1220,27 @@ def get_html_content(html_path_arg=None):
     return DEFAULT_HTML_CONTENT, fallback_dir
 
 
+def get_asset_image_path(filename):
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    candidates = [
+        os.path.join(script_dir, "screenshots", filename),
+        os.path.join(script_dir, "assets", filename),
+        os.path.join(script_dir, filename),
+        os.path.join("/usr/share/flipclock/screenshots", filename),
+        os.path.join("/usr/share/flipclock/assets", filename),
+        os.path.join("/usr/share/flipclock", filename),
+        os.path.join("/usr/local/share/flipclock/screenshots", filename),
+        os.path.join("/usr/local/share/flipclock/assets", filename),
+        os.path.join("/usr/local/share/flipclock", filename),
+        os.path.join(os.getcwd(), "screenshots", filename),
+        os.path.join(os.getcwd(), "assets", filename),
+    ]
+    for c in candidates:
+        if c and os.path.exists(c):
+            return c
+    return None
+
+
 class FlipClockWindow(Gtk.Window):
     """Fullscreen GTK window hosting the WebKit flip clock."""
     def __init__(self, html_path, monitor_idx, config_params):
@@ -1318,7 +1340,7 @@ class FlipClockWindow(Gtk.Window):
         base_uri = "file://" + base_dir + "/"
         self.webview.load_html(html_content, base_uri)
         
-        self.connect("destroy", Gtk.main_quit)
+        self.connect("destroy", lambda w: Gtk.main_quit() if Gtk.main_level() > 0 else None)
         self.connect("key-press-event", self.on_key_event)
         self.connect("button-press-event", self.on_input_event)
         self.connect("motion-notify-event", self.on_motion_event)
@@ -1486,19 +1508,19 @@ class FlipClockSettingsWindow(Gtk.Window):
             border: 1px solid rgba(212, 175, 55, 0.7);
             border-radius: 10px;
             box-shadow: none;
-            min-height: 48px;
-            min-width: 320px;
+            min-height: 46px;
+            min-width: 260px;
         }
         combobox button {
             background-color: transparent;
             background-image: none;
             color: #ffffff;
             border: none;
-            padding: 0 20px;
-            font-size: 16px;
-            font-weight: 700;
+            padding: 0 16px;
+            font-size: 15px;
+            font-weight: 600;
             box-shadow: none;
-            min-height: 46px;
+            min-height: 44px;
         }
         combobox button:hover {
             background-color: #2e2e38;
@@ -1506,27 +1528,27 @@ class FlipClockSettingsWindow(Gtk.Window):
         combobox cellview {
             color: #ffffff;
             background-color: transparent;
-            font-weight: 700;
-            font-size: 16px;
+            font-weight: 600;
+            font-size: 15px;
         }
         combobox arrow {
             color: #d4af37;
-            min-width: 18px;
-            min-height: 18px;
+            min-width: 16px;
+            min-height: 16px;
         }
         menu {
             background-color: #16161b;
             border: 1px solid #d4af37;
             border-radius: 10px;
-            padding: 8px 0px;
+            padding: 6px 0px;
             color: #ffffff;
         }
         menuitem {
             color: #f4f4f5;
             background-color: #16161b;
-            padding: 12px 22px;
+            padding: 10px 18px;
             font-weight: 600;
-            font-size: 16px;
+            font-size: 15px;
         }
         menuitem:hover, menuitem:selected {
             background-color: #d4af37;
@@ -1691,6 +1713,12 @@ class FlipClockSettingsWindow(Gtk.Window):
         self.combo_theme.set_hexpand(True)
         self.combo_theme.connect("changed", self.on_theme_combo_changed)
         grid_t.attach(self.combo_theme, 1, 0, 1, 1)
+
+        self.img_theme_preview = Gtk.Image()
+        self.img_theme_preview.set_margin_top(8)
+        self.img_theme_preview.set_margin_bottom(8)
+        self.img_theme_preview.set_halign(Gtk.Align.CENTER)
+        sec_theme.pack_start(self.img_theme_preview, False, False, 0)
 
         content_vbox.pack_start(sec_theme, False, False, 0)
 
@@ -1966,11 +1994,19 @@ class FlipClockSettingsWindow(Gtk.Window):
         if cur_shape in legacy_map:
             cur_shape = legacy_map[cur_shape]
 
+        self.combo_card_shape.set_wrap_width(2)
         self.combo_card_shape.set_active_id(cur_shape)
         self.combo_card_shape.set_hexpand(True)
         self.combo_card_shape.set_valign(Gtk.Align.CENTER)
-        self.combo_card_shape.connect("changed", lambda w: self.update_config_from_ui() or self.manager.save_config())
+        self.combo_card_shape.connect("changed", self.on_shape_combo_changed)
         grid_d.attach(self.combo_card_shape, 1, 4, 1, 1)
+
+        self.img_shape_preview = Gtk.Image()
+        self.img_shape_preview.set_margin_top(8)
+        self.img_shape_preview.set_margin_bottom(8)
+        self.img_shape_preview.set_halign(Gtk.Align.CENTER)
+        sec_disp.pack_start(self.img_shape_preview, False, False, 0)
+        self.on_shape_combo_changed(self.combo_card_shape)
 
         content_vbox.pack_start(sec_disp, False, False, 0)
 
@@ -2046,7 +2082,7 @@ class FlipClockSettingsWindow(Gtk.Window):
 
         main_box.pack_start(action_box, False, False, 0)
 
-        self.connect("destroy", Gtk.main_quit)
+        self.connect("destroy", lambda w: Gtk.main_quit() if Gtk.main_level() > 0 else None)
         self.show_all()
 
     def on_theme_combo_changed(self, widget):
@@ -2066,6 +2102,31 @@ class FlipClockSettingsWindow(Gtk.Window):
                 self.combo_digit_font.set_active_id(preset['digit_font'])
             if hasattr(self, 'combo_label_font'):
                 self.combo_label_font.set_active_id(preset['label_font'])
+
+        if t_id and hasattr(self, 'img_theme_preview'):
+            img_path = get_asset_image_path(f"theme_{t_id}.png")
+            if img_path:
+                try:
+                    pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(img_path, 360, 200, True)
+                    self.img_theme_preview.set_from_pixbuf(pixbuf)
+                    self.img_theme_preview.show()
+                except Exception:
+                    pass
+
+    def on_shape_combo_changed(self, widget):
+        s_id = widget.get_active_id()
+        if s_id and hasattr(self, 'img_shape_preview'):
+            img_path = get_asset_image_path(f"shape_{s_id}.png")
+            if img_path:
+                try:
+                    pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(img_path, 360, 200, True)
+                    self.img_shape_preview.set_from_pixbuf(pixbuf)
+                    self.img_shape_preview.show()
+                except Exception:
+                    pass
+        if hasattr(self, 'combo_timeout'):
+            self.update_config_from_ui()
+            self.manager.save_config()
 
     def get_coordinating_palette(self, bg_hex):
         best_match = None
@@ -2334,6 +2395,7 @@ class FlipClockManager:
             'animation_speed': 500,
             'monitors': 'all',
             'theme': 'luxury_black_gold',
+            'card_shape': 'squircle',
             'show_seconds': 'true',
             'show_date': 'true',
             'show_greeting': 'true',
@@ -2366,6 +2428,7 @@ class FlipClockManager:
                     self.config['animation_speed'] = settings.getint('animation_speed', 500)
                     self.config['monitors'] = settings.get('monitors', 'all')
                     self.config['theme'] = settings.get('theme', 'luxury_black_gold')
+                    self.config['card_shape'] = settings.get('card_shape', 'squircle')
                     self.config['show_seconds'] = settings.get('show_seconds', 'true')
                     self.config['show_date'] = settings.get('show_date', 'true')
                     self.config['show_greeting'] = settings.get('show_greeting', 'true')
@@ -2393,6 +2456,7 @@ class FlipClockManager:
             'animation_speed': str(self.config.get('animation_speed', 500)),
             'monitors': str(self.config.get('monitors', 'all')),
             'theme': str(self.config.get('theme', 'luxury_black_gold')),
+            'card_shape': str(self.config.get('card_shape', 'squircle')),
             'show_seconds': str(self.config.get('show_seconds', 'true')),
             'show_date': str(self.config.get('show_date', 'true')),
             'show_greeting': str(self.config.get('show_greeting', 'true')),
@@ -2421,6 +2485,7 @@ class FlipClockManager:
             'animation_speed': 500,
             'monitors': 'all',
             'theme': 'luxury_black_gold',
+            'card_shape': 'squircle',
             'show_seconds': 'true',
             'show_date': 'true',
             'show_greeting': 'true',

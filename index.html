@@ -133,6 +133,12 @@
             transition: all 0.4s ease;
         }
 
+        /* ═══ FLIP CARD WRAPPER (Prevents AM/PM clipping) ═══ */
+        .flip-card-wrapper {
+            position: relative;
+            flex-shrink: 0;
+        }
+
         .card-half {
             position: absolute;
             left: 0;
@@ -340,6 +346,61 @@
             padding: clamp(3px, 0.5vh, 8px) clamp(8px, 1.2vh, 18px);
             box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
             transition: all 0.4s ease;
+        }
+
+        /* Shape-specific overrides for AM/PM badge placement */
+        .shape-diamond #ampm-badge,
+        .shape-rhombus #ampm-badge {
+            bottom: clamp(55px, 12vh, 120px);
+            right: clamp(55px, 12vh, 120px);
+        }
+        .shape-circle #ampm-badge,
+        .shape-pill #ampm-badge,
+        .shape-stadium #ampm-badge {
+            bottom: clamp(22px, 4.5vh, 50px);
+            right: clamp(22px, 4.5vh, 50px);
+        }
+        .shape-oval #ampm-badge {
+            bottom: clamp(25px, 5vh, 60px);
+            right: clamp(25px, 5vh, 60px);
+        }
+        .shape-octagon #ampm-badge,
+        .shape-hexagon #ampm-badge,
+        .shape-chamfered #ampm-badge,
+        .shape-beveled #ampm-badge,
+        .shape-notched #ampm-badge,
+        .shape-cut_corner #ampm-badge,
+        .shape-ticket #ampm-badge {
+            bottom: clamp(18px, 3.5vh, 40px);
+            right: clamp(18px, 3.5vh, 40px);
+        }
+        .shape-pentagon #ampm-badge {
+            bottom: clamp(14px, 2.8vh, 32px);
+            right: clamp(45px, 9vh, 90px);
+        }
+        .shape-shield #ampm-badge {
+            bottom: clamp(35px, 7vh, 80px);
+            right: clamp(35px, 7vh, 80px);
+        }
+        .shape-capsule #ampm-badge {
+            bottom: clamp(18px, 3.5vh, 42px);
+            right: clamp(20px, 4vh, 48px);
+        }
+        .shape-chevron #ampm-badge {
+            bottom: clamp(14px, 2.8vh, 32px);
+            right: clamp(32px, 6vh, 65px);
+        }
+        .shape-badge #ampm-badge {
+            bottom: clamp(30px, 6vh, 70px);
+            right: clamp(25px, 5vh, 60px);
+        }
+        .shape-lozenge #ampm-badge {
+            bottom: clamp(30px, 6vh, 70px);
+            right: clamp(45px, 9vh, 90px);
+        }
+        .shape-parallelogram #ampm-badge {
+            bottom: clamp(10px, 2vh, 28px);
+            right: clamp(45px, 9vh, 90px);
         }
 
         #date-badge {
@@ -1438,17 +1499,19 @@
 
             <div class="clock-row" id="clock-row">
                 <!-- Hours Card -->
-                <div class="flip-card" id="fc-h">
+                <div class="flip-card-wrapper">
+                    <div class="flip-card" id="fc-h">
+                        <div class="card-half card-top">
+                            <div class="digit-wrapper"><div class="digit-text" id="fc-h-top"><span>0</span><span>0</span></div></div>
+                        </div>
+                        <div class="card-half card-bottom">
+                            <div class="digit-wrapper"><div class="digit-text" id="fc-h-bot"><span>0</span><span>0</span></div></div>
+                        </div>
+                        <div class="card-divider">
+                            <div class="divider-dot"></div>
+                        </div>
+                    </div>
                     <span class="ampm-badge" id="ampm-badge"></span>
-                    <div class="card-half card-top">
-                        <div class="digit-wrapper"><div class="digit-text" id="fc-h-top"><span>0</span><span>0</span></div></div>
-                    </div>
-                    <div class="card-half card-bottom">
-                        <div class="digit-wrapper"><div class="digit-text" id="fc-h-bot"><span>0</span><span>0</span></div></div>
-                    </div>
-                    <div class="card-divider">
-                        <div class="divider-dot"></div>
-                    </div>
                 </div>
 
                 <div class="sep" id="sep-m">
@@ -1496,6 +1559,7 @@
 
     <script>
         let config = window.screensaverConfig || {};
+        let themeName = config.theme || 'classic_retro';
         let rawShape = config.card_shape || 'squircle';
         const legacyShapeMap = {
             'soft_squircle': 'squircle',
@@ -1536,15 +1600,17 @@
             document.body.className = `theme-${themeName}`;
 
             const scene = document.getElementById('scene');
-            if (scene) scene.className = `shape-${cardShape}`;
-            if (!showSeconds) scene.classList.add('hide-seconds');
-            else scene.classList.remove('hide-seconds');
+            if (scene) {
+                scene.className = `shape-${cardShape}`;
+                if (!showSeconds) scene.classList.add('hide-seconds');
+                else scene.classList.remove('hide-seconds');
 
-            if (!showDate) scene.classList.add('hide-date');
-            else scene.classList.remove('hide-date');
+                if (!showDate) scene.classList.add('hide-date');
+                else scene.classList.remove('hide-date');
 
-            if (!showGreeting) scene.classList.add('hide-greeting');
-            else scene.classList.remove('hide-greeting');
+                if (!showGreeting) scene.classList.add('hide-greeting');
+                else scene.classList.remove('hide-greeting');
+            }
 
             // 3. Proportional Responsive Scale
             const container = document.getElementById('clock-container');

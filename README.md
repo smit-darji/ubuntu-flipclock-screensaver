@@ -1,8 +1,9 @@
 # Premium Fliqlo-Style Flip Clock Screensaver for Ubuntu
 
 [![Platform](https://img.shields.io/badge/Platform-Ubuntu%2020.04%20%7C%2022.04%20%7C%2024.04-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)](https://ubuntu.com)
-[![Version](https://img.shields.io/badge/Version-v2.4.5-blue?style=for-the-badge)](https://github.com/smit-darji/ubuntu-flipclock-screensaver/releases)
-[![Download .deb Package](https://img.shields.io/badge/Download-flipclock--screensaver.deb-10B981?style=for-the-badge&logo=debian&logoColor=white)](https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/flipclock-screensaver.deb)
+[![Version](https://img.shields.io/badge/Version-v2.5.1-blue?style=for-the-badge)](releases/flipclock-screensaver_2.5.1_all.deb)
+[![Download Latest .deb](https://img.shields.io/badge/Download-flipclock--screensaver.deb-10B981?style=for-the-badge&logo=debian&logoColor=white)](https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver.deb)
+[![Archived Release v2.5.1](https://img.shields.io/badge/Archive-v2.5.1.deb-6366F1?style=for-the-badge&logo=debian&logoColor=white)](https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_2.5.1_all.deb)
 [![Language](https://img.shields.io/badge/Language-Python%203%20%2B%20GTK3-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-MIT-6D28D9?style=for-the-badge)](LICENSE)
 
@@ -153,6 +154,7 @@ Choose from **29 unique flip card shapes** — from Apple Vision Pro–style squ
   - **Chamfered**, **Beveled**, **Notched**, **Cut Corner**
   - **Badge**, **Ticket**, **Arch**, **Stadium**, **Lozenge**
   - **Frame**, **Panel**, **Card**, **Tile**
+  - **Full Shape-Wise AM/PM Visibility**: Isolated indicator from card clipping, ensuring the AM/PM badge is 100% visible and positioned correctly across all 29 geometric and organic shapes (polygon, circle, diamond, etc.).
 * **Executive Glassmorphic Greeting Capsule**:
   - Time-of-day greetings (`GOOD MORNING`, `GOOD AFTERNOON`, `GOOD EVENING`, `GOOD NIGHT`) enclosed inside a translucent glass capsule badge with gold `✦` sparkles.
   - Personalize with your custom name (e.g. `GOOD MORNING, SMIT`).
@@ -178,15 +180,24 @@ Choose from **29 unique flip card shapes** — from Apple Vision Pro–style squ
 
 ### Method 1: Download & Install Debian Package (`.deb`) — *Recommended*
 
-Download `flipclock-screensaver.deb` directly using `wget` and install via `apt`:
-
+#### Option A: Install Latest Master Package (`flipclock-screensaver.deb`)
 ```bash
-# 1. Download the standard .deb package via wget
-wget https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/flipclock-screensaver.deb
+# 1. Download the latest .deb package via wget
+wget https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver.deb
 
-# 2. Install package using apt (automatically resolves system dependencies)
+# 2. Install package using apt (automatically installs required system dependencies)
 sudo apt update
 sudo apt install ./flipclock-screensaver.deb
+```
+
+#### Option B: Install Versioned Release Archive (`v2.5.1`)
+```bash
+# 1. Download version v2.5.1 from the releases/ directory
+wget https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_2.5.1_all.deb
+
+# 2. Install versioned package via apt
+sudo apt update
+sudo apt install ./flipclock-screensaver_2.5.1_all.deb
 ```
 
 ---
@@ -245,7 +256,7 @@ Once installed, the following commands are available globally in your terminal:
 |---|---|
 | `flipclock` or `flipclock --run` | Previews/launches screensaver full-screen windows immediately |
 | `flipclock --settings` | Opens the graphical settings configuration window |
-| `flipclock --version` | Outputs current software version (`v2.4.5`) |
+| `flipclock --version` | Outputs current software version (`v2.5.1`) |
 | `flipclock --daemon` | Starts the background idle monitor daemon |
 | `pkill -f "flipclock.*--daemon"` | Stops the background idle monitor daemon |
 
@@ -259,7 +270,7 @@ To build a fresh `.deb` package file locally:
 chmod +x build_deb.sh
 ./build_deb.sh
 ```
-This generates `flipclock-screensaver.deb` (and `flipclock-screensaver_2.4.5_all.deb`) in the project root directory.
+This generates `flipclock-screensaver.deb` (and `flipclock-screensaver_2.5.1_all.deb`) in the project root directory.
 
 ---
 

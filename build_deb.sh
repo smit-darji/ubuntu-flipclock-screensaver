@@ -5,11 +5,13 @@ set -e
 
 # Package name and version
 PKG_NAME="flipclock-screensaver"
-PKG_VER="2.4.5"
+PKG_VER="2.5.1"
 PKG_DIR="flipclock-build"
 
 echo "Creating Debian package structure..."
 rm -rf "$PKG_DIR"
+find . -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true
+find . -name "*.pyc" -delete 2>/dev/null || true
 mkdir -p "$PKG_DIR/DEBIAN"
 mkdir -p "$PKG_DIR/usr/share/flipclock"
 mkdir -p "$PKG_DIR/usr/local/share/flipclock"
@@ -34,7 +36,8 @@ fi
 cp flipclock.py "$PKG_DIR/usr/share/flipclock/"
 if [ -f "daemon.py" ]; then cp daemon.py "$PKG_DIR/usr/share/flipclock/"; fi
 if [ -f "screensaver.py" ]; then cp screensaver.py "$PKG_DIR/usr/share/flipclock/"; fi
-if [ -d "assets" ]; then cp -r assets "$PKG_DIR/usr/share/flipclock/"; fi
+if [ -d "assets" ]; then cp -r assets "$PKG_DIR/usr/share/flipclock/"; cp -r assets "$PKG_DIR/usr/local/share/flipclock/"; fi
+if [ -d "screenshots" ]; then cp -r screenshots "$PKG_DIR/usr/share/flipclock/"; cp -r screenshots "$PKG_DIR/usr/local/share/flipclock/"; fi
 
 if [ -f "flipclock.png" ]; then
     cp flipclock.png "$PKG_DIR/usr/share/pixmaps/flipclock.png"
@@ -65,11 +68,10 @@ cat << 'EOF' > "$PKG_DIR/DEBIAN/postinst"
 #!/bin/bash
 set -e
 
-# Ensure executable permissions
-chmod +x /usr/share/flipclock/flipclock.py
-
-# Create system bin symlinks
+# Ensure executable permissions and clean symlinks
+chmod 755 /usr/share/flipclock/flipclock.py || true
 mkdir -p /usr/bin /usr/local/bin
+rm -f /usr/bin/flipclock /usr/local/bin/flipclock
 ln -sf /usr/share/flipclock/flipclock.py /usr/bin/flipclock
 ln -sf /usr/share/flipclock/flipclock.py /usr/local/bin/flipclock
 
@@ -166,12 +168,12 @@ EOF
 find "$PKG_DIR" -type d -exec chmod 755 {} \;
 find "$PKG_DIR" -type f -not -path "$PKG_DIR/DEBIAN/*" -exec chmod 644 {} \;
 chmod 755 "$PKG_DIR/usr/share/flipclock/flipclock.py"
-
 echo "Building Debian package using dpkg-deb..."
-dpkg-deb --build "$PKG_DIR" "${PKG_NAME}_${PKG_VER}_all.deb"
-cp -f "${PKG_NAME}_${PKG_VER}_all.deb" "${PKG_NAME}.deb"
+mkdir -p releases
+dpkg-deb --build "$PKG_DIR" "releases/${PKG_NAME}_${PKG_VER}_all.deb"
+cp -f "releases/${PKG_NAME}_${PKG_VER}_all.deb" "releases/${PKG_NAME}.deb"
 
 echo "Cleaning up temporary files..."
 rm -rf "$PKG_DIR"
 
-echo "Debian package created: ${PKG_NAME}_${PKG_VER}_all.deb -> ${PKG_NAME}.deb"
+echo "Debian package created: releases/${PKG_NAME}_${PKG_VER}_all.deb -> releases/${PKG_NAME}.deb"

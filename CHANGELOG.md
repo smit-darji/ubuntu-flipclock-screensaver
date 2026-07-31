@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.5.1] - 2026-07-31 - Patch Release: Shape-Wise AM/PM Visibility
+
+### Fixed
+- **Shape-Wise AM/PM Clipping Fix**: Solved the issue where the AM/PM badge was clipped or hidden entirely on custom card shapes due to CSS `clip-path` and `overflow: hidden` on the card elements.
+- **Flip Card Wrapper**: Introduced a `.flip-card-wrapper` parent container around the hours flip-card to isolate the `#ampm-badge` element from the card's clipped boundary.
+- **Shape-Specific Positioning Adjustments**: Added fine-tuned CSS absolute positioning offsets for all 29 shapes (including Diamond, Circle, Hexagon, Octagon, Pentagon, Shield, Capsule, Pill, Stadium, Lozenge, and Chevron) to ensure the AM/PM badge fits perfectly within the borders of each shape.
+
+## [2.5.0] - 2026-07-30 - Major Release: 20 Executive Themes, Auto Color Palette & Custom Popups
+
+### Added
+- **20 Luxury Dark Themes**: Premium color themes including Luxury Black Gold, Obsidian Titanium, Dark Emerald, Forest Green, Racing Green, Ruby Executive, Burgundy Prestige, and more.
+- **Auto Color & Typography Sync**: Theme selection automatically synchronizes background, card background, digit colors, border highlights, and 18 executive font combinations.
+- **Custom Dark GTK Dialogs**: Native screensaver settings alerts replaced with custom dark GTK dialogs (`CustomDarkDialog`).
+
 ## [2.3.0] - 2026-07-30 - Minor Release: Executive Theme Collections, Category Filtering & Quick Visual Swatch Tiles
 
 ### Added

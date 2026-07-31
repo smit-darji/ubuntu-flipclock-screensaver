@@ -7,7 +7,9 @@ import shutil
 
 BASE_HTML = "/home/dev1035/dev-1035/smit.softvan.com/screensaver/clock.html"
 SCREENSHOT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "screenshots")
+ASSETS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets")
 os.makedirs(SCREENSHOT_DIR, exist_ok=True)
+os.makedirs(ASSETS_DIR, exist_ok=True)
 
 with open(BASE_HTML, "r") as f:
     base_html = f.read()
