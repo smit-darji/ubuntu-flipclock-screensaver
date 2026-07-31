@@ -19,6 +19,27 @@ A native, high-fidelity, multi-monitor flip clock screensaver for Ubuntu Linux. 
 
 ---
 
+## 📥 Quick Download & Installation
+
+Click the buttons below to download the pre-compiled `.deb` packages directly:
+
+<p align="center">
+  <a href="https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver.deb" target="_blank">
+    <img src="https://img.shields.io/badge/DOWNLOAD-Latest%20.deb%20Package-10B981?style=for-the-badge&logo=debian&logoColor=white" height="48" alt="Download Latest .deb Package">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_2.5.1_all.deb" target="_blank">
+    <img src="https://img.shields.io/badge/DOWNLOAD-Versioned%20v2.5.1%20.deb-6366F1?style=for-the-badge&logo=debian&logoColor=white" height="48" alt="Download Versioned .deb Package">
+  </a>
+</p>
+
+### ⚡ Direct Copy-Paste Install Command:
+```bash
+wget https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver.deb && sudo apt update && sudo apt install ./flipclock-screensaver.deb
+```
+
+---
+
 ## 🎨 23 Premium Color Themes
 
 ### 🏆 Executive Dark & Gold Collection
