@@ -26,7 +26,7 @@ except ValueError:
         sys.exit(1)
 from gi.repository import Gtk, Gdk, WebKit2, GLib, GdkPixbuf
 
-APP_VERSION = "2.5.1"
+APP_VERSION = "2.5.2"
 
 THEME_CATEGORIES = {
     "liquid_glass": {
