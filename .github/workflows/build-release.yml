@@ -1,0 +1,63 @@
+name: Build and Release Debian Package
+
+on:
+  push:
+    branches:
+      - Master
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
+          fetch-depth: 2  # Fetch parent commit to compare versions
+
+      - name: Setup Git identity
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Detect version changes & update documentation
+        run: |
+          NEW_VERSION=$(grep -o 'APP_VERSION = "[^"]*"' flipclock.py | cut -d'"' -f2)
+          # Get parent commit version of flipclock.py safely
+          if git rev-parse HEAD~1 >/dev/null 2>&1; then
+            OLD_VERSION=$(git show HEAD~1:flipclock.py | grep -o 'APP_VERSION = "[^"]*"' | cut -d'"' -f2)
+          else
+            OLD_VERSION=""
+          fi
+          
+          echo "Old Version: $OLD_VERSION"
+          echo "New Version: $NEW_VERSION"
+          
+          if [ -n "$OLD_VERSION" ] && [ "$OLD_VERSION" != "$NEW_VERSION" ]; then
+            echo "Updating version references in README.md from $OLD_VERSION to $NEW_VERSION..."
+            sed -i "s/$OLD_VERSION/$NEW_VERSION/g" README.md
+            
+            # If build_deb.sh doesn't match the new version, update it as well
+            sed -i "s/PKG_VER=\"$OLD_VERSION\"/PKG_VER=\"$NEW_VERSION\"/g" build_deb.sh
+          fi
+
+      - name: Build Debian package
+        run: |
+          chmod +x build_deb.sh
+          ./build_deb.sh
+
+      - name: Commit and push changes
+        run: |
+          git add README.md build_deb.sh releases/
+          
+          # Check if there are any changes to commit
+          if git diff --staged --quiet; then
+            echo "No changes to release files or README.md."
+          else
+            git commit -m "Auto-build release package & update README for version $(grep -o 'APP_VERSION = "[^"]*"' flipclock.py | cut -d'"' -f2) [skip ci]"
+            git push origin Master
+          fi
