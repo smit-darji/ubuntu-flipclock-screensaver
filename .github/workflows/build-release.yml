@@ -51,6 +51,8 @@ jobs:
           ./build_deb.sh
 
       - name: Commit and push changes
+        env:
+          GH_PAT_EXISTS: ${{ secrets.GH_PAT != '' }}
         run: |
           git add README.md build_deb.sh releases/
           
@@ -58,6 +60,13 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes to release files or README.md."
           else
+            if [ "$GH_PAT_EXISTS" = "false" ]; then
+              echo "WARNING: GH_PAT secret is not defined in Repository Secrets."
+              echo "Skipping push to protected Master branch to avoid authentication failure."
+              echo "To enable automatic updates, please add your PAT as GH_PAT secret in GitHub repository settings."
+              exit 0
+            fi
+            
             git commit -m "Auto-build release package & update README for version $(grep -o 'APP_VERSION = "[^"]*"' flipclock.py | cut -d'"' -f2) [skip ci]"
             git push origin Master
           fi
