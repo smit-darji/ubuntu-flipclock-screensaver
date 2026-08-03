@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.5.4] - 2026-08-03 - Premium Apple Liquid Glass Theme & Gtk Font Wraps
+
+### Added
+- **Apple Liquid Glass Theme**: Integrated a premium, realistic Apple Liquid Glass theme with frosted sapphire glassmorphism (`blur(24px) saturate(180%)`), golden pivot pins, and elegant system serif typography (`New York` / `Cormorant Garamond`).
+- **Gtk Font Dropdown Wrapping**: Configured font selection dropdown boxes in the GTK settings GUI window to show values in columns side-by-side (`set_wrap_width(2)`), improving options visibility and eliminating extremely long scrolling lists.
+
 ## [2.5.1] - 2026-07-31 - Patch Release: Shape-Wise AM/PM Visibility
 
 ### Fixed

@@ -26,12 +26,12 @@ except ValueError:
         sys.exit(1)
 from gi.repository import Gtk, Gdk, WebKit2, GLib, GdkPixbuf
 
-APP_VERSION = "2.5.3"
+APP_VERSION = "2.5.4"
 
 THEME_CATEGORIES = {
     "liquid_glass": {
         "label": "💧 Liquid Glass & Crystal Dark",
-        "themes": ["liquid_glass", "luxury_black_gold", "obsidian_titanium", "arctic_ice", "ocean_cyan"]
+        "themes": ["apple_liquid_glass", "liquid_glass", "luxury_black_gold", "obsidian_titanium", "arctic_ice", "ocean_cyan"]
     },
     "executive": {
         "label": "🏆 Executive Dark & Gold",
@@ -57,7 +57,7 @@ THEME_CATEGORIES = {
 
 PRESET_THEMES = {
     "liquid_glass": {
-        "name": "💧 Liquid Glass Dark",
+        "name": "💧 Translucent Liquid Cyan",
         "bg_color": "#060810",
         "card_color": "#0F172A",
         "digit_color": "#FFFFFF",
@@ -65,6 +65,16 @@ PRESET_THEMES = {
         "border_color": "#1E293B",
         "digit_font": "Audiowide",
         "label_font": "Outfit"
+    },
+    "apple_liquid_glass": {
+        "name": "💧 Apple Liquid Glass",
+        "bg_color": "#000000",
+        "card_color": "rgba(255, 255, 255, 0.12)",
+        "digit_color": "#FFFFFF",
+        "accent_color": "#D4AF37",
+        "border_color": "rgba(255, 255, 255, 0.18)",
+        "digit_font": "New York",
+        "label_font": "New York"
     },
     "luxury_black_gold": {
         "name": "🥇 Luxury Black Gold",
@@ -836,22 +846,217 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
 
         /* 21. Liquid Glass Dark (Translucent Liquid Cyan) */
         .theme-liquid_glass {
-            --vignette-color: rgba(56, 189, 248, 0.08);
-            --card-bg: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.5) 100%);
-            --card-border: rgba(56, 189, 248, 0.4);
-            --card-top-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.03) 100%);
-            --card-bot-bg: linear-gradient(180deg, rgba(15, 23, 42, 0.6) 0%, rgba(2, 6, 23, 0.4) 100%);
-            --divider-line: rgba(56, 189, 248, 0.35);
-            --pin-bg: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
-            --digit-color: #ffffff;
-            --digit-shadow: 0 0 20px rgba(56, 189, 248, 0.45), 0 2px 10px rgba(0,0,0,0.9);
-            --dot-bg: radial-gradient(circle at 30% 28%, #7dd3fc 0%, #38bdf8 50%, #0284c7 100%);
-            --dot-shadow: 0 0 14px rgba(56, 189, 248, 0.8);
-            --accent-color: #38bdf8;
-            --badge-color: #f1f5f9;
-            --badge-bg: rgba(15, 23, 42, 0.85);
-            --badge-border: rgba(56, 189, 248, 0.4);
-            --branding-color: rgba(56, 189, 248, 0.6);
+            --vignette-color: rgba(255, 255, 255, 0.02);
+            --card-bg: rgba(255, 255, 255, 0.12);
+            --card-border: rgba(255, 255, 255, 0.18);
+            --card-top-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 50%);
+            --card-bot-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+            --divider-line: rgba(255, 255, 255, 0.08);
+            --pin-bg: #D4AF37;
+            --digit-color: #FFFFFF;
+            --digit-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            --dot-bg: radial-gradient(circle at 30% 28%, #FFFFFF 0%, #D8D8D8 100%);
+            --dot-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            --accent-color: #D4AF37;
+            --badge-color: #D8D8D8;
+            --badge-bg: rgba(255, 255, 255, 0.12);
+            --badge-border: rgba(255, 255, 255, 0.18);
+            --branding-color: rgba(255, 255, 255, 0.35);
+        }
+
+        /* Apple Liquid Glass Overrides */
+        .theme-liquid_glass #scene {
+            background: #000000 !important;
+        }
+        .theme-liquid_glass #scene::before {
+            content: '' !important;
+            position: absolute !important;
+            inset: 0 !important;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 45%),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 70%) !important;
+            pointer-events: none !important;
+            z-index: 0 !important;
+        }
+        .theme-liquid_glass .flip-card {
+            background: rgba(255, 255, 255, 0.12) !important;
+            backdrop-filter: blur(24px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.18) !important;
+            border-radius: 48px !important;
+            box-shadow: 
+                0 12px 40px rgba(0, 0, 0, 0.45),
+                inset 0 1px rgba(255, 255, 255, 0.35),
+                inset 0 -1px rgba(255, 255, 255, 0.05) !important;
+            animation: liquidGlassFloat 8s ease-in-out infinite alternate;
+            overflow: visible !important;
+        }
+        .theme-liquid_glass .flip-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0) 70%);
+            background-size: 200% 200%;
+            background-position: -200% 0;
+            pointer-events: none;
+            z-index: 13;
+            border-radius: 48px;
+            animation: glassShimmerSweep 12s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+        }
+        .theme-liquid_glass .flip-card::after {
+            content: '';
+            position: absolute;
+            top: 1px;
+            left: 16px;
+            right: 16px;
+            height: 1.5px;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.55) 50%, rgba(255,255,255,0) 100%);
+            pointer-events: none;
+            z-index: 14;
+        }
+        .theme-liquid_glass .card-top,
+        .theme-liquid_glass .flipper-top {
+            border-radius: 48px 48px 0 0 !important;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.02) 100%) !important;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.25) !important;
+        }
+        .theme-liquid_glass .card-bottom,
+        .theme-liquid_glass .flipper-bottom {
+            border-radius: 0 0 48px 48px !important;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.12) 100%) !important;
+        }
+        .theme-liquid_glass .card-divider {
+            height: 1px !important;
+            background: rgba(255, 255, 255, 0.08) !important;
+            border: none !important;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
+        }
+        .theme-liquid_glass .card-divider::before,
+        .theme-liquid_glass .card-divider::after {
+            content: '' !important;
+            width: 6px !important;
+            height: 10px !important;
+            border-radius: 3px !important;
+            background: radial-gradient(circle at 35% 35%, #fff6d1 0%, #D4AF37 60%, #876211 100%) !important;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.4) !important;
+        }
+        .theme-liquid_glass .card-divider::before {
+            left: 8px !important;
+        }
+        .theme-liquid_glass .card-divider::after {
+            right: 8px !important;
+        }
+        .theme-liquid_glass .divider-dot {
+            width: 10px !important;
+            height: 10px !important;
+            border-radius: 50% !important;
+            background: radial-gradient(circle at 35% 35%, #fff6d1 0%, #D4AF37 60%, #876211 100%) !important;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.4) !important;
+            border: 1px solid rgba(0, 0, 0, 0.4) !important;
+        }
+        .theme-liquid_glass .digit-text {
+            font-family: -apple-system-ny, "New York", "Cormorant Garamond", "Georgia", serif !important;
+            font-weight: 500 !important;
+            color: #FFFFFF !important;
+            text-shadow: 
+                -1px -1px 0px rgba(255, 255, 255, 0.25), 
+                1px 1px 0px rgba(0, 0, 0, 0.55), 
+                0 6px 12px rgba(0, 0, 0, 0.35) !important;
+            letter-spacing: -0.02em !important;
+        }
+        .theme-liquid_glass #greeting-badge {
+            background: rgba(255, 255, 255, 0.12) !important;
+            backdrop-filter: blur(24px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+            border: 1px solid rgba(212, 175, 55, 0.45) !important;
+            border-radius: 40px !important;
+            box-shadow: 
+                0 10px 30px rgba(0,0,0,0.35),
+                inset 0 1px rgba(255, 255, 255, 0.25),
+                inset 0 -1px rgba(255, 255, 255, 0.05) !important;
+            color: #D8D8D8 !important;
+            font-family: -apple-system-ny, "New York", "Cormorant Garamond", "Georgia", serif !important;
+            font-weight: 500 !important;
+            letter-spacing: 0.3em !important;
+            padding: clamp(8px, 1.2vh, 14px) clamp(26px, 3.2vw, 50px) !important;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5) !important;
+            animation: liquidGlassFloat 8s ease-in-out infinite alternate;
+        }
+        .theme-liquid_glass #greeting-badge .badge-ornament {
+            color: #D4AF37 !important;
+            text-shadow: 0 0 6px rgba(212, 175, 55, 0.6) !important;
+        }
+        .theme-liquid_glass #date-badge {
+            background: rgba(255, 255, 255, 0.12) !important;
+            backdrop-filter: blur(24px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.18) !important;
+            border-radius: 50px !important;
+            box-shadow: 
+                0 10px 30px rgba(0,0,0,0.35),
+                inset 0 1px rgba(255, 255, 255, 0.25),
+                inset 0 -1px rgba(255, 255, 255, 0.05) !important;
+            color: #D8D8D8 !important;
+            font-family: -apple-system-ny, "New York", "Cormorant Garamond", "Georgia", serif !important;
+            font-weight: 500 !important;
+            letter-spacing: 0.25em !important;
+            padding: clamp(8px, 1.2vh, 14px) clamp(26px, 3.2vw, 50px) !important;
+            animation: liquidGlassFloat 8s ease-in-out infinite alternate 1.5s;
+        }
+        .theme-liquid_glass #date-badge .date-dayname {
+            color: #FFFFFF !important;
+            font-weight: 600 !important;
+        }
+        .theme-liquid_glass #date-badge .date-sep {
+            color: #D4AF37 !important;
+            opacity: 0.9 !important;
+        }
+        .theme-liquid_glass #date-badge .date-num {
+            background: rgba(255, 255, 255, 0.10) !important;
+            border: 1px solid rgba(255, 255, 255, 0.20) !important;
+            box-shadow: inset 0 1px rgba(255, 255, 255, 0.2) !important;
+            color: #FFFFFF !important;
+            border-radius: 8px !important;
+            padding: 2px 10px !important;
+        }
+        .theme-liquid_glass #ampm-badge {
+            background: rgba(255, 255, 255, 0.12) !important;
+            backdrop-filter: blur(24px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.18) !important;
+            border-radius: 10px !important;
+            box-shadow: 
+                0 4px 12px rgba(0,0,0,0.35),
+                inset 0 1px rgba(255, 255, 255, 0.25),
+                inset 0 -1px rgba(255, 255, 255, 0.05) !important;
+            color: #D4AF37 !important;
+            font-family: -apple-system-ny, "New York", "Cormorant Garamond", "Georgia", serif !important;
+            font-weight: 600 !important;
+            letter-spacing: 0.1em !important;
+            padding: clamp(3px, 0.5vh, 6px) clamp(8px, 1.2vh, 14px) !important;
+            text-shadow: 0 0 4px rgba(212, 175, 55, 0.3) !important;
+        }
+        .theme-liquid_glass .sep-dot,
+        .theme-liquid_glass .colon-dot {
+            background: radial-gradient(circle at 35% 35%, #FFFFFF 0%, #D8D8D8 100%) !important;
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.3), 0 2px 4px rgba(0,0,0,0.5) !important;
+        }
+        .theme-liquid_glass .flip-top-out {
+            animation: flipTopOut 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+        }
+        .theme-liquid_glass .flip-bottom-in {
+            animation: flipBottomIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1) 0.35s forwards !important;
+            transform: rotateX(90deg);
+        }
+
+        @keyframes liquidGlassFloat {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-6px); }
+        }
+        @keyframes glassShimmerSweep {
+            0% { background-position: -200% 0; }
+            20% { background-position: 200% 200%; }
+            100% { background-position: 200% 200%; }
         }
 
         /* ═══ 10 PREMIUM CARD SHAPE STYLES ═══ */
@@ -1804,6 +2009,7 @@ class FlipClockSettingsWindow(Gtk.Window):
         ]
 
         self.combo_digit_font = Gtk.ComboBoxText()
+        self.combo_digit_font.set_wrap_width(2)
         for f_id, f_label in font_options:
             self.combo_digit_font.append(f_id, f_label)
 
@@ -1820,6 +2026,7 @@ class FlipClockSettingsWindow(Gtk.Window):
         grid_f.attach(lbl_lfont, 1, 0, 1, 1)
 
         self.combo_label_font = Gtk.ComboBoxText()
+        self.combo_label_font.set_wrap_width(2)
         for f_id, f_label in font_options:
             self.combo_label_font.append(f_id, f_label)
 
