@@ -1,0 +1,10 @@
+# Gradle files and build caches
+.gradle/
+build/
+app/build/
+
+# Local configuration
+local.properties
+
+# Portable SDK & JDK downloads
+sdk/

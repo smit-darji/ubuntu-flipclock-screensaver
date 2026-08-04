@@ -1,0 +1,2406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Flip Clock Screensaver</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Audiowide&family=Bebas+Neue&family=Chakra+Petch:wght@600;700&family=Cinzel:wght@700;800;900&family=Courier+Prime:wght@400;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Exo+2:wght@600;800&family=IBM+Plex+Sans:wght@500;700&family=Inter:wght@300;400;500;600;700;800;900&family=Michroma&family=Orbitron:wght@700;800;900&family=Oswald:wght@500;700&family=Outfit:wght@600;800&family=Oxanium:wght@600;800&family=Rajdhani:wght@600;700&family=Roboto:wght@500;700;900&family=Share+Tech+Mono&family=Teko:wght@600;700&family=VT323&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        html,
+        body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            cursor: none;
+            font-family: var(--digit-font, 'Inter', system-ui, sans-serif);
+        }
+
+        /* ═══ BASE SCENE ═══════════════════════════════════ */
+        #scene {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3.5vh;
+            overflow: hidden;
+            background: #000000;
+            transition: background 0.5s ease;
+        }
+
+        #scene::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 70% 55% at 50% 48%, var(--vignette-color, rgba(255, 255, 255, 0.02)) 0%, transparent 75%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ═══ UNIFIED RESPONSIVE CLOCK CONTAINER ═══ */
+        #clock-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(14px, 3vh, 36px);
+            z-index: 10;
+            width: 100%;
+            max-width: 96vw;
+            transform-origin: center center;
+            transition: transform 0.4s ease;
+        }
+
+        /* ═══ GREETING BADGE ═══════════════════════════════ */
+        #greeting-badge {
+            z-index: 10;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: clamp(6px, 1vh, 12px) clamp(22px, 2.8vw, 44px);
+            border-radius: 40px;
+            font-family: var(--label-font, 'Cinzel', serif);
+            font-size: clamp(11px, 1.4vw, 22px);
+            font-weight: 800;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--accent-color, #ffffff);
+            background: var(--badge-bg, rgba(20, 20, 24, 0.75));
+            border: 1px solid var(--badge-border, rgba(255, 255, 255, 0.18));
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
+            text-align: center;
+            max-width: 92vw;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: all 0.4s ease;
+        }
+
+        .badge-ornament {
+            color: var(--accent-color, #d4af37);
+            font-size: 0.85em;
+            opacity: 0.85;
+        }
+
+        /* ═══ CLOCK ROW ═══════════════════════════════════ */
+        .clock-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(14px, 3vw, 48px);
+            z-index: 10;
+            width: 100%;
+            max-width: 94vw;
+        }
+
+        /* ═══ FLIP CARD ═══════════════════════════════════ */
+        .flip-card {
+            position: relative;
+            width: clamp(160px, 36vh, 440px);
+            height: clamp(220px, 52vh, 620px);
+            border-radius: clamp(10px, 1.8vh, 24px);
+            overflow: hidden;
+            perspective: 1400px;
+            flex-shrink: 0;
+            background: var(--card-bg, linear-gradient(170deg, #1f1f1f 0%, #161616 50%, #0d0d0d 100%));
+            border: 1.5px solid var(--card-border, rgba(255, 255, 255, 0.12));
+            box-shadow:
+                0 18px 70px rgba(0, 0, 0, 0.95),
+                0 0 0 1px rgba(255, 255, 255, 0.04),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.8);
+            transition: all 0.4s ease;
+        }
+
+        /* ═══ FLIP CARD WRAPPER (Prevents AM/PM clipping) ═══ */
+        .flip-card-wrapper {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .card-half {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            overflow: hidden;
+        }
+
+        .card-top {
+            top: 0;
+            border-radius: clamp(10px, 1.8vh, 24px) clamp(10px, 1.8vh, 24px) 0 0;
+            background: var(--card-top-bg, linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%));
+            border-bottom: 1px solid rgba(0, 0, 0, 0.85);
+        }
+
+        .card-bottom {
+            bottom: 0;
+            border-radius: 0 0 clamp(10px, 1.8vh, 24px) clamp(10px, 1.8vh, 24px);
+            background: var(--card-bot-bg, linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%));
+        }
+
+        /* Divider line (═══════◉═══════ Style) */
+        .card-divider {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            transform: translateY(-50%);
+            z-index: 12;
+            background: transparent;
+            border-top: 1.5px solid var(--pin-bg, #a3a3a3);
+            border-bottom: 1.5px solid var(--pin-bg, #a3a3a3);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Central bullet pin (◉) */
+        .divider-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--pin-bg, #a3a3a3);
+            box-shadow: 0 0 8px var(--accent-color, #d4af37), inset 0 1px 2px rgba(255, 255, 255, 0.4);
+            border: 2px solid var(--card-bg, #1a1a1a);
+            z-index: 15;
+        }
+
+        /* Side hinges/pins */
+        .card-divider::before,
+        .card-divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: clamp(5px, 0.7vh, 10px);
+            height: clamp(10px, 1.5vh, 18px);
+            border-radius: clamp(2px, 0.4vh, 5px);
+            background: var(--pin-bg, linear-gradient(180deg, #a3a3a3 0%, #737373 50%, #404040 100%));
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .card-divider::before {
+            left: clamp(8px, 1.2vh, 16px);
+        }
+
+        .card-divider::after {
+            right: clamp(8px, 1.2vh, 16px);
+        }
+
+        /* Digit text */
+        .digit-wrapper {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 200%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-top .digit-wrapper,
+        .flipper-top .digit-wrapper {
+            top: 0;
+        }
+
+        .card-bottom .digit-wrapper,
+        .flipper-bottom .digit-wrapper {
+            bottom: 0;
+        }
+
+        .digit-text {
+            font-family: var(--digit-font, 'Inter', system-ui, sans-serif);
+            font-size: clamp(110px, 24vh, 340px);
+            font-weight: 800;
+            color: var(--digit-color, #ffffff);
+            letter-spacing: normal;
+            line-height: 1;
+            text-align: center;
+            white-space: nowrap;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            gap: 0.02em !important;
+            text-shadow: var(--digit-shadow, 0 2px 10px rgba(0, 0, 0, 0.9));
+            transition: color 0.4s ease, font-family 0.4s ease;
+        }
+
+        .digit-text span {
+            display: inline-block !important;
+            position: static !important;
+            min-width: 0.5em !important;
+            text-align: center !important;
+            margin: 0 !important;
+            background: transparent !important;
+        }
+
+        /* Flip animations */
+        .flipper {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            backface-visibility: hidden;
+        }
+
+        .flipper-top {
+            top: 0;
+            height: 50%;
+            transform-origin: bottom center;
+            border-radius: clamp(10px, 1.8vh, 24px) clamp(10px, 1.8vh, 24px) 0 0;
+            background: var(--card-top-bg, linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%));
+        }
+
+        .flipper-bottom {
+            bottom: 0;
+            height: 50%;
+            transform-origin: top center;
+            border-radius: 0 0 clamp(10px, 1.8vh, 24px) clamp(10px, 1.8vh, 24px);
+            background: var(--card-bot-bg, linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%));
+        }
+
+        @keyframes flipTopOut {
+            0% {
+                transform: rotateX(0deg);
+            }
+
+            100% {
+                transform: rotateX(-90deg);
+            }
+        }
+
+        @keyframes flipBottomIn {
+            0% {
+                transform: rotateX(90deg);
+            }
+
+            100% {
+                transform: rotateX(0deg);
+            }
+        }
+
+        .flip-top-out {
+            animation: flipTopOut 0.3s ease-in forwards;
+        }
+
+        .flip-bottom-in {
+            animation: flipBottomIn 0.3s ease-out 0.3s forwards;
+            transform: rotateX(90deg);
+        }
+
+        .sep,
+        .colon-separator {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(16px, 3.5vh, 44px);
+            z-index: 10;
+        }
+
+        .sep-dot,
+        .colon-dot {
+            width: clamp(12px, 2.2vh, 28px);
+            height: clamp(12px, 2.2vh, 28px);
+            border-radius: 50%;
+            background: var(--dot-bg, radial-gradient(circle at 30% 28%, #ffffff 0%, #a3a3a3 100%));
+            box-shadow: var(--dot-shadow, 0 0 10px rgba(255, 255, 255, 0.4));
+            transition: all 0.4s ease;
+        }
+
+        #ampm-badge {
+            position: absolute;
+            bottom: clamp(10px, 2vh, 28px);
+            right: clamp(12px, 2vh, 28px);
+            z-index: 15;
+            font-family: var(--label-font, 'Inter', sans-serif);
+            font-size: clamp(11px, 1.6vh, 22px);
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            color: var(--badge-color, #e5e5e5);
+            background: var(--badge-bg, rgba(26, 26, 26, 0.85));
+            border: 1px solid var(--badge-border, rgba(255, 255, 255, 0.15));
+            border-radius: clamp(4px, 0.8vh, 10px);
+            padding: clamp(3px, 0.5vh, 8px) clamp(8px, 1.2vh, 18px);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+            transition: all 0.4s ease;
+        }
+
+        /* Shape-specific overrides for AM/PM badge placement */
+        .shape-diamond #ampm-badge,
+        .shape-rhombus #ampm-badge {
+            bottom: clamp(55px, 12vh, 120px);
+            right: clamp(55px, 12vh, 120px);
+        }
+        .shape-circle #ampm-badge,
+        .shape-pill #ampm-badge,
+        .shape-stadium #ampm-badge {
+            bottom: clamp(22px, 4.5vh, 50px);
+            right: clamp(22px, 4.5vh, 50px);
+        }
+        .shape-oval #ampm-badge {
+            bottom: clamp(25px, 5vh, 60px);
+            right: clamp(25px, 5vh, 60px);
+        }
+        .shape-octagon #ampm-badge,
+        .shape-hexagon #ampm-badge,
+        .shape-chamfered #ampm-badge,
+        .shape-beveled #ampm-badge,
+        .shape-notched #ampm-badge,
+        .shape-cut_corner #ampm-badge,
+        .shape-ticket #ampm-badge {
+            bottom: clamp(18px, 3.5vh, 40px);
+            right: clamp(18px, 3.5vh, 40px);
+        }
+        .shape-pentagon #ampm-badge {
+            bottom: clamp(14px, 2.8vh, 32px);
+            right: clamp(45px, 9vh, 90px);
+        }
+        .shape-shield #ampm-badge {
+            bottom: clamp(35px, 7vh, 80px);
+            right: clamp(35px, 7vh, 80px);
+        }
+        .shape-capsule #ampm-badge {
+            bottom: clamp(18px, 3.5vh, 42px);
+            right: clamp(20px, 4vh, 48px);
+        }
+        .shape-chevron #ampm-badge {
+            bottom: clamp(14px, 2.8vh, 32px);
+            right: clamp(32px, 6vh, 65px);
+        }
+        .shape-badge #ampm-badge {
+            bottom: clamp(30px, 6vh, 70px);
+            right: clamp(25px, 5vh, 60px);
+        }
+        .shape-lozenge #ampm-badge {
+            bottom: clamp(30px, 6vh, 70px);
+            right: clamp(45px, 9vh, 90px);
+        }
+        .shape-parallelogram #ampm-badge {
+            bottom: clamp(10px, 2vh, 28px);
+            right: clamp(45px, 9vh, 90px);
+        }
+
+        #date-badge {
+            z-index: 10;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(8px, 1.2vw, 18px);
+            padding: clamp(8px, 1.2vh, 14px) clamp(22px, 3vw, 48px);
+            border-radius: 50px;
+            font-family: var(--label-font, 'Cinzel', serif);
+            font-size: clamp(10px, 1.3vw, 19px);
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--badge-color, #e5e5e5);
+            background: var(--badge-bg, rgba(18, 18, 22, 0.85));
+            border: 1px solid var(--badge-border, rgba(255, 255, 255, 0.18));
+            box-shadow: 0 8px 35px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            text-align: center;
+            max-width: 92vw;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: all 0.4s ease;
+        }
+
+        .date-segment {
+            display: inline-block;
+        }
+
+        .date-dayname {
+            color: var(--accent-color, #ffffff);
+            font-weight: 800;
+        }
+
+        .date-sep {
+            color: var(--accent-color, #ffffff);
+            opacity: 0.65;
+            font-size: 0.8em;
+        }
+
+        .date-num {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 6px;
+            padding: 2px 10px;
+            font-weight: 800;
+            color: var(--digit-color, #ffffff);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .date-month,
+        .date-year {
+            color: var(--badge-color, #e5e5e5);
+        }
+
+        #branding-tag {
+            position: fixed;
+            bottom: 14px;
+            z-index: 10;
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--branding-color, rgba(255, 255, 255, 0.35));
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+
+        #close-btn {
+            position: fixed;
+            top: 18px;
+            right: 18px;
+            z-index: 9999;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1.5px solid var(--card-border, rgba(255, 255, 255, 0.2));
+            background: var(--badge-bg, rgba(20, 20, 24, 0.85));
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: var(--accent-color, #ffffff);
+            font-size: 20px;
+            font-weight: 300;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease, background 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        #close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        #scene.show-close #close-btn {
+            opacity: 1;
+        }
+
+        /* ═══ 20 LUXURY EXECUTIVE THEME PRESETS ═══════════════════════════════ */
+        /* 1. Luxury Black Gold (Executive Rolex / Bentley) */
+        .theme-luxury_black_gold {
+            --vignette-color: rgba(212, 175, 55, 0.03);
+            --card-bg: linear-gradient(170deg, #1C1C1E 0%, #141416 50%, #0c0c0e 100%);
+            --card-border: #4A4A4A;
+            --card-top-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%);
+            --divider-line: #000000;
+            --pin-bg: linear-gradient(180deg, #fef08a 0%, #d4af37 50%, #854d0e 100%);
+            --digit-color: #F5F5F7;
+            --digit-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+            --dot-bg: radial-gradient(circle at 30% 28%, #fef08a 0%, #d4af37 100%);
+            --dot-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            --accent-color: #D4AF37;
+            --badge-color: #fef08a;
+            --badge-bg: rgba(28, 28, 30, 0.85);
+            --badge-border: rgba(212, 175, 55, 0.35);
+            --branding-color: rgba(212, 175, 55, 0.5);
+        }
+
+        /* 2. Obsidian Titanium (Apple Pro / Tesla) */
+        .theme-obsidian_titanium {
+            --vignette-color: rgba(255, 255, 255, 0.02);
+            --card-bg: linear-gradient(170deg, #1F1F1F 0%, #161616 50%, #0d0d0d 100%);
+            --card-border: #50545A;
+            --card-top-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%);
+            --divider-line: #000000;
+            --pin-bg: linear-gradient(180deg, #e4e4e7 0%, #aeb5bd 50%, #50545a 100%);
+            --digit-color: #F8F8F8;
+            --digit-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+            --dot-bg: radial-gradient(circle at 30% 28%, #ffffff 0%, #aeb5bd 100%);
+            --dot-shadow: 0 0 10px rgba(174, 181, 189, 0.4);
+            --accent-color: #AEB5BD;
+            --badge-color: #f8f8f8;
+            --badge-bg: rgba(31, 31, 31, 0.85);
+            --badge-border: rgba(174, 181, 189, 0.3);
+            --branding-color: rgba(174, 181, 189, 0.5);
+        }
+
+        /* 3. Dark Emerald Premium (Luxury Finance) */
+        .theme-dark_emerald {
+            --vignette-color: rgba(0, 200, 83, 0.03);
+            --card-bg: linear-gradient(170deg, #122118 0%, #0a1610 50%, #040d07 100%);
+            --card-border: #365541;
+            --card-top-bg: linear-gradient(180deg, rgba(0, 200, 83, 0.08) 0%, rgba(0, 200, 83, 0.02) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.15) 100%);
+            --divider-line: #040d07;
+            --pin-bg: linear-gradient(180deg, #a7f3d0 0%, #00c853 50%, #064e3b 100%);
+            --digit-color: #F7FAF7;
+            --digit-shadow: 0 0 16px rgba(0, 200, 83, 0.3);
+            --dot-bg: radial-gradient(circle at 30% 28%, #a7f3d0 0%, #00c853 100%);
+            --dot-shadow: 0 0 12px rgba(0, 200, 83, 0.5);
+            --accent-color: #00C853;
+            --badge-color: #a7f3d0;
+            --badge-bg: rgba(18, 33, 24, 0.85);
+            --badge-border: rgba(0, 200, 83, 0.35);
+            --branding-color: rgba(0, 200, 83, 0.5);
+        }
+
+        /* 4. Forest Green Executive */
+        .theme-forest_green {
+            --vignette-color: rgba(76, 175, 80, 0.03);
+            --card-bg: linear-gradient(170deg, #18261D 0%, #101c14 50%, #08110a 100%);
+            --card-border: #486651;
+            --card-top-bg: linear-gradient(180deg, rgba(76, 175, 80, 0.08) 0%, rgba(76, 175, 80, 0.02) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.15) 100%);
+            --divider-line: #08110a;
+            --pin-bg: linear-gradient(180deg, #81c784 0%, #4caf50 50%, #2e7d32 100%);
+            --digit-color: #F4F8F4;
+            --digit-shadow: 0 0 16px rgba(76, 175, 80, 0.3);
+            --dot-bg: radial-gradient(circle at 30% 28%, #a5d6a7 0%, #4caf50 100%);
+            --dot-shadow: 0 0 12px rgba(76, 175, 80, 0.5);
+            --accent-color: #4CAF50;
+            --badge-color: #a5d6a7;
+            --badge-bg: rgba(24, 38, 29, 0.85);
+            --badge-border: rgba(76, 175, 80, 0.35);
+            --branding-color: rgba(76, 175, 80, 0.5);
+        }
+
+        /* 5. British Racing Green (Aston Martin) */
+        .theme-racing_green {
+            --vignette-color: rgba(11, 143, 87, 0.03);
+            --card-bg: linear-gradient(170deg, #0E2017 0%, #091710 50%, #040c07 100%);
+            --card-border: #355649;
+            --card-top-bg: linear-gradient(180deg, rgba(11, 143, 87, 0.08) 0%, rgba(11, 143, 87, 0.02) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.15) 100%);
+            --divider-line: #040c07;
+            --pin-bg: linear-gradient(180deg, #6ee7b7 0%, #0b8f57 50%, #064e3b 100%);
+            --digit-color: #FAFAF6;
+            --digit-shadow: 0 0 16px rgba(11, 143, 87, 0.3);
+            --dot-bg: radial-gradient(circle at 30% 28%, #a7f3d0 0%, #0b8f57 100%);
+            --dot-shadow: 0 0 12px rgba(11, 143, 87, 0.5);
+            --accent-color: #0B8F57;
+            --badge-color: #a7f3d0;
+            --badge-bg: rgba(14, 32, 23, 0.85);
+            --badge-border: rgba(11, 143, 87, 0.35);
+            --branding-color: rgba(11, 143, 87, 0.5);
+        }
+
+        /* 6. Ruby Executive (Premium Red) */
+        .theme-ruby_executive {
+            --vignette-color: rgba(211, 47, 47, 0.03);
+            --card-bg: linear-gradient(170deg, #221515 0%, #170d0d 50%, #0a0505 100%);
+            --card-border: #5B3A3A;
+            --card-top-bg: linear-gradient(180deg, rgba(211, 47, 47, 0.08) 0%, rgba(211, 47, 47, 0.02) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.15) 100%);
+            --divider-line: #0a0505;
+            --pin-bg: linear-gradient(180deg, #ef5350 0%, #d32f2f 50%, #b71c1c 100%);
+            --digit-color: #FAFAFA;
+            --digit-shadow: 0 0 16px rgba(211, 47, 47, 0.3);
+            --dot-bg: radial-gradient(circle at 30% 28%, #ff8a80 0%, #d32f2f 100%);
+            --dot-shadow: 0 0 12px rgba(211, 47, 47, 0.5);
+            --accent-color: #D32F2F;
+            --badge-color: #ff8a80;
+            --badge-bg: rgba(34, 21, 21, 0.85);
+            --badge-border: rgba(211, 47, 47, 0.35);
+            --branding-color: rgba(211, 47, 47, 0.5);
+        }
+
+        /* 7. Burgundy Prestige (Wine & Leather) */
+        .theme-burgundy_prestige {
+            --vignette-color: rgba(142, 36, 48, 0.03);
+            --card-bg: linear-gradient(170deg, #2A1616 0%, #1e0e0e 50%, #100606 100%);
+            --card-border: #634545;
+            --card-top-bg: linear-gradient(180deg, rgba(142, 36, 48, 0.08) 0%, rgba(142, 36, 48, 0.02) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.15) 100%);
+            --divider-line: #100606;
+            --pin-bg: linear-gradient(180deg, #e57373 0%, #8e2430 50%, #4a1017 100%);
+            --digit-color: #FFF9F8;
+            --digit-shadow: 0 0 16px rgba(142, 36, 48, 0.3);
+            --dot-bg: radial-gradient(circle at 30% 28%, #ffcdd2 0%, #8e2430 100%);
+            --dot-shadow: 0 0 12px rgba(142, 36, 48, 0.5);
+            --accent-color: #8E2430;
+            --badge-color: #ffcdd2;
+            --badge-bg: rgba(42, 22, 22, 0.85);
+            --badge-border: rgba(142, 36, 48, 0.35);
+            --branding-color: rgba(142, 36, 48, 0.5);
+        }
+
+        /* 8. Crimson Royal (Ferrari Dashboard) */
+        .theme-crimson_royal {
+            --vignette-color: rgba(198, 40, 40, 0.03);
+            --card-bg: linear-gradient(170deg, #231313 0%, #180b0b 50%, #0c0404 100%);
+            --card-border: #604040;
+            --card-top-bg: linear-gradient(180deg, rgba(198, 40, 40, 0.08) 0%, rgba(198, 40, 40, 0.02) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.15) 100%);
+            --divider-line: #0c0404;
+            --pin-bg: linear-gradient(180deg, #ef5350 0%, #c62828 50%, #8e0000 100%);
+            --digit-color: #FFFFFF;
+            --digit-shadow: 0 0 16px rgba(198, 40, 40, 0.3);
+            --dot-bg: radial-gradient(circle at 30% 28%, #ff8a80 0%, #c62828 100%);
+            --dot-shadow: 0 0 12px rgba(198, 40, 40, 0.5);
+            --accent-color: #C62828;
+            --badge-color: #ff8a80;
+            --badge-bg: rgba(35, 19, 19, 0.85);
+            --badge-border: rgba(198, 40, 40, 0.35);
+            --branding-color: rgba(198, 40, 40, 0.5);
+        }
+
+        /* 9. Royal Sapphire (BMW Digital Cockpit) */
+        .theme-royal_sapphire {
+            --vignette-color: rgba(46, 125, 255, 0.03);
+            --card-bg: linear-gradient(170deg, #162033 0%, #0d1524 50%, #050b16 100%);
+            --card-border: #36527A;
+            --card-top-bg: linear-gradient(180deg, rgba(46, 125, 255, 0.08) 0%, rgba(46, 125, 255, 0.02) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.15) 100%);
+            --divider-line: #050b16;
+            --pin-bg: linear-gradient(180deg, #64b5f6 0%, #2e7dff 50%, #1565c0 100%);
+            --digit-color: #FFFFFF;
+            --digit-shadow: 0 0 16px rgba(46, 125, 255, 0.35);
+            --dot-bg: radial-gradient(circle at 30% 28%, #90caf9 0%, #2e7dff 100%);
+            --dot-shadow: 0 0 12px rgba(46, 125, 255, 0.5);
+            --accent-color: #2E7DFF;
+            --badge-color: #90caf9;
+            --badge-bg: rgba(22, 32, 51, 0.85);
+            --badge-border: rgba(46, 125, 255, 0.35);
+            --branding-color: rgba(46, 125, 255, 0.5);
+        }
+
+        /* 10. Midnight Navy */
+        .theme-midnight_navy {
+            --vignette-color: rgba(79, 139, 255, 0.03);
+            --card-bg: linear-gradient(170deg, #182336 0%, #0f1828 50%, #070e1b 100%);
+            --card-border: #4E6589;
+            --card-top-bg: linear-gradient(180deg, rgba(79, 139, 255, 0.08) 0%, rgba(79, 139, 255, 0.02) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.15) 100%);
+            --divider-line: #070e1b;
+            --pin-bg: linear-gradient(180deg, #93c5fd 0%, #4f8bff 50%, #1d4ed8 100%);
+            --digit-color: #FAFAFA;
+            --digit-shadow: 0 0 16px rgba(79, 139, 255, 0.35);
+            --dot-bg: radial-gradient(circle at 30% 28%, #bfdbfe 0%, #4f8bff 100%);
+            --dot-shadow: 0 0 12px rgba(79, 139, 255, 0.5);
+            --accent-color: #4F8BFF;
+            --badge-color: #bfdbfe;
+            --badge-bg: rgba(24, 35, 54, 0.85);
+            --badge-border: rgba(79, 139, 255, 0.35);
+            --branding-color: rgba(79, 139, 255, 0.5);
+        }
+
+        /* 11. Arctic Ice */
+        .theme-arctic_ice {
+            --vignette-color: rgba(56, 217, 255, 0.03);
+            --card-bg: linear-gradient(170deg, #172126 0%, #0e171c 50%, #060c0f 100%);
+            --card-border: #4B6D77;
+            --card-top-bg: linear-gradient(180deg, rgba(56, 217, 255, 0.08) 0%, rgba(56, 217, 255, 0.02) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.15) 100%);
+            --divider-line: #060c0f;
+            --pin-bg: linear-gradient(180deg, #67e8f9 0%, #38d9ff 50%, #0891b2 100%);
+            --digit-color: #FFFFFF;
+            --digit-shadow: 0 0 16px rgba(56, 217, 255, 0.35);
+            --dot-bg: radial-gradient(circle at 30% 28%, #a5f3fc 0%, #38d9ff 100%);
+            --dot-shadow: 0 0 12px rgba(56, 217, 255, 0.5);
+            --accent-color: #38D9FF;
+            --badge-color: #a5f3fc;
+            --badge-bg: rgba(23, 33, 38, 0.85);
+            --badge-border: rgba(56, 217, 255, 0.35);
+            --branding-color: rgba(56, 217, 255, 0.5);
+        }
+
+        /* 12. Ocean Cyan */
+        .theme-ocean_cyan {
+            --vignette-color: rgba(0, 188, 212, 0.03);
+            --card-bg: linear-gradient(170deg, #172B33 0%, #0e1f26 50%, #061116 100%);
+            --card-border: #47636B;
+            --card-top-bg: linear-gradient(180deg, rgba(0, 188, 212, 0.08) 0%, rgba(0, 188, 212, 0.02) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.15) 100%);
+            --divider-line: #061116;
+            --pin-bg: linear-gradient(180deg, #4dd0e1 0%, #00bcd4 50%, #00838f 100%);
+            --digit-color: #F6FFFF;
+            --digit-shadow: 0 0 16px rgba(0, 188, 212, 0.35);
+            --dot-bg: radial-gradient(circle at 30% 28%, #80deea 0%, #00bcd4 100%);
+            --dot-shadow: 0 0 12px rgba(0, 188, 212, 0.5);
+            --accent-color: #00BCD4;
+            --badge-color: #80deea;
+            --badge-bg: rgba(23, 43, 51, 0.85);
+            --badge-border: rgba(0, 188, 212, 0.35);
+            --branding-color: rgba(0, 188, 212, 0.5);
+        }
+
+        /* 13. Royal Purple */
+        .theme-royal_purple {
+            --vignette-color: rgba(142, 68, 255, 0.03);
+            --card-bg: linear-gradient(170deg, #1F1930 0%, #140f21 50%, #0a0712 100%);
+            --card-border: #50416E;
+            --card-top-bg: linear-gradient(180deg, rgba(142, 68, 255, 0.08) 0%, rgba(142, 68, 255, 0.02) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.15) 100%);
+            --divider-line: #0a0712;
+            --pin-bg: linear-gradient(180deg, #c084fc 0%, #8e44ff 50%, #6b21a8 100%);
+            --digit-color: #FAFAFA;
+            --digit-shadow: 0 0 16px rgba(142, 68, 255, 0.35);
+            --dot-bg: radial-gradient(circle at 30% 28%, #e9d5ff 0%, #8e44ff 100%);
+            --dot-shadow: 0 0 12px rgba(142, 68, 255, 0.5);
+            --accent-color: #8E44FF;
+            --badge-color: #e9d5ff;
+            --badge-bg: rgba(31, 25, 48, 0.85);
+            --badge-border: rgba(142, 68, 255, 0.35);
+            --branding-color: rgba(142, 68, 255, 0.5);
+        }
+
+        /* 14. Amethyst Elite */
+        .theme-amethyst_elite {
+            --vignette-color: rgba(162, 89, 255, 0.03);
+            --card-bg: linear-gradient(170deg, #241A2E 0%, #181021 50%, #0d0714 100%);
+            --card-border: #5D5174;
+            --card-top-bg: linear-gradient(180deg, rgba(162, 89, 255, 0.08) 0%, rgba(162, 89, 255, 0.02) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.15) 100%);
+            --divider-line: #0d0714;
+            --pin-bg: linear-gradient(180deg, #d8b4fe 0%, #a259ff 50%, #7e22ce 100%);
+            --digit-color: #FFFFFF;
+            --digit-shadow: 0 0 16px rgba(162, 89, 255, 0.35);
+            --dot-bg: radial-gradient(circle at 30% 28%, #f3e8ff 0%, #a259ff 100%);
+            --dot-shadow: 0 0 12px rgba(162, 89, 255, 0.5);
+            --accent-color: #A259FF;
+            --badge-color: #f3e8ff;
+            --badge-bg: rgba(36, 26, 46, 0.85);
+            --badge-border: rgba(162, 89, 255, 0.35);
+            --branding-color: rgba(162, 89, 255, 0.5);
+        }
+
+        /* 15. Platinum Silver */
+        .theme-platinum_silver {
+            --vignette-color: rgba(255, 255, 255, 0.02);
+            --card-bg: linear-gradient(170deg, #262626 0%, #1c1c1c 50%, #101010 100%);
+            --card-border: #5A5A5A;
+            --card-top-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%);
+            --divider-line: #101010;
+            --pin-bg: linear-gradient(180deg, #f1f5f9 0%, #c7ccd4 50%, #64748b 100%);
+            --digit-color: #FFFFFF;
+            --digit-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+            --dot-bg: radial-gradient(circle at 30% 28%, #ffffff 0%, #c7ccd4 100%);
+            --dot-shadow: 0 0 10px rgba(199, 204, 212, 0.4);
+            --accent-color: #C7CCD4;
+            --badge-color: #ffffff;
+            --badge-bg: rgba(38, 38, 38, 0.85);
+            --badge-border: rgba(199, 204, 212, 0.35);
+            --branding-color: rgba(199, 204, 212, 0.5);
+        }
+
+        /* 16. Graphite Gray */
+        .theme-graphite_gray {
+            --vignette-color: rgba(255, 255, 255, 0.02);
+            --card-bg: linear-gradient(170deg, #2A2A2A 0%, #1e1e1e 50%, #111111 100%);
+            --card-border: #555555;
+            --card-top-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%);
+            --divider-line: #111111;
+            --pin-bg: linear-gradient(180deg, #e0e0e0 0%, #9e9e9e 50%, #616161 100%);
+            --digit-color: #F5F5F5;
+            --digit-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+            --dot-bg: radial-gradient(circle at 30% 28%, #ffffff 0%, #9e9e9e 100%);
+            --dot-shadow: 0 0 10px rgba(158, 158, 158, 0.4);
+            --accent-color: #9E9E9E;
+            --badge-color: #f5f5f5;
+            --badge-bg: rgba(42, 42, 42, 0.85);
+            --badge-border: rgba(158, 158, 158, 0.35);
+            --branding-color: rgba(158, 158, 158, 0.5);
+        }
+
+        /* 17. Copper Elite */
+        .theme-copper_elite {
+            --vignette-color: rgba(184, 115, 51, 0.03);
+            --card-bg: linear-gradient(170deg, #201A18 0%, #171110 50%, #090909 100%);
+            --card-border: #5C4537;
+            --card-top-bg: linear-gradient(180deg, rgba(184, 115, 51, 0.08) 0%, rgba(184, 115, 51, 0.02) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.15) 100%);
+            --divider-line: #090909;
+            --pin-bg: linear-gradient(180deg, #fdba74 0%, #b87333 50%, #7c2d12 100%);
+            --digit-color: #FFF8F2;
+            --digit-shadow: 0 0 16px rgba(184, 115, 51, 0.35);
+            --dot-bg: radial-gradient(circle at 30% 28%, #ffedd5 0%, #b87333 100%);
+            --dot-shadow: 0 0 12px rgba(184, 115, 51, 0.5);
+            --accent-color: #B87333;
+            --badge-color: #ffedd5;
+            --badge-bg: rgba(32, 26, 24, 0.85);
+            --badge-border: rgba(184, 115, 51, 0.35);
+            --branding-color: rgba(184, 115, 51, 0.5);
+        }
+
+        /* 18. Rose Gold */
+        .theme-rose_gold {
+            --vignette-color: rgba(232, 168, 124, 0.03);
+            --card-bg: linear-gradient(170deg, #241C1B 0%, #191211 50%, #0a0909 100%);
+            --card-border: #6A504A;
+            --card-top-bg: linear-gradient(180deg, rgba(232, 168, 124, 0.08) 0%, rgba(232, 168, 124, 0.02) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.15) 100%);
+            --divider-line: #0a0909;
+            --pin-bg: linear-gradient(180deg, #fed7aa 0%, #e8a87c 50%, #9a3412 100%);
+            --digit-color: #FFF8F6;
+            --digit-shadow: 0 0 16px rgba(232, 168, 124, 0.35);
+            --dot-bg: radial-gradient(circle at 30% 28%, #ffedd5 0%, #e8a87c 100%);
+            --dot-shadow: 0 0 12px rgba(232, 168, 124, 0.5);
+            --accent-color: #E8A87C;
+            --badge-color: #ffedd5;
+            --badge-bg: rgba(36, 28, 27, 0.85);
+            --badge-border: rgba(232, 168, 124, 0.35);
+            --branding-color: rgba(232, 168, 124, 0.5);
+        }
+
+        /* 19. Champagne Gold */
+        .theme-champagne_gold {
+            --vignette-color: rgba(229, 192, 123, 0.03);
+            --card-bg: linear-gradient(170deg, #24221D 0%, #191713 50%, #0b0a08 100%);
+            --card-border: #6D6655;
+            --card-top-bg: linear-gradient(180deg, rgba(229, 192, 123, 0.08) 0%, rgba(229, 192, 123, 0.02) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.15) 100%);
+            --divider-line: #0b0a08;
+            --pin-bg: linear-gradient(180deg, #fef08a 0%, #e5c07b 50%, #854d0e 100%);
+            --digit-color: #FFFDF7;
+            --digit-shadow: 0 0 16px rgba(229, 192, 123, 0.35);
+            --dot-bg: radial-gradient(circle at 30% 28%, #fef9c3 0%, #e5c07b 100%);
+            --dot-shadow: 0 0 12px rgba(229, 192, 123, 0.5);
+            --accent-color: #E5C07B;
+            --badge-color: #fef9c3;
+            --badge-bg: rgba(36, 34, 29, 0.85);
+            --badge-border: rgba(229, 192, 123, 0.35);
+            --branding-color: rgba(229, 192, 123, 0.5);
+        }
+
+        /* 20. Matte Black Diamond (Ultra Minimal) */
+        .theme-matte_black_diamond {
+            --vignette-color: rgba(255, 255, 255, 0.015);
+            --card-bg: linear-gradient(170deg, #181818 0%, #101010 50%, #010101 100%);
+            --card-border: #3A3A3A;
+            --card-top-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.1) 100%);
+            --divider-line: #010101;
+            --pin-bg: linear-gradient(180deg, #ffffff 0%, #f0f0f0 50%, #a3a3a3 100%);
+            --digit-color: #FCFCFC;
+            --digit-shadow: 0 2px 10px rgba(0, 0, 0, 0.95);
+            --dot-bg: radial-gradient(circle at 30% 28%, #ffffff 0%, #f0f0f0 100%);
+            --dot-shadow: 0 0 10px rgba(240, 240, 240, 0.4);
+            --accent-color: #F0F0F0;
+            --badge-color: #fcfcfc;
+            --badge-bg: rgba(24, 24, 24, 0.85);
+            --badge-border: rgba(240, 240, 240, 0.3);
+            --branding-color: rgba(240, 240, 240, 0.4);
+        }
+
+        /* 21. Liquid Glass Dark (Translucent Liquid Cyan) */
+        .theme-liquid_glass {
+            --vignette-color: rgba(56, 189, 248, 0.08);
+            --card-bg: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.5) 100%);
+            --card-border: rgba(56, 189, 248, 0.4);
+            --card-top-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.03) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(15, 23, 42, 0.6) 0%, rgba(2, 6, 23, 0.4) 100%);
+            --divider-line: rgba(56, 189, 248, 0.35);
+            --pin-bg: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+            --digit-color: #ffffff;
+            --digit-shadow: 0 0 20px rgba(56, 189, 248, 0.45), 0 2px 10px rgba(0, 0, 0, 0.9);
+            --dot-bg: radial-gradient(circle at 30% 28%, #7dd3fc 0%, #38bdf8 50%, #0284c7 100%);
+            --dot-shadow: 0 0 14px rgba(56, 189, 248, 0.8);
+            --accent-color: #38bdf8;
+            --badge-color: #f1f5f9;
+            --badge-bg: rgba(15, 23, 42, 0.85);
+            --badge-border: rgba(56, 189, 248, 0.4);
+            --branding-color: rgba(56, 189, 248, 0.6);
+        }
+
+        /* 21b. Apple Liquid Glass (Cinematic Dark Sapphire) */
+        .theme-apple_liquid_glass {
+            --vignette-color: rgba(255, 255, 255, 0.02);
+            --card-bg: rgba(255, 255, 255, 0.12);
+            --card-border: rgba(255, 255, 255, 0.18);
+            --card-top-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 50%);
+            --card-bot-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+            --divider-line: rgba(255, 255, 255, 0.08);
+            --pin-bg: #D4AF37;
+            --digit-color: #FFFFFF;
+            --digit-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            --dot-bg: radial-gradient(circle at 30% 28%, #FFFFFF 0%, #D8D8D8 100%);
+            --dot-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            --accent-color: #D4AF37;
+            --badge-color: #D8D8D8;
+            --badge-bg: rgba(255, 255, 255, 0.12);
+            --badge-border: rgba(255, 255, 255, 0.18);
+            --branding-color: rgba(255, 255, 255, 0.35);
+        }
+
+        /* Apple Liquid Glass Overrides */
+        .theme-apple_liquid_glass #scene {
+            background: #000000 !important;
+        }
+        .theme-apple_liquid_glass #scene::before {
+            content: '' !important;
+            position: absolute !important;
+            inset: 0 !important;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 45%),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 70%) !important;
+            pointer-events: none !important;
+            z-index: 0 !important;
+        }
+        .theme-apple_liquid_glass .flip-card {
+            background: rgba(255, 255, 255, 0.12) !important;
+            backdrop-filter: blur(24px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.18) !important;
+            border-radius: 48px !important;
+            box-shadow: 
+                0 12px 40px rgba(0, 0, 0, 0.45),
+                inset 0 1px rgba(255, 255, 255, 0.35),
+                inset 0 -1px rgba(255, 255, 255, 0.05) !important;
+            animation: appleGlassFloat 8s ease-in-out infinite alternate;
+            overflow: visible !important;
+        }
+        .theme-apple_liquid_glass .flip-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0) 70%);
+            background-size: 200% 200%;
+            background-position: -200% 0;
+            pointer-events: none;
+            z-index: 13;
+            border-radius: 48px;
+            animation: appleGlassShimmerSweep 12s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+        }
+        .theme-apple_liquid_glass .flip-card::after {
+            content: '';
+            position: absolute;
+            top: 1px;
+            left: 16px;
+            right: 16px;
+            height: 1.5px;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.55) 50%, rgba(255,255,255,0) 100%);
+            pointer-events: none;
+            z-index: 14;
+        }
+        .theme-apple_liquid_glass .card-top,
+        .theme-apple_liquid_glass .flipper-top {
+            border-radius: 48px 48px 0 0 !important;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.02) 100%) !important;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.25) !important;
+        }
+        .theme-apple_liquid_glass .card-bottom,
+        .theme-apple_liquid_glass .flipper-bottom {
+            border-radius: 0 0 48px 48px !important;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.12) 100%) !important;
+        }
+        .theme-apple_liquid_glass .card-divider {
+            height: 1px !important;
+            background: rgba(255, 255, 255, 0.08) !important;
+            border: none !important;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
+        }
+        .theme-apple_liquid_glass .card-divider::before,
+        .theme-apple_liquid_glass .card-divider::after {
+            content: '' !important;
+            width: 6px !important;
+            height: 10px !important;
+            border-radius: 3px !important;
+            background: radial-gradient(circle at 35% 35%, #fff6d1 0%, #D4AF37 60%, #876211 100%) !important;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.4) !important;
+        }
+        .theme-apple_liquid_glass .card-divider::before {
+            left: 8px !important;
+        }
+        .theme-apple_liquid_glass .card-divider::after {
+            right: 8px !important;
+        }
+        .theme-apple_liquid_glass .divider-dot {
+            width: 10px !important;
+            height: 10px !important;
+            border-radius: 50% !important;
+            background: radial-gradient(circle at 35% 35%, #fff6d1 0%, #D4AF37 60%, #876211 100%) !important;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.4) !important;
+            border: 1px solid rgba(0, 0, 0, 0.4) !important;
+        }
+        .theme-apple_liquid_glass .digit-text {
+            font-family: -apple-system-ny, "New York", "Cormorant Garamond", "Georgia", serif !important;
+            font-weight: 500 !important;
+            color: #FFFFFF !important;
+            text-shadow: 
+                -1px -1px 0px rgba(255, 255, 255, 0.25), 
+                1px 1px 0px rgba(0, 0, 0, 0.55), 
+                0 6px 12px rgba(0, 0, 0, 0.35) !important;
+            letter-spacing: -0.02em !important;
+        }
+        .theme-apple_liquid_glass #greeting-badge {
+            background: rgba(255, 255, 255, 0.12) !important;
+            backdrop-filter: blur(24px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+            border: 1px solid rgba(212, 175, 55, 0.45) !important;
+            border-radius: 40px !important;
+            box-shadow: 
+                0 10px 30px rgba(0,0,0,0.35),
+                inset 0 1px rgba(255, 255, 255, 0.25),
+                inset 0 -1px rgba(255, 255, 255, 0.05) !important;
+            color: #D8D8D8 !important;
+            font-family: -apple-system-ny, "New York", "Cormorant Garamond", "Georgia", serif !important;
+            font-weight: 500 !important;
+            letter-spacing: 0.3em !important;
+            padding: clamp(8px, 1.2vh, 14px) clamp(26px, 3.2vw, 50px) !important;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5) !important;
+            animation: appleGlassFloat 8s ease-in-out infinite alternate;
+        }
+        .theme-apple_liquid_glass #greeting-badge .badge-ornament {
+            color: #D4AF37 !important;
+            text-shadow: 0 0 6px rgba(212, 175, 55, 0.6) !important;
+        }
+        .theme-apple_liquid_glass #date-badge {
+            background: rgba(255, 255, 255, 0.12) !important;
+            backdrop-filter: blur(24px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.18) !important;
+            border-radius: 50px !important;
+            box-shadow: 
+                0 10px 30px rgba(0,0,0,0.35),
+                inset 0 1px rgba(255, 255, 255, 0.25),
+                inset 0 -1px rgba(255, 255, 255, 0.05) !important;
+            color: #D8D8D8 !important;
+            font-family: -apple-system-ny, "New York", "Cormorant Garamond", "Georgia", serif !important;
+            font-weight: 500 !important;
+            letter-spacing: 0.25em !important;
+            padding: clamp(8px, 1.2vh, 14px) clamp(26px, 3.2vw, 50px) !important;
+            animation: appleGlassFloat 8s ease-in-out infinite alternate 1.5s;
+        }
+        .theme-apple_liquid_glass #date-badge .date-dayname {
+            color: #FFFFFF !important;
+            font-weight: 600 !important;
+        }
+        .theme-apple_liquid_glass #date-badge .date-sep {
+            color: #D4AF37 !important;
+            opacity: 0.9 !important;
+        }
+        .theme-apple_liquid_glass #date-badge .date-num {
+            background: rgba(255, 255, 255, 0.10) !important;
+            border: 1px solid rgba(255, 255, 255, 0.20) !important;
+            box-shadow: inset 0 1px rgba(255, 255, 255, 0.2) !important;
+            color: #FFFFFF !important;
+            border-radius: 8px !important;
+            padding: 2px 10px !important;
+        }
+        .theme-apple_liquid_glass #ampm-badge {
+            background: rgba(255, 255, 255, 0.12) !important;
+            backdrop-filter: blur(24px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.18) !important;
+            border-radius: 10px !important;
+            box-shadow: 
+                0 4px 12px rgba(0,0,0,0.35),
+                inset 0 1px rgba(255, 255, 255, 0.25),
+                inset 0 -1px rgba(255, 255, 255, 0.05) !important;
+            color: #D4AF37 !important;
+            font-family: -apple-system-ny, "New York", "Cormorant Garamond", "Georgia", serif !important;
+            font-weight: 600 !important;
+            letter-spacing: 0.1em !important;
+            padding: clamp(3px, 0.5vh, 6px) clamp(8px, 1.2vh, 14px) !important;
+            text-shadow: 0 0 4px rgba(212, 175, 55, 0.3) !important;
+        }
+        .theme-apple_liquid_glass .sep-dot,
+        .theme-apple_liquid_glass .colon-dot {
+            background: radial-gradient(circle at 35% 35%, #FFFFFF 0%, #D8D8D8 100%) !important;
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.3), 0 2px 4px rgba(0,0,0,0.5) !important;
+        }
+        .theme-apple_liquid_glass .flip-top-out {
+            animation: flipTopOut 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+        }
+        .theme-apple_liquid_glass .flip-bottom-in {
+            animation: flipBottomIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1) 0.35s forwards !important;
+            transform: rotateX(90deg);
+        }
+
+        @keyframes appleGlassFloat {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-6px); }
+        }
+        @keyframes appleGlassShimmerSweep {
+            0% { background-position: -200% 0; }
+            20% { background-position: 200% 200%; }
+            100% { background-position: 200% 200%; }
+        }
+
+        /* ═══ 30 PREMIUM CARD SHAPE STYLES ═══ */
+
+            /* 1. Rectangle */
+            .shape-rectangle .flip-card {
+                border-radius: 0;
+            }
+
+            .shape-rectangle .card-top,
+            .shape-rectangle .flipper-top {
+                border-radius: 0;
+            }
+
+            .shape-rectangle .card-bottom,
+            .shape-rectangle .flipper-bottom {
+                border-radius: 0;
+            }
+
+            /* 2. Rounded Rectangle */
+            .shape-rounded_rectangle .flip-card {
+                border-radius: clamp(10px, 1.5vh, 20px);
+            }
+
+            .shape-rounded_rectangle .card-top,
+            .shape-rounded_rectangle .flipper-top {
+                border-radius: clamp(10px, 1.5vh, 20px) clamp(10px, 1.5vh, 20px) 0 0;
+            }
+
+            .shape-rounded_rectangle .card-bottom,
+            .shape-rounded_rectangle .flipper-bottom {
+                border-radius: 0 0 clamp(10px, 1.5vh, 20px) clamp(10px, 1.5vh, 20px);
+            }
+
+            /* 3. Squircle */
+            .shape-squircle .flip-card {
+                border-radius: clamp(24px, 3.5vh, 42px);
+            }
+
+            .shape-squircle .card-top,
+            .shape-squircle .flipper-top {
+                border-radius: clamp(24px, 3.5vh, 42px) clamp(24px, 3.5vh, 42px) 0 0;
+            }
+
+            .shape-squircle .card-bottom,
+            .shape-squircle .flipper-bottom {
+                border-radius: 0 0 clamp(24px, 3.5vh, 42px) clamp(24px, 3.5vh, 42px);
+            }
+
+            /* 4. Octagon */
+            .shape-octagon .flip-card {
+                clip-path: polygon(18px 0, calc(100% - 18px) 0, 100% 18px, 100% calc(100% - 18px), calc(100% - 18px) 100%, 18px 100%, 0 calc(100% - 18px), 0 18px);
+                border-radius: 0;
+            }
+
+            .shape-octagon .card-top,
+            .shape-octagon .flipper-top {
+                clip-path: polygon(18px 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%, 0 18px);
+                border-radius: 0;
+            }
+
+            .shape-octagon .card-bottom,
+            .shape-octagon .flipper-bottom {
+                clip-path: polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 18px 100%, 0 calc(100% - 18px));
+                border-radius: 0;
+            }
+
+            /* 5. Hexagon */
+            .shape-hexagon .flip-card {
+                clip-path: polygon(12% 0, 88% 0, 100% 15%, 100% 85%, 88% 100%, 12% 100%, 0 85%, 0 15%);
+                border-radius: 0;
+            }
+
+            .shape-hexagon .card-top,
+            .shape-hexagon .flipper-top {
+                clip-path: polygon(12% 0, 88% 0, 100% 30%, 100% 100%, 0 100%, 0 30%);
+                border-radius: 0;
+            }
+
+            .shape-hexagon .card-bottom,
+            .shape-hexagon .flipper-bottom {
+                clip-path: polygon(0 0, 100% 0, 100% 70%, 88% 100%, 12% 100%, 0 70%);
+                border-radius: 0;
+            }
+
+            /* 6. Pentagon */
+            .shape-pentagon .flip-card {
+                clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+                border-radius: 0;
+            }
+
+            .shape-pentagon .card-top,
+            .shape-pentagon .flipper-top {
+                clip-path: polygon(50% 0%, 100% 38%, 100% 100%, 0 100%, 0% 38%);
+                border-radius: 0;
+            }
+
+            .shape-pentagon .card-bottom,
+            .shape-pentagon .flipper-bottom {
+                clip-path: polygon(0 0, 100% 0, 100% 38%, 82% 100%, 18% 100%, 0 100%);
+                border-radius: 0;
+            }
+
+            /* 7. Diamond */
+            .shape-diamond .flip-card {
+                clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+                border-radius: 0;
+            }
+
+            .shape-diamond .card-top,
+            .shape-diamond .flipper-top {
+                clip-path: polygon(50% 0%, 100% 50%, 100% 100%, 0 100%, 0% 50%);
+                border-radius: 0;
+            }
+
+            .shape-diamond .card-bottom,
+            .shape-diamond .flipper-bottom {
+                clip-path: polygon(0 0, 100% 0, 100% 50%, 50% 100%, 0% 50%);
+                border-radius: 0;
+            }
+
+            /* 8. Shield */
+            .shape-shield .flip-card {
+                clip-path: polygon(0% 0%, 100% 0%, 100% 45%, 50% 100%, 0% 45%);
+                border-radius: 0;
+            }
+
+            .shape-shield .card-top,
+            .shape-shield .flipper-top {
+                clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 0 90%);
+                border-radius: 0;
+            }
+
+            .shape-shield .card-bottom,
+            .shape-shield .flipper-bottom {
+                clip-path: polygon(0 0, 100% 0, 100% 45%, 50% 100%, 0% 45%);
+                border-radius: 0;
+            }
+
+            /* 9. Capsule */
+            .shape-capsule .flip-card {
+                border-radius: clamp(40px, 8vh, 90px);
+            }
+
+            .shape-capsule .card-top,
+            .shape-capsule .flipper-top {
+                border-radius: clamp(40px, 8vh, 90px) clamp(40px, 8vh, 90px) 0 0;
+            }
+
+            .shape-capsule .card-bottom,
+            .shape-capsule .flipper-bottom {
+                border-radius: 0 0 clamp(40px, 8vh, 90px) clamp(40px, 8vh, 90px);
+            }
+
+            /* 10. Pill */
+            .shape-pill .flip-card {
+                border-radius: 9999px;
+            }
+
+            .shape-pill .card-top,
+            .shape-pill .flipper-top {
+                border-radius: 9999px 9999px 0 0;
+            }
+
+            .shape-pill .card-bottom,
+            .shape-pill .flipper-bottom {
+                border-radius: 0 0 9999px 9999px;
+            }
+
+            /* 11. Circle */
+            .shape-circle .flip-card {
+                border-radius: 50%;
+                aspect-ratio: 1;
+            }
+
+            .shape-circle .card-top,
+            .shape-circle .flipper-top {
+                border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+            }
+
+            .shape-circle .card-bottom,
+            .shape-circle .flipper-bottom {
+                border-radius: 0 0 50% 50% / 0 0 100% 100%;
+            }
+
+            /* 12. Oval */
+            .shape-oval .flip-card {
+                border-radius: 50% / 30%;
+            }
+
+            .shape-oval .card-top,
+            .shape-oval .flipper-top {
+                border-radius: 50% 50% 0 0 / 60% 60% 0 0;
+            }
+
+            .shape-oval .card-bottom,
+            .shape-oval .flipper-bottom {
+                border-radius: 0 0 50% 50% / 0 0 60% 60%;
+            }
+
+            /* 13. Trapezoid */
+            .shape-trapezoid .flip-card {
+                clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+                border-radius: 0;
+            }
+
+            .shape-trapezoid .card-top,
+            .shape-trapezoid .flipper-top {
+                clip-path: polygon(20% 0%, 80% 0%, 90% 100%, 10% 100%);
+                border-radius: 0;
+            }
+
+            .shape-trapezoid .card-bottom,
+            .shape-trapezoid .flipper-bottom {
+                clip-path: polygon(10% 0, 90% 0, 100% 100%, 0% 100%);
+                border-radius: 0;
+            }
+
+            /* 14. Parallelogram */
+            .shape-parallelogram .flip-card {
+                clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+                border-radius: 0;
+            }
+
+            .shape-parallelogram .card-top,
+            .shape-parallelogram .flipper-top {
+                clip-path: polygon(25% 0%, 100% 0%, 87.5% 100%, 12.5% 100%);
+                border-radius: 0;
+            }
+
+            .shape-parallelogram .card-bottom,
+            .shape-parallelogram .flipper-bottom {
+                clip-path: polygon(12.5% 0, 87.5% 0, 75% 100%, 0% 100%);
+                border-radius: 0;
+            }
+
+            /* 15. Rhombus */
+            .shape-rhombus .flip-card {
+                clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+                border-radius: 0;
+            }
+
+            .shape-rhombus .card-top,
+            .shape-rhombus .flipper-top {
+                clip-path: polygon(50% 0%, 100% 50%, 100% 100%, 0 100%, 0% 50%);
+                border-radius: 0;
+            }
+
+            .shape-rhombus .card-bottom,
+            .shape-rhombus .flipper-bottom {
+                clip-path: polygon(0 0, 100% 0, 100% 50%, 50% 100%, 0% 50%);
+                border-radius: 0;
+            }
+
+            /* 16. Chamfered */
+            .shape-chamfered .flip-card {
+                clip-path: polygon(12px 0, calc(100% - 12px) 0, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px), 0 12px);
+                border-radius: 0;
+            }
+
+            .shape-chamfered .card-top,
+            .shape-chamfered .flipper-top {
+                clip-path: polygon(12px 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%, 0 12px);
+                border-radius: 0;
+            }
+
+            .shape-chamfered .card-bottom,
+            .shape-chamfered .flipper-bottom {
+                clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px));
+                border-radius: 0;
+            }
+
+            /* 17. Beveled */
+            .shape-beveled .flip-card {
+                clip-path: polygon(24px 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0 24px);
+                border-radius: 0;
+            }
+
+            .shape-beveled .card-top,
+            .shape-beveled .flipper-top {
+                clip-path: polygon(24px 0, 100% 0, 100% 100%, 0 100%, 0 24px);
+                border-radius: 0;
+            }
+
+            .shape-beveled .card-bottom,
+            .shape-beveled .flipper-bottom {
+                clip-path: polygon(0 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%);
+                border-radius: 0;
+            }
+
+            /* 18. Notched */
+            .shape-notched .flip-card {
+                clip-path: polygon(0% 10%, 10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%);
+                border-radius: 0;
+            }
+
+            .shape-notched .card-top,
+            .shape-notched .flipper-top {
+                clip-path: polygon(0% 10%, 10% 0%, 90% 0%, 100% 10%, 100% 100%, 0% 100%);
+                border-radius: 0;
+            }
+
+            .shape-notched .card-bottom,
+            .shape-notched .flipper-bottom {
+                clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 90% 100%, 10% 100%, 0% 90%);
+                border-radius: 0;
+            }
+
+            /* 19. Cut Corner */
+            .shape-cut_corner .flip-card {
+                clip-path: polygon(16px 0, calc(100% - 16px) 0, 100% 16px, 100% calc(100% - 16px), calc(100% - 16px) 100%, 16px 100%, 0 calc(100% - 16px), 0 16px);
+                border-radius: 0;
+            }
+
+            .shape-cut_corner .card-top,
+            .shape-cut_corner .flipper-top {
+                clip-path: polygon(16px 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%, 0 16px);
+                border-radius: 0;
+            }
+
+            .shape-cut_corner .card-bottom,
+            .shape-cut_corner .flipper-bottom {
+                clip-path: polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 16px 100%, 0 calc(100% - 16px));
+                border-radius: 0;
+            }
+
+            /* 20. Chevron */
+            .shape-chevron .flip-card {
+                clip-path: polygon(0 0, 100% 0, 85% 50%, 100% 100%, 0 100%, 15% 50%);
+                border-radius: 0;
+            }
+
+            .shape-chevron .card-top,
+            .shape-chevron .flipper-top {
+                clip-path: polygon(0 0, 100% 0, 92.5% 100%, 7.5% 100%);
+                border-radius: 0;
+            }
+
+            .shape-chevron .card-bottom,
+            .shape-chevron .flipper-bottom {
+                clip-path: polygon(7.5% 0, 92.5% 0, 100% 100%, 0 100%);
+                border-radius: 0;
+            }
+
+            /* 21. Badge */
+            .shape-badge .flip-card {
+                clip-path: polygon(50% 0%, 100% 30%, 100% 70%, 50% 100%, 0% 70%, 0% 30%);
+                border-radius: 0;
+            }
+
+            .shape-badge .card-top,
+            .shape-badge .flipper-top {
+                clip-path: polygon(50% 0%, 100% 30%, 100% 100%, 0 100%, 0% 30%);
+                border-radius: 0;
+            }
+
+            .shape-badge .card-bottom,
+            .shape-badge .flipper-bottom {
+                clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0% 70%);
+                border-radius: 0;
+            }
+
+            /* 22. Ticket */
+            .shape-ticket .flip-card {
+                clip-path: polygon(0 8%, 4% 0, 96% 0, 100% 8%, 100% 42%, 96% 50%, 100% 58%, 100% 92%, 96% 100%, 4% 100%, 0 92%, 0 58%, 4% 50%, 0 42%);
+                border-radius: 0;
+            }
+
+            .shape-ticket .card-top,
+            .shape-ticket .flipper-top {
+                clip-path: polygon(0 16%, 4% 0, 96% 0, 100% 16%, 100% 84%, 96% 100%, 4% 100%, 0 84%);
+                border-radius: 0;
+            }
+
+            .shape-ticket .card-bottom,
+            .shape-ticket .flipper-bottom {
+                clip-path: polygon(0 0, 4% 0, 96% 0, 100% 0, 100% 84%, 96% 100%, 4% 100%, 0 84%);
+                border-radius: 0;
+            }
+
+            /* 23. Arch */
+            .shape-arch .flip-card {
+                border-radius: clamp(100px, 20vh, 200px) clamp(100px, 20vh, 200px) 0 0;
+            }
+
+            .shape-arch .card-top,
+            .shape-arch .flipper-top {
+                border-radius: clamp(100px, 20vh, 200px) clamp(100px, 20vh, 200px) 0 0;
+            }
+
+            .shape-arch .card-bottom,
+            .shape-arch .flipper-bottom {
+                border-radius: 0;
+            }
+
+            /* 24. Stadium */
+            .shape-stadium .flip-card {
+                border-radius: clamp(60px, 14vh, 140px) / clamp(40px, 6vh, 80px);
+            }
+
+            .shape-stadium .card-top,
+            .shape-stadium .flipper-top {
+                border-radius: clamp(60px, 14vh, 140px) clamp(60px, 14vh, 140px) 0 0 / clamp(40px, 6vh, 80px) clamp(40px, 6vh, 80px) 0 0;
+            }
+
+            .shape-stadium .card-bottom,
+            .shape-stadium .flipper-bottom {
+                border-radius: 0 0 clamp(60px, 14vh, 140px) clamp(60px, 14vh, 140px) / 0 0 clamp(40px, 6vh, 80px) clamp(40px, 6vh, 80px);
+            }
+
+            /* 25. Lozenge */
+            .shape-lozenge .flip-card {
+                clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
+                border-radius: 0;
+            }
+
+            .shape-lozenge .card-top,
+            .shape-lozenge .flipper-top {
+                clip-path: polygon(30% 0%, 70% 0%, 85% 100%, 15% 100%);
+                border-radius: 0;
+            }
+
+            .shape-lozenge .card-bottom,
+            .shape-lozenge .flipper-bottom {
+                clip-path: polygon(15% 0%, 85% 0%, 70% 100%, 30% 100%);
+                border-radius: 0;
+            }
+
+            /* 27. Frame */
+            .shape-frame .flip-card {
+                border: 12px double var(--card-border);
+                border-radius: 8px;
+            }
+
+            .shape-frame .card-top,
+            .shape-frame .flipper-top {
+                border-radius: 0;
+            }
+
+            .shape-frame .card-bottom,
+            .shape-frame .flipper-bottom {
+                border-radius: 0;
+            }
+
+            /* 28. Panel */
+            .shape-panel .flip-card {
+                border-radius: 4px;
+                box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+            }
+
+            .shape-panel .card-top,
+            .shape-panel .flipper-top {
+                border-radius: 4px 4px 0 0;
+            }
+
+            .shape-panel .card-bottom,
+            .shape-panel .flipper-bottom {
+                border-radius: 0 0 4px 4px;
+            }
+
+            /* 29. Card */
+            .shape-card .flip-card {
+                border-radius: 12px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            }
+
+            .shape-card .card-top,
+            .shape-card .flipper-top {
+                border-radius: 12px 12px 0 0;
+            }
+
+            .shape-card .card-bottom,
+            .shape-card .flipper-bottom {
+                border-radius: 0 0 12px 12px;
+            }
+
+            /* 30. Tile */
+            .shape-tile .flip-card {
+                border-radius: 8px;
+                border: 2px solid var(--card-border);
+            }
+
+            .shape-tile .card-top,
+            .shape-tile .flipper-top {
+                border-radius: 6px 6px 0 0;
+            }
+
+            .shape-tile .card-bottom,
+            .shape-tile .flipper-bottom {
+                border-radius: 0 0 6px 6px;
+            }
+
+            .shape-premium_bevel .card-top,
+            .shape-premium_bevel .flipper-top {
+                clip-path: polygon(24px 0, 100% 0, 100% 100%, 0 100%, 0 24px);
+                border-radius: 0;
+            }
+
+            .shape-premium_bevel .card-bottom,
+            .shape-premium_bevel .flipper-bottom {
+                clip-path: polygon(0 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%);
+                border-radius: 0;
+            }
+
+            /* Draw crisp outer borders around all clipped shapes using stacked drop-shadows */
+            .shape-octagon .card-top, .shape-octagon .flipper-top, .shape-octagon .card-bottom, .shape-octagon .flipper-bottom,
+            .shape-hexagon .card-top, .shape-hexagon .flipper-top, .shape-hexagon .card-bottom, .shape-hexagon .flipper-bottom,
+            .shape-pentagon .card-top, .shape-pentagon .flipper-top, .shape-pentagon .card-bottom, .shape-pentagon .flipper-bottom,
+            .shape-diamond .card-top, .shape-diamond .flipper-top, .shape-diamond .card-bottom, .shape-diamond .flipper-bottom,
+            .shape-shield .card-top, .shape-shield .flipper-top, .shape-shield .card-bottom, .shape-shield .flipper-bottom,
+            .shape-trapezoid .card-top, .shape-trapezoid .flipper-top, .shape-trapezoid .card-bottom, .shape-trapezoid .flipper-bottom,
+            .shape-parallelogram .card-top, .shape-parallelogram .flipper-top, .shape-parallelogram .card-bottom, .shape-parallelogram .flipper-bottom,
+            .shape-rhombus .card-top, .shape-rhombus .flipper-top, .shape-rhombus .card-bottom, .shape-rhombus .flipper-bottom,
+            .shape-chamfered .card-top, .shape-chamfered .flipper-top, .shape-chamfered .card-bottom, .shape-chamfered .flipper-bottom,
+            .shape-beveled .card-top, .shape-beveled .flipper-top, .shape-beveled .card-bottom, .shape-beveled .flipper-bottom,
+            .shape-notched .card-top, .shape-notched .flipper-top, .shape-notched .card-bottom, .shape-notched .flipper-bottom,
+            .shape-cut_corner .card-top, .shape-cut_corner .flipper-top, .shape-cut_corner .card-bottom, .shape-cut_corner .flipper-bottom,
+            .shape-chevron .card-top, .shape-chevron .flipper-top, .shape-chevron .card-bottom, .shape-chevron .flipper-bottom,
+            .shape-badge .card-top, .shape-badge .flipper-top, .shape-badge .card-bottom, .shape-badge .flipper-bottom,
+            .shape-ticket .card-top, .shape-ticket .flipper-top, .shape-ticket .card-bottom, .shape-ticket .flipper-bottom,
+            .shape-arch .card-top, .shape-arch .flipper-top, .shape-arch .card-bottom, .shape-arch .flipper-bottom,
+            .shape-frame .card-top, .shape-frame .flipper-top, .shape-frame .card-bottom, .shape-frame .flipper-bottom,
+            .shape-panel .card-top, .shape-panel .flipper-top, .shape-panel .card-bottom, .shape-panel .flipper-bottom,
+            .shape-premium_bevel .card-top, .shape-premium_bevel .flipper-top, .shape-premium_bevel .card-bottom, .shape-premium_bevel .flipper-bottom {
+                filter: drop-shadow(1.5px 0 0 var(--card-border)) drop-shadow(-1.5px 0 0 var(--card-border)) drop-shadow(0 1.5px 0 var(--card-border)) drop-shadow(0 -1.5px 0 var(--card-border));
+            }
+
+            /* Custom User Theme Override */
+            .theme-custom {
+                --vignette-color: rgba(255, 255, 255, 0.02);
+                --card-bg: var(--custom-card-color, #1c1c1e);
+                --card-border: var(--custom-border-color, #4a4a4a);
+                --card-top-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.015) 100%);
+                --card-bot-bg: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%);
+                --divider-line: #000000;
+                --pin-bg: var(--custom-accent-color, #d4af37);
+                --digit-color: var(--custom-digit-color, #ffffff);
+                --digit-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+                --dot-bg: var(--custom-accent-color, #d4af37);
+                --dot-shadow: 0 0 10px var(--custom-accent-color, rgba(255, 255, 255, 0.4));
+                --accent-color: var(--custom-accent-color, #d4af37);
+                --badge-color: var(--custom-digit-color, #ffffff);
+                --badge-bg: rgba(20, 20, 24, 0.85);
+                --badge-border: var(--custom-border-color, #4a4a4a);
+                --branding-color: var(--custom-accent-color, #d4af37);
+            }
+
+            /* Hide elements when toggled off */
+            .hide-seconds #fc-s,
+            .hide-seconds #sep-s {
+                display: none !important;
+            }
+
+            .hide-date #date-badge {
+                display: none !important;
+            }
+
+            .hide-greeting #greeting-badge {
+                display: none !important;
+            }
+
+            /* ═══ MOBILE SETTINGS OVERLAY ══════════════════════ */
+            #mobile-settings-overlay {
+                position: fixed;
+                inset: 0;
+                z-index: 10000;
+                background: rgba(0, 0, 0, 0.4);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                transition: opacity 0.3s ease;
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            #mobile-settings-overlay.settings-overlay-hidden {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            #mobile-settings-panel {
+                background: rgba(20, 20, 24, 0.85);
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                border-radius: 20px;
+                width: 90%;
+                max-width: 420px;
+                padding: 24px;
+                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+                color: #ffffff;
+                font-family: 'Inter', system-ui, sans-serif;
+                transform: scale(1);
+                transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            #mobile-settings-overlay.settings-overlay-hidden #mobile-settings-panel {
+                transform: scale(0.9);
+            }
+
+            .settings-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 20px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                padding-bottom: 12px;
+            }
+
+            .settings-header h2 {
+                font-size: 20px;
+                font-weight: 700;
+                color: var(--accent-color, #d4af37);
+                letter-spacing: 0.05em;
+            }
+
+            #settings-close-btn {
+                background: none;
+                border: none;
+                color: #aaaaaa;
+                font-size: 22px;
+                cursor: pointer;
+                padding: 4px;
+                line-height: 1;
+                transition: color 0.2s;
+            }
+
+            #settings-close-btn:hover {
+                color: #ffffff;
+            }
+
+            .settings-body {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                max-height: 70vh;
+                overflow-y: auto;
+                padding-right: 4px;
+            }
+
+            /* Custom scrollbar for settings drawer */
+            .settings-body::-webkit-scrollbar {
+                width: 6px;
+            }
+            .settings-body::-webkit-scrollbar-track {
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 3px;
+            }
+            .settings-body::-webkit-scrollbar-thumb {
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 3px;
+            }
+
+            .settings-group {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            .settings-group label {
+                font-size: 11px;
+                font-weight: 600;
+                color: #aaaaaa;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+            }
+
+            .settings-group select, 
+            .settings-group input {
+                background: rgba(30, 30, 35, 0.8);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 8px;
+                color: #ffffff;
+                padding: 10px 12px;
+                font-size: 15px;
+                font-family: inherit;
+                outline: none;
+                transition: border-color 0.2s;
+            }
+
+            .settings-group select:focus, 
+            .settings-group input:focus {
+                border-color: var(--accent-color, #d4af37);
+            }
+
+            .settings-group-row {
+                display: flex;
+                align-items: center;
+            }
+
+            .settings-group-row label {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-size: 15px;
+                cursor: pointer;
+                user-select: none;
+            }
+
+            .settings-group-row input[type="checkbox"] {
+                width: 18px;
+                height: 18px;
+                accent-color: var(--accent-color, #d4af37);
+                cursor: pointer;
+            }
+
+            .settings-hint {
+                margin-top: 10px;
+                padding: 10px;
+                background: rgba(212, 175, 55, 0.1);
+                border-radius: 8px;
+                border-left: 3px solid var(--accent-color, #d4af37);
+            }
+
+            .settings-hint p {
+                font-size: 12px;
+                color: #dddddd;
+                line-height: 1.4;
+            }
+
+            /* ═══ RESPONSIVE PORTRAIT LAYOUT FOR 3 CARDS (VERTICAL STACK) ═══ */
+            @media (orientation: portrait) {
+                #clock-container {
+                    max-width: 95vw;
+                    height: 88vh !important;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    gap: clamp(8px, 1.8vh, 20px) !important;
+                    margin-bottom: 4vh !important;
+                }
+                .clock-row {
+                    flex-direction: column !important;
+                    gap: clamp(8px, 1.8vh, 18px) !important;
+                    width: 100%;
+                    max-width: 95vw;
+                }
+                .flip-card {
+                    /* Adjusted scale to prevent overflow on shorter screens */
+                    width: clamp(120px, 18vh, 240px) !important;
+                    height: clamp(160px, 23.5vh, 280px) !important;
+                    border-radius: clamp(8px, 2vw, 16px) !important;
+                }
+                /* Keep circles circle-shaped even in portrait stack */
+                .shape-circle .flip-card {
+                    height: clamp(120px, 18vh, 240px) !important;
+                }
+                .digit-text {
+                    font-size: clamp(80px, 11.5vh, 140px) !important;
+                }
+                /* Hide horizontal separators in vertical stack */
+                .sep, .colon-separator {
+                    display: none !important;
+                }
+                .ampm-badge {
+                    font-size: clamp(8px, 1.1vh, 13px) !important;
+                    padding: clamp(2px, 0.3vh, 5px) clamp(5px, 0.8vh, 12px) !important;
+                    border-radius: clamp(3px, 0.5vh, 6px) !important;
+                    bottom: clamp(6px, 1vh, 12px) !important;
+                    right: clamp(6px, 1vh, 12px) !important;
+                }
+                #greeting-badge {
+                    padding: clamp(4px, 0.8vh, 10px) clamp(14px, 2.5vh, 30px) !important;
+                    font-size: clamp(9px, 1.3vh, 15px) !important;
+                    margin-bottom: 0px !important;
+                }
+                #branding-tag {
+                    position: fixed !important;
+                    bottom: 8px !important;
+                    font-size: clamp(8px, 1vh, 11px) !important;
+                    opacity: 0.5 !important;
+                    margin: 0 !important;
+                }
+            }
+    </style>
+</head>
+
+<body class="theme-classic_retro">
+
+    <div id="scene">
+        <button id="close-btn" onclick="forceClose()" title="Close Screensaver">✕</button>
+
+        <div id="clock-container">
+            <div id="greeting-badge">GOOD MORNING</div>
+
+            <div class="clock-row" id="clock-row">
+                <!-- Hours Card -->
+                <div class="flip-card-wrapper">
+                    <div class="flip-card" id="fc-h">
+                        <div class="card-half card-top">
+                            <div class="digit-wrapper"><div class="digit-text" id="fc-h-top"><span>0</span><span>0</span></div></div>
+                        </div>
+                        <div class="card-half card-bottom">
+                            <div class="digit-wrapper"><div class="digit-text" id="fc-h-bot"><span>0</span><span>0</span></div></div>
+                        </div>
+                        <div class="card-divider">
+                            <div class="divider-dot"></div>
+                        </div>
+                    </div>
+                    <span class="ampm-badge" id="ampm-badge"></span>
+                </div>
+
+                <div class="sep" id="sep-m">
+                    <div class="sep-dot"></div>
+                    <div class="sep-dot"></div>
+                </div>
+
+                <!-- Minutes Card -->
+                <div class="flip-card" id="fc-m">
+                    <div class="card-half card-top">
+                        <div class="digit-wrapper"><div class="digit-text" id="fc-m-top"><span>0</span><span>0</span></div></div>
+                    </div>
+                    <div class="card-half card-bottom">
+                        <div class="digit-wrapper"><div class="digit-text" id="fc-m-bot"><span>0</span><span>0</span></div></div>
+                    </div>
+                    <div class="card-divider">
+                        <div class="divider-dot"></div>
+                    </div>
+                </div>
+
+                <div class="sep" id="sep-s">
+                    <div class="sep-dot"></div>
+                    <div class="sep-dot"></div>
+                </div>
+
+                <!-- Seconds Card -->
+                <div class="flip-card" id="fc-s">
+                    <div class="card-half card-top">
+                        <div class="digit-wrapper"><div class="digit-text" id="fc-s-top"><span>0</span><span>0</span></div></div>
+                    </div>
+                    <div class="card-half card-bottom">
+                        <div class="digit-wrapper"><div class="digit-text" id="fc-s-bot"><span>0</span><span>0</span></div></div>
+                    </div>
+                    <div class="card-divider">
+                        <div class="divider-dot"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="date-badge"></div>
+        </div>
+
+        <div id="branding-tag">FLIP CLOCK SCREENSAVER</div>
+    </div>
+
+    <!-- Mobile Settings Panel -->
+    <div id="mobile-settings-overlay" class="settings-overlay-hidden">
+        <div id="mobile-settings-panel">
+            <div class="settings-header">
+                <h2>Flip Clock Settings</h2>
+                <button id="settings-close-btn" onclick="toggleSettingsMenu()">✕</button>
+            </div>
+            <div class="settings-body">
+                <div class="settings-group">
+                    <label for="set-theme">Theme</label>
+                    <select id="set-theme" onchange="updateSetting('theme', this.value)">
+                        <option value="luxury_black_gold">Luxury Black Gold</option>
+                        <option value="obsidian_titanium">Obsidian Titanium</option>
+                        <option value="champagne_gold">Champagne Gold</option>
+                        <option value="platinum_silver">Platinum Silver</option>
+                        <option value="matte_black_diamond">Matte Black Diamond</option>
+                        <option value="graphite_gray">Graphite Gray</option>
+                        <option value="arctic_ice">Arctic Ice</option>
+                        <option value="ocean_cyan">Ocean Cyan</option>
+                        <option value="midnight_navy">Midnight Navy</option>
+                        <option value="royal_sapphire">Royal Sapphire</option>
+                        <option value="amethyst_elite">Amethyst Elite</option>
+                        <option value="rose_gold">Rose Gold</option>
+                        <option value="copper_elite">Copper Elite</option>
+                        <option value="ruby_executive">Ruby Executive</option>
+                        <option value="minimal_light">Minimalist Light</option>
+                        <option value="royal_purple">Royal Purple</option>
+                        <option value="burgundy_prestige">Burgundy Prestige</option>
+                        <option value="crimson_royal">Crimson Royal</option>
+                        <option value="dark_emerald">Dark Emerald</option>
+                        <option value="forest_green">Forest Green</option>
+                        <option value="racing_green">British Racing Green</option>
+                        <option value="classic_retro">Classic Retro</option>
+                        <option value="liquid_glass">Liquid Glass</option>
+                    </select>
+                </div>
+                <div class="settings-group">
+                    <label for="set-shape">Card Shape</label>
+                    <select id="set-shape" onchange="updateSetting('card_shape', this.value)">
+                        <option value="squircle">Squircle</option>
+                        <option value="rounded_rectangle">Rounded Rectangle</option>
+                        <option value="rectangle">Rectangle</option>
+                        <option value="circle">Circle</option>
+                        <option value="oval">Oval</option>
+                        <option value="pill">Pill</option>
+                        <option value="stadium">Stadium</option>
+                        <option value="octagon">Octagon</option>
+                        <option value="hexagon">Hexagon</option>
+                        <option value="pentagon">Pentagon</option>
+                        <option value="diamond">Diamond</option>
+                        <option value="rhombus">Rhombus</option>
+                        <option value="parallelogram">Parallelogram</option>
+                        <option value="trapezoid">Trapezoid</option>
+                        <option value="arch">Arch</option>
+                        <option value="badge">Badge</option>
+                        <option value="beveled">Beveled</option>
+                        <option value="capsule">Capsule</option>
+                        <option value="card">Card</option>
+                        <option value="chamfered">Chamfered</option>
+                        <option value="chevron">Chevron</option>
+                        <option value="cut_corner">Cut Corner</option>
+                        <option value="frame">Frame</option>
+                        <option value="lozenge">Lozenge</option>
+                        <option value="notched">Notched</option>
+                        <option value="panel">Panel</option>
+                        <option value="shield">Shield</option>
+                        <option value="ticket">Ticket</option>
+                        <option value="tile">Tile</option>
+                    </select>
+                </div>
+                <div class="settings-group">
+                    <label for="set-username">User Name</label>
+                    <input type="text" id="set-username" placeholder="Enter greeting name" oninput="updateSetting('user_name', this.value)" />
+                </div>
+                <div class="settings-group-row">
+                    <label><input type="checkbox" id="set-seconds" onchange="updateSetting('show_seconds', this.checked)"> Show Seconds</label>
+                </div>
+                <div class="settings-group-row">
+                    <label><input type="checkbox" id="set-date" onchange="updateSetting('show_date', this.checked)"> Show Date</label>
+                </div>
+                <div class="settings-group-row">
+                    <label><input type="checkbox" id="set-greeting" onchange="updateSetting('show_greeting', this.checked)"> Show Greeting</label>
+                </div>
+                <div class="settings-group-row">
+                    <label><input type="checkbox" id="set-format24" onchange="updateSetting('format24', this.checked)"> Use 24-Hour Format</label>
+                </div>
+                <div class="settings-hint">
+                    <p>💡 Double-tap anywhere on the clock to show/hide this settings panel.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function getSavedSetting(key, defaultValue) {
+            const saved = localStorage.getItem('flipclock_' + key);
+            if (saved !== null) {
+                if (saved === 'true') return true;
+                if (saved === 'false') return false;
+                return saved;
+            }
+            return defaultValue;
+        }
+
+        let config = window.screensaverConfig || {};
+        let themeName = getSavedSetting('theme', config.theme || 'luxury_black_gold');
+        let rawShape = getSavedSetting('card_shape', config.card_shape || 'squircle');
+        const legacyShapeMap = {
+            'soft_squircle': 'squircle',
+            'neo_rounded': 'rounded_rectangle',
+            'glass_floating': 'card',
+            'fold_corner': 'notched',
+            'split_flip': 'rectangle',
+            'premium_bevel': 'beveled'
+        };
+        let cardShape = legacyShapeMap[rawShape] || rawShape;
+        let hourFormat = getSavedSetting('format', config.format || '12');
+        let showSeconds = getSavedSetting('show_seconds', config.show_seconds !== 'false');
+        let showDate = getSavedSetting('show_date', config.show_date !== 'false');
+        let showGreeting = getSavedSetting('show_greeting', config.show_greeting !== 'false');
+        let userName = getSavedSetting('user_name', config.user_name || '');
+        let clockScale = parseFloat(getSavedSetting('size', config.size || '1.0'));
+        let customCredit = getSavedSetting('custom_credit', config.custom_credit || 'FLIP CLOCK SCREENSAVER');
+        let digitFont = getSavedSetting('digit_font', config.digit_font || 'Inter');
+        let labelFont = getSavedSetting('label_font', config.label_font || 'Cinzel');
+        let customBgColor = getSavedSetting('custom_bg_color', config.custom_bg_color || '#000000');
+        let customCardColor = getSavedSetting('custom_card_color', config.custom_card_color || '#1e1e22');
+        let customDigitColor = getSavedSetting('custom_digit_color', config.custom_digit_color || '#ffffff');
+        let customAccentColor = getSavedSetting('custom_accent_color', config.custom_accent_color || '#d4af37');
+        let customBorderColor = getSavedSetting('custom_border_color', config.custom_border_color || '#333333');
+
+        function applyConfiguration() {
+            // 0. Fonts
+            document.documentElement.style.setProperty('--digit-font', `'${digitFont}', system-ui, sans-serif`);
+            document.documentElement.style.setProperty('--label-font', `'${labelFont}', serif`);
+
+            // 1. Custom colors & Theme class
+            document.documentElement.style.setProperty('--custom-bg-color', customBgColor);
+            document.documentElement.style.setProperty('--custom-card-color', customCardColor);
+            document.documentElement.style.setProperty('--custom-digit-color', customDigitColor);
+            document.documentElement.style.setProperty('--custom-accent-color', customAccentColor);
+            document.documentElement.style.setProperty('--custom-border-color', customBorderColor);
+
+            document.body.className = `theme-${themeName}`;
+
+            const scene = document.getElementById('scene');
+            if (scene) {
+                scene.className = `shape-${cardShape}`;
+                if (!showSeconds) scene.classList.add('hide-seconds');
+                else scene.classList.remove('hide-seconds');
+
+                if (!showDate) scene.classList.add('hide-date');
+                else scene.classList.remove('hide-date');
+
+                if (!showGreeting) scene.classList.add('hide-greeting');
+                else scene.classList.remove('hide-greeting');
+            }
+
+            // 3. Proportional Responsive Scale
+            const container = document.getElementById('clock-container');
+            if (container && clockScale !== 1.0) {
+                container.style.transform = `scale(${clockScale})`;
+            }
+
+            // 4. Branding credit text
+            const brandEl = document.getElementById('branding-tag');
+            if (brandEl) brandEl.textContent = customCredit;
+
+            // Adjust background body color
+            const themeBackgrounds = {
+                "apple_liquid_glass": "#000000",
+                "liquid_glass": "#060810",
+                "luxury_black_gold": "#000000",
+                "obsidian_titanium": "#050505",
+                "dark_emerald": "#07120C",
+                "forest_green": "#08110A",
+                "racing_green": "#06110A",
+                "ruby_executive": "#090606",
+                "burgundy_prestige": "#120808",
+                "crimson_royal": "#0A0505",
+                "royal_sapphire": "#030816",
+                "midnight_navy": "#050B16",
+                "arctic_ice": "#05080A",
+                "ocean_cyan": "#071116",
+                "royal_purple": "#08040D",
+                "amethyst_elite": "#0C0712",
+                "platinum_silver": "#101010",
+                "graphite_gray": "#111111",
+                "copper_elite": "#090909",
+                "rose_gold": "#0A0909",
+                "champagne_gold": "#0B0A08",
+                "matte_black_diamond": "#010101",
+                "classic_retro": "#0A0A0C",
+                "minimal_light": "#F1F5F9"
+            };
+
+            if (themeName === 'custom') {
+                scene.style.background = customBgColor;
+            } else if (themeBackgrounds[themeName]) {
+                scene.style.background = themeBackgrounds[themeName];
+            } else {
+                scene.style.background = '#000000';
+            }
+        }
+
+        function updateGreeting() {
+            const h = new Date().getHours();
+            let period = 'MORNING';
+            if (h >= 12 && h < 17) period = 'AFTERNOON';
+            else if (h >= 17 && h < 22) period = 'EVENING';
+            else if (h >= 22 || h < 5) period = 'NIGHT';
+
+            const gEl = document.getElementById('greeting-badge');
+            if (!gEl) return;
+
+            const nameStr = userName ? userName.trim().toUpperCase() : '';
+            const text = nameStr ? `GOOD ${period}, ${nameStr}` : `GOOD ${period}`;
+            gEl.innerHTML = `<span class="badge-ornament">✦</span><span class="greeting-text">${text}</span><span class="badge-ornament">✦</span>`;
+        }
+
+        function updateDate() {
+            const now = new Date();
+            const days = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
+            const months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'];
+            const b = document.getElementById('date-badge');
+            if (!b) return;
+
+            const dayName = days[now.getDay()];
+            const dateNum = String(now.getDate()).padStart(2, '0');
+            const monthName = months[now.getMonth()];
+            const yearNum = now.getFullYear();
+
+            b.innerHTML = `<span class="date-segment date-dayname">${dayName}</span>` +
+                `<span class="date-sep">◆</span>` +
+                `<span class="date-segment date-num">${dateNum}</span>` +
+                `<span class="date-segment date-month">${monthName}</span>` +
+                `<span class="date-segment date-year">${yearNum}</span>`;
+        }
+
+        let pH = -1, pM = -1, pS = -1;
+        function updateFlip() {
+            const now = new Date();
+            let h = now.getHours();
+            const m = now.getMinutes();
+            const s = now.getSeconds();
+
+            let ampmText = '';
+            if (hourFormat === '12') {
+                ampmText = h >= 12 ? 'PM' : 'AM';
+                h = h % 12;
+                if (h === 0) h = 12;
+            }
+
+            const ampmEl = document.getElementById('ampm-badge');
+            if (ampmEl) ampmEl.textContent = ampmText;
+
+            const p = n => String(n).padStart(2, '0');
+            const strH = p(h), strM = p(m), strS = p(s);
+
+            if (pH === -1) {
+                setCardVal('fc-h', strH); pH = h;
+                setCardVal('fc-m', strM); pM = m;
+                setCardVal('fc-s', strS); pS = s;
+                return;
+            }
+
+            if (h !== pH) { doFlip('fc-h', strH); pH = h; }
+            if (m !== pM) { doFlip('fc-m', strM); pM = m; }
+            if (showSeconds && s !== pS) { doFlip('fc-s', strS); pS = s; }
+        }
+
+        function setCardVal(id, val) {
+            const t = document.getElementById(id + '-top');
+            const b = document.getElementById(id + '-bot');
+            if (t) t.innerHTML = '<span>' + val[0] + '</span><span>' + val[1] + '</span>';
+            if (b) b.innerHTML = '<span>' + val[0] + '</span><span>' + val[1] + '</span>';
+        }
+
+        function doFlip(id, val) {
+            const t = document.getElementById(id + '-top');
+            const b = document.getElementById(id + '-bot');
+            const c = document.getElementById(id);
+            if (!t || !b || !c) return;
+            const prev = t.textContent;
+            if (prev === val) return;
+
+            const ft = document.createElement('div');
+            ft.className = 'flipper flipper-top';
+            ft.innerHTML = '<div class="digit-wrapper"><div class="digit-text"><span>' + prev[0] + '</span><span>' + prev[1] + '</span></div></div>';
+            const fb = document.createElement('div');
+            fb.className = 'flipper flipper-bottom';
+            fb.innerHTML = '<div class="digit-wrapper"><div class="digit-text"><span>' + val[0] + '</span><span>' + val[1] + '</span></div></div>';
+
+            c.appendChild(ft); c.appendChild(fb);
+            requestAnimationFrame(function () { ft.classList.add('flip-top-out'); fb.classList.add('flip-bottom-in'); });
+            t.innerHTML = '<span>' + val[0] + '</span><span>' + val[1] + '</span>';
+            b.innerHTML = '<span>' + val[0] + '</span><span>' + val[1] + '</span>';
+            setTimeout(function () { ft.remove(); fb.remove(); }, 650);
+        }
+
+        function forceClose() {
+            try {
+                if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.screensaverExit) {
+                    window.webkit.messageHandlers.screensaverExit.postMessage("forceClose");
+                }
+            } catch (e) { }
+            window.close();
+            try { document.title = 'EXIT_SCREENSAVER'; } catch (e) { }
+        }
+
+        // Show close button on mouse movement, hide after 3s idle
+        let hideTimer = null;
+        document.addEventListener('mousemove', function () {
+            document.getElementById('scene').classList.add('show-close');
+            clearTimeout(hideTimer);
+            hideTimer = setTimeout(function () {
+                document.getElementById('scene').classList.remove('show-close');
+            }, 3000);
+        });
+
+        // Escape key closes
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') forceClose();
+        });
+
+        // Mobile settings management functions
+        function updateSetting(key, val) {
+            localStorage.setItem('flipclock_' + key, val);
+            if (key === 'theme') {
+                themeName = val;
+            } else if (key === 'card_shape') {
+                cardShape = val;
+            } else if (key === 'user_name') {
+                userName = val;
+            } else if (key === 'show_seconds') {
+                showSeconds = val;
+            } else if (key === 'show_date') {
+                showDate = val;
+            } else if (key === 'show_greeting') {
+                showGreeting = val;
+            } else if (key === 'format24') {
+                hourFormat = val ? '24' : '12';
+                localStorage.setItem('flipclock_format', hourFormat);
+            }
+            applyConfiguration();
+            updateGreeting();
+            updateDate();
+            updateFlip();
+        }
+
+        function toggleSettingsMenu() {
+            const overlay = document.getElementById('mobile-settings-overlay');
+            if (!overlay) return;
+            overlay.classList.toggle('settings-overlay-hidden');
+            if (!overlay.classList.contains('settings-overlay-hidden')) {
+                document.getElementById('set-theme').value = themeName;
+                document.getElementById('set-shape').value = cardShape;
+                document.getElementById('set-username').value = userName;
+                document.getElementById('set-seconds').checked = showSeconds;
+                document.getElementById('set-date').checked = showDate;
+                document.getElementById('set-greeting').checked = showGreeting;
+                document.getElementById('set-format24').checked = (hourFormat === '24');
+            }
+        }
+
+        // Double tap detection
+        let lastTap = 0;
+        document.body.addEventListener('touchend', function (e) {
+            if (document.getElementById('mobile-settings-panel').contains(e.target)) return;
+            const currentTime = new Date().getTime();
+            const tapLength = currentTime - lastTap;
+            if (tapLength < 300 && tapLength > 0) {
+                toggleSettingsMenu();
+                e.preventDefault();
+            }
+            lastTap = currentTime;
+        });
+
+        document.body.addEventListener('dblclick', function (e) {
+            if (document.getElementById('mobile-settings-panel').contains(e.target)) return;
+            toggleSettingsMenu();
+        });
+
+        // Wakelock API support
+        let wakeLock = null;
+        async function requestWakeLock() {
+            try {
+                if ('wakeLock' in navigator) {
+                    wakeLock = await navigator.wakeLock.request('screen');
+                    console.log('Screen Wake Lock acquired');
+                }
+            } catch (err) {
+                console.warn(`${err.name}, ${err.message}`);
+            }
+        }
+
+        document.addEventListener('visibilitychange', async () => {
+            if (wakeLock !== null && document.visibilityState === 'visible') {
+                await requestWakeLock();
+            }
+        });
+
+        window.addEventListener('load', function () {
+            applyConfiguration();
+            updateGreeting();
+            updateDate(); updateFlip();
+            setInterval(updateFlip, 1000);
+            setInterval(updateGreeting, 10000);
+            setInterval(updateDate, 30000);
+            requestWakeLock();
+        });
+    </script>
+</body>
+
+</html>
