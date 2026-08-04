@@ -7,7 +7,7 @@ This directory contains the native Android WebView implementation of the Fliqlo-
 Click the button below to download the compiled mobile application directly:
 
 <p align="center">
-  <a href="../releases/flipclock-screensaver.apk" target="_blank">
+  <a href="../releases/flipclock-screensaver.apk" download="flipclock-screensaver.apk">
     <img src="https://img.shields.io/badge/DOWNLOAD-Android%20Mobile%20APK-FFB000?style=for-the-badge&logo=android&logoColor=white" height="54" alt="Download Android Mobile APK">
   </a>
 </p>

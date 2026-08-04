@@ -34,7 +34,7 @@ Click the buttons below to download the pre-compiled packages directly (includin
     <img src="https://img.shields.io/badge/DOWNLOAD-Versioned%20v2.5.4%20.deb-6366F1?style=for-the-badge&logo=debian&logoColor=white" height="48" alt="Download Versioned .deb Package">
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="releases/flipclock-screensaver.apk" target="_blank">
+  <a href="releases/flipclock-screensaver.apk" download="flipclock-screensaver.apk">
     <img src="https://img.shields.io/badge/DOWNLOAD-Android%20Mobile%20APK-FFB000?style=for-the-badge&logo=android&logoColor=white" height="48" alt="Download Android Mobile APK">
   </a>
 </p>
