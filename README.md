@@ -247,6 +247,34 @@ chmod +x install.sh
 
 ---
 
+### Method 3: Compile & Install on macOS (Native Screensaver)
+
+For Mac laptop and desktop systems, you can compile the flip clock screensaver into a native macOS Screensaver (`.saver` bundle) using Xcode.
+
+For full instructions, see the dedicated [macOS Setup Guide](macos/README.md).
+
+#### Quick Steps:
+1. **Create Xcode Project**: Open Xcode, create a new project under **macOS -> Screen Saver**, and name it `FlipClockScreensaver` (Language: Swift).
+2. **Add Templates**: Replace the generated principal view class (e.g., `FlipClockScreensaverView.swift`) with [FlipClockView.swift](macos/FlipClockScreensaver/FlipClockView.swift).
+3. **Add HTML Asset**: Drag and drop the `index.html` asset from the workspace (e.g., `mobile/app/src/main/assets/index.html`) into your Xcode project. Ensure **Copy items if needed** and **Create folder references** are checked.
+4. **Build & Install**: Press `Cmd + B` to build. In the Xcode navigator under **Products**, right-click `FlipClockScreensaver.saver` -> **Show in Finder**, then double-click the file to install it.
+
+---
+
+### Method 4: Compile & Run on iOS (iPhone & iPad App)
+
+You can compile the flip clock screensaver into a native iOS application using Xcode and run it on an iPhone or iPad.
+
+For full instructions, see the dedicated [iOS Setup Guide](ios/README.md).
+
+#### Quick Steps:
+1. **Create Xcode Project**: Open Xcode, create a new project under **iOS -> App** (Interface: SwiftUI, Language: Swift), and name it `FlipClock`.
+2. **Copy Templates**: Replace `FlipClockApp.swift` with [FlipClockApp.swift](ios/FlipClock/FlipClockApp.swift), `ContentView.swift` with [ContentView.swift](ios/FlipClock/ContentView.swift), and add a new Swift file named `WebView.swift` containing [WebView.swift](ios/FlipClock/WebView.swift).
+3. **Add HTML Asset**: Drag and drop `index.html` from the workspace into your Xcode project group (select **Copy items if needed** and **Create folder references**).
+4. **Build & Run**: Connect your iOS device (or select a Simulator) and press `Cmd + R` to run. Double-tap the screen to open the configuration settings!
+
+---
+
 ## ⚙️ Configuration & GUI Settings
 
 Open **"Flip Clock Settings"** from Ubuntu Applications menu, or run in terminal:
