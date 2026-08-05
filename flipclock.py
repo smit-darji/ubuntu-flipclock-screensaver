@@ -35,7 +35,7 @@ THEME_CATEGORIES = {
     },
     "executive": {
         "label": "🏆 Executive Dark & Gold",
-        "themes": ["luxury_black_gold", "obsidian_titanium", "platinum_silver", "champagne_gold", "matte_black_diamond"]
+        "themes": ["luxury_black_gold", "obsidian_titanium", "platinum_silver", "champagne_gold", "matte_black_diamond", "swiss_minimalist"]
     },
     "greens": {
         "label": "🌿 Executive Greens",
@@ -273,6 +273,16 @@ PRESET_THEMES = {
         "digit_color": "#FCFCFC",
         "accent_color": "#F0F0F0",
         "border_color": "#3A3A3A",
+        "digit_font": "Inter",
+        "label_font": "Inter"
+    },
+    "swiss_minimalist": {
+        "name": "⬜ Swiss Minimalist",
+        "bg_color": "#000000",
+        "card_color": "#181818",
+        "digit_color": "#FFFFFF",
+        "accent_color": "#FFFFFF",
+        "border_color": "#000000",
         "digit_font": "Inter",
         "label_font": "Inter"
     },
@@ -844,6 +854,26 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
             --branding-color: rgba(30, 41, 59, 0.5);
         }
 
+        /* 22. Swiss Minimalist */
+        .theme-swiss_minimalist {
+            --vignette-color: transparent;
+            --card-bg: #181818;
+            --card-border: transparent;
+            --card-top-bg: #181818;
+            --card-bot-bg: #181818;
+            --divider-line: #000000;
+            --pin-bg: #000000;
+            --digit-color: #FFFFFF;
+            --digit-shadow: none;
+            --dot-bg: #FFFFFF;
+            --dot-shadow: 0 0 10px rgba(255,255,255,0.4);
+            --accent-color: #FFFFFF;
+            --badge-color: #F2F2F2;
+            --badge-bg: transparent;
+            --badge-border: transparent;
+            --branding-color: rgba(255, 255, 255, 0.2);
+        }
+
         /* 21. Liquid Glass Dark (Translucent Liquid Cyan) */
         .theme-liquid_glass {
             --vignette-color: rgba(255, 255, 255, 0.02);
@@ -1057,6 +1087,98 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
             0% { background-position: -200% 0; }
             20% { background-position: 200% 200%; }
             100% { background-position: 200% 200%; }
+        }
+
+        /* Swiss Minimalist Theme Overrides */
+        .theme-swiss_minimalist #scene {
+            background: #000000 !important;
+        }
+        .theme-swiss_minimalist #scene::before {
+            display: none !important;
+        }
+        .theme-swiss_minimalist #branding-tag,
+        .theme-swiss_minimalist #date-badge,
+        .theme-swiss_minimalist #greeting-badge {
+            display: none !important;
+        }
+        .theme-swiss_minimalist .flip-card {
+            background: #181818 !important;
+            border: none !important;
+            border-radius: 28px !important;
+            box-shadow:
+                0 18px 40px rgba(0,0,0,0.45),
+                inset 0 0 15px rgba(0, 0, 0, 0.4) !important;
+            width: clamp(200px, 45vh, 480px) !important;
+            height: clamp(240px, 54vh, 576px) !important;
+        }
+        .theme-swiss_minimalist .card-top,
+        .theme-swiss_minimalist .flipper-top {
+            border-radius: 28px 28px 0 0 !important;
+            background: #181818 !important;
+            border-bottom: none !important;
+        }
+        .theme-swiss_minimalist .card-bottom,
+        .theme-swiss_minimalist .flipper-bottom {
+            border-radius: 0 0 28px 28px !important;
+            background: #181818 !important;
+        }
+        .theme-swiss_minimalist .card-divider {
+            height: 2px !important;
+            background: #000000 !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+        .theme-swiss_minimalist .divider-dot,
+        .theme-swiss_minimalist .card-divider::before,
+        .theme-swiss_minimalist .card-divider::after {
+            display: none !important;
+        }
+        .theme-swiss_minimalist .digit-text {
+            font-family: "SF Pro Display", "Helvetica Neue", "Inter", sans-serif !important;
+            font-weight: 900 !important;
+            color: #FFFFFF !important;
+            font-size: clamp(140px, 33vh, 440px) !important;
+            text-shadow: none !important;
+            letter-spacing: -0.04em !important;
+        }
+        .theme-swiss_minimalist #ampm-badge {
+            position: absolute !important;
+            top: 24px !important;
+            left: 24px !important;
+            bottom: auto !important;
+            right: auto !important;
+            font-family: "Inter", sans-serif !important;
+            font-weight: 600 !important;
+            font-size: 24px !important;
+            color: #F2F2F2 !important;
+            background: transparent !important;
+            border: none !important;
+            border-radius: 0 !important;
+            padding: 0 !important;
+            box-shadow: none !important;
+            letter-spacing: normal !important;
+            z-index: 20 !important;
+        }
+        .theme-swiss_minimalist .clock-row {
+            gap: 18px !important;
+        }
+        .theme-swiss_minimalist .sep {
+            gap: 28px !important;
+            margin: 0 40px !important;
+        }
+        .theme-swiss_minimalist .sep-dot {
+            width: 14px !important;
+            height: 14px !important;
+            border-radius: 50% !important;
+            background: #FFFFFF !important;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.4) !important;
+        }
+        .theme-swiss_minimalist .flip-top-out {
+            animation: flipTopOut 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+        }
+        .theme-swiss_minimalist .flip-bottom-in {
+            animation: flipBottomIn 0.35s cubic-bezier(0.4, 0, 0.2, 1) 0s forwards !important;
+            transform: rotateX(90deg);
         }
 
         /* ═══ 10 PREMIUM CARD SHAPE STYLES ═══ */
@@ -1285,6 +1407,8 @@ function applyConfiguration() {
         scene.style.background = customBgColor;
     } else if (themeName === 'minimal_light') {
         scene.style.background = '#f1f5f9';
+    } else if (themeName === 'swiss_minimalist') {
+        scene.style.background = '#000000';
     } else {
         scene.style.background = '#000000';
     }
