@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.5.5] - 2026-08-05 - Minimalist Dark Theme, Shape Compatibility & Day Toggle
+
+### Added
+- **Minimalist Dark Theme**: A pure system dark mode aesthetic theme with #111111 background, #1C1C1E card backgrounds, and a subtle border for card lift.
+- **Independent Day of Week Toggle**: Added settings UI options to show/hide the day name segment (e.g. TUESDAY) independently of the date segment.
+
+### Fixed
+- **Theme Shape Compatibility**: Corrected issue where the selected card shape was ignored by premium themes (`minimal_dark`, `swiss_minimalist`, `apple_liquid_glass`) due to hardcoded `!important` border-radius overrides.
+
 ## [2.5.4] - 2026-08-03 - Premium Apple Liquid Glass Theme & Gtk Font Wraps
 
 ### Added
