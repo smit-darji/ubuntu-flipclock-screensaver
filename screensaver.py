@@ -420,6 +420,55 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
         }
         .theme-swiss_minimalist .sep-dot { background: #FFF !important; box-shadow: 0 0 8px rgba(255,255,255,0.4) !important; }
 
+        /* 23. Minimalist Dark */
+        .theme-minimal_dark {
+            --card-bg: #1C1C1E;
+            --card-border: rgba(255,255,255,0.06);
+            --card-top-bg: linear-gradient(180deg,rgba(255,255,255,0.04) 0%,rgba(255,255,255,0.01) 100%);
+            --card-bot-bg: linear-gradient(180deg,rgba(0,0,0,0.15) 0%,rgba(0,0,0,0.04) 100%);
+            --digit-color: #FFFFFF;
+            --digit-shadow: none;
+            --pin-bg: rgba(255,255,255,0.15);
+            --dot-bg: rgba(235,235,245,0.6);
+            --dot-shadow: none;
+            --accent-color: rgba(235,235,245,0.6);
+            --badge-color: rgba(235,235,245,0.85);
+            --badge-bg: rgba(44,44,46,0.9);
+            --badge-border: rgba(255,255,255,0.1);
+        }
+        /* Minimalist Dark structural overrides */
+        .theme-minimal_dark #scene { background: #111111 !important; }
+        .theme-minimal_dark #scene::before { display:none !important; }
+        .theme-minimal_dark #branding-tag { display:none !important; }
+        .theme-minimal_dark .flip-card {
+            background: #1C1C1E !important;
+            border: 1px solid rgba(255,255,255,0.06) !important;
+            border-radius: 20px !important;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.05) !important;
+        }
+        .theme-minimal_dark .card-top, .theme-minimal_dark .flipper-top {
+            background: rgba(255,255,255,0.03) !important;
+            border-radius: 20px 20px 0 0 !important;
+            border-bottom: 1px solid rgba(0,0,0,0.4) !important;
+        }
+        .theme-minimal_dark .card-bottom, .theme-minimal_dark .flipper-bottom {
+            background: rgba(0,0,0,0.1) !important;
+            border-radius: 0 0 20px 20px !important;
+        }
+        .theme-minimal_dark .card-divider {
+            height: 1px !important; background: rgba(0,0,0,0.6) !important;
+            border: none !important; box-shadow: none !important;
+        }
+        .theme-minimal_dark .card-divider::before,
+        .theme-minimal_dark .card-divider::after { display:none !important; }
+        .theme-minimal_dark .digit-text {
+            font-weight: 700 !important;
+            font-size: clamp(90px,22vh,310px) !important;
+            letter-spacing: -0.03em !important;
+            text-shadow: none !important;
+        }
+        .theme-minimal_dark .sep-dot { background: rgba(235,235,245,0.6) !important; box-shadow: none !important; }
+
         /* ─── Scene ─── */
         #scene {
             position:relative;
@@ -671,6 +720,8 @@ function applyTheme() {
         scene.style.background = cfg.custom_bg_color || '#000000';
     } else if (lightBg[theme]) {
         scene.style.background = lightBg[theme];
+    } else if (theme === 'minimal_dark') {
+        scene.style.background = '#111111';
     } else {
         scene.style.background = '#000000';
     }

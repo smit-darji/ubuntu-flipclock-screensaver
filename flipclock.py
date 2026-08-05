@@ -35,7 +35,7 @@ THEME_CATEGORIES = {
     },
     "executive": {
         "label": "🏆 Executive Dark & Gold",
-        "themes": ["luxury_black_gold", "obsidian_titanium", "platinum_silver", "champagne_gold", "matte_black_diamond", "swiss_minimalist"]
+        "themes": ["luxury_black_gold", "obsidian_titanium", "platinum_silver", "champagne_gold", "matte_black_diamond", "swiss_minimalist", "minimal_dark"]
     },
     "greens": {
         "label": "🌿 Executive Greens",
@@ -283,6 +283,16 @@ PRESET_THEMES = {
         "digit_color": "#FFFFFF",
         "accent_color": "#FFFFFF",
         "border_color": "#000000",
+        "digit_font": "Inter",
+        "label_font": "Inter"
+    },
+    "minimal_dark": {
+        "name": "🌑 Minimalist Dark",
+        "bg_color": "#111111",
+        "card_color": "#1C1C1E",
+        "digit_color": "#FFFFFF",
+        "accent_color": "rgba(235,235,245,0.6)",
+        "border_color": "rgba(255,255,255,0.06)",
         "digit_font": "Inter",
         "label_font": "Inter"
     },
@@ -874,6 +884,26 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
             --branding-color: rgba(255, 255, 255, 0.2);
         }
 
+        /* 23. Minimalist Dark */
+        .theme-minimal_dark {
+            --vignette-color: transparent;
+            --card-bg: #1C1C1E;
+            --card-border: rgba(255,255,255,0.06);
+            --card-top-bg: linear-gradient(180deg,rgba(255,255,255,0.04) 0%,rgba(255,255,255,0.01) 100%);
+            --card-bot-bg: linear-gradient(180deg,rgba(0,0,0,0.15) 0%,rgba(0,0,0,0.04) 100%);
+            --divider-line: #111111;
+            --pin-bg: rgba(255,255,255,0.15);
+            --digit-color: #FFFFFF;
+            --digit-shadow: none;
+            --dot-bg: rgba(235,235,245,0.6);
+            --dot-shadow: none;
+            --accent-color: rgba(235,235,245,0.6);
+            --badge-color: rgba(235,235,245,0.85);
+            --badge-bg: rgba(44,44,46,0.9);
+            --badge-border: rgba(255,255,255,0.1);
+            --branding-color: rgba(235,235,245,0.3);
+        }
+
         /* 21. Liquid Glass Dark (Translucent Liquid Cyan) */
         .theme-liquid_glass {
             --vignette-color: rgba(255, 255, 255, 0.02);
@@ -1181,6 +1211,76 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
             transform: rotateX(90deg);
         }
 
+        /* Minimalist Dark Theme Overrides */
+        .theme-minimal_dark #scene {
+            background: #111111 !important;
+        }
+        .theme-minimal_dark #scene::before { display:none !important; }
+        .theme-minimal_dark #branding-tag { display:none !important; }
+        .theme-minimal_dark .flip-card {
+            background: #1C1C1E !important;
+            border: 1px solid rgba(255,255,255,0.06) !important;
+            border-radius: 20px !important;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.05) !important;
+        }
+        .theme-minimal_dark .card-top,
+        .theme-minimal_dark .flipper-top {
+            background: rgba(255,255,255,0.03) !important;
+            border-radius: 20px 20px 0 0 !important;
+            border-bottom: 1px solid rgba(0,0,0,0.4) !important;
+        }
+        .theme-minimal_dark .card-bottom,
+        .theme-minimal_dark .flipper-bottom {
+            background: rgba(0,0,0,0.1) !important;
+            border-radius: 0 0 20px 20px !important;
+        }
+        .theme-minimal_dark .card-divider {
+            height: 1px !important;
+            background: rgba(0,0,0,0.6) !important;
+            border: none !important; box-shadow: none !important;
+        }
+        .theme-minimal_dark .divider-dot,
+        .theme-minimal_dark .card-divider::before,
+        .theme-minimal_dark .card-divider::after { display:none !important; }
+        .theme-minimal_dark .digit-text {
+            font-weight: 700 !important;
+            color: #FFFFFF !important;
+            font-size: clamp(110px,28vh,380px) !important;
+            text-shadow: none !important;
+            letter-spacing: -0.03em !important;
+        }
+        .theme-minimal_dark #date-badge {
+            font-weight: 500 !important;
+            font-size: clamp(10px,1.1vw,15px) !important;
+            letter-spacing: 0.05em !important;
+            color: rgba(235,235,245,0.85) !important;
+            background: rgba(44,44,46,0.9) !important;
+            border: 1px solid rgba(255,255,255,0.08) !important;
+            border-radius: 10px !important;
+            box-shadow: none !important;
+            backdrop-filter: blur(20px) !important;
+        }
+        .theme-minimal_dark #greeting-badge {
+            color: rgba(235,235,245,0.5) !important;
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+        .theme-minimal_dark #ampm-badge {
+            font-weight: 500 !important;
+            font-size: 18px !important;
+            color: rgba(235,235,245,0.6) !important;
+            background: rgba(44,44,46,0.8) !important;
+            border: 1px solid rgba(255,255,255,0.08) !important;
+            border-radius: 8px !important;
+            padding: 4px 10px !important;
+            box-shadow: none !important;
+        }
+        .theme-minimal_dark .sep-dot {
+            background: rgba(235,235,245,0.6) !important;
+            box-shadow: none !important;
+        }
+
         /* ═══ 10 PREMIUM CARD SHAPE STYLES ═══ */
 
         /* 1. Soft Squircle ⭐ (Apple Vision Pro — 28px ultra-smooth) */
@@ -1409,6 +1509,8 @@ function applyConfiguration() {
         scene.style.background = '#f1f5f9';
     } else if (themeName === 'swiss_minimalist') {
         scene.style.background = '#000000';
+    } else if (themeName === 'minimal_dark') {
+        scene.style.background = '#111111';
     } else {
         scene.style.background = '#000000';
     }

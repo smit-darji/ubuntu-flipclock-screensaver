@@ -930,6 +930,26 @@
             --branding-color: rgba(255, 255, 255, 0.2);
         }
 
+        /* 23. Minimalist Dark (System dark mode aesthetic) */
+        .theme-minimal_dark {
+            --vignette-color: transparent;
+            --card-bg: #1C1C1E;
+            --card-border: rgba(255, 255, 255, 0.06);
+            --card-top-bg: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.04) 100%);
+            --divider-line: #111111;
+            --pin-bg: rgba(255,255,255,0.15);
+            --digit-color: #FFFFFF;
+            --digit-shadow: none;
+            --dot-bg: rgba(235, 235, 245, 0.6);
+            --dot-shadow: none;
+            --accent-color: rgba(235, 235, 245, 0.6);
+            --badge-color: rgba(235, 235, 245, 0.85);
+            --badge-bg: rgba(44, 44, 46, 0.9);
+            --badge-border: rgba(255, 255, 255, 0.1);
+            --branding-color: rgba(235, 235, 245, 0.3);
+        }
+
         /* 21. Liquid Glass Dark (Translucent Liquid Cyan) */
         .theme-liquid_glass {
             --vignette-color: rgba(56, 189, 248, 0.08);
@@ -1245,6 +1265,59 @@
         .theme-swiss_minimalist .flip-bottom-in {
             animation: flipBottomIn 0.35s cubic-bezier(0.4, 0, 0.2, 1) 0s forwards !important;
             transform: rotateX(90deg);
+        }
+
+        /* Minimalist Dark Theme Overrides */
+        .theme-minimal_dark #scene { background: #111111 !important; }
+        .theme-minimal_dark #scene::before { display:none !important; }
+        .theme-minimal_dark #branding-tag { display:none !important; }
+        .theme-minimal_dark .flip-card {
+            background: #1C1C1E !important;
+            border: 1px solid rgba(255,255,255,0.06) !important;
+            border-radius: 20px !important;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.05) !important;
+        }
+        .theme-minimal_dark .card-top, .theme-minimal_dark .flipper-top {
+            background: rgba(255,255,255,0.03) !important;
+            border-radius: 20px 20px 0 0 !important;
+            border-bottom: 1px solid rgba(0,0,0,0.4) !important;
+        }
+        .theme-minimal_dark .card-bottom, .theme-minimal_dark .flipper-bottom {
+            background: rgba(0,0,0,0.1) !important;
+            border-radius: 0 0 20px 20px !important;
+        }
+        .theme-minimal_dark .card-divider {
+            height: 1px !important; background: rgba(0,0,0,0.6) !important;
+            border: none !important; box-shadow: none !important;
+        }
+        .theme-minimal_dark .divider-dot,
+        .theme-minimal_dark .card-divider::before,
+        .theme-minimal_dark .card-divider::after { display:none !important; }
+        .theme-minimal_dark .digit-text {
+            font-weight: 700 !important; color: #FFFFFF !important;
+            font-size: clamp(110px,28vh,380px) !important;
+            text-shadow: none !important; letter-spacing: -0.03em !important;
+        }
+        .theme-minimal_dark #date-badge {
+            font-weight: 500 !important; color: rgba(235,235,245,0.85) !important;
+            background: rgba(44,44,46,0.9) !important;
+            border: 1px solid rgba(255,255,255,0.08) !important;
+            border-radius: 10px !important; box-shadow: none !important;
+            backdrop-filter: blur(20px) !important;
+        }
+        .theme-minimal_dark #greeting-badge {
+            color: rgba(235,235,245,0.5) !important;
+            background: transparent !important; border: none !important; box-shadow: none !important;
+        }
+        .theme-minimal_dark #ampm-badge {
+            font-weight: 500 !important; font-size: 18px !important;
+            color: rgba(235,235,245,0.6) !important;
+            background: rgba(44,44,46,0.8) !important;
+            border: 1px solid rgba(255,255,255,0.08) !important;
+            border-radius: 8px !important; padding: 4px 10px !important; box-shadow: none !important;
+        }
+        .theme-minimal_dark .sep-dot {
+            background: rgba(235,235,245,0.6) !important; box-shadow: none !important;
         }
 
         @keyframes appleGlassFloat {
@@ -2137,6 +2210,7 @@
                         <option value="liquid_glass">Liquid Glass</option>
                         <option value="apple_liquid_glass">Apple Liquid Glass</option>
                         <option value="swiss_minimalist">Swiss Minimalist</option>
+                        <option value="minimal_dark">Minimalist Dark</option>
                     </select>
                 </div>
                 <div class="settings-group">
@@ -2296,6 +2370,7 @@
                 "champagne_gold": "#0B0A08",
                 "matte_black_diamond": "#010101",
                 "swiss_minimalist": "#000000",
+                "minimal_dark": "#111111",
                 "classic_retro": "#0A0A0C",
                 "minimal_light": "#F1F5F9"
             };
