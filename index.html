@@ -1009,7 +1009,7 @@
             backdrop-filter: blur(24px) saturate(180%) !important;
             -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
             border: 1px solid rgba(255, 255, 255, 0.18) !important;
-            border-radius: 48px !important;
+            border-radius: 48px;
             box-shadow: 
                 0 12px 40px rgba(0, 0, 0, 0.45),
                 inset 0 1px rgba(255, 255, 255, 0.35),
@@ -1042,13 +1042,13 @@
         }
         .theme-apple_liquid_glass .card-top,
         .theme-apple_liquid_glass .flipper-top {
-            border-radius: 48px 48px 0 0 !important;
+            border-radius: 48px 48px 0 0;
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.02) 100%) !important;
             border-bottom: 1px solid rgba(0, 0, 0, 0.25) !important;
         }
         .theme-apple_liquid_glass .card-bottom,
         .theme-apple_liquid_glass .flipper-bottom {
-            border-radius: 0 0 48px 48px !important;
+            border-radius: 0 0 48px 48px;
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.12) 100%) !important;
         }
         .theme-apple_liquid_glass .card-divider {
@@ -1190,7 +1190,7 @@
         .theme-swiss_minimalist .flip-card {
             background: #181818 !important;
             border: none !important;
-            border-radius: 28px !important;
+            border-radius: 28px;
             box-shadow: 
                 0 18px 40px rgba(0,0,0,0.45),
                 inset 0 0 15px rgba(0, 0, 0, 0.4) !important;
@@ -1199,13 +1199,13 @@
         }
         .theme-swiss_minimalist .card-top,
         .theme-swiss_minimalist .flipper-top {
-            border-radius: 28px 28px 0 0 !important;
+            border-radius: 28px 28px 0 0;
             background: #181818 !important;
             border-bottom: none !important;
         }
         .theme-swiss_minimalist .card-bottom,
         .theme-swiss_minimalist .flipper-bottom {
-            border-radius: 0 0 28px 28px !important;
+            border-radius: 0 0 28px 28px;
             background: #181818 !important;
         }
         .theme-swiss_minimalist .card-divider {
@@ -1280,7 +1280,7 @@
         .theme-minimal_dark .flip-card {
             background: #1C1C1E !important;
             border: 1px solid rgba(255,255,255,0.06) !important;
-            border-radius: 20px !important;
+            border-radius: 20px;
             box-shadow:
                 0 12px 32px rgba(0,0,0,0.55),
                 inset 0 1px 0 rgba(255,255,255,0.05) !important;
@@ -1288,13 +1288,13 @@
         .theme-minimal_dark .card-top,
         .theme-minimal_dark .flipper-top {
             background: rgba(255,255,255,0.03) !important;
-            border-radius: 20px 20px 0 0 !important;
+            border-radius: 20px 20px 0 0;
             border-bottom: 1px solid rgba(0,0,0,0.4) !important;
         }
         .theme-minimal_dark .card-bottom,
         .theme-minimal_dark .flipper-bottom {
             background: rgba(0,0,0,0.1) !important;
-            border-radius: 0 0 20px 20px !important;
+            border-radius: 0 0 20px 20px;
         }
         .theme-minimal_dark .card-divider {
             height: 1px !important;
@@ -1912,7 +1912,7 @@
                 display: none !important;
             }
 
-            .hide-date #date-badge {
+            .hide-date-badge #date-badge {
                 display: none !important;
             }
 
@@ -2006,6 +2006,7 @@
         let hourFormat = config.format || '12';
         let showSeconds = config.show_seconds !== 'false';
         let showDate = config.show_date !== 'false';
+        let showDay = config.show_day !== 'false';
         let showGreeting = config.show_greeting !== 'false';
         let userName = config.user_name || '';
         let clockScale = parseFloat(config.size || '1.0');
@@ -2038,8 +2039,8 @@
                 if (!showSeconds) scene.classList.add('hide-seconds');
                 else scene.classList.remove('hide-seconds');
 
-                if (!showDate) scene.classList.add('hide-date');
-                else scene.classList.remove('hide-date');
+                if (!showDate && !showDay) scene.classList.add('hide-date-badge');
+                else scene.classList.remove('hide-date-badge');
 
                 if (!showGreeting) scene.classList.add('hide-greeting');
                 else scene.classList.remove('hide-greeting');
@@ -2121,11 +2122,19 @@
             const monthName = months[now.getMonth()];
             const yearNum = now.getFullYear();
 
-            b.innerHTML = `<span class="date-segment date-dayname">${dayName}</span>` +
-                `<span class="date-sep">◆</span>` +
-                `<span class="date-segment date-num">${dateNum}</span>` +
-                `<span class="date-segment date-month">${monthName}</span>` +
-                `<span class="date-segment date-year">${yearNum}</span>`;
+            let content = '';
+            if (showDay) {
+                content += `<span class="date-segment date-dayname">${dayName}</span>`;
+            }
+            if (showDay && showDate) {
+                content += `<span class="date-sep">◆</span>`;
+            }
+            if (showDate) {
+                content += `<span class="date-segment date-num">${dateNum}</span>` +
+                           `<span class="date-segment date-month">${monthName}</span>` +
+                           `<span class="date-segment date-year">${yearNum}</span>`;
+            }
+            b.innerHTML = content;
         }
 
         let pH = -1, pM = -1, pS = -1;

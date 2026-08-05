@@ -1134,7 +1134,7 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
         .theme-swiss_minimalist .flip-card {
             background: #181818 !important;
             border: none !important;
-            border-radius: 28px !important;
+            border-radius: 28px;
             box-shadow:
                 0 18px 40px rgba(0,0,0,0.45),
                 inset 0 0 15px rgba(0, 0, 0, 0.4) !important;
@@ -1143,13 +1143,13 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
         }
         .theme-swiss_minimalist .card-top,
         .theme-swiss_minimalist .flipper-top {
-            border-radius: 28px 28px 0 0 !important;
+            border-radius: 28px 28px 0 0;
             background: #181818 !important;
             border-bottom: none !important;
         }
         .theme-swiss_minimalist .card-bottom,
         .theme-swiss_minimalist .flipper-bottom {
-            border-radius: 0 0 28px 28px !important;
+            border-radius: 0 0 28px 28px;
             background: #181818 !important;
         }
         .theme-swiss_minimalist .card-divider {
@@ -1220,19 +1220,19 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
         .theme-minimal_dark .flip-card {
             background: #1C1C1E !important;
             border: 1px solid rgba(255,255,255,0.06) !important;
-            border-radius: 20px !important;
+            border-radius: 20px;
             box-shadow: 0 12px 32px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.05) !important;
         }
         .theme-minimal_dark .card-top,
         .theme-minimal_dark .flipper-top {
             background: rgba(255,255,255,0.03) !important;
-            border-radius: 20px 20px 0 0 !important;
+            border-radius: 20px 20px 0 0;
             border-bottom: 1px solid rgba(0,0,0,0.4) !important;
         }
         .theme-minimal_dark .card-bottom,
         .theme-minimal_dark .flipper-bottom {
             background: rgba(0,0,0,0.1) !important;
-            border-radius: 0 0 20px 20px !important;
+            border-radius: 0 0 20px 20px;
         }
         .theme-minimal_dark .card-divider {
             height: 1px !important;
@@ -1458,6 +1458,7 @@ let cardShape = legacyMap[rawShape] || rawShape;
 let hourFormat = config.format || '12';
 let showSeconds = config.show_seconds !== 'false';
 let showDate = config.show_date !== 'false';
+let showDay = config.show_day !== 'false';
 let showGreeting = config.show_greeting !== 'false';
 let userName = config.user_name || '';
 let clockScale = parseFloat(config.size || '1.0');
@@ -1488,8 +1489,8 @@ function applyConfiguration() {
         if (!showSeconds) scene.classList.add('hide-seconds');
         else scene.classList.remove('hide-seconds');
 
-        if (!showDate) scene.classList.add('hide-date');
-        else scene.classList.remove('hide-date');
+        if (!showDate && !showDay) scene.classList.add('hide-date-badge');
+        else scene.classList.remove('hide-date-badge');
 
         if (!showGreeting) scene.classList.add('hide-greeting');
         else scene.classList.remove('hide-greeting');
@@ -1543,11 +1544,19 @@ function updateDate() {
     const monthName = months[now.getMonth()];
     const yearNum = now.getFullYear();
 
-    b.innerHTML = `<span class="date-segment date-dayname">${dayName}</span>` +
-                  `<span class="date-sep">◆</span>` +
-                  `<span class="date-segment date-num">${dateNum}</span>` +
-                  `<span class="date-segment date-month">${monthName}</span>` +
-                  `<span class="date-segment date-year">${yearNum}</span>`;
+    let content = '';
+    if (showDay) {
+        content += `<span class="date-segment date-dayname">${dayName}</span>`;
+    }
+    if (showDay && showDate) {
+        content += `<span class="date-sep">◆</span>`;
+    }
+    if (showDate) {
+        content += `<span class="date-segment date-num">${dateNum}</span>` +
+                   `<span class="date-segment date-month">${monthName}</span>` +
+                   `<span class="date-segment date-year">${yearNum}</span>`;
+    }
+    b.innerHTML = content;
 }
 
 let pH = -1, pM = -1, pS = -1;
@@ -1748,6 +1757,7 @@ class FlipClockWindow(Gtk.Window):
         theme = config_params.get('theme', 'classic_retro')
         show_seconds = str(config_params.get('show_seconds', 'true')).lower()
         show_date = str(config_params.get('show_date', 'true')).lower()
+        show_day = str(config_params.get('show_day', 'true')).lower()
         show_greeting = str(config_params.get('show_greeting', 'true')).lower()
         user_name = config_params.get('user_name', '').replace("'", "\\'")
         custom_credit = config_params.get('custom_credit', 'FLIP CLOCK SCREENSAVER')
@@ -1762,7 +1772,7 @@ class FlipClockWindow(Gtk.Window):
         legacy_shape_map = {'soft_squircle': 'squircle', 'neo_rounded': 'rounded_rectangle', 'glass_floating': 'card', 'fold_corner': 'notched', 'split_flip': 'rectangle', 'premium_bevel': 'beveled'}
         card_shape = legacy_shape_map.get(raw_shape, raw_shape)
         
-        config_script = f"<script>window.screensaverConfig = {{ monitor: '{monitor_idx}', format: '{fmt}', size: '{size}', speed: '{speed}', theme: '{theme}', card_shape: '{card_shape}', show_seconds: '{show_seconds}', show_date: '{show_date}', show_greeting: '{show_greeting}', user_name: '{user_name}', custom_credit: '{custom_credit}', digit_font: '{digit_font}', label_font: '{label_font}', custom_bg_color: '{custom_bg_color}', custom_card_color: '{custom_card_color}', custom_digit_color: '{custom_digit_color}', custom_accent_color: '{custom_accent_color}', custom_border_color: '{custom_border_color}' }};</script>"
+        config_script = f"<script>window.screensaverConfig = {{ monitor: '{monitor_idx}', format: '{fmt}', size: '{size}', speed: '{speed}', theme: '{theme}', card_shape: '{card_shape}', show_seconds: '{show_seconds}', show_date: '{show_date}', show_day: '{show_day}', show_greeting: '{show_greeting}', user_name: '{user_name}', custom_credit: '{custom_credit}', digit_font: '{digit_font}', label_font: '{label_font}', custom_bg_color: '{custom_bg_color}', custom_card_color: '{custom_card_color}', custom_digit_color: '{custom_digit_color}', custom_accent_color: '{custom_accent_color}', custom_border_color: '{custom_border_color}' }};</script>"
         if "</head>" in html_content:
             html_content = html_content.replace("</head>", f"{config_script}</head>")
         else:
@@ -2358,12 +2368,25 @@ class FlipClockSettingsWindow(Gtk.Window):
         self.switch_date.set_valign(Gtk.Align.CENTER)
         grid_d.attach(self.switch_date, 1, 2, 1, 1)
 
+        # Show Day of Week Toggle
+        lbl_day_toggle = Gtk.Label(label="Display Day of Week:")
+        lbl_day_toggle.get_style_context().add_class("field-label")
+        lbl_day_toggle.set_xalign(0)
+        lbl_day_toggle.set_valign(Gtk.Align.CENTER)
+        grid_d.attach(lbl_day_toggle, 0, 3, 1, 1)
+
+        self.switch_day = Gtk.Switch()
+        self.switch_day.set_active(str(self.manager.config.get('show_day', 'true')).lower() == 'true')
+        self.switch_day.set_halign(Gtk.Align.END)
+        self.switch_day.set_valign(Gtk.Align.CENTER)
+        grid_d.attach(self.switch_day, 1, 3, 1, 1)
+
         # Clock Scale Slider
         lbl_scale = Gtk.Label(label="Clock Scale / Size:")
         lbl_scale.get_style_context().add_class("field-label")
         lbl_scale.set_xalign(0)
         lbl_scale.set_valign(Gtk.Align.CENTER)
-        grid_d.attach(lbl_scale, 0, 3, 1, 1)
+        grid_d.attach(lbl_scale, 0, 4, 1, 1)
 
         cur_scale = float(self.manager.config.get('clock_size', '1.0'))
         self.adj_size = Gtk.Adjustment(value=cur_scale, lower=0.5, upper=2.0, step_increment=0.1, page_increment=0.5, page_size=0)
@@ -2371,14 +2394,14 @@ class FlipClockSettingsWindow(Gtk.Window):
         self.scale_size.set_digits(1)
         self.scale_size.set_hexpand(True)
         self.scale_size.set_valign(Gtk.Align.CENTER)
-        grid_d.attach(self.scale_size, 1, 3, 1, 1)
+        grid_d.attach(self.scale_size, 1, 4, 1, 1)
 
         # Flip Card Corner Shape Selection
         lbl_shape = Gtk.Label(label="Flip Card Design / Shape:")
         lbl_shape.get_style_context().add_class("field-label")
         lbl_shape.set_xalign(0)
         lbl_shape.set_valign(Gtk.Align.CENTER)
-        grid_d.attach(lbl_shape, 0, 4, 1, 1)
+        grid_d.attach(lbl_shape, 0, 5, 1, 1)
 
         self.combo_card_shape = Gtk.ComboBoxText()
         shapes_list = [
@@ -2432,7 +2455,7 @@ class FlipClockSettingsWindow(Gtk.Window):
         self.combo_card_shape.set_hexpand(True)
         self.combo_card_shape.set_valign(Gtk.Align.CENTER)
         self.combo_card_shape.connect("changed", self.on_shape_combo_changed)
-        grid_d.attach(self.combo_card_shape, 1, 4, 1, 1)
+        grid_d.attach(self.combo_card_shape, 1, 5, 1, 1)
 
         self.img_shape_preview = Gtk.Image()
         self.img_shape_preview.set_margin_top(8)
@@ -2680,6 +2703,7 @@ class FlipClockSettingsWindow(Gtk.Window):
         size = f"{self.scale_size.get_value():.1f}"
         show_sec = 'true' if self.switch_seconds.get_active() else 'false'
         show_dt = 'true' if self.switch_date.get_active() else 'false'
+        show_day = 'true' if self.switch_day.get_active() else 'false'
         show_greet = 'true' if self.switch_greeting.get_active() else 'false'
         uname = self.entry_name.get_text().strip()
         card_shape = self.combo_card_shape.get_active_id() or "squircle"
@@ -2698,6 +2722,7 @@ class FlipClockSettingsWindow(Gtk.Window):
         self.manager.config['clock_size'] = size
         self.manager.config['show_seconds'] = show_sec
         self.manager.config['show_date'] = show_dt
+        self.manager.config['show_day'] = show_day
         self.manager.config['show_greeting'] = show_greet
         self.manager.config['user_name'] = uname
         self.manager.config['card_shape'] = card_shape
@@ -2718,6 +2743,7 @@ class FlipClockSettingsWindow(Gtk.Window):
         self.combo_format.set_active_id(str(self.manager.config.get('hour_format', '12')))
         self.switch_seconds.set_active(str(self.manager.config.get('show_seconds', 'true')).lower() == 'true')
         self.switch_date.set_active(str(self.manager.config.get('show_date', 'true')).lower() == 'true')
+        self.switch_day.set_active(str(self.manager.config.get('show_day', 'true')).lower() == 'true')
         self.switch_greeting.set_active(str(self.manager.config.get('show_greeting', 'true')).lower() == 'true')
         self.entry_name.set_text(self.manager.config.get('user_name', ''))
         cur_shape = self.manager.config.get('card_shape', 'squircle')
@@ -2831,6 +2857,7 @@ class FlipClockManager:
             'card_shape': 'squircle',
             'show_seconds': 'true',
             'show_date': 'true',
+            'show_day': 'true',
             'show_greeting': 'true',
             'user_name': '',
             'bg_style': 'vignette',
@@ -2864,6 +2891,7 @@ class FlipClockManager:
                     self.config['card_shape'] = settings.get('card_shape', 'squircle')
                     self.config['show_seconds'] = settings.get('show_seconds', 'true')
                     self.config['show_date'] = settings.get('show_date', 'true')
+                    self.config['show_day'] = settings.get('show_day', 'true')
                     self.config['show_greeting'] = settings.get('show_greeting', 'true')
                     self.config['user_name'] = settings.get('user_name', '')
                     self.config['bg_style'] = settings.get('bg_style', 'vignette')
@@ -2892,6 +2920,7 @@ class FlipClockManager:
             'card_shape': str(self.config.get('card_shape', 'squircle')),
             'show_seconds': str(self.config.get('show_seconds', 'true')),
             'show_date': str(self.config.get('show_date', 'true')),
+            'show_day': str(self.config.get('show_day', 'true')),
             'show_greeting': str(self.config.get('show_greeting', 'true')),
             'user_name': str(self.config.get('user_name', '')),
             'bg_style': str(self.config.get('bg_style', 'vignette')),
@@ -2921,6 +2950,7 @@ class FlipClockManager:
             'card_shape': 'squircle',
             'show_seconds': 'true',
             'show_date': 'true',
+            'show_day': 'true',
             'show_greeting': 'true',
             'user_name': '',
             'bg_style': 'vignette',

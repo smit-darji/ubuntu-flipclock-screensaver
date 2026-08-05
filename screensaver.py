@@ -394,17 +394,17 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
         .theme-swiss_minimalist .flip-card {
             background: #181818 !important;
             border: none !important;
-            border-radius: 28px !important;
+            border-radius: 28px;
             box-shadow: 0 18px 40px rgba(0,0,0,0.45), inset 0 0 15px rgba(0,0,0,0.4) !important;
         }
         .theme-swiss_minimalist .card-top, .theme-swiss_minimalist .flipper-top {
             background: #181818 !important;
             border-bottom: none !important;
-            border-radius: 28px 28px 0 0 !important;
+            border-radius: 28px 28px 0 0;
         }
         .theme-swiss_minimalist .card-bottom, .theme-swiss_minimalist .flipper-bottom {
             background: #181818 !important;
-            border-radius: 0 0 28px 28px !important;
+            border-radius: 0 0 28px 28px;
         }
         .theme-swiss_minimalist .card-divider {
             height: 2px !important; background: #000 !important;
@@ -443,17 +443,17 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
         .theme-minimal_dark .flip-card {
             background: #1C1C1E !important;
             border: 1px solid rgba(255,255,255,0.06) !important;
-            border-radius: 20px !important;
+            border-radius: 20px;
             box-shadow: 0 12px 32px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.05) !important;
         }
         .theme-minimal_dark .card-top, .theme-minimal_dark .flipper-top {
             background: rgba(255,255,255,0.03) !important;
-            border-radius: 20px 20px 0 0 !important;
+            border-radius: 20px 20px 0 0;
             border-bottom: 1px solid rgba(0,0,0,0.4) !important;
         }
         .theme-minimal_dark .card-bottom, .theme-minimal_dark .flipper-bottom {
             background: rgba(0,0,0,0.1) !important;
-            border-radius: 0 0 20px 20px !important;
+            border-radius: 0 0 20px 20px;
         }
         .theme-minimal_dark .card-divider {
             height: 1px !important; background: rgba(0,0,0,0.6) !important;
@@ -583,6 +583,7 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
             box-shadow: 0 6px 30px rgba(0,0,0,0.7);
             backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
         }
+        .hide-date-badge #date-badge { display:none !important; }
 
         #close-btn {
             position:fixed; top:18px; right:18px; z-index:9999;
@@ -636,11 +637,38 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
 
 <script>
 function updateDate() {
+    const cfg = window.screensaverConfig || {};
+    const showDate = cfg.show_date !== 'false';
+    const showDay = cfg.show_day !== 'false';
+    const b = document.getElementById('date-badge');
+    if (!b) return;
+
+    const scene = document.getElementById('scene');
+    if (scene) {
+        if (!showDate && !showDay) scene.classList.add('hide-date-badge');
+        else scene.classList.remove('hide-date-badge');
+    }
+
     const now = new Date();
     const days   = ['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];
     const months = ['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'];
-    const b = document.getElementById('date-badge');
-    if (b) b.textContent = `${days[now.getDay()]} \u25C6 ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
+
+    const dayName = days[now.getDay()];
+    const dateNum = now.getDate();
+    const monthName = months[now.getMonth()];
+    const yearNum = now.getFullYear();
+
+    let content = '';
+    if (showDay) {
+        content += dayName;
+    }
+    if (showDay && showDate) {
+        content += ' \u25C6 ';
+    }
+    if (showDate) {
+        content += `${dateNum} ${monthName} ${yearNum}`;
+    }
+    b.textContent = content;
 }
 
 let pH = -1, pM = -1, pS = -1;
@@ -838,6 +866,7 @@ class ScreensaverWindow(Gtk.Window):
         theme = "luxury_black_gold"
         show_seconds = "true"
         show_date = "true"
+        show_day = "true"
         show_greeting = "true"
         user_name = ""
         custom_credit = "FLIP CLOCK SCREENSAVER"
@@ -862,6 +891,7 @@ class ScreensaverWindow(Gtk.Window):
                     theme = cp['Settings'].get('theme', 'luxury_black_gold')
                     show_seconds = cp['Settings'].get('show_seconds', 'true')
                     show_date = cp['Settings'].get('show_date', 'true')
+                    show_day = cp['Settings'].get('show_day', 'true')
                     show_greeting = cp['Settings'].get('show_greeting', 'true')
                     user_name = cp['Settings'].get('user_name', '').replace("'", "\\'")
                     custom_credit = cp['Settings'].get('custom_credit', 'FLIP CLOCK SCREENSAVER')
@@ -881,7 +911,7 @@ class ScreensaverWindow(Gtk.Window):
             print("Error: Could not locate clock.html or index.html")
             sys.exit(1)
             
-        config_script = f"<script>window.screensaverConfig = {{ monitor: '{monitor_idx}', format: '{fmt}', size: '{size}', speed: '{speed}', theme: '{theme}', card_shape: '{card_shape}', show_seconds: '{show_seconds}', show_date: '{show_date}', show_greeting: '{show_greeting}', user_name: '{user_name}', custom_credit: '{custom_credit}', digit_font: '{digit_font}', label_font: '{label_font}', custom_bg_color: '{custom_bg_color}', custom_card_color: '{custom_card_color}', custom_digit_color: '{custom_digit_color}', custom_accent_color: '{custom_accent_color}', custom_border_color: '{custom_border_color}' }};</script>"
+        config_script = f"<script>window.screensaverConfig = {{ monitor: '{monitor_idx}', format: '{fmt}', size: '{size}', speed: '{speed}', theme: '{theme}', card_shape: '{card_shape}', show_seconds: '{show_seconds}', show_date: '{show_date}', show_day: '{show_day}', show_greeting: '{show_greeting}', user_name: '{user_name}', custom_credit: '{custom_credit}', digit_font: '{digit_font}', label_font: '{label_font}', custom_bg_color: '{custom_bg_color}', custom_card_color: '{custom_card_color}', custom_digit_color: '{custom_digit_color}', custom_accent_color: '{custom_accent_color}', custom_border_color: '{custom_border_color}' }};</script>"
         if "</head>" in html_content:
             html_content = html_content.replace("</head>", f"{config_script}</head>")
         else:
