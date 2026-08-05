@@ -1,10 +1,10 @@
 # Premium Fliqlo-Style Flip Clock Screensaver for Ubuntu
 
 [![Platform](https://img.shields.io/badge/Platform-Ubuntu%2020.04%20%7C%2022.04%20%7C%2024.04-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)](https://ubuntu.com)
-[![Version](https://img.shields.io/badge/Version-v2.5.4-blue?style=for-the-badge)](releases/flipclock-screensaver_2.5.4.deb)
+[![Version](https://img.shields.io/badge/Version-v2.5.5-blue?style=for-the-badge)](releases/flipclock-screensaver_2.5.5.deb)
 [![Download Latest .deb](https://img.shields.io/badge/Download-flipclock--screensaver.deb-10B981?style=for-the-badge&logo=debian&logoColor=white)](https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver.deb)
 [![Download Android APK](https://img.shields.io/badge/Download-flipclock--screensaver.apk-FFB000?style=for-the-badge&logo=android&logoColor=white)](releases/flipclock-screensaver.apk)
-[![Archived Release v2.5.4](https://img.shields.io/badge/Archive-v2.5.4.deb-6366F1?style=for-the-badge&logo=debian&logoColor=white)](https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_2.5.4.deb)
+[![Archived Release v2.5.5](https://img.shields.io/badge/Archive-v2.5.5.deb-6366F1?style=for-the-badge&logo=debian&logoColor=white)](https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_2.5.5.deb)
 [![Language](https://img.shields.io/badge/Language-Python%203%20%2B%20GTK3-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-MIT-6D28D9?style=for-the-badge)](LICENSE)
 
@@ -30,8 +30,8 @@ Click the buttons below to download the pre-compiled packages directly (includin
     <img src="https://img.shields.io/badge/DOWNLOAD-Latest%20.deb%20Package-10B981?style=for-the-badge&logo=debian&logoColor=white" height="48" alt="Download Latest .deb Package">
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_2.5.4.deb" target="_blank">
-    <img src="https://img.shields.io/badge/DOWNLOAD-Versioned%20v2.5.4%20.deb-6366F1?style=for-the-badge&logo=debian&logoColor=white" height="48" alt="Download Versioned .deb Package">
+  <a href="https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_2.5.5.deb" target="_blank">
+    <img src="https://img.shields.io/badge/DOWNLOAD-Versioned%20v2.5.5%20.deb-6366F1?style=for-the-badge&logo=debian&logoColor=white" height="48" alt="Download Versioned .deb Package">
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="releases/flipclock-screensaver.apk" download="flipclock-screensaver.apk">
@@ -217,14 +217,14 @@ sudo apt update
 sudo apt install ./flipclock-screensaver.deb
 ```
 
-#### Option B: Install Versioned Release Archive (`v2.5.4`)
+#### Option B: Install Versioned Release Archive (`v2.5.5`)
 ```bash
-# 1. Download version v2.5.4 from the releases/ directory
-wget https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_2.5.4.deb
+# 1. Download version v2.5.5 from the releases/ directory
+wget https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_2.5.5.deb
 
 # 2. Install versioned package via apt
 sudo apt update
-sudo apt install ./flipclock-screensaver_2.5.4.deb
+sudo apt install ./flipclock-screensaver_2.5.5.deb
 ```
 
 ---
@@ -311,7 +311,7 @@ Once installed, the following commands are available globally in your terminal:
 |---|---|
 | `flipclock` or `flipclock --run` | Previews/launches screensaver full-screen windows immediately |
 | `flipclock --settings` | Opens the graphical settings configuration window |
-| `flipclock --version` | Outputs current software version (`v2.5.4`) |
+| `flipclock --version` | Outputs current software version (`v2.5.5`) |
 | `flipclock --daemon` | Starts the background idle monitor daemon |
 | `pkill -f "flipclock.*--daemon"` | Stops the background idle monitor daemon |
 
@@ -325,7 +325,7 @@ To build a fresh `.deb` package file locally:
 chmod +x build_deb.sh
 ./build_deb.sh
 ```
-This generates `flipclock-screensaver.deb` (and `flipclock-screensaver_2.5.4.deb`) in the `releases/` directory.
+This generates `flipclock-screensaver.deb` (and `flipclock-screensaver_2.5.5.deb`) in the `releases/` directory.
 
 ---
 
