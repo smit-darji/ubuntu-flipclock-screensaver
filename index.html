@@ -356,16 +356,19 @@
             bottom: clamp(55px, 12vh, 120px);
             right: clamp(55px, 12vh, 120px);
         }
+
         .shape-circle #ampm-badge,
         .shape-pill #ampm-badge,
         .shape-stadium #ampm-badge {
             bottom: clamp(22px, 4.5vh, 50px);
             right: clamp(22px, 4.5vh, 50px);
         }
+
         .shape-oval #ampm-badge {
             bottom: clamp(25px, 5vh, 60px);
             right: clamp(25px, 5vh, 60px);
         }
+
         .shape-octagon #ampm-badge,
         .shape-hexagon #ampm-badge,
         .shape-chamfered #ampm-badge,
@@ -376,30 +379,37 @@
             bottom: clamp(18px, 3.5vh, 40px);
             right: clamp(18px, 3.5vh, 40px);
         }
+
         .shape-pentagon #ampm-badge {
             bottom: clamp(14px, 2.8vh, 32px);
             right: clamp(45px, 9vh, 90px);
         }
+
         .shape-shield #ampm-badge {
             bottom: clamp(35px, 7vh, 80px);
             right: clamp(35px, 7vh, 80px);
         }
+
         .shape-capsule #ampm-badge {
             bottom: clamp(18px, 3.5vh, 42px);
             right: clamp(20px, 4vh, 48px);
         }
+
         .shape-chevron #ampm-badge {
             bottom: clamp(14px, 2.8vh, 32px);
             right: clamp(32px, 6vh, 65px);
         }
+
         .shape-badge #ampm-badge {
             bottom: clamp(30px, 6vh, 70px);
             right: clamp(25px, 5vh, 60px);
         }
+
         .shape-lozenge #ampm-badge {
             bottom: clamp(30px, 6vh, 70px);
             right: clamp(45px, 9vh, 90px);
         }
+
         .shape-parallelogram #ampm-badge {
             bottom: clamp(10px, 2vh, 28px);
             right: clamp(45px, 9vh, 90px);
@@ -935,10 +945,10 @@
             --vignette-color: transparent;
             --card-bg: #1C1C1E;
             --card-border: rgba(255, 255, 255, 0.06);
-            --card-top-bg: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
-            --card-bot-bg: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.04) 100%);
+            --card-top-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.04) 100%);
             --divider-line: #111111;
-            --pin-bg: rgba(255,255,255,0.15);
+            --pin-bg: rgba(255, 255, 255, 0.15);
             --digit-color: #FFFFFF;
             --digit-shadow: none;
             --dot-bg: rgba(235, 235, 245, 0.6);
@@ -994,34 +1004,37 @@
         .theme-apple_liquid_glass #scene {
             background: #000000 !important;
         }
+
         .theme-apple_liquid_glass #scene::before {
             content: '' !important;
             position: absolute !important;
             inset: 0 !important;
-            background: 
+            background:
                 radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 45%),
                 radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 70%) !important;
             pointer-events: none !important;
             z-index: 0 !important;
         }
+
         .theme-apple_liquid_glass .flip-card {
             background: rgba(255, 255, 255, 0.12) !important;
             backdrop-filter: blur(24px) saturate(180%) !important;
             -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
             border: 1px solid rgba(255, 255, 255, 0.18) !important;
             border-radius: 48px;
-            box-shadow: 
+            box-shadow:
                 0 12px 40px rgba(0, 0, 0, 0.45),
                 inset 0 1px rgba(255, 255, 255, 0.35),
                 inset 0 -1px rgba(255, 255, 255, 0.05) !important;
             animation: appleGlassFloat 8s ease-in-out infinite alternate;
             overflow: visible !important;
         }
+
         .theme-apple_liquid_glass .flip-card::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0) 70%);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0) 70%);
             background-size: 200% 200%;
             background-position: -200% 0;
             pointer-events: none;
@@ -1029,6 +1042,7 @@
             border-radius: 48px;
             animation: appleGlassShimmerSweep 12s cubic-bezier(0.25, 1, 0.5, 1) infinite;
         }
+
         .theme-apple_liquid_glass .flip-card::after {
             content: '';
             position: absolute;
@@ -1036,27 +1050,31 @@
             left: 16px;
             right: 16px;
             height: 1.5px;
-            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.55) 50%, rgba(255,255,255,0) 100%);
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.55) 50%, rgba(255, 255, 255, 0) 100%);
             pointer-events: none;
             z-index: 14;
         }
+
         .theme-apple_liquid_glass .card-top,
         .theme-apple_liquid_glass .flipper-top {
             border-radius: 48px 48px 0 0;
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.02) 100%) !important;
             border-bottom: 1px solid rgba(0, 0, 0, 0.25) !important;
         }
+
         .theme-apple_liquid_glass .card-bottom,
         .theme-apple_liquid_glass .flipper-bottom {
             border-radius: 0 0 48px 48px;
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.12) 100%) !important;
         }
+
         .theme-apple_liquid_glass .card-divider {
             height: 1px !important;
             background: rgba(255, 255, 255, 0.08) !important;
             border: none !important;
             box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
         }
+
         .theme-apple_liquid_glass .card-divider::before,
         .theme-apple_liquid_glass .card-divider::after {
             content: '' !important;
@@ -1064,40 +1082,45 @@
             height: 10px !important;
             border-radius: 3px !important;
             background: radial-gradient(circle at 35% 35%, #fff6d1 0%, #D4AF37 60%, #876211 100%) !important;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.4) !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.4) !important;
         }
+
         .theme-apple_liquid_glass .card-divider::before {
             left: 8px !important;
         }
+
         .theme-apple_liquid_glass .card-divider::after {
             right: 8px !important;
         }
+
         .theme-apple_liquid_glass .divider-dot {
             width: 10px !important;
             height: 10px !important;
             border-radius: 50% !important;
             background: radial-gradient(circle at 35% 35%, #fff6d1 0%, #D4AF37 60%, #876211 100%) !important;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.4) !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.4) !important;
             border: 1px solid rgba(0, 0, 0, 0.4) !important;
         }
+
         .theme-apple_liquid_glass .digit-text {
             font-family: -apple-system-ny, "New York", "Cormorant Garamond", "Georgia", serif !important;
             font-weight: 500 !important;
             color: #FFFFFF !important;
-            text-shadow: 
-                -1px -1px 0px rgba(255, 255, 255, 0.25), 
-                1px 1px 0px rgba(0, 0, 0, 0.55), 
+            text-shadow:
+                -1px -1px 0px rgba(255, 255, 255, 0.25),
+                1px 1px 0px rgba(0, 0, 0, 0.55),
                 0 6px 12px rgba(0, 0, 0, 0.35) !important;
             letter-spacing: -0.02em !important;
         }
+
         .theme-apple_liquid_glass #greeting-badge {
             background: rgba(255, 255, 255, 0.12) !important;
             backdrop-filter: blur(24px) saturate(180%) !important;
             -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
             border: 1px solid rgba(212, 175, 55, 0.45) !important;
             border-radius: 40px !important;
-            box-shadow: 
-                0 10px 30px rgba(0,0,0,0.35),
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.35),
                 inset 0 1px rgba(255, 255, 255, 0.25),
                 inset 0 -1px rgba(255, 255, 255, 0.05) !important;
             color: #D8D8D8 !important;
@@ -1105,21 +1128,23 @@
             font-weight: 500 !important;
             letter-spacing: 0.3em !important;
             padding: clamp(8px, 1.2vh, 14px) clamp(26px, 3.2vw, 50px) !important;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5) !important;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
             animation: appleGlassFloat 8s ease-in-out infinite alternate;
         }
+
         .theme-apple_liquid_glass #greeting-badge .badge-ornament {
             color: #D4AF37 !important;
             text-shadow: 0 0 6px rgba(212, 175, 55, 0.6) !important;
         }
+
         .theme-apple_liquid_glass #date-badge {
             background: rgba(255, 255, 255, 0.12) !important;
             backdrop-filter: blur(24px) saturate(180%) !important;
             -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
             border: 1px solid rgba(255, 255, 255, 0.18) !important;
             border-radius: 50px !important;
-            box-shadow: 
-                0 10px 30px rgba(0,0,0,0.35),
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.35),
                 inset 0 1px rgba(255, 255, 255, 0.25),
                 inset 0 -1px rgba(255, 255, 255, 0.05) !important;
             color: #D8D8D8 !important;
@@ -1129,14 +1154,17 @@
             padding: clamp(8px, 1.2vh, 14px) clamp(26px, 3.2vw, 50px) !important;
             animation: appleGlassFloat 8s ease-in-out infinite alternate 1.5s;
         }
+
         .theme-apple_liquid_glass #date-badge .date-dayname {
             color: #FFFFFF !important;
             font-weight: 600 !important;
         }
+
         .theme-apple_liquid_glass #date-badge .date-sep {
             color: #D4AF37 !important;
             opacity: 0.9 !important;
         }
+
         .theme-apple_liquid_glass #date-badge .date-num {
             background: rgba(255, 255, 255, 0.10) !important;
             border: 1px solid rgba(255, 255, 255, 0.20) !important;
@@ -1145,14 +1173,15 @@
             border-radius: 8px !important;
             padding: 2px 10px !important;
         }
+
         .theme-apple_liquid_glass #ampm-badge {
             background: rgba(255, 255, 255, 0.12) !important;
             backdrop-filter: blur(24px) saturate(180%) !important;
             -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
             border: 1px solid rgba(255, 255, 255, 0.18) !important;
             border-radius: 10px !important;
-            box-shadow: 
-                0 4px 12px rgba(0,0,0,0.35),
+            box-shadow:
+                0 4px 12px rgba(0, 0, 0, 0.35),
                 inset 0 1px rgba(255, 255, 255, 0.25),
                 inset 0 -1px rgba(255, 255, 255, 0.05) !important;
             color: #D4AF37 !important;
@@ -1162,14 +1191,17 @@
             padding: clamp(3px, 0.5vh, 6px) clamp(8px, 1.2vh, 14px) !important;
             text-shadow: 0 0 4px rgba(212, 175, 55, 0.3) !important;
         }
+
         .theme-apple_liquid_glass .sep-dot,
         .theme-apple_liquid_glass .colon-dot {
             background: radial-gradient(circle at 35% 35%, #FFFFFF 0%, #D8D8D8 100%) !important;
-            box-shadow: 0 0 12px rgba(255, 255, 255, 0.3), 0 2px 4px rgba(0,0,0,0.5) !important;
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.3), 0 2px 4px rgba(0, 0, 0, 0.5) !important;
         }
+
         .theme-apple_liquid_glass .flip-top-out {
             animation: flipTopOut 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
         }
+
         .theme-apple_liquid_glass .flip-bottom-in {
             animation: flipBottomIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1) 0.35s forwards !important;
             transform: rotateX(90deg);
@@ -1179,46 +1211,54 @@
         .theme-swiss_minimalist #scene {
             background: #000000 !important;
         }
+
         .theme-swiss_minimalist #scene::before {
             display: none !important;
         }
+
         .theme-swiss_minimalist #branding-tag,
         .theme-swiss_minimalist #date-badge,
         .theme-swiss_minimalist #greeting-badge {
             display: none !important;
         }
+
         .theme-swiss_minimalist .flip-card {
             background: #181818 !important;
             border: none !important;
             border-radius: 28px;
-            box-shadow: 
-                0 18px 40px rgba(0,0,0,0.45),
+            box-shadow:
+                0 18px 40px rgba(0, 0, 0, 0.45),
                 inset 0 0 15px rgba(0, 0, 0, 0.4) !important;
             width: clamp(200px, 45vh, 480px) !important;
             height: clamp(240px, 54vh, 576px) !important;
         }
+
         .theme-swiss_minimalist .card-top,
         .theme-swiss_minimalist .flipper-top {
             border-radius: 28px 28px 0 0;
             background: #181818 !important;
             border-bottom: none !important;
         }
+
         .theme-swiss_minimalist .card-bottom,
         .theme-swiss_minimalist .flipper-bottom {
             border-radius: 0 0 28px 28px;
             background: #181818 !important;
         }
+
         .theme-swiss_minimalist .card-divider {
             height: 2px !important;
             background: #000000 !important;
             border: none !important;
             box-shadow: none !important;
         }
+
         .theme-swiss_minimalist .divider-dot,
         .theme-swiss_minimalist .card-divider::before,
         .theme-swiss_minimalist .card-divider::after {
             display: none !important;
         }
+
         .theme-swiss_minimalist .digit-text {
             font-family: "SF Pro Display", "Helvetica Neue", "Inter", sans-serif !important;
             font-weight: 900 !important;
@@ -1227,6 +1267,7 @@
             text-shadow: none !important;
             letter-spacing: -0.04em !important;
         }
+
         .theme-swiss_minimalist #ampm-badge {
             position: absolute !important;
             top: 24px !important;
@@ -1245,13 +1286,16 @@
             letter-spacing: normal !important;
             z-index: 20 !important;
         }
+
         .theme-swiss_minimalist .clock-row {
             gap: 18px !important;
         }
+
         .theme-swiss_minimalist .sep {
             gap: 28px !important;
             margin: 0 40px !important;
         }
+
         .theme-swiss_minimalist .sep-dot {
             width: 14px !important;
             height: 14px !important;
@@ -1259,9 +1303,11 @@
             background: #FFFFFF !important;
             box-shadow: 0 0 8px rgba(255, 255, 255, 0.4) !important;
         }
+
         .theme-swiss_minimalist .flip-top-out {
             animation: flipTopOut 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
         }
+
         .theme-swiss_minimalist .flip-bottom-in {
             animation: flipBottomIn 0.35s cubic-bezier(0.4, 0, 0.2, 1) 0s forwards !important;
             transform: rotateX(90deg);
@@ -1271,42 +1317,50 @@
         .theme-minimal_dark #scene {
             background: #111111 !important;
         }
+
         .theme-minimal_dark #scene::before {
             display: none !important;
         }
+
         .theme-minimal_dark #branding-tag {
             display: none !important;
         }
+
         .theme-minimal_dark .flip-card {
             background: #1C1C1E !important;
-            border: 1px solid rgba(255,255,255,0.06) !important;
+            border: 1px solid rgba(255, 255, 255, 0.06) !important;
             border-radius: 20px;
             box-shadow:
-                0 12px 32px rgba(0,0,0,0.55),
-                inset 0 1px 0 rgba(255,255,255,0.05) !important;
+                0 12px 32px rgba(0, 0, 0, 0.55),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
         }
+
         .theme-minimal_dark .card-top,
         .theme-minimal_dark .flipper-top {
-            background: rgba(255,255,255,0.03) !important;
+            background: rgba(255, 255, 255, 0.03) !important;
             border-radius: 20px 20px 0 0;
-            border-bottom: 1px solid rgba(0,0,0,0.4) !important;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.4) !important;
         }
+
         .theme-minimal_dark .card-bottom,
         .theme-minimal_dark .flipper-bottom {
-            background: rgba(0,0,0,0.1) !important;
+            background: rgba(0, 0, 0, 0.1) !important;
             border-radius: 0 0 20px 20px;
         }
+
         .theme-minimal_dark .card-divider {
             height: 1px !important;
-            background: rgba(0,0,0,0.6) !important;
+            background: rgba(0, 0, 0, 0.6) !important;
             border: none !important;
             box-shadow: none !important;
         }
+
         .theme-minimal_dark .divider-dot,
         .theme-minimal_dark .card-divider::before,
         .theme-minimal_dark .card-divider::after {
             display: none !important;
         }
+
         .theme-minimal_dark .digit-text {
             font-family: "SF Pro Display", "Helvetica Neue", "Inter", sans-serif !important;
             font-weight: 700 !important;
@@ -1315,610 +1369,685 @@
             text-shadow: none !important;
             letter-spacing: -0.03em !important;
         }
+
         .theme-minimal_dark #date-badge {
             font-family: "Inter", "SF Pro Text", sans-serif !important;
             font-weight: 500 !important;
             font-size: clamp(10px, 1.1vw, 15px) !important;
             letter-spacing: 0.05em !important;
-            color: rgba(235,235,245,0.85) !important;
-            background: rgba(44,44,46,0.9) !important;
-            border: 1px solid rgba(255,255,255,0.08) !important;
+            color: rgba(235, 235, 245, 0.85) !important;
+            background: rgba(44, 44, 46, 0.9) !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
             border-radius: 10px !important;
             box-shadow: none !important;
             backdrop-filter: blur(20px) !important;
         }
+
         .theme-minimal_dark #greeting-badge {
             font-family: "Inter", sans-serif !important;
             font-weight: 400 !important;
-            color: rgba(235,235,245,0.5) !important;
+            color: rgba(235, 235, 245, 0.5) !important;
             background: transparent !important;
             border: none !important;
             box-shadow: none !important;
         }
+
         .theme-minimal_dark #ampm-badge {
             font-family: "Inter", sans-serif !important;
             font-weight: 500 !important;
             font-size: 18px !important;
-            color: rgba(235,235,245,0.6) !important;
-            background: rgba(44,44,46,0.8) !important;
-            border: 1px solid rgba(255,255,255,0.08) !important;
+            color: rgba(235, 235, 245, 0.6) !important;
+            background: rgba(44, 44, 46, 0.8) !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
             border-radius: 8px !important;
             padding: 4px 10px !important;
             box-shadow: none !important;
         }
+
         .theme-minimal_dark .sep-dot {
-            background: rgba(235,235,245,0.6) !important;
+            background: rgba(235, 235, 245, 0.6) !important;
             box-shadow: none !important;
         }
 
         @keyframes appleGlassFloat {
-            0% { transform: translateY(0px); }
-            100% { transform: translateY(-6px); }
+            0% {
+                transform: translateY(0px);
+            }
+
+            100% {
+                transform: translateY(-6px);
+            }
         }
+
         @keyframes appleGlassShimmerSweep {
-            0% { background-position: -200% 0; }
-            20% { background-position: 200% 200%; }
-            100% { background-position: 200% 200%; }
+            0% {
+                background-position: -200% 0;
+            }
+
+            20% {
+                background-position: 200% 200%;
+            }
+
+            100% {
+                background-position: 200% 200%;
+            }
         }
 
         /* ═══ 30 PREMIUM CARD SHAPE STYLES ═══ */
 
-            /* 1. Rectangle */
-            .shape-rectangle .flip-card {
-                border-radius: 0;
-            }
-
-            .shape-rectangle .card-top,
-            .shape-rectangle .flipper-top {
-                border-radius: 0;
-            }
-
-            .shape-rectangle .card-bottom,
-            .shape-rectangle .flipper-bottom {
-                border-radius: 0;
-            }
-
-            /* 2. Rounded Rectangle */
-            .shape-rounded_rectangle .flip-card {
-                border-radius: clamp(10px, 1.5vh, 20px);
-            }
-
-            .shape-rounded_rectangle .card-top,
-            .shape-rounded_rectangle .flipper-top {
-                border-radius: clamp(10px, 1.5vh, 20px) clamp(10px, 1.5vh, 20px) 0 0;
-            }
-
-            .shape-rounded_rectangle .card-bottom,
-            .shape-rounded_rectangle .flipper-bottom {
-                border-radius: 0 0 clamp(10px, 1.5vh, 20px) clamp(10px, 1.5vh, 20px);
-            }
-
-            /* 3. Squircle */
-            .shape-squircle .flip-card {
-                border-radius: clamp(24px, 3.5vh, 42px);
-            }
-
-            .shape-squircle .card-top,
-            .shape-squircle .flipper-top {
-                border-radius: clamp(24px, 3.5vh, 42px) clamp(24px, 3.5vh, 42px) 0 0;
-            }
-
-            .shape-squircle .card-bottom,
-            .shape-squircle .flipper-bottom {
-                border-radius: 0 0 clamp(24px, 3.5vh, 42px) clamp(24px, 3.5vh, 42px);
-            }
-
-            /* 4. Octagon */
-            .shape-octagon .flip-card {
-                clip-path: polygon(18px 0, calc(100% - 18px) 0, 100% 18px, 100% calc(100% - 18px), calc(100% - 18px) 100%, 18px 100%, 0 calc(100% - 18px), 0 18px);
-                border-radius: 0;
-            }
-
-            .shape-octagon .card-top,
-            .shape-octagon .flipper-top {
-                clip-path: polygon(18px 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%, 0 18px);
-                border-radius: 0;
-            }
-
-            .shape-octagon .card-bottom,
-            .shape-octagon .flipper-bottom {
-                clip-path: polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 18px 100%, 0 calc(100% - 18px));
-                border-radius: 0;
-            }
-
-            /* 5. Hexagon */
-            .shape-hexagon .flip-card {
-                clip-path: polygon(12% 0, 88% 0, 100% 15%, 100% 85%, 88% 100%, 12% 100%, 0 85%, 0 15%);
-                border-radius: 0;
-            }
-
-            .shape-hexagon .card-top,
-            .shape-hexagon .flipper-top {
-                clip-path: polygon(12% 0, 88% 0, 100% 30%, 100% 100%, 0 100%, 0 30%);
-                border-radius: 0;
-            }
-
-            .shape-hexagon .card-bottom,
-            .shape-hexagon .flipper-bottom {
-                clip-path: polygon(0 0, 100% 0, 100% 70%, 88% 100%, 12% 100%, 0 70%);
-                border-radius: 0;
-            }
-
-            /* 6. Pentagon */
-            .shape-pentagon .flip-card {
-                clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
-                border-radius: 0;
-            }
-
-            .shape-pentagon .card-top,
-            .shape-pentagon .flipper-top {
-                clip-path: polygon(50% 0%, 100% 38%, 100% 100%, 0 100%, 0% 38%);
-                border-radius: 0;
-            }
-
-            .shape-pentagon .card-bottom,
-            .shape-pentagon .flipper-bottom {
-                clip-path: polygon(0 0, 100% 0, 100% 38%, 82% 100%, 18% 100%, 0 100%);
-                border-radius: 0;
-            }
-
-            /* 7. Diamond */
-            .shape-diamond .flip-card {
-                clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-                border-radius: 0;
-            }
-
-            .shape-diamond .card-top,
-            .shape-diamond .flipper-top {
-                clip-path: polygon(50% 0%, 100% 50%, 100% 100%, 0 100%, 0% 50%);
-                border-radius: 0;
-            }
-
-            .shape-diamond .card-bottom,
-            .shape-diamond .flipper-bottom {
-                clip-path: polygon(0 0, 100% 0, 100% 50%, 50% 100%, 0% 50%);
-                border-radius: 0;
-            }
-
-            /* 8. Shield */
-            .shape-shield .flip-card {
-                clip-path: polygon(0% 0%, 100% 0%, 100% 45%, 50% 100%, 0% 45%);
-                border-radius: 0;
-            }
-
-            .shape-shield .card-top,
-            .shape-shield .flipper-top {
-                clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 0 90%);
-                border-radius: 0;
-            }
-
-            .shape-shield .card-bottom,
-            .shape-shield .flipper-bottom {
-                clip-path: polygon(0 0, 100% 0, 100% 45%, 50% 100%, 0% 45%);
-                border-radius: 0;
-            }
-
-            /* 9. Capsule */
-            .shape-capsule .flip-card {
-                border-radius: clamp(40px, 8vh, 90px);
-            }
-
-            .shape-capsule .card-top,
-            .shape-capsule .flipper-top {
-                border-radius: clamp(40px, 8vh, 90px) clamp(40px, 8vh, 90px) 0 0;
-            }
-
-            .shape-capsule .card-bottom,
-            .shape-capsule .flipper-bottom {
-                border-radius: 0 0 clamp(40px, 8vh, 90px) clamp(40px, 8vh, 90px);
-            }
-
-            /* 10. Pill */
-            .shape-pill .flip-card {
-                border-radius: 9999px;
-            }
-
-            .shape-pill .card-top,
-            .shape-pill .flipper-top {
-                border-radius: 9999px 9999px 0 0;
-            }
-
-            .shape-pill .card-bottom,
-            .shape-pill .flipper-bottom {
-                border-radius: 0 0 9999px 9999px;
-            }
-
-            /* 11. Circle */
-            .shape-circle .flip-card {
-                border-radius: 50%;
-                aspect-ratio: 1;
-            }
-
-            .shape-circle .card-top,
-            .shape-circle .flipper-top {
-                border-radius: 50% 50% 0 0 / 100% 100% 0 0;
-            }
-
-            .shape-circle .card-bottom,
-            .shape-circle .flipper-bottom {
-                border-radius: 0 0 50% 50% / 0 0 100% 100%;
-            }
-
-            /* 12. Oval */
-            .shape-oval .flip-card {
-                border-radius: 50% / 30%;
-            }
-
-            .shape-oval .card-top,
-            .shape-oval .flipper-top {
-                border-radius: 50% 50% 0 0 / 60% 60% 0 0;
-            }
-
-            .shape-oval .card-bottom,
-            .shape-oval .flipper-bottom {
-                border-radius: 0 0 50% 50% / 0 0 60% 60%;
-            }
-
-            /* 13. Trapezoid */
-            .shape-trapezoid .flip-card {
-                clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
-                border-radius: 0;
-            }
-
-            .shape-trapezoid .card-top,
-            .shape-trapezoid .flipper-top {
-                clip-path: polygon(20% 0%, 80% 0%, 90% 100%, 10% 100%);
-                border-radius: 0;
-            }
-
-            .shape-trapezoid .card-bottom,
-            .shape-trapezoid .flipper-bottom {
-                clip-path: polygon(10% 0, 90% 0, 100% 100%, 0% 100%);
-                border-radius: 0;
-            }
-
-            /* 14. Parallelogram */
-            .shape-parallelogram .flip-card {
-                clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
-                border-radius: 0;
-            }
-
-            .shape-parallelogram .card-top,
-            .shape-parallelogram .flipper-top {
-                clip-path: polygon(25% 0%, 100% 0%, 87.5% 100%, 12.5% 100%);
-                border-radius: 0;
-            }
-
-            .shape-parallelogram .card-bottom,
-            .shape-parallelogram .flipper-bottom {
-                clip-path: polygon(12.5% 0, 87.5% 0, 75% 100%, 0% 100%);
-                border-radius: 0;
-            }
-
-            /* 15. Rhombus */
-            .shape-rhombus .flip-card {
-                clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-                border-radius: 0;
-            }
-
-            .shape-rhombus .card-top,
-            .shape-rhombus .flipper-top {
-                clip-path: polygon(50% 0%, 100% 50%, 100% 100%, 0 100%, 0% 50%);
-                border-radius: 0;
-            }
-
-            .shape-rhombus .card-bottom,
-            .shape-rhombus .flipper-bottom {
-                clip-path: polygon(0 0, 100% 0, 100% 50%, 50% 100%, 0% 50%);
-                border-radius: 0;
-            }
-
-            /* 16. Chamfered */
-            .shape-chamfered .flip-card {
-                clip-path: polygon(12px 0, calc(100% - 12px) 0, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px), 0 12px);
-                border-radius: 0;
-            }
-
-            .shape-chamfered .card-top,
-            .shape-chamfered .flipper-top {
-                clip-path: polygon(12px 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%, 0 12px);
-                border-radius: 0;
-            }
-
-            .shape-chamfered .card-bottom,
-            .shape-chamfered .flipper-bottom {
-                clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px));
-                border-radius: 0;
-            }
-
-            /* 17. Beveled */
-            .shape-beveled .flip-card {
-                clip-path: polygon(24px 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0 24px);
-                border-radius: 0;
-            }
-
-            .shape-beveled .card-top,
-            .shape-beveled .flipper-top {
-                clip-path: polygon(24px 0, 100% 0, 100% 100%, 0 100%, 0 24px);
-                border-radius: 0;
-            }
-
-            .shape-beveled .card-bottom,
-            .shape-beveled .flipper-bottom {
-                clip-path: polygon(0 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%);
-                border-radius: 0;
-            }
-
-            /* 18. Notched */
-            .shape-notched .flip-card {
-                clip-path: polygon(0% 10%, 10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%);
-                border-radius: 0;
-            }
-
-            .shape-notched .card-top,
-            .shape-notched .flipper-top {
-                clip-path: polygon(0% 10%, 10% 0%, 90% 0%, 100% 10%, 100% 100%, 0% 100%);
-                border-radius: 0;
-            }
-
-            .shape-notched .card-bottom,
-            .shape-notched .flipper-bottom {
-                clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 90% 100%, 10% 100%, 0% 90%);
-                border-radius: 0;
-            }
-
-            /* 19. Cut Corner */
-            .shape-cut_corner .flip-card {
-                clip-path: polygon(16px 0, calc(100% - 16px) 0, 100% 16px, 100% calc(100% - 16px), calc(100% - 16px) 100%, 16px 100%, 0 calc(100% - 16px), 0 16px);
-                border-radius: 0;
-            }
-
-            .shape-cut_corner .card-top,
-            .shape-cut_corner .flipper-top {
-                clip-path: polygon(16px 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%, 0 16px);
-                border-radius: 0;
-            }
-
-            .shape-cut_corner .card-bottom,
-            .shape-cut_corner .flipper-bottom {
-                clip-path: polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 16px 100%, 0 calc(100% - 16px));
-                border-radius: 0;
-            }
-
-            /* 20. Chevron */
-            .shape-chevron .flip-card {
-                clip-path: polygon(0 0, 100% 0, 85% 50%, 100% 100%, 0 100%, 15% 50%);
-                border-radius: 0;
-            }
-
-            .shape-chevron .card-top,
-            .shape-chevron .flipper-top {
-                clip-path: polygon(0 0, 100% 0, 92.5% 100%, 7.5% 100%);
-                border-radius: 0;
-            }
-
-            .shape-chevron .card-bottom,
-            .shape-chevron .flipper-bottom {
-                clip-path: polygon(7.5% 0, 92.5% 0, 100% 100%, 0 100%);
-                border-radius: 0;
-            }
-
-            /* 21. Badge */
-            .shape-badge .flip-card {
-                clip-path: polygon(50% 0%, 100% 30%, 100% 70%, 50% 100%, 0% 70%, 0% 30%);
-                border-radius: 0;
-            }
-
-            .shape-badge .card-top,
-            .shape-badge .flipper-top {
-                clip-path: polygon(50% 0%, 100% 30%, 100% 100%, 0 100%, 0% 30%);
-                border-radius: 0;
-            }
-
-            .shape-badge .card-bottom,
-            .shape-badge .flipper-bottom {
-                clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0% 70%);
-                border-radius: 0;
-            }
-
-            /* 22. Ticket */
-            .shape-ticket .flip-card {
-                clip-path: polygon(0 8%, 4% 0, 96% 0, 100% 8%, 100% 42%, 96% 50%, 100% 58%, 100% 92%, 96% 100%, 4% 100%, 0 92%, 0 58%, 4% 50%, 0 42%);
-                border-radius: 0;
-            }
-
-            .shape-ticket .card-top,
-            .shape-ticket .flipper-top {
-                clip-path: polygon(0 16%, 4% 0, 96% 0, 100% 16%, 100% 84%, 96% 100%, 4% 100%, 0 84%);
-                border-radius: 0;
-            }
-
-            .shape-ticket .card-bottom,
-            .shape-ticket .flipper-bottom {
-                clip-path: polygon(0 0, 4% 0, 96% 0, 100% 0, 100% 84%, 96% 100%, 4% 100%, 0 84%);
-                border-radius: 0;
-            }
-
-            /* 23. Arch */
-            .shape-arch .flip-card {
-                border-radius: clamp(100px, 20vh, 200px) clamp(100px, 20vh, 200px) 0 0;
-            }
-
-            .shape-arch .card-top,
-            .shape-arch .flipper-top {
-                border-radius: clamp(100px, 20vh, 200px) clamp(100px, 20vh, 200px) 0 0;
-            }
-
-            .shape-arch .card-bottom,
-            .shape-arch .flipper-bottom {
-                border-radius: 0;
-            }
-
-            /* 24. Stadium */
-            .shape-stadium .flip-card {
-                border-radius: clamp(60px, 14vh, 140px) / clamp(40px, 6vh, 80px);
-            }
-
-            .shape-stadium .card-top,
-            .shape-stadium .flipper-top {
-                border-radius: clamp(60px, 14vh, 140px) clamp(60px, 14vh, 140px) 0 0 / clamp(40px, 6vh, 80px) clamp(40px, 6vh, 80px) 0 0;
-            }
-
-            .shape-stadium .card-bottom,
-            .shape-stadium .flipper-bottom {
-                border-radius: 0 0 clamp(60px, 14vh, 140px) clamp(60px, 14vh, 140px) / 0 0 clamp(40px, 6vh, 80px) clamp(40px, 6vh, 80px);
-            }
-
-            /* 25. Lozenge */
-            .shape-lozenge .flip-card {
-                clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
-                border-radius: 0;
-            }
-
-            .shape-lozenge .card-top,
-            .shape-lozenge .flipper-top {
-                clip-path: polygon(30% 0%, 70% 0%, 85% 100%, 15% 100%);
-                border-radius: 0;
-            }
-
-            .shape-lozenge .card-bottom,
-            .shape-lozenge .flipper-bottom {
-                clip-path: polygon(15% 0%, 85% 0%, 70% 100%, 30% 100%);
-                border-radius: 0;
-            }
-
-            /* 27. Frame */
-            .shape-frame .flip-card {
-                border: 12px double var(--card-border);
-                border-radius: 8px;
-            }
-
-            .shape-frame .card-top,
-            .shape-frame .flipper-top {
-                border-radius: 0;
-            }
-
-            .shape-frame .card-bottom,
-            .shape-frame .flipper-bottom {
-                border-radius: 0;
-            }
-
-            /* 28. Panel */
-            .shape-panel .flip-card {
-                border-radius: 4px;
-                box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
-            }
-
-            .shape-panel .card-top,
-            .shape-panel .flipper-top {
-                border-radius: 4px 4px 0 0;
-            }
-
-            .shape-panel .card-bottom,
-            .shape-panel .flipper-bottom {
-                border-radius: 0 0 4px 4px;
-            }
-
-            /* 29. Card */
-            .shape-card .flip-card {
-                border-radius: 12px;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            }
-
-            .shape-card .card-top,
-            .shape-card .flipper-top {
-                border-radius: 12px 12px 0 0;
-            }
-
-            .shape-card .card-bottom,
-            .shape-card .flipper-bottom {
-                border-radius: 0 0 12px 12px;
-            }
-
-            /* 30. Tile */
-            .shape-tile .flip-card {
-                border-radius: 8px;
-                border: 2px solid var(--card-border);
-            }
-
-            .shape-tile .card-top,
-            .shape-tile .flipper-top {
-                border-radius: 6px 6px 0 0;
-            }
-
-            .shape-tile .card-bottom,
-            .shape-tile .flipper-bottom {
-                border-radius: 0 0 6px 6px;
-            }
-
-            .shape-premium_bevel .card-top,
-            .shape-premium_bevel .flipper-top {
-                clip-path: polygon(24px 0, 100% 0, 100% 100%, 0 100%, 0 24px);
-                border-radius: 0;
-            }
-
-            .shape-premium_bevel .card-bottom,
-            .shape-premium_bevel .flipper-bottom {
-                clip-path: polygon(0 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%);
-                border-radius: 0;
-            }
-
-            /* Draw crisp outer borders around all clipped shapes using stacked drop-shadows */
-            .shape-octagon .card-top, .shape-octagon .flipper-top, .shape-octagon .card-bottom, .shape-octagon .flipper-bottom,
-            .shape-hexagon .card-top, .shape-hexagon .flipper-top, .shape-hexagon .card-bottom, .shape-hexagon .flipper-bottom,
-            .shape-pentagon .card-top, .shape-pentagon .flipper-top, .shape-pentagon .card-bottom, .shape-pentagon .flipper-bottom,
-            .shape-diamond .card-top, .shape-diamond .flipper-top, .shape-diamond .card-bottom, .shape-diamond .flipper-bottom,
-            .shape-shield .card-top, .shape-shield .flipper-top, .shape-shield .card-bottom, .shape-shield .flipper-bottom,
-            .shape-trapezoid .card-top, .shape-trapezoid .flipper-top, .shape-trapezoid .card-bottom, .shape-trapezoid .flipper-bottom,
-            .shape-parallelogram .card-top, .shape-parallelogram .flipper-top, .shape-parallelogram .card-bottom, .shape-parallelogram .flipper-bottom,
-            .shape-rhombus .card-top, .shape-rhombus .flipper-top, .shape-rhombus .card-bottom, .shape-rhombus .flipper-bottom,
-            .shape-chamfered .card-top, .shape-chamfered .flipper-top, .shape-chamfered .card-bottom, .shape-chamfered .flipper-bottom,
-            .shape-beveled .card-top, .shape-beveled .flipper-top, .shape-beveled .card-bottom, .shape-beveled .flipper-bottom,
-            .shape-notched .card-top, .shape-notched .flipper-top, .shape-notched .card-bottom, .shape-notched .flipper-bottom,
-            .shape-cut_corner .card-top, .shape-cut_corner .flipper-top, .shape-cut_corner .card-bottom, .shape-cut_corner .flipper-bottom,
-            .shape-chevron .card-top, .shape-chevron .flipper-top, .shape-chevron .card-bottom, .shape-chevron .flipper-bottom,
-            .shape-badge .card-top, .shape-badge .flipper-top, .shape-badge .card-bottom, .shape-badge .flipper-bottom,
-            .shape-ticket .card-top, .shape-ticket .flipper-top, .shape-ticket .card-bottom, .shape-ticket .flipper-bottom,
-            .shape-arch .card-top, .shape-arch .flipper-top, .shape-arch .card-bottom, .shape-arch .flipper-bottom,
-            .shape-frame .card-top, .shape-frame .flipper-top, .shape-frame .card-bottom, .shape-frame .flipper-bottom,
-            .shape-panel .card-top, .shape-panel .flipper-top, .shape-panel .card-bottom, .shape-panel .flipper-bottom,
-            .shape-premium_bevel .card-top, .shape-premium_bevel .flipper-top, .shape-premium_bevel .card-bottom, .shape-premium_bevel .flipper-bottom {
-                filter: drop-shadow(1.5px 0 0 var(--card-border)) drop-shadow(-1.5px 0 0 var(--card-border)) drop-shadow(0 1.5px 0 var(--card-border)) drop-shadow(0 -1.5px 0 var(--card-border));
-            }
-
-            /* Custom User Theme Override */
-            .theme-custom {
-                --vignette-color: rgba(255, 255, 255, 0.02);
-                --card-bg: var(--custom-card-color, #1c1c1e);
-                --card-border: var(--custom-border-color, #4a4a4a);
-                --card-top-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.015) 100%);
-                --card-bot-bg: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%);
-                --divider-line: #000000;
-                --pin-bg: var(--custom-accent-color, #d4af37);
-                --digit-color: var(--custom-digit-color, #ffffff);
-                --digit-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
-                --dot-bg: var(--custom-accent-color, #d4af37);
-                --dot-shadow: 0 0 10px var(--custom-accent-color, rgba(255, 255, 255, 0.4));
-                --accent-color: var(--custom-accent-color, #d4af37);
-                --badge-color: var(--custom-digit-color, #ffffff);
-                --badge-bg: rgba(20, 20, 24, 0.85);
-                --badge-border: var(--custom-border-color, #4a4a4a);
-                --branding-color: var(--custom-accent-color, #d4af37);
-            }
-
-            /* Hide elements when toggled off */
-            .hide-seconds #fc-s,
-            .hide-seconds #sep-s {
-                display: none !important;
-            }
-
-            .hide-date-badge #date-badge {
-                display: none !important;
-            }
-
-            .hide-greeting #greeting-badge {
-                display: none !important;
-            }
+        /* 1. Rectangle */
+        .shape-rectangle .flip-card {
+            border-radius: 0;
+        }
+
+        .shape-rectangle .card-top,
+        .shape-rectangle .flipper-top {
+            border-radius: 0;
+        }
+
+        .shape-rectangle .card-bottom,
+        .shape-rectangle .flipper-bottom {
+            border-radius: 0;
+        }
+
+        /* 2. Rounded Rectangle */
+        .shape-rounded_rectangle .flip-card {
+            border-radius: clamp(10px, 1.5vh, 20px);
+        }
+
+        .shape-rounded_rectangle .card-top,
+        .shape-rounded_rectangle .flipper-top {
+            border-radius: clamp(10px, 1.5vh, 20px) clamp(10px, 1.5vh, 20px) 0 0;
+        }
+
+        .shape-rounded_rectangle .card-bottom,
+        .shape-rounded_rectangle .flipper-bottom {
+            border-radius: 0 0 clamp(10px, 1.5vh, 20px) clamp(10px, 1.5vh, 20px);
+        }
+
+        /* 3. Squircle */
+        .shape-squircle .flip-card {
+            border-radius: clamp(24px, 3.5vh, 42px);
+        }
+
+        .shape-squircle .card-top,
+        .shape-squircle .flipper-top {
+            border-radius: clamp(24px, 3.5vh, 42px) clamp(24px, 3.5vh, 42px) 0 0;
+        }
+
+        .shape-squircle .card-bottom,
+        .shape-squircle .flipper-bottom {
+            border-radius: 0 0 clamp(24px, 3.5vh, 42px) clamp(24px, 3.5vh, 42px);
+        }
+
+        /* 4. Octagon */
+        .shape-octagon .flip-card {
+            clip-path: polygon(18px 0, calc(100% - 18px) 0, 100% 18px, 100% calc(100% - 18px), calc(100% - 18px) 100%, 18px 100%, 0 calc(100% - 18px), 0 18px);
+            border-radius: 0;
+        }
+
+        .shape-octagon .card-top,
+        .shape-octagon .flipper-top {
+            clip-path: polygon(18px 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%, 0 18px);
+            border-radius: 0;
+        }
+
+        .shape-octagon .card-bottom,
+        .shape-octagon .flipper-bottom {
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 18px 100%, 0 calc(100% - 18px));
+            border-radius: 0;
+        }
+
+        /* 5. Hexagon */
+        .shape-hexagon .flip-card {
+            clip-path: polygon(12% 0, 88% 0, 100% 15%, 100% 85%, 88% 100%, 12% 100%, 0 85%, 0 15%);
+            border-radius: 0;
+        }
+
+        .shape-hexagon .card-top,
+        .shape-hexagon .flipper-top {
+            clip-path: polygon(12% 0, 88% 0, 100% 30%, 100% 100%, 0 100%, 0 30%);
+            border-radius: 0;
+        }
+
+        .shape-hexagon .card-bottom,
+        .shape-hexagon .flipper-bottom {
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 88% 100%, 12% 100%, 0 70%);
+            border-radius: 0;
+        }
+
+        /* 6. Pentagon */
+        .shape-pentagon .flip-card {
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+            border-radius: 0;
+        }
+
+        .shape-pentagon .card-top,
+        .shape-pentagon .flipper-top {
+            clip-path: polygon(50% 0%, 100% 38%, 100% 100%, 0 100%, 0% 38%);
+            border-radius: 0;
+        }
+
+        .shape-pentagon .card-bottom,
+        .shape-pentagon .flipper-bottom {
+            clip-path: polygon(0 0, 100% 0, 100% 38%, 82% 100%, 18% 100%, 0 100%);
+            border-radius: 0;
+        }
+
+        /* 7. Diamond */
+        .shape-diamond .flip-card {
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            border-radius: 0;
+        }
+
+        .shape-diamond .card-top,
+        .shape-diamond .flipper-top {
+            clip-path: polygon(50% 0%, 100% 50%, 100% 100%, 0 100%, 0% 50%);
+            border-radius: 0;
+        }
+
+        .shape-diamond .card-bottom,
+        .shape-diamond .flipper-bottom {
+            clip-path: polygon(0 0, 100% 0, 100% 50%, 50% 100%, 0% 50%);
+            border-radius: 0;
+        }
+
+        /* 8. Shield */
+        .shape-shield .flip-card {
+            clip-path: polygon(0% 0%, 100% 0%, 100% 45%, 50% 100%, 0% 45%);
+            border-radius: 0;
+        }
+
+        .shape-shield .card-top,
+        .shape-shield .flipper-top {
+            clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 0 90%);
+            border-radius: 0;
+        }
+
+        .shape-shield .card-bottom,
+        .shape-shield .flipper-bottom {
+            clip-path: polygon(0 0, 100% 0, 100% 45%, 50% 100%, 0% 45%);
+            border-radius: 0;
+        }
+
+        /* 9. Capsule */
+        .shape-capsule .flip-card {
+            border-radius: clamp(40px, 8vh, 90px);
+        }
+
+        .shape-capsule .card-top,
+        .shape-capsule .flipper-top {
+            border-radius: clamp(40px, 8vh, 90px) clamp(40px, 8vh, 90px) 0 0;
+        }
+
+        .shape-capsule .card-bottom,
+        .shape-capsule .flipper-bottom {
+            border-radius: 0 0 clamp(40px, 8vh, 90px) clamp(40px, 8vh, 90px);
+        }
+
+        /* 10. Pill */
+        .shape-pill .flip-card {
+            border-radius: 9999px;
+        }
+
+        .shape-pill .card-top,
+        .shape-pill .flipper-top {
+            border-radius: 9999px 9999px 0 0;
+        }
+
+        .shape-pill .card-bottom,
+        .shape-pill .flipper-bottom {
+            border-radius: 0 0 9999px 9999px;
+        }
+
+        /* 11. Circle */
+        .shape-circle .flip-card {
+            border-radius: 50%;
+            aspect-ratio: 1;
+        }
+
+        .shape-circle .card-top,
+        .shape-circle .flipper-top {
+            border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+        }
+
+        .shape-circle .card-bottom,
+        .shape-circle .flipper-bottom {
+            border-radius: 0 0 50% 50% / 0 0 100% 100%;
+        }
+
+        /* 12. Oval */
+        .shape-oval .flip-card {
+            border-radius: 50% / 30%;
+        }
+
+        .shape-oval .card-top,
+        .shape-oval .flipper-top {
+            border-radius: 50% 50% 0 0 / 60% 60% 0 0;
+        }
+
+        .shape-oval .card-bottom,
+        .shape-oval .flipper-bottom {
+            border-radius: 0 0 50% 50% / 0 0 60% 60%;
+        }
+
+        /* 13. Trapezoid */
+        .shape-trapezoid .flip-card {
+            clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+            border-radius: 0;
+        }
+
+        .shape-trapezoid .card-top,
+        .shape-trapezoid .flipper-top {
+            clip-path: polygon(20% 0%, 80% 0%, 90% 100%, 10% 100%);
+            border-radius: 0;
+        }
+
+        .shape-trapezoid .card-bottom,
+        .shape-trapezoid .flipper-bottom {
+            clip-path: polygon(10% 0, 90% 0, 100% 100%, 0% 100%);
+            border-radius: 0;
+        }
+
+        /* 14. Parallelogram */
+        .shape-parallelogram .flip-card {
+            clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+            border-radius: 0;
+        }
+
+        .shape-parallelogram .card-top,
+        .shape-parallelogram .flipper-top {
+            clip-path: polygon(25% 0%, 100% 0%, 87.5% 100%, 12.5% 100%);
+            border-radius: 0;
+        }
+
+        .shape-parallelogram .card-bottom,
+        .shape-parallelogram .flipper-bottom {
+            clip-path: polygon(12.5% 0, 87.5% 0, 75% 100%, 0% 100%);
+            border-radius: 0;
+        }
+
+        /* 15. Rhombus */
+        .shape-rhombus .flip-card {
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            border-radius: 0;
+        }
+
+        .shape-rhombus .card-top,
+        .shape-rhombus .flipper-top {
+            clip-path: polygon(50% 0%, 100% 50%, 100% 100%, 0 100%, 0% 50%);
+            border-radius: 0;
+        }
+
+        .shape-rhombus .card-bottom,
+        .shape-rhombus .flipper-bottom {
+            clip-path: polygon(0 0, 100% 0, 100% 50%, 50% 100%, 0% 50%);
+            border-radius: 0;
+        }
+
+        /* 16. Chamfered */
+        .shape-chamfered .flip-card {
+            clip-path: polygon(12px 0, calc(100% - 12px) 0, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px), 0 12px);
+            border-radius: 0;
+        }
+
+        .shape-chamfered .card-top,
+        .shape-chamfered .flipper-top {
+            clip-path: polygon(12px 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%, 0 12px);
+            border-radius: 0;
+        }
+
+        .shape-chamfered .card-bottom,
+        .shape-chamfered .flipper-bottom {
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px));
+            border-radius: 0;
+        }
+
+        /* 17. Beveled */
+        .shape-beveled .flip-card {
+            clip-path: polygon(24px 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0 24px);
+            border-radius: 0;
+        }
+
+        .shape-beveled .card-top,
+        .shape-beveled .flipper-top {
+            clip-path: polygon(24px 0, 100% 0, 100% 100%, 0 100%, 0 24px);
+            border-radius: 0;
+        }
+
+        .shape-beveled .card-bottom,
+        .shape-beveled .flipper-bottom {
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%);
+            border-radius: 0;
+        }
+
+        /* 18. Notched */
+        .shape-notched .flip-card {
+            clip-path: polygon(0% 10%, 10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%);
+            border-radius: 0;
+        }
+
+        .shape-notched .card-top,
+        .shape-notched .flipper-top {
+            clip-path: polygon(0% 10%, 10% 0%, 90% 0%, 100% 10%, 100% 100%, 0% 100%);
+            border-radius: 0;
+        }
+
+        .shape-notched .card-bottom,
+        .shape-notched .flipper-bottom {
+            clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 90% 100%, 10% 100%, 0% 90%);
+            border-radius: 0;
+        }
+
+        /* 19. Cut Corner */
+        .shape-cut_corner .flip-card {
+            clip-path: polygon(16px 0, calc(100% - 16px) 0, 100% 16px, 100% calc(100% - 16px), calc(100% - 16px) 100%, 16px 100%, 0 calc(100% - 16px), 0 16px);
+            border-radius: 0;
+        }
+
+        .shape-cut_corner .card-top,
+        .shape-cut_corner .flipper-top {
+            clip-path: polygon(16px 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%, 0 16px);
+            border-radius: 0;
+        }
+
+        .shape-cut_corner .card-bottom,
+        .shape-cut_corner .flipper-bottom {
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 16px 100%, 0 calc(100% - 16px));
+            border-radius: 0;
+        }
+
+        /* 20. Chevron */
+        .shape-chevron .flip-card {
+            clip-path: polygon(0 0, 100% 0, 85% 50%, 100% 100%, 0 100%, 15% 50%);
+            border-radius: 0;
+        }
+
+        .shape-chevron .card-top,
+        .shape-chevron .flipper-top {
+            clip-path: polygon(0 0, 100% 0, 92.5% 100%, 7.5% 100%);
+            border-radius: 0;
+        }
+
+        .shape-chevron .card-bottom,
+        .shape-chevron .flipper-bottom {
+            clip-path: polygon(7.5% 0, 92.5% 0, 100% 100%, 0 100%);
+            border-radius: 0;
+        }
+
+        /* 21. Badge */
+        .shape-badge .flip-card {
+            clip-path: polygon(50% 0%, 100% 30%, 100% 70%, 50% 100%, 0% 70%, 0% 30%);
+            border-radius: 0;
+        }
+
+        .shape-badge .card-top,
+        .shape-badge .flipper-top {
+            clip-path: polygon(50% 0%, 100% 30%, 100% 100%, 0 100%, 0% 30%);
+            border-radius: 0;
+        }
+
+        .shape-badge .card-bottom,
+        .shape-badge .flipper-bottom {
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0% 70%);
+            border-radius: 0;
+        }
+
+        /* 22. Ticket */
+        .shape-ticket .flip-card {
+            clip-path: polygon(0 8%, 4% 0, 96% 0, 100% 8%, 100% 42%, 96% 50%, 100% 58%, 100% 92%, 96% 100%, 4% 100%, 0 92%, 0 58%, 4% 50%, 0 42%);
+            border-radius: 0;
+        }
+
+        .shape-ticket .card-top,
+        .shape-ticket .flipper-top {
+            clip-path: polygon(0 16%, 4% 0, 96% 0, 100% 16%, 100% 84%, 96% 100%, 4% 100%, 0 84%);
+            border-radius: 0;
+        }
+
+        .shape-ticket .card-bottom,
+        .shape-ticket .flipper-bottom {
+            clip-path: polygon(0 0, 4% 0, 96% 0, 100% 0, 100% 84%, 96% 100%, 4% 100%, 0 84%);
+            border-radius: 0;
+        }
+
+        /* 23. Arch */
+        .shape-arch .flip-card {
+            border-radius: clamp(100px, 20vh, 200px) clamp(100px, 20vh, 200px) 0 0;
+        }
+
+        .shape-arch .card-top,
+        .shape-arch .flipper-top {
+            border-radius: clamp(100px, 20vh, 200px) clamp(100px, 20vh, 200px) 0 0;
+        }
+
+        .shape-arch .card-bottom,
+        .shape-arch .flipper-bottom {
+            border-radius: 0;
+        }
+
+        /* 24. Stadium */
+        .shape-stadium .flip-card {
+            border-radius: clamp(60px, 14vh, 140px) / clamp(40px, 6vh, 80px);
+        }
+
+        .shape-stadium .card-top,
+        .shape-stadium .flipper-top {
+            border-radius: clamp(60px, 14vh, 140px) clamp(60px, 14vh, 140px) 0 0 / clamp(40px, 6vh, 80px) clamp(40px, 6vh, 80px) 0 0;
+        }
+
+        .shape-stadium .card-bottom,
+        .shape-stadium .flipper-bottom {
+            border-radius: 0 0 clamp(60px, 14vh, 140px) clamp(60px, 14vh, 140px) / 0 0 clamp(40px, 6vh, 80px) clamp(40px, 6vh, 80px);
+        }
+
+        /* 25. Lozenge */
+        .shape-lozenge .flip-card {
+            clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
+            border-radius: 0;
+        }
+
+        .shape-lozenge .card-top,
+        .shape-lozenge .flipper-top {
+            clip-path: polygon(30% 0%, 70% 0%, 85% 100%, 15% 100%);
+            border-radius: 0;
+        }
+
+        .shape-lozenge .card-bottom,
+        .shape-lozenge .flipper-bottom {
+            clip-path: polygon(15% 0%, 85% 0%, 70% 100%, 30% 100%);
+            border-radius: 0;
+        }
+
+        /* 27. Frame */
+        .shape-frame .flip-card {
+            border: 12px double var(--card-border);
+            border-radius: 8px;
+        }
+
+        .shape-frame .card-top,
+        .shape-frame .flipper-top {
+            border-radius: 0;
+        }
+
+        .shape-frame .card-bottom,
+        .shape-frame .flipper-bottom {
+            border-radius: 0;
+        }
+
+        /* 28. Panel */
+        .shape-panel .flip-card {
+            border-radius: 4px;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+        }
+
+        .shape-panel .card-top,
+        .shape-panel .flipper-top {
+            border-radius: 4px 4px 0 0;
+        }
+
+        .shape-panel .card-bottom,
+        .shape-panel .flipper-bottom {
+            border-radius: 0 0 4px 4px;
+        }
+
+        /* 29. Card */
+        .shape-card .flip-card {
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .shape-card .card-top,
+        .shape-card .flipper-top {
+            border-radius: 12px 12px 0 0;
+        }
+
+        .shape-card .card-bottom,
+        .shape-card .flipper-bottom {
+            border-radius: 0 0 12px 12px;
+        }
+
+        /* 30. Tile */
+        .shape-tile .flip-card {
+            border-radius: 8px;
+            border: 2px solid var(--card-border);
+        }
+
+        .shape-tile .card-top,
+        .shape-tile .flipper-top {
+            border-radius: 6px 6px 0 0;
+        }
+
+        .shape-tile .card-bottom,
+        .shape-tile .flipper-bottom {
+            border-radius: 0 0 6px 6px;
+        }
+
+        .shape-premium_bevel .card-top,
+        .shape-premium_bevel .flipper-top {
+            clip-path: polygon(24px 0, 100% 0, 100% 100%, 0 100%, 0 24px);
+            border-radius: 0;
+        }
+
+        .shape-premium_bevel .card-bottom,
+        .shape-premium_bevel .flipper-bottom {
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%);
+            border-radius: 0;
+        }
+
+        /* Draw crisp outer borders around all clipped shapes using stacked drop-shadows */
+        .shape-octagon .card-top,
+        .shape-octagon .flipper-top,
+        .shape-octagon .card-bottom,
+        .shape-octagon .flipper-bottom,
+        .shape-hexagon .card-top,
+        .shape-hexagon .flipper-top,
+        .shape-hexagon .card-bottom,
+        .shape-hexagon .flipper-bottom,
+        .shape-pentagon .card-top,
+        .shape-pentagon .flipper-top,
+        .shape-pentagon .card-bottom,
+        .shape-pentagon .flipper-bottom,
+        .shape-diamond .card-top,
+        .shape-diamond .flipper-top,
+        .shape-diamond .card-bottom,
+        .shape-diamond .flipper-bottom,
+        .shape-shield .card-top,
+        .shape-shield .flipper-top,
+        .shape-shield .card-bottom,
+        .shape-shield .flipper-bottom,
+        .shape-trapezoid .card-top,
+        .shape-trapezoid .flipper-top,
+        .shape-trapezoid .card-bottom,
+        .shape-trapezoid .flipper-bottom,
+        .shape-parallelogram .card-top,
+        .shape-parallelogram .flipper-top,
+        .shape-parallelogram .card-bottom,
+        .shape-parallelogram .flipper-bottom,
+        .shape-rhombus .card-top,
+        .shape-rhombus .flipper-top,
+        .shape-rhombus .card-bottom,
+        .shape-rhombus .flipper-bottom,
+        .shape-chamfered .card-top,
+        .shape-chamfered .flipper-top,
+        .shape-chamfered .card-bottom,
+        .shape-chamfered .flipper-bottom,
+        .shape-beveled .card-top,
+        .shape-beveled .flipper-top,
+        .shape-beveled .card-bottom,
+        .shape-beveled .flipper-bottom,
+        .shape-notched .card-top,
+        .shape-notched .flipper-top,
+        .shape-notched .card-bottom,
+        .shape-notched .flipper-bottom,
+        .shape-cut_corner .card-top,
+        .shape-cut_corner .flipper-top,
+        .shape-cut_corner .card-bottom,
+        .shape-cut_corner .flipper-bottom,
+        .shape-chevron .card-top,
+        .shape-chevron .flipper-top,
+        .shape-chevron .card-bottom,
+        .shape-chevron .flipper-bottom,
+        .shape-badge .card-top,
+        .shape-badge .flipper-top,
+        .shape-badge .card-bottom,
+        .shape-badge .flipper-bottom,
+        .shape-ticket .card-top,
+        .shape-ticket .flipper-top,
+        .shape-ticket .card-bottom,
+        .shape-ticket .flipper-bottom,
+        .shape-arch .card-top,
+        .shape-arch .flipper-top,
+        .shape-arch .card-bottom,
+        .shape-arch .flipper-bottom,
+        .shape-frame .card-top,
+        .shape-frame .flipper-top,
+        .shape-frame .card-bottom,
+        .shape-frame .flipper-bottom,
+        .shape-panel .card-top,
+        .shape-panel .flipper-top,
+        .shape-panel .card-bottom,
+        .shape-panel .flipper-bottom,
+        .shape-premium_bevel .card-top,
+        .shape-premium_bevel .flipper-top,
+        .shape-premium_bevel .card-bottom,
+        .shape-premium_bevel .flipper-bottom {
+            filter: drop-shadow(1.5px 0 0 var(--card-border)) drop-shadow(-1.5px 0 0 var(--card-border)) drop-shadow(0 1.5px 0 var(--card-border)) drop-shadow(0 -1.5px 0 var(--card-border));
+        }
+
+        /* Custom User Theme Override */
+        .theme-custom {
+            --vignette-color: rgba(255, 255, 255, 0.02);
+            --card-bg: var(--custom-card-color, #1c1c1e);
+            --card-border: var(--custom-border-color, #4a4a4a);
+            --card-top-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.015) 100%);
+            --card-bot-bg: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%);
+            --divider-line: #000000;
+            --pin-bg: var(--custom-accent-color, #d4af37);
+            --digit-color: var(--custom-digit-color, #ffffff);
+            --digit-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+            --dot-bg: var(--custom-accent-color, #d4af37);
+            --dot-shadow: 0 0 10px var(--custom-accent-color, rgba(255, 255, 255, 0.4));
+            --accent-color: var(--custom-accent-color, #d4af37);
+            --badge-color: var(--custom-digit-color, #ffffff);
+            --badge-bg: rgba(20, 20, 24, 0.85);
+            --badge-border: var(--custom-border-color, #4a4a4a);
+            --branding-color: var(--custom-accent-color, #d4af37);
+        }
+
+        /* Hide elements when toggled off */
+        .hide-seconds #fc-s,
+        .hide-seconds #sep-s {
+            display: none !important;
+        }
+
+        .hide-date-badge #date-badge {
+            display: none !important;
+        }
+
+        .hide-greeting #greeting-badge {
+            display: none !important;
+        }
     </style>
 </head>
 
@@ -1935,10 +2064,14 @@
                 <div class="flip-card-wrapper">
                     <div class="flip-card" id="fc-h">
                         <div class="card-half card-top">
-                            <div class="digit-wrapper"><div class="digit-text" id="fc-h-top"><span>0</span><span>0</span></div></div>
+                            <div class="digit-wrapper">
+                                <div class="digit-text" id="fc-h-top"><span>0</span><span>0</span></div>
+                            </div>
                         </div>
                         <div class="card-half card-bottom">
-                            <div class="digit-wrapper"><div class="digit-text" id="fc-h-bot"><span>0</span><span>0</span></div></div>
+                            <div class="digit-wrapper">
+                                <div class="digit-text" id="fc-h-bot"><span>0</span><span>0</span></div>
+                            </div>
                         </div>
                         <div class="card-divider">
                             <div class="divider-dot"></div>
@@ -1955,10 +2088,14 @@
                 <!-- Minutes Card -->
                 <div class="flip-card" id="fc-m">
                     <div class="card-half card-top">
-                        <div class="digit-wrapper"><div class="digit-text" id="fc-m-top"><span>0</span><span>0</span></div></div>
+                        <div class="digit-wrapper">
+                            <div class="digit-text" id="fc-m-top"><span>0</span><span>0</span></div>
+                        </div>
                     </div>
                     <div class="card-half card-bottom">
-                        <div class="digit-wrapper"><div class="digit-text" id="fc-m-bot"><span>0</span><span>0</span></div></div>
+                        <div class="digit-wrapper">
+                            <div class="digit-text" id="fc-m-bot"><span>0</span><span>0</span></div>
+                        </div>
                     </div>
                     <div class="card-divider">
                         <div class="divider-dot"></div>
@@ -1973,10 +2110,14 @@
                 <!-- Seconds Card -->
                 <div class="flip-card" id="fc-s">
                     <div class="card-half card-top">
-                        <div class="digit-wrapper"><div class="digit-text" id="fc-s-top"><span>0</span><span>0</span></div></div>
+                        <div class="digit-wrapper">
+                            <div class="digit-text" id="fc-s-top"><span>0</span><span>0</span></div>
+                        </div>
                     </div>
                     <div class="card-half card-bottom">
-                        <div class="digit-wrapper"><div class="digit-text" id="fc-s-bot"><span>0</span><span>0</span></div></div>
+                        <div class="digit-wrapper">
+                            <div class="digit-text" id="fc-s-bot"><span>0</span><span>0</span></div>
+                        </div>
                     </div>
                     <div class="card-divider">
                         <div class="divider-dot"></div>
@@ -2131,8 +2272,8 @@
             }
             if (showDate) {
                 content += `<span class="date-segment date-num">${dateNum}</span>` +
-                           `<span class="date-segment date-month">${monthName}</span>` +
-                           `<span class="date-segment date-year">${yearNum}</span>`;
+                    `<span class="date-segment date-month">${monthName}</span>` +
+                    `<span class="date-segment date-year">${yearNum}</span>`;
             }
             b.innerHTML = content;
         }
