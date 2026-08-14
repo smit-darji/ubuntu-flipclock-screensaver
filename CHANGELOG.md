@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.5.6] - 2026-08-14 - AM/PM Badge Position Update
+
+### Changed
+- **AM/PM Badge Position**: Relocated the AM/PM badge from the Hours (first) card to the Minutes (second) card to improve layout balance.
+
 ## [2.5.5] - 2026-08-05 - Minimalist Dark Theme, Shape Compatibility & Day Toggle
 
 ### Added

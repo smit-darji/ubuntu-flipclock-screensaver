@@ -26,7 +26,7 @@ except ValueError:
         sys.exit(1)
 from gi.repository import Gtk, Gdk, WebKit2, GLib, GdkPixbuf
 
-APP_VERSION = "2.5.5"
+APP_VERSION = "2.5.6"
 
 THEME_CATEGORIES = {
     "liquid_glass": {
@@ -1418,7 +1418,6 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
         <div class="clock-row" id="clock-row">
             <!-- Hours Card -->
             <div class="flip-card" id="fc-h">
-                <span class="ampm-badge" id="ampm-badge"></span>
                 <div class="card-half card-top"><div class="digit-wrapper"><span class="digit-text" id="fc-h-top">00</span></div></div>
                 <div class="card-half card-bottom"><div class="digit-wrapper"><span class="digit-text" id="fc-h-bot">00</span></div></div>
                 <div class="card-divider"></div>
@@ -1428,6 +1427,7 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
 
             <!-- Minutes Card -->
             <div class="flip-card" id="fc-m">
+                <span class="ampm-badge" id="ampm-badge"></span>
                 <div class="card-half card-top"><div class="digit-wrapper"><span class="digit-text" id="fc-m-top">00</span></div></div>
                 <div class="card-half card-bottom"><div class="digit-wrapper"><span class="digit-text" id="fc-m-bot">00</span></div></div>
                 <div class="card-divider"></div>
