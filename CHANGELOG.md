@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.5.7] - 2026-08-14 - Dark Black Theme & Seconds Card AM/PM Badge
+
+### Added
+- **Dark Black Theme**: A premium, ultra-clean theme with a deep black background (`#000000`), subtle dark slate card backgrounds (`#0A0A0C`), and high-visibility white digits with soft drop shadows.
+
+### Changed
+- **AM/PM Badge Relocation**: Relocated the AM/PM badge from the Minutes card to the Seconds card (`#fc-s`), positioned slightly higher to sit cleanly underneath the digits.
+
 ## [2.5.6] - 2026-08-14 - AM/PM Badge Position Update
 
 ### Changed

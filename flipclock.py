@@ -26,7 +26,7 @@ except ValueError:
         sys.exit(1)
 from gi.repository import Gtk, Gdk, WebKit2, GLib, GdkPixbuf
 
-APP_VERSION = "2.5.6"
+APP_VERSION = "2.5.7"
 
 THEME_CATEGORIES = {
     "liquid_glass": {
@@ -35,7 +35,7 @@ THEME_CATEGORIES = {
     },
     "executive": {
         "label": "🏆 Executive Dark & Gold",
-        "themes": ["luxury_black_gold", "obsidian_titanium", "platinum_silver", "champagne_gold", "matte_black_diamond", "swiss_minimalist", "minimal_dark"]
+        "themes": ["luxury_black_gold", "obsidian_titanium", "platinum_silver", "champagne_gold", "matte_black_diamond", "swiss_minimalist", "minimal_dark", "dark_black"]
     },
     "greens": {
         "label": "🌿 Executive Greens",
@@ -293,6 +293,16 @@ PRESET_THEMES = {
         "digit_color": "#FFFFFF",
         "accent_color": "rgba(235,235,245,0.6)",
         "border_color": "rgba(255,255,255,0.06)",
+        "digit_font": "Inter",
+        "label_font": "Inter"
+    },
+    "dark_black": {
+        "name": "🌑 Dark Black",
+        "bg_color": "#000000",
+        "card_color": "#0C0C0F",
+        "digit_color": "#FFFFFF",
+        "accent_color": "#E5E5E7",
+        "border_color": "rgba(255,255,255,0.08)",
         "digit_font": "Inter",
         "label_font": "Inter"
     },
@@ -615,10 +625,10 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
             text-shadow: var(--digit-shadow, 0 2px 10px rgba(0,0,0,0.9));
         }
 
-        /* AM/PM Badge inside hours card */
+        /* AM/PM Badge inside hours/seconds card */
         .ampm-badge {
             position:absolute;
-            bottom:clamp(8px, 1.5vh, 20px);
+            bottom:clamp(12px, 2.5vh, 32px);
             left:clamp(12px, 2vh, 24px);
             z-index:15;
             font-size:clamp(10px, 1.4vh, 18px);
@@ -902,6 +912,26 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
             --badge-bg: rgba(44,44,46,0.9);
             --badge-border: rgba(255,255,255,0.1);
             --branding-color: rgba(235,235,245,0.3);
+        }
+
+        /* 24. Dark Black Theme */
+        .theme-dark_black {
+            --vignette-color: transparent;
+            --card-bg: #0C0C0F;
+            --card-border: rgba(255,255,255,0.08);
+            --card-top-bg: linear-gradient(180deg,rgba(255,255,255,0.03) 0%,rgba(255,255,255,0.01) 100%);
+            --card-bot-bg: linear-gradient(180deg,rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.05) 100%);
+            --divider-line: #000000;
+            --pin-bg: rgba(255,255,255,0.18);
+            --digit-color: #FFFFFF;
+            --digit-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            --dot-bg: #FFFFFF;
+            --dot-shadow: 0 0 8px rgba(255,255,255,0.3);
+            --accent-color: #E5E5E7;
+            --badge-color: #FFFFFF;
+            --badge-bg: rgba(28,28,30,0.9);
+            --badge-border: rgba(255,255,255,0.12);
+            --branding-color: rgba(255,255,255,0.3);
         }
 
         /* 21. Liquid Glass Dark (Translucent Liquid Cyan) */
@@ -1281,6 +1311,90 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
             box-shadow: none !important;
         }
 
+        /* Dark Black Theme Overrides */
+        .theme-dark_black #scene {
+            background: #000000 !important;
+        }
+        .theme-dark_black #scene::before {
+            display: none !important;
+        }
+        .theme-dark_black #branding-tag {
+            display: none !important;
+        }
+        .theme-dark_black .flip-card {
+            background: #0A0A0C !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            border-radius: 20px;
+            box-shadow:
+                0 16px 40px rgba(0, 0, 0, 0.8),
+                inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+        }
+        .theme-dark_black .card-top,
+        .theme-dark_black .flipper-top {
+            background: rgba(255, 255, 255, 0.02) !important;
+            border-radius: 20px 20px 0 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.5) !important;
+        }
+        .theme-dark_black .card-bottom,
+        .theme-dark_black .flipper-bottom {
+            background: rgba(0, 0, 0, 0.2) !important;
+            border-radius: 0 0 20px 20px;
+        }
+        .theme-dark_black .card-divider {
+            height: 1px !important;
+            background: rgba(0, 0, 0, 0.7) !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+        .theme-dark_black .divider-dot,
+        .theme-dark_black .card-divider::before,
+        .theme-dark_black .card-divider::after {
+            display: none !important;
+        }
+        .theme-dark_black .digit-text {
+            font-family: "SF Pro Display", "Inter", sans-serif !important;
+            font-weight: 800 !important;
+            color: #FFFFFF !important;
+            font-size: clamp(110px, 28vh, 380px) !important;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6) !important;
+            letter-spacing: -0.03em !important;
+        }
+        .theme-dark_black #date-badge {
+            font-family: "Inter", sans-serif !important;
+            font-weight: 500 !important;
+            font-size: clamp(10px, 1.1vw, 15px) !important;
+            letter-spacing: 0.05em !important;
+            color: #FFFFFF !important;
+            background: rgba(28, 28, 30, 0.9) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            border-radius: 10px !important;
+            box-shadow: none !important;
+            backdrop-filter: blur(20px) !important;
+        }
+        .theme-dark_black #greeting-badge {
+            font-family: "Inter", sans-serif !important;
+            font-weight: 400 !important;
+            color: rgba(255, 255, 255, 0.5) !important;
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+        .theme-dark_black #ampm-badge {
+            font-family: "Inter", sans-serif !important;
+            font-weight: 500 !important;
+            font-size: 18px !important;
+            color: #FFFFFF !important;
+            background: rgba(28, 28, 30, 0.8) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            border-radius: 8px !important;
+            padding: 4px 10px !important;
+            box-shadow: none !important;
+        }
+        .theme-dark_black .sep-dot {
+            background: #FFFFFF !important;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.4) !important;
+        }
+
         /* ═══ 10 PREMIUM CARD SHAPE STYLES ═══ */
 
         /* 1. Soft Squircle ⭐ (Apple Vision Pro — 28px ultra-smooth) */
@@ -1427,7 +1541,6 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
 
             <!-- Minutes Card -->
             <div class="flip-card" id="fc-m">
-                <span class="ampm-badge" id="ampm-badge"></span>
                 <div class="card-half card-top"><div class="digit-wrapper"><span class="digit-text" id="fc-m-top">00</span></div></div>
                 <div class="card-half card-bottom"><div class="digit-wrapper"><span class="digit-text" id="fc-m-bot">00</span></div></div>
                 <div class="card-divider"></div>
@@ -1437,6 +1550,7 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
 
             <!-- Seconds Card -->
             <div class="flip-card" id="fc-s">
+                <span class="ampm-badge" id="ampm-badge"></span>
                 <div class="card-half card-top"><div class="digit-wrapper"><span class="digit-text" id="fc-s-top">00</span></div></div>
                 <div class="card-half card-bottom"><div class="digit-wrapper"><span class="digit-text" id="fc-s-bot">00</span></div></div>
                 <div class="card-divider"></div>
@@ -1509,6 +1623,8 @@ function applyConfiguration() {
     } else if (themeName === 'minimal_light') {
         scene.style.background = '#f1f5f9';
     } else if (themeName === 'swiss_minimalist') {
+        scene.style.background = '#000000';
+    } else if (themeName === 'dark_black') {
         scene.style.background = '#000000';
     } else if (themeName === 'minimal_dark') {
         scene.style.background = '#111111';
