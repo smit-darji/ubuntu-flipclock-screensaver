@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.2.0] - 2026-08-31 - Widescreen Panoramic Lalbaugcha Raja Artwork & Extended Font Calibration
+
+### Added
+- **🐘 1920x1080 Widescreen Panoramic Lalbaugcha Raja Artwork (`glass_ganesha`)**: Full-screen edge-to-edge depiction with blended bokeh ambient side wings, zero black side bars, and glowing saffron halo lighting across all widescreen & ultrawide monitor resolutions.
+- **🔤 Universal Font Scaling & Proportional Margins**: Calibrated digit font size (`clamp(3.8rem, 11vw, 15rem)`) and extended font overrides for Orbitron (`clamp(3.1rem, 9vw, 12.5rem) !important; letter-spacing: -0.04em !important`) to guarantee ~15% side margins with zero card edge spillover across all 31 themes.
+- **🕷️ Animated Real Spider-Man Web-Slinger Hero Sprite (`glass_spiderman`)**: High-detail suit figure with glowing eye lenses (`.eye-lens`), chest spider emblem, and animated web shooter lines.
+
 ## [3.1.0] - 2026-08-31 - Unified Card Dimensions & Full-Screen Spider-Man NYC Theme
 
 ### Added

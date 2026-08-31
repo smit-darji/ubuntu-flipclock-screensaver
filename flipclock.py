@@ -26,7 +26,7 @@ except ValueError:
         sys.exit(1)
 from gi.repository import Gtk, Gdk, WebKit2, GLib, GdkPixbuf
 
-APP_VERSION = "3.1.0"
+APP_VERSION = "3.2.0"
 
 THEME_CATEGORIES = {
     "glass_clock": {

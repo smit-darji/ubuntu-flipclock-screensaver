@@ -1,10 +1,10 @@
 # Premium Fliqlo-Style Flip Clock Screensaver for Ubuntu
 
 [![Platform](https://img.shields.io/badge/Platform-Ubuntu%2020.04%20%7C%2022.04%20%7C%2024.04-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)](https://ubuntu.com)
-[![Version](https://img.shields.io/badge/Version-v3.1.0-blue?style=for-the-badge)](releases/flipclock-screensaver_3.1.0.deb)
+[![Version](https://img.shields.io/badge/Version-v3.2.0-blue?style=for-the-badge)](releases/flipclock-screensaver_3.2.0.deb)
 [![Download Latest .deb](https://img.shields.io/badge/Download-flipclock--screensaver.deb-10B981?style=for-the-badge&logo=debian&logoColor=white)](https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver.deb)
 [![Download Android APK](https://img.shields.io/badge/Download-flipclock--screensaver.apk-FFB000?style=for-the-badge&logo=android&logoColor=white)](releases/flipclock-screensaver.apk)
-[![Archived Release v3.1.0](https://img.shields.io/badge/Archive-v3.1.0.deb-6366F1?style=for-the-badge&logo=debian&logoColor=white)](https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_3.1.0.deb)
+[![Archived Release v3.2.0](https://img.shields.io/badge/Archive-v3.2.0.deb-6366F1?style=for-the-badge&logo=debian&logoColor=white)](https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_3.2.0.deb)
 [![Language](https://img.shields.io/badge/Language-Python%203%20%2B%20GTK3-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-MIT-6D28D9?style=for-the-badge)](LICENSE)
 
@@ -21,12 +21,12 @@ A native, high-fidelity, multi-monitor flip clock screensaver for Ubuntu Linux. 
 
 ---
 
-## ✨ New in v3.1.0: Full-Screen Cinematic Spider-Man NYC Theme & Unified Card Sizing
+## ✨ New in v3.2.0: Widescreen Lalbaugcha Raja Panoramic Artwork & Universal Font Calibration
 
-Experience the brand new **v3.1.0 Release** featuring:
-- 🕷️ **Full-Screen Cinematic Spider-Man Theme**: NYC night atmosphere with radial web overlay grids, vignette edge textures, floating particles, dark skyline, and glowing red/blue digits.
-- 🐘 **Lord Ganesha Divine Murti**: High-res Lalbaugcha Raja Lord Ganesha Murti artwork with pulsating saffron halo.
-- 🎴 **Unified Universal Card Sizing**: Both retro flip cards and glass tiles now share the exact same card dimensions (`width: clamp(170px, 25vw, 400px)` by `height: clamp(210px, 29vw, 470px)`).
+Experience the brand new **v3.2.0 Release** featuring:
+- 🐘 **1920x1080 Widescreen Panoramic Lalbaugcha Raja Artwork**: Full-screen edge-to-edge depiction with blended bokeh ambient side wings, zero black side bars, and glowing saffron halo lighting.
+- 🔤 **Universal Font Calibration**: Calibrated digit typography and extended font overrides for Orbitron and Space Grotesk to guarantee side margins with zero card edge spillover.
+- 🕷️ **Animated Real Spider-Man Hero Sprite**: Detailed suit figure with glowing eye lenses, chest spider emblem, and animated web shooter lines.
 
 ![Glass Clock Face](screenshots/theme_glass_clock.png)
 
@@ -41,8 +41,8 @@ Click the buttons below to download the pre-compiled packages directly (includin
     <img src="https://img.shields.io/badge/DOWNLOAD-Latest%20.deb%20Package-10B981?style=for-the-badge&logo=debian&logoColor=white" height="48" alt="Download Latest .deb Package">
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_3.1.0.deb" target="_blank">
-    <img src="https://img.shields.io/badge/DOWNLOAD-Versioned%20v3.1.0%20.deb-6366F1?style=for-the-badge&logo=debian&logoColor=white" height="48" alt="Download Versioned .deb Package">
+  <a href="https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_3.2.0.deb" target="_blank">
+    <img src="https://img.shields.io/badge/DOWNLOAD-Versioned%20v3.2.0%20.deb-6366F1?style=for-the-badge&logo=debian&logoColor=white" height="48" alt="Download Versioned .deb Package">
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="releases/flipclock-screensaver.apk" download="flipclock-screensaver.apk">
@@ -242,14 +242,14 @@ sudo apt update
 sudo apt install ./flipclock-screensaver.deb
 ```
 
-#### Option B: Install Versioned Release Archive (`v3.1.0`)
+#### Option B: Install Versioned Release Archive (`v3.2.0`)
 ```bash
-# 1. Download version v3.1.0 from the releases/ directory
-wget https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_3.1.0.deb
+# 1. Download version v3.2.0 from the releases/ directory
+wget https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_3.2.0.deb
 
 # 2. Install versioned package via apt
 sudo apt update
-sudo apt install ./flipclock-screensaver_3.1.0.deb
+sudo apt install ./flipclock-screensaver_3.2.0.deb
 ```
 
 ---
