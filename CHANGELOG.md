@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.1.0] - 2026-08-31 - Unified Card Dimensions & Full-Screen Spider-Man NYC Theme
+
+### Added
+- **🕷️ Full-Screen Cinematic Spider-Man NYC Theme (`glass_spiderman`)**: Dedicated NYC night atmosphere with radial web overlay grids, vignette edge textures, floating particles, dark skyline, and glowing red/blue digits.
+- **Unified Universal Card Dimensions**: Standardized card dimensions (`width: clamp(170px, 25vw, 400px); height: clamp(210px, 29vw, 470px)`) across all 31 themes (retro flip cards & glass tiles).
+- **Anti-Clipping Digit Typography**: Calibrated digit sizing (`clamp(4.5rem, 13.5vw, 18rem)`), line height (`1.1`), and overflow handling to completely eliminate digit font clipping.
+
 ## [3.0.0] - 2026-08-31 - Tall Flip-Card Proportions, Animated Spider-Man & Lord Ganesha Divine Murti
 
 ### Added

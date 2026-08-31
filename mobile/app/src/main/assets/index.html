@@ -117,8 +117,8 @@
         /* ═══ FLIP CARD ═══════════════════════════════════ */
         .flip-card {
             position: relative;
-            width: clamp(160px, 36vh, 440px);
-            height: clamp(220px, 52vh, 620px);
+            width: clamp(170px, 25vw, 400px);
+            height: clamp(210px, 29vw, 470px);
             border-radius: clamp(10px, 1.8vh, 24px);
             overflow: hidden;
             perspective: 1400px;
@@ -2117,28 +2117,64 @@
                 color: #fde68a;
             }
 
-            /* Theme 6: Spider-Man Web (Red & Blue) */
+            /* Theme 6: Full-Screen Cinematic Spider-Man NYC Theme */
             .theme-glass_spiderman #scene {
-                background: radial-gradient(circle at 50% 45%, #180308 0%, #080104 100%) !important;
+                background: radial-gradient(circle at 50% 40%, #15050b 0%, #080309 60%, #030104 100%) !important;
+            }
+            .spiderman-scene-layer {
+                display: none;
+                position: absolute;
+                inset: 0;
+                pointer-events: none;
+                z-index: 2;
+                overflow: hidden;
+            }
+            .theme-glass_spiderman .spiderman-scene-layer {
+                display: block;
+            }
+            .spidey-web-overlay {
+                position: absolute;
+                inset: 0;
+                background-image: radial-gradient(circle at 50% 50%, rgba(239, 68, 68, 0.12) 0%, transparent 75%),
+                                  repeating-radial-gradient(circle at 50% 50%, transparent 0, transparent 45px, rgba(239, 68, 68, 0.05) 46px, transparent 47px),
+                                  repeating-conic-gradient(from 0deg at 50% 50%, transparent 0deg, transparent 28deg, rgba(37, 99, 235, 0.06) 29deg, transparent 30deg);
+                opacity: 0.85;
+            }
+            .spidey-web-vignette {
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(circle at center, transparent 45%, rgba(10, 2, 6, 0.85) 100%);
+                box-shadow: inset 0 0 120px rgba(220, 38, 38, 0.2);
             }
             .theme-glass_spiderman .orb-1 {
-                background: radial-gradient(circle, rgba(220, 38, 38, 0.38) 0%, rgba(185, 28, 28, 0.12) 70%, transparent 100%);
+                background: radial-gradient(circle, rgba(220, 38, 38, 0.45) 0%, rgba(185, 28, 28, 0.15) 70%, transparent 100%);
             }
             .theme-glass_spiderman .orb-2 {
-                background: radial-gradient(circle, rgba(37, 99, 235, 0.32) 0%, rgba(29, 78, 216, 0.1) 70%, transparent 100%);
+                background: radial-gradient(circle, rgba(37, 99, 235, 0.40) 0%, rgba(29, 78, 216, 0.12) 70%, transparent 100%);
             }
             .theme-glass_spiderman .glass-digit-tile {
-                background: rgba(220, 38, 38, 0.08);
-                border-color: rgba(239, 68, 68, 0.4);
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), 0 0 25px rgba(220, 38, 38, 0.2);
+                background: transparent !important;
+                border: none !important;
+                box-shadow: none !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                padding: 0 !important;
+            }
+            .theme-glass_spiderman .glass-digit-tile::after,
+            .theme-glass_spiderman .glass-digit-tile::before {
+                display: none !important;
             }
             .theme-glass_spiderman .gc-num {
-                color: #ffffff;
-                text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 25px rgba(239, 68, 68, 0.6);
+                color: #ffffff !important;
+                font-weight: 300 !important;
+                text-shadow: 
+                    0 0 35px rgba(239, 68, 68, 0.85),
+                    0 0 70px rgba(37, 99, 235, 0.55),
+                    0 4px 24px rgba(0, 0, 0, 0.95) !important;
             }
             .theme-glass_spiderman .glass-colon {
-                color: #ef4444;
-                text-shadow: 0 0 20px rgba(239, 68, 68, 0.8);
+                color: #ef4444 !important;
+                text-shadow: 0 0 30px rgba(239, 68, 68, 0.95), 0 0 60px rgba(239, 68, 68, 0.6) !important;
             }
 
             /* Theme 7: Lalbaugcha Raja Ganesha Divine Saffron & Gold */
@@ -2752,8 +2788,10 @@
             </div>
         </div>
 
-        <!-- Spider-Man NYC City Skyline & Web Swinger -->
+        <!-- Full-Screen Cinematic Spider-Man NYC Theme Layer -->
         <div class="spiderman-scene-layer">
+            <div class="spidey-web-overlay"></div>
+            <div class="spidey-web-vignette"></div>
             <div class="city-skyline">
                 <svg viewBox="0 0 1400 350" preserveAspectRatio="none" class="skyline-svg">
                     <path d="M0 350 L0 180 L40 180 L40 120 L90 120 L90 350 L120 350 L120 150 L170 150 L170 80 L180 80 L180 50 L190 50 L190 80 L200 80 L200 150 L240 150 L240 350 L280 350 L280 200 L340 200 L340 100 L400 100 L400 350 L450 350 L450 160 L510 160 L510 350 L560 350 L560 60 L570 60 L570 30 L580 30 L580 60 L590 60 L590 350 L640 350 L640 140 L700 140 L700 350 L750 350 L750 90 L820 90 L820 350 L870 350 L870 170 L930 170 L930 70 L940 70 L940 40 L950 40 L950 70 L960 70 L960 170 L1020 170 L1020 350 L1080 350 L1080 130 L1140 130 L1140 350 L1200 350 L1200 190 L1260 190 L1260 90 L1270 90 L1270 50 L1280 50 L1280 90 L1290 90 L1290 190 L1350 190 L1350 350 L1400 350 Z" fill="#0c0205" />

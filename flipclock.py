@@ -26,7 +26,7 @@ except ValueError:
         sys.exit(1)
 from gi.repository import Gtk, Gdk, WebKit2, GLib, GdkPixbuf
 
-APP_VERSION = "3.0.0"
+APP_VERSION = "3.1.0"
 
 THEME_CATEGORIES = {
     "glass_clock": {
@@ -111,8 +111,8 @@ PRESET_THEMES = {
         "label_font": "Outfit"
     },
     "glass_spiderman": {
-        "name": "🕷️ Spider-Man Web (Red & Blue) ✦",
-        "bg_color": "#180308",
+        "name": "🕷️ Spider-Man Theme ✦",
+        "bg_color": "#15050b",
         "card_color": "rgba(220, 38, 38, 0.12)",
         "digit_color": "#FFFFFF",
         "accent_color": "#EF4444",
