@@ -2119,7 +2119,7 @@
 
             /* Theme 6: Full-Screen Cinematic Spider-Man NYC Theme */
             .theme-glass_spiderman #scene {
-                background: radial-gradient(circle at 50% 40%, #15050b 0%, #080309 60%, #030104 100%) !important;
+                background: #080309 !important;
             }
             .spiderman-scene-layer {
                 display: none;
@@ -2131,6 +2131,21 @@
             }
             .theme-glass_spiderman .spiderman-scene-layer {
                 display: block;
+            }
+            .spiderman-artwork-bg {
+                position: absolute;
+                inset: 0;
+                background-image: url('assets/spiderman_bg.png');
+                background-size: cover;
+                background-position: center center;
+                background-repeat: no-repeat;
+                opacity: 0.85;
+                filter: brightness(0.95) contrast(1.1) drop-shadow(0 0 50px rgba(220, 38, 38, 0.4));
+                animation: spideyGlowPulse 8s ease-in-out infinite alternate;
+            }
+            @keyframes spideyGlowPulse {
+                0% { opacity: 0.78; filter: brightness(0.90) contrast(1.08) drop-shadow(0 0 35px rgba(220, 38, 38, 0.35)); }
+                100% { opacity: 0.92; filter: brightness(1.05) contrast(1.15) drop-shadow(0 0 75px rgba(37, 99, 235, 0.65)); }
             }
             .spidey-web-overlay {
                 position: absolute;
@@ -2793,6 +2808,7 @@
 
         <!-- Full-Screen Cinematic Spider-Man NYC Theme Layer -->
         <div class="spiderman-scene-layer">
+            <div class="spiderman-artwork-bg"></div>
             <div class="spidey-web-overlay"></div>
             <div class="spidey-web-vignette"></div>
 
