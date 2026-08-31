@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.3.0] - 2026-08-31 - User Lord Ganesha Temple Mandap Artwork & Auto-Approve Uninstall Guide
+
+### Added
+- **🐘 User Uploaded Lord Ganesha Temple Mandap Artwork (`glass_ganesha`)**: Integrated native 16:9 widescreen temple mandap artwork (`assets/ganesha_murti_bg.png`) with teakwood & warm amber color harmonization.
+- **🕷️ Ultra-Premium Realistic Spider-Man Theme Redesign (`glass_spiderman`)**: Upgraded 3D suit graphics, metallic white eye lenses (`.eye-lens`), dark ruby glass cards, and high-res NYC skyline backdrop.
+- **🗑️ Auto-Approve Uninstallation Guide**: Updated `README.md` to document `-y` auto-approval commands (`sudo apt remove -y flipclock-screensaver` & `sudo apt purge -y flipclock-screensaver`).
+
 ## [3.2.0] - 2026-08-31 - Widescreen Panoramic Lalbaugcha Raja Artwork & Extended Font Calibration
 
 ### Added
