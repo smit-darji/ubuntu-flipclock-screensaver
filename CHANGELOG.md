@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.5.0] - 2026-08-31 - Frosted Dark Ruby Spider-Man Glass Cards & Deep High-Contrast Ganesha Theme
+
+### Added
+- **🕷️ Frosted Dark Ruby Glass Cards (`glass_spiderman`)**: Added translucent frosted dark ruby glass tiles (`background: rgba(14, 4, 9, 0.76); border: 1px solid rgba(239, 68, 68, 0.5); backdrop-filter: blur(22px);`) to blur out busy background window lights and guarantee 100% crystal-clear digit visibility (`07:47:17`).
+- **🐘 Deep High-Contrast Ganesha Theme (`glass_ganesha`)**: Enhanced background artwork filter (`brightness(0.55) contrast(1.22)`), dark teak glass tiles (`rgba(12, 5, 2, 0.78)`), and pure white digits (`#FFFFFF`) with glowing saffron text shadow.
+
 ## [3.4.0] - 2026-08-31 - High-Contrast Ganesha Theme & Frameless Spider-Man Theme
 
 ### Added
