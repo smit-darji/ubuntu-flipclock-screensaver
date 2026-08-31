@@ -54,7 +54,17 @@ wget https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/M
 
 ---
 
-## 🎨 23 Premium Color Themes
+## 🎨 29 Premium Color Themes & Glass Collections
+
+### ✨ Premium Glass Clock Face Collections (6 Themes)
+
+| ✨ Classic Frosted Cyan | 🌌 Aurora Borealis | 🌆 Cyberpunk Neon |
+|:---:|:---:|:---:|
+| ![Classic Frosted Cyan](assets/theme_glass_clock.png) | ![Aurora Borealis](assets/theme_glass_aurora.png) | ![Cyberpunk Neon](assets/theme_glass_cyberpunk.png) |
+
+| 🌿 Emerald Gold | 🌇 Sunset Champagne | 🧊 OLED Pure Frameless |
+|:---:|:---:|:---:|
+| ![Emerald Gold](assets/theme_glass_emerald.png) | ![Sunset Champagne](assets/theme_glass_sunset.png) | ![OLED Pure Frameless](assets/theme_glass_minimal_oled.png) |
 
 ### 🏆 Executive Dark & Gold Collection
 
