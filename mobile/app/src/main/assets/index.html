@@ -2117,7 +2117,31 @@
                 color: #fde68a;
             }
 
-            /* Theme 6: OLED Pure Pitch Black Frameless */
+            /* Theme 6: Spider-Man Web (Red & Blue) */
+            .theme-glass_spiderman #scene {
+                background: radial-gradient(circle at 50% 45%, #180308 0%, #080104 100%) !important;
+            }
+            .theme-glass_spiderman .orb-1 {
+                background: radial-gradient(circle, rgba(220, 38, 38, 0.38) 0%, rgba(185, 28, 28, 0.12) 70%, transparent 100%);
+            }
+            .theme-glass_spiderman .orb-2 {
+                background: radial-gradient(circle, rgba(37, 99, 235, 0.32) 0%, rgba(29, 78, 216, 0.1) 70%, transparent 100%);
+            }
+            .theme-glass_spiderman .glass-digit-tile {
+                background: rgba(220, 38, 38, 0.08);
+                border-color: rgba(239, 68, 68, 0.4);
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), 0 0 25px rgba(220, 38, 38, 0.2);
+            }
+            .theme-glass_spiderman .gc-num {
+                color: #ffffff;
+                text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 25px rgba(239, 68, 68, 0.6);
+            }
+            .theme-glass_spiderman .glass-colon {
+                color: #ef4444;
+                text-shadow: 0 0 20px rgba(239, 68, 68, 0.8);
+            }
+
+            /* Theme 7: OLED Pure Pitch Black Frameless */
             .theme-glass_minimal_oled #scene {
                 background: #000000 !important;
             }
@@ -2223,7 +2247,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                gap: clamp(8px, 1.8vw, 24px);
+                gap: clamp(12px, 2.2vw, 36px);
             }
 
             .glass-digit-tile {
@@ -2231,16 +2255,16 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                padding: clamp(12px, 2vh, 32px) clamp(16px, 2.4vw, 42px);
+                padding: clamp(16px, 2.8vh, 48px) clamp(22px, 3.2vw, 60px);
                 background: rgba(255, 255, 255, 0.05);
-                border: 1px solid rgba(255, 255, 255, 0.12);
-                border-radius: clamp(16px, 2vw, 30px);
+                border: 1px solid rgba(255, 255, 255, 0.14);
+                border-radius: clamp(20px, 2.5vw, 40px);
                 box-shadow: 
-                    0 8px 32px rgba(0, 0, 0, 0.35),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.18);
-                backdrop-filter: blur(16px);
-                -webkit-backdrop-filter: blur(16px);
-                min-width: clamp(90px, 22vw, 300px);
+                    0 12px 40px rgba(0, 0, 0, 0.4),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                min-width: clamp(120px, 25vw, 400px);
                 text-align: center;
                 transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
             }
@@ -2252,25 +2276,25 @@
 
             .gc-num {
                 font-family: var(--digit-font, 'Inter', system-ui, sans-serif);
-                font-size: clamp(4rem, 14vw, 16rem);
+                font-size: clamp(5.5rem, 17vw, 22rem);
                 font-weight: 300;
                 line-height: 1;
                 letter-spacing: -0.02em;
                 color: #ffffff;
                 text-shadow: 
-                    0 4px 20px rgba(0, 0, 0, 0.6),
-                    0 0 25px rgba(255, 255, 255, 0.25);
+                    0 4px 24px rgba(0, 0, 0, 0.6),
+                    0 0 30px rgba(255, 255, 255, 0.25);
                 transition: all 0.3s ease;
             }
 
             .glass-colon {
                 font-family: var(--digit-font, 'Inter', system-ui, sans-serif);
-                font-size: clamp(3rem, 11vw, 12rem);
+                font-size: clamp(4.5rem, 14vw, 18rem);
                 font-weight: 200;
-                color: rgba(255, 255, 255, 0.7);
-                text-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+                color: rgba(255, 255, 255, 0.75);
+                text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
                 animation: colonPulse 2s ease-in-out infinite;
-                margin: 0 clamp(-4px, -0.5vw, -12px);
+                margin: 0 clamp(-6px, -0.6vw, -16px);
                 user-select: none;
             }
 
@@ -2279,23 +2303,22 @@
                 50% { opacity: 0.35; transform: scale(0.95); }
             }
 
-            /* Clean Non-Overlapping AM/PM Frosted Pill Badge */
+            /* Clean Vertically Centered AM/PM Frosted Pill Badge */
             .gc-ampm-pill {
-                align-self: flex-end;
-                margin-bottom: clamp(10px, 1.8vh, 24px);
-                margin-left: clamp(2px, 0.5vw, 8px);
-                padding: clamp(4px, 0.8vh, 8px) clamp(10px, 1.2vw, 16px);
+                align-self: center;
+                margin-left: clamp(8px, 1.2vw, 24px);
+                padding: clamp(6px, 1.2vh, 14px) clamp(14px, 1.6vw, 28px);
                 background: rgba(255, 255, 255, 0.08);
-                border: 1px solid rgba(255, 255, 255, 0.18);
-                border-radius: 20px;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 24px;
                 font-family: var(--label-font, 'Inter', sans-serif);
-                font-size: clamp(12px, 1.6vw, 24px);
+                font-size: clamp(14px, 2vw, 32px);
                 font-weight: 800;
-                letter-spacing: 0.12em;
+                letter-spacing: 0.14em;
                 color: var(--accent-color, #38bdf8);
-                backdrop-filter: blur(12px);
-                -webkit-backdrop-filter: blur(12px);
-                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
                 user-select: none;
             }
 
@@ -2427,15 +2450,11 @@
                 border-color: #38bdf8;
             }
 
-            .badge-new {
+            .badge-star {
                 margin-left: auto;
-                font-size: 9px;
-                font-weight: 900;
-                background: linear-gradient(135deg, #38bdf8, #818cf8);
-                color: #000000;
-                padding: 2px 6px;
-                border-radius: 6px;
-                letter-spacing: 0.05em;
+                font-size: 12px;
+                color: #f59e0b;
+                filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.6));
             }
 
             .menu-divider {
@@ -2482,27 +2501,32 @@
                 <div class="menu-item" data-face="glass_aurora">
                     <span class="item-icon">🌌</span>
                     <span class="item-label">Aurora Borealis</span>
-                    <span class="badge-new">NEW</span>
+                    <span class="badge-star">✦</span>
                 </div>
                 <div class="menu-item" data-face="glass_cyberpunk">
                     <span class="item-icon">🌆</span>
                     <span class="item-label">Cyberpunk Neon</span>
-                    <span class="badge-new">NEW</span>
+                    <span class="badge-star">✦</span>
                 </div>
                 <div class="menu-item" data-face="glass_emerald">
                     <span class="item-icon">🌿</span>
                     <span class="item-label">Emerald Gold</span>
-                    <span class="badge-new">NEW</span>
+                    <span class="badge-star">✦</span>
                 </div>
                 <div class="menu-item" data-face="glass_sunset">
                     <span class="item-icon">🌇</span>
                     <span class="item-label">Sunset Champagne</span>
-                    <span class="badge-new">NEW</span>
+                    <span class="badge-star">✦</span>
+                </div>
+                <div class="menu-item" data-face="glass_spiderman">
+                    <span class="item-icon">🕷️</span>
+                    <span class="item-label">Spider-Man Web</span>
+                    <span class="badge-star">✦</span>
                 </div>
                 <div class="menu-item" data-face="glass_minimal_oled">
                     <span class="item-icon">🧊</span>
                     <span class="item-label">OLED Pure Frameless</span>
-                    <span class="badge-new">NEW</span>
+                    <span class="badge-star">✦</span>
                 </div>
 
                 <div class="menu-divider"></div>
@@ -2692,6 +2716,7 @@
                 "glass_cyberpunk": "#0a0512",
                 "glass_emerald": "#05140d",
                 "glass_sunset": "#130914",
+                "glass_spiderman": "#180308",
                 "glass_minimal_oled": "#000000",
                 "apple_liquid_glass": "#000000",
                 "liquid_glass": "#060810",

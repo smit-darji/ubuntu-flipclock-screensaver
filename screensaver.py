@@ -409,6 +409,15 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
             --badge-bg: rgba(31,11,30,0.85);
             --badge-border: rgba(253,230,138,0.35);
         }
+        .theme-glass_spiderman {
+            --card-bg: rgba(220,38,38,0.08);
+            --card-border: rgba(239,68,68,0.35);
+            --digit-color: #FFFFFF;
+            --accent-color: #EF4444;
+            --badge-color: #EF4444;
+            --badge-bg: rgba(24,3,8,0.85);
+            --badge-border: rgba(239,68,68,0.4);
+        }
         .theme-glass_minimal_oled {
             --card-bg: transparent;
             --card-border: transparent;

@@ -26,12 +26,12 @@ except ValueError:
         sys.exit(1)
 from gi.repository import Gtk, Gdk, WebKit2, GLib, GdkPixbuf
 
-APP_VERSION = "2.7.0"
+APP_VERSION = "2.8.0"
 
 THEME_CATEGORIES = {
     "glass_clock": {
         "label": "✨ Glass Clock Collections",
-        "themes": ["glass_clock", "glass_aurora", "glass_cyberpunk", "glass_emerald", "glass_sunset", "glass_minimal_oled"]
+        "themes": ["glass_clock", "glass_aurora", "glass_cyberpunk", "glass_emerald", "glass_sunset", "glass_spiderman", "glass_minimal_oled"]
     },
     "liquid_glass": {
         "label": "💧 Liquid Glass & Crystal Dark",
@@ -61,7 +61,7 @@ THEME_CATEGORIES = {
 
 PRESET_THEMES = {
     "glass_clock": {
-        "name": "✨ Glass Clock (Frosted Glass) ✦ NEW",
+        "name": "✨ Glass Clock (Frosted Glass) ✦",
         "bg_color": "#0a0f19",
         "card_color": "rgba(255, 255, 255, 0.12)",
         "digit_color": "#FFFFFF",
@@ -71,7 +71,7 @@ PRESET_THEMES = {
         "label_font": "Inter"
     },
     "glass_aurora": {
-        "name": "🌌 Aurora Glass (Teal & Violet) ✦ NEW",
+        "name": "🌌 Aurora Glass (Teal & Violet) ✦",
         "bg_color": "#040d1a",
         "card_color": "rgba(255, 255, 255, 0.10)",
         "digit_color": "#E0F2FE",
@@ -81,7 +81,7 @@ PRESET_THEMES = {
         "label_font": "Inter"
     },
     "glass_cyberpunk": {
-        "name": "🌆 Cyberpunk Neon (Magenta & Cyan) ✦ NEW",
+        "name": "🌆 Cyberpunk Neon (Magenta & Cyan) ✦",
         "bg_color": "#0a0512",
         "card_color": "rgba(236, 72, 153, 0.12)",
         "digit_color": "#FFFFFF",
@@ -91,7 +91,7 @@ PRESET_THEMES = {
         "label_font": "Space Grotesk"
     },
     "glass_emerald": {
-        "name": "🌿 Emerald Gold (Green & Gold) ✦ NEW",
+        "name": "🌿 Emerald Gold (Green & Gold) ✦",
         "bg_color": "#05140d",
         "card_color": "rgba(16, 185, 129, 0.12)",
         "digit_color": "#F5F5F7",
@@ -101,7 +101,7 @@ PRESET_THEMES = {
         "label_font": "Cinzel"
     },
     "glass_sunset": {
-        "name": "🌇 Sunset Champagne (Warm Dusk) ✦ NEW",
+        "name": "🌇 Sunset Champagne (Warm Dusk) ✦",
         "bg_color": "#130914",
         "card_color": "rgba(251, 146, 60, 0.12)",
         "digit_color": "#FDE68A",
@@ -110,8 +110,18 @@ PRESET_THEMES = {
         "digit_font": "Outfit",
         "label_font": "Outfit"
     },
+    "glass_spiderman": {
+        "name": "🕷️ Spider-Man Web (Red & Blue) ✦",
+        "bg_color": "#180308",
+        "card_color": "rgba(220, 38, 38, 0.12)",
+        "digit_color": "#FFFFFF",
+        "accent_color": "#EF4444",
+        "border_color": "rgba(239, 68, 68, 0.35)",
+        "digit_font": "Inter",
+        "label_font": "Inter"
+    },
     "glass_minimal_oled": {
-        "name": "🧊 OLED Pure Frameless (Pitch Black) ✦ NEW",
+        "name": "🧊 OLED Pure Frameless (Pitch Black) ✦",
         "bg_color": "#000000",
         "card_color": "transparent",
         "digit_color": "#FFFFFF",

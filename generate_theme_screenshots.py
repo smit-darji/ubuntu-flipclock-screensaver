@@ -81,6 +81,19 @@ THEMES = {
         "badge_border": (50, 50, 50, 140),
         "greeting": "GOOD EVENING"
     },
+    "glass_spiderman": {
+        "title": "🕷️ Spider-Man Web",
+        "bg_color": (24, 3, 8, 255),
+        "card_top": (220, 38, 38, 35),
+        "card_bot": (37, 99, 235, 20),
+        "border_color": (239, 68, 68, 180),
+        "digit_color": (255, 255, 255, 255),
+        "pin_color": (239, 68, 68, 255),
+        "accent_color": (239, 68, 68, 255),
+        "badge_bg": (32, 6, 12, 200),
+        "badge_border": (239, 68, 68, 140),
+        "greeting": "GOOD EVENING"
+    },
     "liquid_glass": {
         "title": "💧 Liquid Glass Dark",
         "bg_color": (6, 8, 16, 255),

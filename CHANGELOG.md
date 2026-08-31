@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.8.0] - 2026-08-31 - Larger Responsive Sizing, Spider-Man Theme & Star Badges
+
+### Added
+- **🕷️ Spider-Man Web Theme (`glass_spiderman`)**: Dark crimson red & midnight blue ambient backdrop (`#180308`) with spider-red neon glowing colons and web highlights.
+- **Larger Hero Responsive Sizing**: Scaled up digit font size (`clamp(5.5rem, 17vw, 22rem)`), card dimensions (`min-width: clamp(120px, 25vw, 400px)`), and colon spacing for a grand full-screen screensaver presentation across 1080p, 2K, 4K, and ultra-wide displays.
+- **Vertically Centered AM/PM Pill Badge**: Centered `.gc-ampm-pill` vertically (`align-self: center`) alongside the time row for balanced, pixel-perfect alignment.
+- **`✦` Star Badge Indicator**: Replaced literal "NEW" text labels with sleek gold star badge icons (`✦`) in quick menus and GTK settings.
+
 ## [2.7.0] - 2026-08-31 - Frameless Glass Clock & 5 New Aesthetic Themes
 
 ### Added
