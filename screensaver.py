@@ -418,6 +418,15 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
             --badge-bg: rgba(24,3,8,0.85);
             --badge-border: rgba(239,68,68,0.4);
         }
+        .theme-glass_ganesha {
+            --card-bg: rgba(245,158,11,0.08);
+            --card-border: rgba(245,158,11,0.35);
+            --digit-color: #FEF3C7;
+            --accent-color: #EA580C;
+            --badge-color: #FEF3C7;
+            --badge-bg: rgba(26,12,2,0.85);
+            --badge-border: rgba(245,158,11,0.4);
+        }
         .theme-glass_minimal_oled {
             --card-bg: transparent;
             --card-border: transparent;

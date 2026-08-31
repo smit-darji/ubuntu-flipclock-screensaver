@@ -26,12 +26,12 @@ except ValueError:
         sys.exit(1)
 from gi.repository import Gtk, Gdk, WebKit2, GLib, GdkPixbuf
 
-APP_VERSION = "2.8.0"
+APP_VERSION = "2.9.0"
 
 THEME_CATEGORIES = {
     "glass_clock": {
         "label": "✨ Glass Clock Collections",
-        "themes": ["glass_clock", "glass_aurora", "glass_cyberpunk", "glass_emerald", "glass_sunset", "glass_spiderman", "glass_minimal_oled"]
+        "themes": ["glass_clock", "glass_aurora", "glass_cyberpunk", "glass_emerald", "glass_sunset", "glass_spiderman", "glass_ganesha", "glass_minimal_oled"]
     },
     "liquid_glass": {
         "label": "💧 Liquid Glass & Crystal Dark",
@@ -119,6 +119,16 @@ PRESET_THEMES = {
         "border_color": "rgba(239, 68, 68, 0.35)",
         "digit_font": "Inter",
         "label_font": "Inter"
+    },
+    "glass_ganesha": {
+        "name": "🐘 Ganesha Divine Gold (Divine Saffron) ✦",
+        "bg_color": "#1a0c02",
+        "card_color": "rgba(245, 158, 11, 0.12)",
+        "digit_color": "#FEF3C7",
+        "accent_color": "#EA580C",
+        "border_color": "rgba(245, 158, 11, 0.35)",
+        "digit_font": "Inter",
+        "label_font": "Cinzel"
     },
     "glass_minimal_oled": {
         "name": "🧊 OLED Pure Frameless (Pitch Black) ✦",

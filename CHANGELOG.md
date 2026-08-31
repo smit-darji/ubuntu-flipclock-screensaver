@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.9.0] - 2026-08-31 - Ganesha Festival Divine Gold Theme & Fluid Sizing
+
+### Added
+- **🐘 Ganesha Festival Divine Gold Theme (`glass_ganesha`)**: Royal saffron & temple gold ambient backdrop (`#1a0c02`) with animated glowing marigold orange and sacred saffron light orbs.
+- **Fluid Code-Based Responsive Layout System**: Standardized all Glass theme layout dimensions with fluid CSS variables and responsive calc logic for seamless scaling across all display aspect ratios.
+
 ## [2.8.0] - 2026-08-31 - Larger Responsive Sizing, Spider-Man Theme & Star Badges
 
 ### Added

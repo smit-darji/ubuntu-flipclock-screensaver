@@ -94,6 +94,19 @@ THEMES = {
         "badge_border": (239, 68, 68, 140),
         "greeting": "GOOD EVENING"
     },
+    "glass_ganesha": {
+        "title": "🐘 Ganesha Divine Gold",
+        "bg_color": (26, 12, 2, 255),
+        "card_top": (245, 158, 11, 35),
+        "card_bot": (234, 88, 12, 20),
+        "border_color": (245, 158, 11, 180),
+        "digit_color": (254, 243, 199, 255),
+        "pin_color": (234, 88, 12, 255),
+        "accent_color": (234, 88, 12, 255),
+        "badge_bg": (40, 18, 4, 200),
+        "badge_border": (245, 158, 11, 140),
+        "greeting": "GOOD EVENING"
+    },
     "liquid_glass": {
         "title": "💧 Liquid Glass Dark",
         "bg_color": (6, 8, 16, 255),
