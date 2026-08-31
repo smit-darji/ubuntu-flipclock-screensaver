@@ -2141,9 +2141,9 @@
                 text-shadow: 0 0 20px rgba(239, 68, 68, 0.8);
             }
 
-            /* Theme 7: Ganesha Divine Saffron & Gold */
+            /* Theme 7: Lalbaugcha Raja Ganesha Divine Saffron & Gold */
             .theme-glass_ganesha #scene {
-                background: radial-gradient(circle at 50% 45%, #1a0c02 0%, #0d0501 100%) !important;
+                background: #090302 !important;
             }
             .ganesha-scene-layer {
                 display: none;
@@ -2154,22 +2154,24 @@
                 overflow: hidden;
             }
             .theme-glass_ganesha .ganesha-scene-layer {
-                display: block;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
             .ganesha-artwork-bg {
                 position: absolute;
                 inset: 0;
                 background-image: url('assets/ganesha_murti_bg.png');
-                background-size: cover;
-                background-position: center bottom;
-                opacity: 0.38;
-                filter: brightness(0.9) contrast(1.15) drop-shadow(0 0 40px rgba(245, 158, 11, 0.5));
-                mix-blend-mode: screen;
+                background-size: contain;
+                background-position: center center;
+                background-repeat: no-repeat;
+                opacity: 0.70;
+                filter: brightness(0.95) contrast(1.1) drop-shadow(0 0 50px rgba(245, 158, 11, 0.4));
                 animation: ganeshaPulseAura 8s ease-in-out infinite alternate;
             }
             @keyframes ganeshaPulseAura {
-                0% { opacity: 0.32; filter: brightness(0.85) contrast(1.1) drop-shadow(0 0 30px rgba(245, 158, 11, 0.4)); }
-                100% { opacity: 0.48; filter: brightness(1.0) contrast(1.2) drop-shadow(0 0 65px rgba(234, 88, 12, 0.7)); }
+                0% { opacity: 0.65; filter: brightness(0.90) contrast(1.08) drop-shadow(0 0 35px rgba(245, 158, 11, 0.35)); }
+                100% { opacity: 0.80; filter: brightness(1.05) contrast(1.15) drop-shadow(0 0 70px rgba(234, 88, 12, 0.65)); }
             }
             .theme-glass_ganesha .orb-1 {
                 background: radial-gradient(circle, rgba(245, 158, 11, 0.38) 0%, rgba(217, 119, 6, 0.12) 70%, transparent 100%);
@@ -2181,17 +2183,19 @@
                 background: radial-gradient(circle, rgba(212, 175, 55, 0.25) 0%, rgba(245, 158, 11, 0.08) 70%, transparent 100%);
             }
             .theme-glass_ganesha .glass-digit-tile {
-                background: rgba(245, 158, 11, 0.08);
-                border-color: rgba(245, 158, 11, 0.4);
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), 0 0 25px rgba(245, 158, 11, 0.2);
+                background: rgba(18, 7, 3, 0.62) !important;
+                border-color: rgba(245, 158, 11, 0.5) !important;
+                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7), 0 0 30px rgba(245, 158, 11, 0.25) !important;
+                backdrop-filter: blur(16px) !important;
+                -webkit-backdrop-filter: blur(16px) !important;
             }
             .theme-glass_ganesha .gc-num {
-                color: #fef3c7;
-                text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 25px rgba(245, 158, 11, 0.6);
+                color: #FEF3C7 !important;
+                text-shadow: 0 4px 24px rgba(0, 0, 0, 0.8), 0 0 25px rgba(245, 158, 11, 0.7) !important;
             }
             .theme-glass_ganesha .glass-colon {
-                color: #ea580c;
-                text-shadow: 0 0 20px rgba(234, 88, 12, 0.8);
+                color: #EA580C !important;
+                text-shadow: 0 0 25px rgba(234, 88, 12, 0.9) !important;
             }
 
             /* Theme 8: OLED Pure Pitch Black Frameless */
@@ -2403,9 +2407,9 @@
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                width: clamp(140px, 20vw, 320px);
-                height: clamp(190px, 27vw, 440px);
-                padding: 0;
+                width: clamp(170px, 25vw, 400px);
+                height: clamp(210px, 29vw, 470px);
+                padding: 0 clamp(8px, 1.2vw, 24px);
                 background: rgba(255, 255, 255, 0.05);
                 border: 1px solid rgba(255, 255, 255, 0.14);
                 border-radius: clamp(18px, 2.2vw, 36px);
@@ -2415,7 +2419,7 @@
                 backdrop-filter: blur(20px);
                 -webkit-backdrop-filter: blur(20px);
                 text-align: center;
-                overflow: hidden;
+                overflow: visible;
                 transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
             }
 
@@ -2454,15 +2458,17 @@
 
             .gc-num {
                 font-family: var(--digit-font, 'Inter', system-ui, sans-serif);
-                font-size: clamp(5.5rem, 17vw, 22rem);
+                font-size: clamp(4.5rem, 13.5vw, 18rem);
                 font-weight: 300;
-                line-height: 1;
-                letter-spacing: -0.02em;
+                line-height: 1.1;
+                letter-spacing: -0.01em;
                 color: #ffffff;
                 text-shadow: 
                     0 4px 24px rgba(0, 0, 0, 0.6),
                     0 0 30px rgba(255, 255, 255, 0.25);
                 transition: all 0.3s ease;
+                z-index: 2;
+                white-space: nowrap;
             }
 
             .glass-colon {
