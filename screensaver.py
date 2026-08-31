@@ -356,7 +356,7 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
             --accent-color: #D4AF37;
             --badge-color: #D8D8D8;
             --badge-bg: rgba(255,255,255,0.12);
-            --badge-border: rgba(255,255,255,0.18);
+            --badge-border: rgba(255,255,255,0.15);
         }
         .theme-glass_clock {
             --card-bg: rgba(255,255,255,0.08);
@@ -369,9 +369,54 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
             --dot-bg: #38BDF8;
             --dot-shadow: 0 0 12px rgba(56,189,248,0.6);
             --accent-color: #38BDF8;
+            --badge-color: #38BDF8;
+            --badge-bg: rgba(15,23,42,0.85);
+            --badge-border: rgba(56,189,248,0.3);
+        }
+        .theme-glass_aurora {
+            --card-bg: rgba(20,184,166,0.08);
+            --card-border: rgba(56,189,248,0.25);
+            --digit-color: #E0F2FE;
+            --accent-color: #38BDF8;
+            --badge-color: #E0F2FE;
+            --badge-bg: rgba(4,19,38,0.85);
+            --badge-border: rgba(56,189,248,0.3);
+        }
+        .theme-glass_cyberpunk {
+            --card-bg: rgba(236,72,153,0.08);
+            --card-border: rgba(236,72,153,0.35);
+            --digit-color: #FFFFFF;
+            --accent-color: #EC4899;
+            --badge-color: #EC4899;
+            --badge-bg: rgba(20,7,34,0.85);
+            --badge-border: rgba(236,72,153,0.4);
+        }
+        .theme-glass_emerald {
+            --card-bg: rgba(16,185,129,0.08);
+            --card-border: rgba(212,175,55,0.35);
+            --digit-color: #F5F5F7;
+            --accent-color: #D4AF37;
+            --badge-color: #D4AF37;
+            --badge-bg: rgba(5,32,20,0.85);
+            --badge-border: rgba(212,175,55,0.4);
+        }
+        .theme-glass_sunset {
+            --card-bg: rgba(251,146,60,0.08);
+            --card-border: rgba(253,230,138,0.3);
+            --digit-color: #FDE68A;
+            --accent-color: #FDE68A;
+            --badge-color: #FDE68A;
+            --badge-bg: rgba(31,11,30,0.85);
+            --badge-border: rgba(253,230,138,0.35);
+        }
+        .theme-glass_minimal_oled {
+            --card-bg: transparent;
+            --card-border: transparent;
+            --digit-color: #FFFFFF;
+            --accent-color: #FFFFFF;
             --badge-color: #FFFFFF;
-            --badge-bg: rgba(10,15,25,0.45);
-            --badge-border: rgba(255,255,255,0.15);
+            --badge-bg: rgba(0,0,0,0.9);
+            --badge-border: rgba(255,255,255,0.2);
         }
         .theme-apple_liquid_glass {
             --card-bg: rgba(255,255,255,0.12);

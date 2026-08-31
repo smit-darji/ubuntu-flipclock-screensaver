@@ -26,12 +26,12 @@ except ValueError:
         sys.exit(1)
 from gi.repository import Gtk, Gdk, WebKit2, GLib, GdkPixbuf
 
-APP_VERSION = "2.6.0"
+APP_VERSION = "2.7.0"
 
 THEME_CATEGORIES = {
     "glass_clock": {
-        "label": "✨ Glass Clock (Frosted Glass)",
-        "themes": ["glass_clock"]
+        "label": "✨ Glass Clock Collections",
+        "themes": ["glass_clock", "glass_aurora", "glass_cyberpunk", "glass_emerald", "glass_sunset", "glass_minimal_oled"]
     },
     "liquid_glass": {
         "label": "💧 Liquid Glass & Crystal Dark",
@@ -61,12 +61,62 @@ THEME_CATEGORIES = {
 
 PRESET_THEMES = {
     "glass_clock": {
-        "name": "✨ Glass Clock (Frosted Glass)",
+        "name": "✨ Glass Clock (Frosted Glass) ✦ NEW",
         "bg_color": "#0a0f19",
         "card_color": "rgba(255, 255, 255, 0.12)",
         "digit_color": "#FFFFFF",
         "accent_color": "#38BDF8",
         "border_color": "rgba(255, 255, 255, 0.18)",
+        "digit_font": "Inter",
+        "label_font": "Inter"
+    },
+    "glass_aurora": {
+        "name": "🌌 Aurora Glass (Teal & Violet) ✦ NEW",
+        "bg_color": "#040d1a",
+        "card_color": "rgba(255, 255, 255, 0.10)",
+        "digit_color": "#E0F2FE",
+        "accent_color": "#38BDF8",
+        "border_color": "rgba(56, 189, 248, 0.25)",
+        "digit_font": "Inter",
+        "label_font": "Inter"
+    },
+    "glass_cyberpunk": {
+        "name": "🌆 Cyberpunk Neon (Magenta & Cyan) ✦ NEW",
+        "bg_color": "#0a0512",
+        "card_color": "rgba(236, 72, 153, 0.12)",
+        "digit_color": "#FFFFFF",
+        "accent_color": "#EC4899",
+        "border_color": "rgba(236, 72, 153, 0.35)",
+        "digit_font": "Orbitron",
+        "label_font": "Space Grotesk"
+    },
+    "glass_emerald": {
+        "name": "🌿 Emerald Gold (Green & Gold) ✦ NEW",
+        "bg_color": "#05140d",
+        "card_color": "rgba(16, 185, 129, 0.12)",
+        "digit_color": "#F5F5F7",
+        "accent_color": "#D4AF37",
+        "border_color": "rgba(212, 175, 55, 0.35)",
+        "digit_font": "Inter",
+        "label_font": "Cinzel"
+    },
+    "glass_sunset": {
+        "name": "🌇 Sunset Champagne (Warm Dusk) ✦ NEW",
+        "bg_color": "#130914",
+        "card_color": "rgba(251, 146, 60, 0.12)",
+        "digit_color": "#FDE68A",
+        "accent_color": "#FDE68A",
+        "border_color": "rgba(253, 230, 138, 0.30)",
+        "digit_font": "Outfit",
+        "label_font": "Outfit"
+    },
+    "glass_minimal_oled": {
+        "name": "🧊 OLED Pure Frameless (Pitch Black) ✦ NEW",
+        "bg_color": "#000000",
+        "card_color": "transparent",
+        "digit_color": "#FFFFFF",
+        "accent_color": "#FFFFFF",
+        "border_color": "transparent",
         "digit_font": "Inter",
         "label_font": "Inter"
     },

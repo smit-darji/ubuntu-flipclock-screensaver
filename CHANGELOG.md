@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.7.0] - 2026-08-31 - Frameless Glass Clock & 5 New Aesthetic Themes
+
+### Added
+- **Frameless Glass Clock Layout**: Completely removed the heavy outer container box (`#glass-clock-display`), allowing sleek frosted glass digit tiles to float directly on the screen against rich aesthetic backgrounds.
+- **5 Brand-New Aesthetic Glass Themes**:
+  - 🌌 **Aurora Glass (`glass_aurora`)**: Deep cosmic navy backdrop with flowing cyan/violet/teal aurora light waves.
+  - 🌆 **Cyberpunk Neon (`glass_cyberpunk`)**: Synthwave dark backdrop with electric magenta/cyan plasma glow.
+  - 🌿 **Emerald Gold (`glass_emerald`)**: Midnight emerald green backdrop with warm gold ambient illumination.
+  - 🌇 **Sunset Champagne (`glass_sunset`)**: Twilight dusk backdrop with warm rose gold & peach sunset lights.
+  - 🧊 **OLED Pure Frameless (`glass_minimal_oled`)**: Pitch black backdrop (`#000000`) with pure floating white digits and zero card borders.
+- **Clean AM/PM Frosted Pill Badge**: Re-architected the AM/PM badge into an elegant, non-overlapping frosted capsule badge (`.gc-ampm-pill`) positioned cleanly beside the seconds tile.
+- **`✦ NEW` Badging**: Added clear visual indicators for all new Glass Clock themes across the floating quick menu overlay and GTK settings GUI (`flipclock --settings`).
+
 ## [2.6.0] - 2026-08-31 - Premium Glass Clock Face & Quick Menu Integration
 
 ### Added

@@ -2037,12 +2037,112 @@
             }
 
             /* ═══ PREMIUM GLASS CLOCK FACE STYLES ═══════════════════════════ */
+            /* Theme 1: Classic Frosted Cyan Glass */
             .theme-glass_clock #scene {
-                background: radial-gradient(circle at 50% 45%, #0e172a 0%, #060a12 100%) !important;
+                background: radial-gradient(circle at 50% 45%, #0f172a 0%, #060911 100%) !important;
             }
 
-            .theme-glass_clock #clock-row {
+            /* Theme 2: Aurora Borealis */
+            .theme-glass_aurora #scene {
+                background: radial-gradient(circle at 50% 40%, #041326 0%, #020710 100%) !important;
+            }
+            .theme-glass_aurora .orb-1 {
+                background: radial-gradient(circle, rgba(20, 184, 166, 0.3) 0%, rgba(56, 189, 248, 0.1) 70%, transparent 100%);
+            }
+            .theme-glass_aurora .orb-2 {
+                background: radial-gradient(circle, rgba(168, 85, 247, 0.28) 0%, rgba(99, 102, 241, 0.1) 70%, transparent 100%);
+            }
+            .theme-glass_aurora .glass-digit-tile {
+                background: rgba(20, 184, 166, 0.07);
+                border-color: rgba(56, 189, 248, 0.25);
+            }
+            .theme-glass_aurora .gc-num {
+                color: #e0f2fe;
+            }
+
+            /* Theme 3: Cyberpunk Neon Pulse */
+            .theme-glass_cyberpunk #scene {
+                background: radial-gradient(circle at 50% 45%, #140722 0%, #07020d 100%) !important;
+            }
+            .theme-glass_cyberpunk .orb-1 {
+                background: radial-gradient(circle, rgba(236, 72, 153, 0.35) 0%, rgba(139, 92, 246, 0.1) 70%, transparent 100%);
+            }
+            .theme-glass_cyberpunk .orb-2 {
+                background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, rgba(236, 72, 153, 0.1) 70%, transparent 100%);
+            }
+            .theme-glass_cyberpunk .glass-digit-tile {
+                background: rgba(236, 72, 153, 0.08);
+                border-color: rgba(236, 72, 153, 0.35);
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 25px rgba(236, 72, 153, 0.15);
+            }
+            .theme-glass_cyberpunk .glass-colon {
+                color: #ec4899;
+                text-shadow: 0 0 20px rgba(236, 72, 153, 0.7);
+            }
+
+            /* Theme 4: Midnight Emerald & Gold */
+            .theme-glass_emerald #scene {
+                background: radial-gradient(circle at 50% 45%, #052014 0%, #020b07 100%) !important;
+            }
+            .theme-glass_emerald .orb-1 {
+                background: radial-gradient(circle, rgba(16, 185, 129, 0.3) 0%, rgba(5, 150, 105, 0.1) 70%, transparent 100%);
+            }
+            .theme-glass_emerald .orb-2 {
+                background: radial-gradient(circle, rgba(212, 175, 55, 0.22) 0%, rgba(245, 158, 11, 0.08) 70%, transparent 100%);
+            }
+            .theme-glass_emerald .glass-digit-tile {
+                background: rgba(16, 185, 129, 0.07);
+                border-color: rgba(212, 175, 55, 0.35);
+            }
+            .theme-glass_emerald .glass-colon {
+                color: #d4af37;
+                text-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+            }
+
+            /* Theme 5: Sunset Champagne */
+            .theme-glass_sunset #scene {
+                background: radial-gradient(circle at 50% 45%, #1f0b1e 0%, #0a030b 100%) !important;
+            }
+            .theme-glass_sunset .orb-1 {
+                background: radial-gradient(circle, rgba(251, 146, 60, 0.3) 0%, rgba(244, 63, 94, 0.1) 70%, transparent 100%);
+            }
+            .theme-glass_sunset .orb-2 {
+                background: radial-gradient(circle, rgba(236, 72, 153, 0.25) 0%, rgba(147, 51, 234, 0.1) 70%, transparent 100%);
+            }
+            .theme-glass_sunset .glass-digit-tile {
+                background: rgba(251, 146, 60, 0.07);
+                border-color: rgba(253, 230, 138, 0.3);
+            }
+            .theme-glass_sunset .gc-num {
+                color: #fde68a;
+            }
+
+            /* Theme 6: OLED Pure Pitch Black Frameless */
+            .theme-glass_minimal_oled #scene {
+                background: #000000 !important;
+            }
+            .theme-glass_minimal_oled .ambient-bg-orbs {
                 display: none !important;
+            }
+            .theme-glass_minimal_oled .glass-digit-tile {
+                background: transparent !important;
+                border: none !important;
+                box-shadow: none !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+            }
+            .theme-glass_minimal_oled .gc-num {
+                color: #ffffff;
+                text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+            }
+
+            /* Hide flip clock cards when any Glass theme is active */
+            body[class*="theme-glass_"] #clock-row {
+                display: none !important;
+            }
+
+            body[class*="theme-glass_"] #glass-clock-display {
+                display: flex !important;
             }
 
             .ambient-bg-orbs {
@@ -2102,28 +2202,21 @@
                 100% { transform: translate3d(5vw, -4vh, 0) scale(1.08); }
             }
 
+            /* Frameless Glass Clock Container (No outer box frame) */
             #glass-clock-display {
                 display: none;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                padding: clamp(20px, 4vh, 52px) clamp(28px, 5vw, 70px);
-                background: rgba(10, 15, 25, 0.35);
-                border: 1px solid rgba(255, 255, 255, 0.15);
-                border-radius: clamp(24px, 3.5vw, 44px);
-                box-shadow: 
-                    0 20px 60px rgba(0, 0, 0, 0.6),
-                    inset 0 1px 1px rgba(255, 255, 255, 0.25),
-                    inset 0 -1px 1px rgba(0, 0, 0, 0.4),
-                    0 0 40px rgba(56, 189, 248, 0.12);
-                backdrop-filter: blur(24px) saturate(180%);
-                -webkit-backdrop-filter: blur(24px) saturate(180%);
+                padding: 0 !important;
+                background: transparent !important;
+                border: none !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
                 transition: all 0.5s ease;
                 z-index: 10;
-            }
-
-            .theme-glass_clock #glass-clock-display {
-                display: flex !important;
             }
 
             .glass-time-row {
@@ -2138,22 +2231,22 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                padding: clamp(10px, 1.8vh, 28px) clamp(14px, 2.2vw, 38px);
+                padding: clamp(12px, 2vh, 32px) clamp(16px, 2.4vw, 42px);
                 background: rgba(255, 255, 255, 0.05);
                 border: 1px solid rgba(255, 255, 255, 0.12);
                 border-radius: clamp(16px, 2vw, 30px);
                 box-shadow: 
                     0 8px 32px rgba(0, 0, 0, 0.35),
                     inset 0 1px 0 rgba(255, 255, 255, 0.18);
-                backdrop-filter: blur(12px);
-                -webkit-backdrop-filter: blur(12px);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
                 min-width: clamp(90px, 22vw, 300px);
                 text-align: center;
                 transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
             }
 
             .glass-digit-tile:hover {
-                background: rgba(255, 255, 255, 0.08);
+                background: rgba(255, 255, 255, 0.09);
                 border-color: rgba(255, 255, 255, 0.22);
             }
 
@@ -2186,16 +2279,24 @@
                 50% { opacity: 0.35; transform: scale(0.95); }
             }
 
-            .gc-ampm {
-                position: absolute;
-                bottom: clamp(8px, 1.5vh, 20px);
-                right: clamp(12px, 1.8vw, 24px);
+            /* Clean Non-Overlapping AM/PM Frosted Pill Badge */
+            .gc-ampm-pill {
+                align-self: flex-end;
+                margin-bottom: clamp(10px, 1.8vh, 24px);
+                margin-left: clamp(2px, 0.5vw, 8px);
+                padding: clamp(4px, 0.8vh, 8px) clamp(10px, 1.2vw, 16px);
+                background: rgba(255, 255, 255, 0.08);
+                border: 1px solid rgba(255, 255, 255, 0.18);
+                border-radius: 20px;
                 font-family: var(--label-font, 'Inter', sans-serif);
-                font-size: clamp(11px, 1.5vw, 24px);
-                font-weight: 700;
-                letter-spacing: 0.15em;
-                color: #38bdf8;
-                text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+                font-size: clamp(12px, 1.6vw, 24px);
+                font-weight: 800;
+                letter-spacing: 0.12em;
+                color: var(--accent-color, #38bdf8);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+                user-select: none;
             }
 
             /* Quick Menu Overlay Styles */
@@ -2246,7 +2347,7 @@
                 position: absolute;
                 top: 50px;
                 right: 0;
-                width: 290px;
+                width: 300px;
                 background: rgba(10, 15, 25, 0.94);
                 border: 1px solid rgba(255, 255, 255, 0.18);
                 border-radius: 18px;
@@ -2373,12 +2474,39 @@
                     <span>Clock Faces & Themes</span>
                     <button class="menu-close-x" id="menu-close-x">✕</button>
                 </div>
-                <div class="menu-section-title">✨ CLOCK FACE</div>
+                <div class="menu-section-title">✨ GLASS CLOCK FACES</div>
                 <div class="menu-item" data-face="glass_clock">
                     <span class="item-icon">✨</span>
-                    <span class="item-label">Glass Clock</span>
+                    <span class="item-label">Classic Frosted Cyan</span>
+                </div>
+                <div class="menu-item" data-face="glass_aurora">
+                    <span class="item-icon">🌌</span>
+                    <span class="item-label">Aurora Borealis</span>
                     <span class="badge-new">NEW</span>
                 </div>
+                <div class="menu-item" data-face="glass_cyberpunk">
+                    <span class="item-icon">🌆</span>
+                    <span class="item-label">Cyberpunk Neon</span>
+                    <span class="badge-new">NEW</span>
+                </div>
+                <div class="menu-item" data-face="glass_emerald">
+                    <span class="item-icon">🌿</span>
+                    <span class="item-label">Emerald Gold</span>
+                    <span class="badge-new">NEW</span>
+                </div>
+                <div class="menu-item" data-face="glass_sunset">
+                    <span class="item-icon">🌇</span>
+                    <span class="item-label">Sunset Champagne</span>
+                    <span class="badge-new">NEW</span>
+                </div>
+                <div class="menu-item" data-face="glass_minimal_oled">
+                    <span class="item-icon">🧊</span>
+                    <span class="item-label">OLED Pure Frameless</span>
+                    <span class="badge-new">NEW</span>
+                </div>
+
+                <div class="menu-divider"></div>
+                <div class="menu-section-title">🕐 RETRO FLIP CLOCK</div>
                 <div class="menu-item" data-face="classic_retro">
                     <span class="item-icon">🕐</span>
                     <span class="item-label">Flip Clock (Retro)</span>
@@ -2412,7 +2540,7 @@
         <div id="clock-container">
             <div id="greeting-badge">GOOD MORNING</div>
 
-            <!-- Glass Clock Display (NEW) -->
+            <!-- Glass Clock Display (Frameless Floating Tiles) -->
             <div id="glass-clock-display" class="glass-clock-container">
                 <div class="glass-time-row">
                     <div class="glass-digit-tile" id="gc-h"><span class="gc-num">00</span></div>
@@ -2421,8 +2549,8 @@
                     <div class="glass-colon gc-sec-colon">:</div>
                     <div class="glass-digit-tile gc-sec-tile" id="gc-s">
                         <span class="gc-num">00</span>
-                        <span class="gc-ampm" id="gc-ampm">AM</span>
                     </div>
+                    <span class="gc-ampm-pill" id="gc-ampm">AM</span>
                 </div>
             </div>
 
@@ -2530,6 +2658,9 @@
             document.documentElement.style.setProperty('--custom-border-color', customBorderColor);
 
             document.body.className = `theme-${themeName}`;
+            if (themeName.startsWith('glass_')) {
+                document.body.classList.add('theme-glass_clock');
+            }
 
             const scene = document.getElementById('scene');
             if (scene) {
@@ -2557,6 +2688,11 @@
             // Adjust background body color
             const themeBackgrounds = {
                 "glass_clock": "#090d16",
+                "glass_aurora": "#040d1a",
+                "glass_cyberpunk": "#0a0512",
+                "glass_emerald": "#05140d",
+                "glass_sunset": "#130914",
+                "glass_minimal_oled": "#000000",
                 "apple_liquid_glass": "#000000",
                 "liquid_glass": "#060810",
                 "luxury_black_gold": "#000000",
@@ -2668,7 +2804,14 @@
                 const numEl = gcS.querySelector('.gc-num');
                 if (numEl && numEl.textContent !== p(s)) numEl.textContent = p(s);
             }
-            if (gcAmpm) gcAmpm.textContent = ampmText;
+            if (gcAmpm) {
+                if (hourFormat === '12') {
+                    gcAmpm.textContent = ampmText;
+                    gcAmpm.style.display = 'inline-flex';
+                } else {
+                    gcAmpm.style.display = 'none';
+                }
+            }
         }
 
         function applyBurnInShift() {
