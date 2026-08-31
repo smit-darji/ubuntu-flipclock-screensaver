@@ -235,14 +235,14 @@ sudo apt update
 sudo apt install ./flipclock-screensaver.deb
 ```
 
-#### Option B: Install Versioned Release Archive (`v2.6.0`)
+#### Option B: Install Versioned Release Archive (`v2.7.0`)
 ```bash
-# 1. Download version v2.6.0 from the releases/ directory
-wget https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_2.6.0.deb
+# 1. Download version v2.7.0 from the releases/ directory
+wget https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_2.7.0.deb
 
 # 2. Install versioned package via apt
 sudo apt update
-sudo apt install ./flipclock-screensaver_2.6.0.deb
+sudo apt install ./flipclock-screensaver_2.7.0.deb
 ```
 
 ---
