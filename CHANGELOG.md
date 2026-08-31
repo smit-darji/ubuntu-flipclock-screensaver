@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.0.0] - 2026-08-31 - Tall Flip-Card Proportions, Animated Spider-Man & Lord Ganesha Divine Murti
+
+### Added
+- **🕷️ Animated Spider-Man NYC Web-Slinger**: Added animated NYC building skyline background with Spider-Man swinging dynamically between skyscrapers in a continuous pendulum arc with web shooting lines.
+- **🐘 Lord Ganesha Divine Murti Background (`glass_ganesha`)**: Integrated high-resolution golden Lord Ganesha Murti artwork with pulsating saffron halo aura (`ganeshaPulseAura`) and marigold lighting.
+- **Tall Vertical Flip-Card Proportions for Glass Themes**: Standardized all Glass themes to feature exact tall vertical flip card dimensions (`1 : 1.35` aspect ratio) with authentic middle split-flap divider lines (`.glass-digit-tile::after`) and hinge dots.
+- **Internal AM/PM Pill Badge**: Moved the AM/PM badge inside the bottom right corner of the last card (`#gc-s` / `#gc-m`), matching retro split-flap clock layouts.
+
 ## [2.9.0] - 2026-08-31 - Ganesha Festival Divine Gold Theme & Fluid Sizing
 
 ### Added

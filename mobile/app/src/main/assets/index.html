@@ -2145,6 +2145,32 @@
             .theme-glass_ganesha #scene {
                 background: radial-gradient(circle at 50% 45%, #1a0c02 0%, #0d0501 100%) !important;
             }
+            .ganesha-scene-layer {
+                display: none;
+                position: absolute;
+                inset: 0;
+                pointer-events: none;
+                z-index: 2;
+                overflow: hidden;
+            }
+            .theme-glass_ganesha .ganesha-scene-layer {
+                display: block;
+            }
+            .ganesha-artwork-bg {
+                position: absolute;
+                inset: 0;
+                background-image: url('assets/ganesha_murti_bg.png');
+                background-size: cover;
+                background-position: center bottom;
+                opacity: 0.38;
+                filter: brightness(0.9) contrast(1.15) drop-shadow(0 0 40px rgba(245, 158, 11, 0.5));
+                mix-blend-mode: screen;
+                animation: ganeshaPulseAura 8s ease-in-out infinite alternate;
+            }
+            @keyframes ganeshaPulseAura {
+                0% { opacity: 0.32; filter: brightness(0.85) contrast(1.1) drop-shadow(0 0 30px rgba(245, 158, 11, 0.4)); }
+                100% { opacity: 0.48; filter: brightness(1.0) contrast(1.2) drop-shadow(0 0 65px rgba(234, 88, 12, 0.7)); }
+            }
             .theme-glass_ganesha .orb-1 {
                 background: radial-gradient(circle, rgba(245, 158, 11, 0.38) 0%, rgba(217, 119, 6, 0.12) 70%, transparent 100%);
             }
@@ -2253,7 +2279,101 @@
                 100% { transform: translate3d(5vw, -4vh, 0) scale(1.08); }
             }
 
-            /* Frameless Glass Clock Container (No outer box frame) */
+            /* Spider-Man NYC City Skyline & Web Swinger */
+            .spiderman-scene-layer {
+                display: none;
+                position: absolute;
+                inset: 0;
+                pointer-events: none;
+                z-index: 2;
+                overflow: hidden;
+            }
+
+            .theme-glass_spiderman .spiderman-scene-layer {
+                display: block;
+            }
+
+            .city-skyline {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 38vh;
+                z-index: 2;
+                opacity: 0.95;
+            }
+
+            .skyline-svg {
+                width: 100%;
+                height: 100%;
+                display: block;
+            }
+
+            .spiderman-hero-swinger {
+                position: absolute;
+                top: 15vh;
+                left: -15vw;
+                width: 220px;
+                height: 220px;
+                z-index: 3;
+                animation: spideySwingAcross 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            }
+
+            .web-line-svg {
+                position: absolute;
+                top: -80px;
+                left: -60px;
+                width: 260px;
+                height: 200px;
+                overflow: visible;
+            }
+
+            .spiderman-vector-figure {
+                width: 75px;
+                height: 75px;
+                position: absolute;
+                bottom: 20px;
+                right: 20px;
+                filter: drop-shadow(0 0 15px rgba(239, 68, 68, 0.9));
+                animation: spideyPoseRotate 12s ease-in-out infinite;
+            }
+
+            @keyframes spideySwingAcross {
+                0% {
+                    left: -12vw;
+                    top: 12vh;
+                    transform: rotate(28deg) scale(0.8);
+                }
+                25% {
+                    left: 22vw;
+                    top: 36vh;
+                    transform: rotate(-12deg) scale(1.18);
+                }
+                50% {
+                    left: 52vw;
+                    top: 14vh;
+                    transform: rotate(-36deg) scale(0.9);
+                }
+                75% {
+                    left: 82vw;
+                    top: 38vh;
+                    transform: rotate(18deg) scale(1.12);
+                }
+                100% {
+                    left: 114vw;
+                    top: 13vh;
+                    transform: rotate(32deg) scale(0.85);
+                }
+            }
+
+            @keyframes spideyPoseRotate {
+                0%, 100% { transform: scale(1) rotate(0deg); }
+                25% { transform: scale(1.15) rotate(-18deg); }
+                50% { transform: scale(0.95) rotate(22deg); }
+                75% { transform: scale(1.12) rotate(-12deg); }
+            }
+
+            /* Frameless Glass Clock Container */
             #glass-clock-display {
                 display: none;
                 flex-direction: column;
@@ -2280,20 +2400,51 @@
             .glass-digit-tile {
                 position: relative;
                 display: flex;
+                flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                padding: clamp(16px, 2.8vh, 48px) clamp(22px, 3.2vw, 60px);
+                width: clamp(140px, 20vw, 320px);
+                height: clamp(190px, 27vw, 440px);
+                padding: 0;
                 background: rgba(255, 255, 255, 0.05);
                 border: 1px solid rgba(255, 255, 255, 0.14);
-                border-radius: clamp(20px, 2.5vw, 40px);
+                border-radius: clamp(18px, 2.2vw, 36px);
                 box-shadow: 
                     0 12px 40px rgba(0, 0, 0, 0.4),
                     inset 0 1px 0 rgba(255, 255, 255, 0.2);
                 backdrop-filter: blur(20px);
                 -webkit-backdrop-filter: blur(20px);
-                min-width: clamp(120px, 25vw, 400px);
                 text-align: center;
+                overflow: hidden;
                 transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+            }
+
+            /* Authentic Middle Split-Flap Divider Line for Glass Cards */
+            .glass-digit-tile::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 0;
+                right: 0;
+                height: 2px;
+                background: rgba(0, 0, 0, 0.45);
+                box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15);
+                z-index: 5;
+            }
+
+            /* Hinge dots on left & right edge */
+            .glass-digit-tile::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 4px;
+                right: 4px;
+                height: 4px;
+                transform: translateY(-50%);
+                background: radial-gradient(circle at 4px center, rgba(255, 255, 255, 0.45) 2px, transparent 2.5px),
+                            radial-gradient(circle at calc(100% - 4px) center, rgba(255, 255, 255, 0.45) 2px, transparent 2.5px);
+                z-index: 6;
+                pointer-events: none;
             }
 
             .glass-digit-tile:hover {
@@ -2330,23 +2481,25 @@
                 50% { opacity: 0.35; transform: scale(0.95); }
             }
 
-            /* Clean Vertically Centered AM/PM Frosted Pill Badge */
+            /* AM/PM Pill Badge Inside Last Card Tile */
             .gc-ampm-pill {
-                align-self: center;
-                margin-left: clamp(8px, 1.2vw, 24px);
-                padding: clamp(6px, 1.2vh, 14px) clamp(14px, 1.6vw, 28px);
-                background: rgba(255, 255, 255, 0.08);
-                border: 1px solid rgba(255, 255, 255, 0.2);
-                border-radius: 24px;
+                position: absolute;
+                bottom: clamp(10px, 1.4vh, 22px);
+                right: clamp(10px, 1.4vw, 22px);
+                padding: clamp(3px, 0.6vh, 6px) clamp(8px, 1vw, 14px);
+                background: rgba(255, 255, 255, 0.12);
+                border: 1px solid rgba(255, 255, 255, 0.22);
+                border-radius: 10px;
                 font-family: var(--label-font, 'Inter', sans-serif);
-                font-size: clamp(14px, 2vw, 32px);
+                font-size: clamp(11px, 1.3vw, 20px);
                 font-weight: 800;
-                letter-spacing: 0.14em;
+                letter-spacing: 0.12em;
                 color: var(--accent-color, #38bdf8);
-                backdrop-filter: blur(16px);
-                -webkit-backdrop-filter: blur(16px);
-                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
                 user-select: none;
+                z-index: 8;
             }
 
             /* Quick Menu Overlay Styles */
@@ -2593,6 +2746,48 @@
             </div>
         </div>
 
+        <!-- Spider-Man NYC City Skyline & Web Swinger -->
+        <div class="spiderman-scene-layer">
+            <div class="city-skyline">
+                <svg viewBox="0 0 1400 350" preserveAspectRatio="none" class="skyline-svg">
+                    <path d="M0 350 L0 180 L40 180 L40 120 L90 120 L90 350 L120 350 L120 150 L170 150 L170 80 L180 80 L180 50 L190 50 L190 80 L200 80 L200 150 L240 150 L240 350 L280 350 L280 200 L340 200 L340 100 L400 100 L400 350 L450 350 L450 160 L510 160 L510 350 L560 350 L560 60 L570 60 L570 30 L580 30 L580 60 L590 60 L590 350 L640 350 L640 140 L700 140 L700 350 L750 350 L750 90 L820 90 L820 350 L870 350 L870 170 L930 170 L930 70 L940 70 L940 40 L950 40 L950 70 L960 70 L960 170 L1020 170 L1020 350 L1080 350 L1080 130 L1140 130 L1140 350 L1200 350 L1200 190 L1260 190 L1260 90 L1270 90 L1270 50 L1280 50 L1280 90 L1290 90 L1290 190 L1350 190 L1350 350 L1400 350 Z" fill="#0c0205" />
+                    <rect x="50" y="140" width="8" height="12" fill="rgba(251,191,36,0.5)"/>
+                    <rect x="65" y="140" width="8" height="12" fill="rgba(251,191,36,0.3)"/>
+                    <rect x="50" y="160" width="8" height="12" fill="rgba(251,191,36,0.6)"/>
+                    <rect x="135" y="170" width="10" height="15" fill="rgba(56,189,248,0.4)"/>
+                    <rect x="150" y="170" width="10" height="15" fill="rgba(251,191,36,0.5)"/>
+                    <rect x="135" y="200" width="10" height="15" fill="rgba(251,191,36,0.6)"/>
+                    <rect x="300" y="220" width="12" height="16" fill="rgba(239,68,68,0.5)"/>
+                    <rect x="320" y="220" width="12" height="16" fill="rgba(251,191,36,0.4)"/>
+                    <rect x="575" y="80" width="6" height="10" fill="rgba(239,68,68,0.8)"/>
+                    <rect x="575" y="100" width="6" height="10" fill="rgba(251,191,36,0.6)"/>
+                    <rect x="770" y="120" width="12" height="18" fill="rgba(56,189,248,0.6)"/>
+                    <rect x="790" y="120" width="12" height="18" fill="rgba(251,191,36,0.5)"/>
+                    <rect x="945" y="90" width="6" height="10" fill="rgba(239,68,68,0.9)"/>
+                    <rect x="1100" y="160" width="10" height="14" fill="rgba(251,191,36,0.6)"/>
+                    <rect x="1275" y="110" width="6" height="10" fill="rgba(239,68,68,0.8)"/>
+                </svg>
+            </div>
+            <div class="spiderman-hero-swinger">
+                <svg class="web-line-svg" viewBox="0 0 300 200">
+                    <line x1="0" y1="0" x2="160" y2="130" stroke="rgba(255,255,255,0.85)" stroke-width="2" stroke-dasharray="4,2"/>
+                </svg>
+                <div class="spiderman-vector-figure">
+                    <svg viewBox="0 0 100 100" class="spidey-svg">
+                        <path d="M50 15 C35 15 25 25 25 40 C25 50 32 58 40 65 L30 85 L45 75 L50 95 L55 75 L70 85 L60 65 C68 58 75 50 75 40 C75 25 65 15 50 15 Z" fill="#DC2626"/>
+                        <polygon points="36,32 46,38 42,46 34,40" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+                        <polygon points="64,32 54,38 58,46 66,40" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
+                        <path d="M50 42 L46 48 L50 54 L54 48 Z M45 46 L35 44 M55 46 L65 44 M45 50 L35 54 M55 50 L65 54" stroke="#000000" stroke-width="2"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lord Ganesha Divine Murti Background Layer -->
+        <div class="ganesha-scene-layer">
+            <div class="ganesha-artwork-bg"></div>
+        </div>
+
         <div id="clock-container">
             <div id="greeting-badge">GOOD MORNING</div>
 
@@ -2601,12 +2796,14 @@
                 <div class="glass-time-row">
                     <div class="glass-digit-tile" id="gc-h"><span class="gc-num">00</span></div>
                     <div class="glass-colon">:</div>
-                    <div class="glass-digit-tile" id="gc-m"><span class="gc-num">00</span></div>
+                    <div class="glass-digit-tile" id="gc-m">
+                        <span class="gc-num">00</span>
+                    </div>
                     <div class="glass-colon gc-sec-colon">:</div>
                     <div class="glass-digit-tile gc-sec-tile" id="gc-s">
                         <span class="gc-num">00</span>
+                        <span class="gc-ampm-pill" id="gc-ampm">AM</span>
                     </div>
-                    <span class="gc-ampm-pill" id="gc-ampm">AM</span>
                 </div>
             </div>
 
@@ -2729,6 +2926,14 @@
 
                 if (!showGreeting) scene.classList.add('hide-greeting');
                 else scene.classList.remove('hide-greeting');
+
+                const ampmEl = document.getElementById('gc-ampm');
+                if (ampmEl) {
+                    const targetTile = showSeconds ? document.getElementById('gc-s') : document.getElementById('gc-m');
+                    if (targetTile && ampmEl.parentElement !== targetTile) {
+                        targetTile.appendChild(ampmEl);
+                    }
+                }
             }
 
             // 3. Proportional Responsive Scale
