@@ -334,7 +334,7 @@
 
         #ampm-badge {
             position: absolute;
-            bottom: clamp(22px, 4.5vh, 50px);
+            bottom: clamp(20px, 4vh, 48px);
             right: clamp(12px, 2vh, 28px);
             z-index: 15;
             font-family: var(--label-font, 'Inter', sans-serif);
@@ -1211,7 +1211,7 @@
             background: #181818 !important;
             border: none !important;
             border-radius: 28px;
-            box-shadow:
+            box-shadow: 
                 0 18px 40px rgba(0,0,0,0.45),
                 inset 0 0 15px rgba(0, 0, 0, 0.4) !important;
             width: clamp(200px, 45vh, 480px) !important;
@@ -1288,56 +1288,87 @@
         }
 
         /* Minimalist Dark Theme Overrides */
-        .theme-minimal_dark #scene { background: #111111 !important; }
-        .theme-minimal_dark #scene::before { display:none !important; }
-        .theme-minimal_dark #branding-tag { display:none !important; }
+        .theme-minimal_dark #scene {
+            background: #111111 !important;
+        }
+        .theme-minimal_dark #scene::before {
+            display: none !important;
+        }
+        .theme-minimal_dark #branding-tag {
+            display: none !important;
+        }
         .theme-minimal_dark .flip-card {
             background: #1C1C1E !important;
             border: 1px solid rgba(255,255,255,0.06) !important;
             border-radius: 20px;
-            box-shadow: 0 12px 32px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.05) !important;
+            box-shadow:
+                0 12px 32px rgba(0,0,0,0.55),
+                inset 0 1px 0 rgba(255,255,255,0.05) !important;
         }
-        .theme-minimal_dark .card-top, .theme-minimal_dark .flipper-top {
+        .theme-minimal_dark .card-top,
+        .theme-minimal_dark .flipper-top {
             background: rgba(255,255,255,0.03) !important;
             border-radius: 20px 20px 0 0;
             border-bottom: 1px solid rgba(0,0,0,0.4) !important;
         }
-        .theme-minimal_dark .card-bottom, .theme-minimal_dark .flipper-bottom {
+        .theme-minimal_dark .card-bottom,
+        .theme-minimal_dark .flipper-bottom {
             background: rgba(0,0,0,0.1) !important;
             border-radius: 0 0 20px 20px;
         }
         .theme-minimal_dark .card-divider {
-            height: 1px !important; background: rgba(0,0,0,0.6) !important;
-            border: none !important; box-shadow: none !important;
+            height: 1px !important;
+            background: rgba(0,0,0,0.6) !important;
+            border: none !important;
+            box-shadow: none !important;
         }
         .theme-minimal_dark .divider-dot,
         .theme-minimal_dark .card-divider::before,
-        .theme-minimal_dark .card-divider::after { display:none !important; }
+        .theme-minimal_dark .card-divider::after {
+            display: none !important;
+        }
         .theme-minimal_dark .digit-text {
-            font-weight: 700 !important; color: #FFFFFF !important;
-            font-size: clamp(110px,28vh,380px) !important;
-            text-shadow: none !important; letter-spacing: -0.03em !important;
+            font-family: "SF Pro Display", "Helvetica Neue", "Inter", sans-serif !important;
+            font-weight: 700 !important;
+            color: #FFFFFF !important;
+            font-size: clamp(110px, 28vh, 380px) !important;
+            text-shadow: none !important;
+            letter-spacing: -0.03em !important;
         }
         .theme-minimal_dark #date-badge {
-            font-weight: 500 !important; color: rgba(235,235,245,0.85) !important;
+            font-family: "Inter", "SF Pro Text", sans-serif !important;
+            font-weight: 500 !important;
+            font-size: clamp(10px, 1.1vw, 15px) !important;
+            letter-spacing: 0.05em !important;
+            color: rgba(235,235,245,0.85) !important;
             background: rgba(44,44,46,0.9) !important;
             border: 1px solid rgba(255,255,255,0.08) !important;
-            border-radius: 10px !important; box-shadow: none !important;
+            border-radius: 10px !important;
+            box-shadow: none !important;
             backdrop-filter: blur(20px) !important;
         }
         .theme-minimal_dark #greeting-badge {
+            font-family: "Inter", sans-serif !important;
+            font-weight: 400 !important;
             color: rgba(235,235,245,0.5) !important;
-            background: transparent !important; border: none !important; box-shadow: none !important;
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
         }
         .theme-minimal_dark #ampm-badge {
-            font-weight: 500 !important; font-size: 18px !important;
+            font-family: "Inter", sans-serif !important;
+            font-weight: 500 !important;
+            font-size: 18px !important;
             color: rgba(235,235,245,0.6) !important;
             background: rgba(44,44,46,0.8) !important;
             border: 1px solid rgba(255,255,255,0.08) !important;
-            border-radius: 8px !important; padding: 4px 10px !important; box-shadow: none !important;
+            border-radius: 8px !important;
+            padding: 4px 10px !important;
+            box-shadow: none !important;
         }
         .theme-minimal_dark .sep-dot {
-            background: rgba(235,235,245,0.6) !important; box-shadow: none !important;
+            background: rgba(235, 235, 245, 0.6) !important;
+            box-shadow: none !important;
         }
 
         /* Dark Black Theme Overrides */
@@ -2005,219 +2036,316 @@
                 display: none !important;
             }
 
-            /* ═══ MOBILE SETTINGS OVERLAY ══════════════════════ */
-            #mobile-settings-overlay {
-                position: fixed;
+            /* ═══ PREMIUM GLASS CLOCK FACE STYLES ═══════════════════════════ */
+            .theme-glass_clock #scene {
+                background: radial-gradient(circle at 50% 45%, #0e172a 0%, #060a12 100%) !important;
+            }
+
+            .theme-glass_clock #clock-row {
+                display: none !important;
+            }
+
+            .ambient-bg-orbs {
+                position: absolute;
                 inset: 0;
-                z-index: 10000;
-                background: rgba(0, 0, 0, 0.4);
+                overflow: hidden;
+                pointer-events: none;
+                z-index: 1;
+                opacity: 0.85;
+                transition: opacity 0.8s ease;
+            }
+
+            .ambient-orb {
+                position: absolute;
+                border-radius: 50%;
+                filter: blur(90px);
+                will-change: transform;
+            }
+
+            .orb-1 {
+                top: 10%;
+                left: 15%;
+                width: 48vw;
+                height: 48vw;
+                background: radial-gradient(circle, rgba(56, 189, 248, 0.22) 0%, rgba(99, 102, 241, 0.08) 70%, transparent 100%);
+                animation: orbFloat1 24s ease-in-out infinite alternate;
+            }
+
+            .orb-2 {
+                bottom: 5%;
+                right: 12%;
+                width: 52vw;
+                height: 52vw;
+                background: radial-gradient(circle, rgba(236, 72, 153, 0.16) 0%, rgba(139, 92, 246, 0.08) 70%, transparent 100%);
+                animation: orbFloat2 28s ease-in-out infinite alternate;
+            }
+
+            .orb-3 {
+                top: 35%;
+                right: 30%;
+                width: 38vw;
+                height: 38vw;
+                background: radial-gradient(circle, rgba(16, 185, 129, 0.14) 0%, rgba(56, 189, 248, 0.06) 70%, transparent 100%);
+                animation: orbFloat3 22s ease-in-out infinite alternate;
+            }
+
+            @keyframes orbFloat1 {
+                0% { transform: translate3d(0, 0, 0) scale(1); }
+                100% { transform: translate3d(7vw, 5vh, 0) scale(1.12); }
+            }
+            @keyframes orbFloat2 {
+                0% { transform: translate3d(0, 0, 0) scale(1); }
+                100% { transform: translate3d(-9vw, -7vh, 0) scale(1.1); }
+            }
+            @keyframes orbFloat3 {
+                0% { transform: translate3d(0, 0, 0) scale(0.95); }
+                100% { transform: translate3d(5vw, -4vh, 0) scale(1.08); }
+            }
+
+            #glass-clock-display {
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: clamp(20px, 4vh, 52px) clamp(28px, 5vw, 70px);
+                background: rgba(10, 15, 25, 0.35);
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                border-radius: clamp(24px, 3.5vw, 44px);
+                box-shadow: 
+                    0 20px 60px rgba(0, 0, 0, 0.6),
+                    inset 0 1px 1px rgba(255, 255, 255, 0.25),
+                    inset 0 -1px 1px rgba(0, 0, 0, 0.4),
+                    0 0 40px rgba(56, 189, 248, 0.12);
+                backdrop-filter: blur(24px) saturate(180%);
+                -webkit-backdrop-filter: blur(24px) saturate(180%);
+                transition: all 0.5s ease;
+                z-index: 10;
+            }
+
+            .theme-glass_clock #glass-clock-display {
+                display: flex !important;
+            }
+
+            .glass-time-row {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                backdrop-filter: blur(8px);
-                -webkit-backdrop-filter: blur(8px);
-                transition: opacity 0.3s ease;
+                gap: clamp(8px, 1.8vw, 24px);
+            }
+
+            .glass-digit-tile {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: clamp(10px, 1.8vh, 28px) clamp(14px, 2.2vw, 38px);
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.12);
+                border-radius: clamp(16px, 2vw, 30px);
+                box-shadow: 
+                    0 8px 32px rgba(0, 0, 0, 0.35),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                min-width: clamp(90px, 22vw, 300px);
+                text-align: center;
+                transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+            }
+
+            .glass-digit-tile:hover {
+                background: rgba(255, 255, 255, 0.08);
+                border-color: rgba(255, 255, 255, 0.22);
+            }
+
+            .gc-num {
+                font-family: var(--digit-font, 'Inter', system-ui, sans-serif);
+                font-size: clamp(4rem, 14vw, 16rem);
+                font-weight: 300;
+                line-height: 1;
+                letter-spacing: -0.02em;
+                color: #ffffff;
+                text-shadow: 
+                    0 4px 20px rgba(0, 0, 0, 0.6),
+                    0 0 25px rgba(255, 255, 255, 0.25);
+                transition: all 0.3s ease;
+            }
+
+            .glass-colon {
+                font-family: var(--digit-font, 'Inter', system-ui, sans-serif);
+                font-size: clamp(3rem, 11vw, 12rem);
+                font-weight: 200;
+                color: rgba(255, 255, 255, 0.7);
+                text-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+                animation: colonPulse 2s ease-in-out infinite;
+                margin: 0 clamp(-4px, -0.5vw, -12px);
+                user-select: none;
+            }
+
+            @keyframes colonPulse {
+                0%, 100% { opacity: 0.85; transform: scale(1); }
+                50% { opacity: 0.35; transform: scale(0.95); }
+            }
+
+            .gc-ampm {
+                position: absolute;
+                bottom: clamp(8px, 1.5vh, 20px);
+                right: clamp(12px, 1.8vw, 24px);
+                font-family: var(--label-font, 'Inter', sans-serif);
+                font-size: clamp(11px, 1.5vw, 24px);
+                font-weight: 700;
+                letter-spacing: 0.15em;
+                color: #38bdf8;
+                text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+            }
+
+            /* Quick Menu Overlay Styles */
+            #quick-menu-wrapper {
+                position: absolute;
+                top: 24px;
+                right: 24px;
+                z-index: 1000;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.4s ease;
+            }
+
+            #scene.show-close #quick-menu-wrapper,
+            #quick-menu-wrapper:hover,
+            #quick-menu-wrapper.open {
                 opacity: 1;
                 pointer-events: auto;
             }
 
-            #mobile-settings-overlay.settings-overlay-hidden {
-                opacity: 0;
-                pointer-events: none;
-            }
-
-            #mobile-settings-panel {
-                background: rgba(20, 20, 24, 0.85);
-                border: 1px solid rgba(255, 255, 255, 0.15);
-                border-radius: 20px;
-                width: 90%;
-                max-width: 420px;
-                padding: 24px;
-                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            #menu-toggle-btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                padding: 10px 18px;
+                background: rgba(15, 23, 42, 0.8);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 30px;
                 color: #ffffff;
-                font-family: 'Inter', system-ui, sans-serif;
-                transform: scale(1);
-                transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+                font-family: 'Inter', sans-serif;
+                font-size: 13px;
+                font-weight: 600;
+                cursor: pointer;
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+                transition: all 0.3s ease;
             }
 
-            #mobile-settings-overlay.settings-overlay-hidden #mobile-settings-panel {
-                transform: scale(0.9);
+            #menu-toggle-btn:hover {
+                background: rgba(30, 41, 59, 0.95);
+                border-color: #38bdf8;
+                transform: translateY(-2px);
+                box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 189, 248, 0.3);
             }
 
-            .settings-header {
+            .menu-dropdown {
+                position: absolute;
+                top: 50px;
+                right: 0;
+                width: 290px;
+                background: rgba(10, 15, 25, 0.94);
+                border: 1px solid rgba(255, 255, 255, 0.18);
+                border-radius: 18px;
+                padding: 16px;
+                backdrop-filter: blur(24px) saturate(180%);
+                -webkit-backdrop-filter: blur(24px) saturate(180%);
+                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75), 0 0 30px rgba(56, 189, 248, 0.15);
+                display: none;
+                flex-direction: column;
+                gap: 6px;
+                max-height: 80vh;
+                overflow-y: auto;
+                z-index: 1001;
+                animation: menuFadeIn 0.25s ease-out;
+            }
+
+            .menu-dropdown.active {
+                display: flex;
+            }
+
+            @keyframes menuFadeIn {
+                from { opacity: 0; transform: translateY(-10px) scale(0.95); }
+                to { opacity: 1; transform: translateY(0) scale(1); }
+            }
+
+            .menu-header {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                margin-bottom: 20px;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-                padding-bottom: 12px;
-            }
-
-            .settings-header h2 {
-                font-size: 20px;
+                font-size: 14px;
                 font-weight: 700;
-                color: var(--accent-color, #d4af37);
-                letter-spacing: 0.05em;
+                color: #ffffff;
+                padding-bottom: 8px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             }
 
-            #settings-close-btn {
-                background: none;
+            .menu-close-x {
+                background: transparent;
                 border: none;
-                color: #aaaaaa;
-                font-size: 22px;
+                color: rgba(255, 255, 255, 0.6);
+                font-size: 16px;
                 cursor: pointer;
-                padding: 4px;
-                line-height: 1;
-                transition: color 0.2s;
             }
 
-            #settings-close-btn:hover {
-                color: #ffffff;
+            .menu-section-title {
+                font-size: 10px;
+                font-weight: 800;
+                letter-spacing: 0.1em;
+                color: #38bdf8;
+                margin-top: 6px;
+                margin-bottom: 2px;
             }
 
-            .settings-body {
-                display: flex;
-                flex-direction: column;
-                gap: 16px;
-                max-height: 70vh;
-                overflow-y: auto;
-                padding-right: 4px;
-            }
-
-            /* Custom scrollbar for settings drawer */
-            .settings-body::-webkit-scrollbar {
-                width: 6px;
-            }
-            .settings-body::-webkit-scrollbar-track {
-                background: rgba(255, 255, 255, 0.05);
-                border-radius: 3px;
-            }
-            .settings-body::-webkit-scrollbar-thumb {
-                background: rgba(255, 255, 255, 0.2);
-                border-radius: 3px;
-            }
-
-            .settings-group {
-                display: flex;
-                flex-direction: column;
-                gap: 6px;
-            }
-
-            .settings-group label {
-                font-size: 11px;
-                font-weight: 600;
-                color: #aaaaaa;
-                text-transform: uppercase;
-                letter-spacing: 0.05em;
-            }
-
-            .settings-group select, 
-            .settings-group input {
-                background: rgba(30, 30, 35, 0.8);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                border-radius: 8px;
-                color: #ffffff;
-                padding: 10px 12px;
-                font-size: 15px;
-                font-family: inherit;
-                outline: none;
-                transition: border-color 0.2s;
-            }
-
-            .settings-group select:focus, 
-            .settings-group input:focus {
-                border-color: var(--accent-color, #d4af37);
-            }
-
-            .settings-group-row {
-                display: flex;
-                align-items: center;
-            }
-
-            .settings-group-row label {
+            .menu-item {
                 display: flex;
                 align-items: center;
                 gap: 10px;
-                font-size: 15px;
+                padding: 8px 12px;
+                border-radius: 10px;
+                background: rgba(255, 255, 255, 0.04);
+                border: 1px solid rgba(255, 255, 255, 0.06);
                 cursor: pointer;
-                user-select: none;
+                font-size: 13px;
+                color: #e2e8f0;
+                transition: all 0.2s ease;
             }
 
-            .settings-group-row input[type="checkbox"] {
-                width: 18px;
-                height: 18px;
-                accent-color: var(--accent-color, #d4af37);
-                cursor: pointer;
+            .menu-item:hover, .menu-item.selected {
+                background: rgba(56, 189, 248, 0.18);
+                border-color: rgba(56, 189, 248, 0.4);
+                color: #ffffff;
+                transform: translateX(3px);
             }
 
-            .settings-hint {
-                margin-top: 10px;
-                padding: 10px;
-                background: rgba(212, 175, 55, 0.1);
-                border-radius: 8px;
-                border-left: 3px solid var(--accent-color, #d4af37);
+            .menu-item.selected {
+                font-weight: 700;
+                border-color: #38bdf8;
             }
 
-            .settings-hint p {
-                font-size: 12px;
-                color: #dddddd;
-                line-height: 1.4;
+            .badge-new {
+                margin-left: auto;
+                font-size: 9px;
+                font-weight: 900;
+                background: linear-gradient(135deg, #38bdf8, #818cf8);
+                color: #000000;
+                padding: 2px 6px;
+                border-radius: 6px;
+                letter-spacing: 0.05em;
             }
 
-            /* ═══ RESPONSIVE PORTRAIT LAYOUT FOR 3 CARDS (VERTICAL STACK) ═══ */
-            @media (orientation: portrait) {
-                #clock-container {
-                    max-width: 95vw;
-                    height: 88vh !important;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    gap: clamp(8px, 1.8vh, 20px) !important;
-                    margin-bottom: 4vh !important;
-                }
-                .clock-row {
-                    flex-direction: column !important;
-                    gap: clamp(8px, 1.8vh, 18px) !important;
-                    width: 100%;
-                    max-width: 95vw;
-                }
-                .flip-card {
-                    /* Adjusted scale to prevent overflow on shorter screens */
-                    width: clamp(120px, 18vh, 240px) !important;
-                    height: clamp(160px, 23.5vh, 280px) !important;
-                    border-radius: clamp(8px, 2vw, 16px) !important;
-                }
-                /* Keep circles circle-shaped even in portrait stack */
-                .shape-circle .flip-card {
-                    height: clamp(120px, 18vh, 240px) !important;
-                }
-                .digit-text {
-                    font-size: clamp(80px, 11.5vh, 140px) !important;
-                }
-                /* Hide horizontal separators in vertical stack */
-                .sep, .colon-separator {
-                    display: none !important;
-                }
-                .ampm-badge {
-                    font-size: clamp(8px, 1.1vh, 13px) !important;
-                    padding: clamp(2px, 0.3vh, 5px) clamp(5px, 0.8vh, 12px) !important;
-                    border-radius: clamp(3px, 0.5vh, 6px) !important;
-                    bottom: clamp(6px, 1vh, 12px) !important;
-                    right: clamp(6px, 1vh, 12px) !important;
-                }
-                #greeting-badge {
-                    padding: clamp(4px, 0.8vh, 10px) clamp(14px, 2.5vh, 30px) !important;
-                    font-size: clamp(9px, 1.3vh, 15px) !important;
-                    margin-bottom: 0px !important;
-                }
-                #branding-tag {
-                    position: fixed !important;
-                    bottom: 8px !important;
-                    font-size: clamp(8px, 1vh, 11px) !important;
-                    opacity: 0.5 !important;
-                    margin: 0 !important;
-                }
+            .menu-divider {
+                height: 1px;
+                background: rgba(255, 255, 255, 0.1);
+                margin: 4px 0;
+            }
+
+            .hide-seconds #gc-s,
+            .hide-seconds .gc-sec-colon {
+                display: none !important;
             }
     </style>
 </head>
@@ -2227,9 +2355,78 @@
     <div id="scene">
         <button id="close-btn" onclick="forceClose()" title="Close Screensaver">✕</button>
 
+        <!-- Ambient Background Light Orbs -->
+        <div class="ambient-bg-orbs" id="ambient-orbs">
+            <div class="ambient-orb orb-1"></div>
+            <div class="ambient-orb orb-2"></div>
+            <div class="ambient-orb orb-3"></div>
+        </div>
+
+        <!-- Quick Menu Overlay -->
+        <div id="quick-menu-wrapper">
+            <button id="menu-toggle-btn" title="Clock Faces & Settings Menu">
+                <span class="menu-icon">🪟</span>
+                <span class="menu-text">Clock Faces</span>
+            </button>
+            <div id="quick-menu-dropdown" class="menu-dropdown">
+                <div class="menu-header">
+                    <span>Clock Faces & Themes</span>
+                    <button class="menu-close-x" id="menu-close-x">✕</button>
+                </div>
+                <div class="menu-section-title">✨ CLOCK FACE</div>
+                <div class="menu-item" data-face="glass_clock">
+                    <span class="item-icon">✨</span>
+                    <span class="item-label">Glass Clock</span>
+                    <span class="badge-new">NEW</span>
+                </div>
+                <div class="menu-item" data-face="classic_retro">
+                    <span class="item-icon">🕐</span>
+                    <span class="item-label">Flip Clock (Retro)</span>
+                </div>
+                
+                <div class="menu-divider"></div>
+                <div class="menu-section-title">🎨 FLIP CLOCK THEMES</div>
+                <div class="menu-item" data-face="luxury_black_gold">
+                    <span class="item-icon">🥇</span>
+                    <span class="item-label">Luxury Black Gold</span>
+                </div>
+                <div class="menu-item" data-face="obsidian_titanium">
+                    <span class="item-icon">🥈</span>
+                    <span class="item-label">Obsidian Titanium</span>
+                </div>
+                <div class="menu-item" data-face="apple_liquid_glass">
+                    <span class="item-icon">💧</span>
+                    <span class="item-label">Apple Liquid Glass</span>
+                </div>
+                <div class="menu-item" data-face="dark_emerald">
+                    <span class="item-icon">🌿</span>
+                    <span class="item-label">Dark Emerald</span>
+                </div>
+                <div class="menu-item" data-face="ruby_executive">
+                    <span class="item-icon">💎</span>
+                    <span class="item-label">Ruby Executive</span>
+                </div>
+            </div>
+        </div>
+
         <div id="clock-container">
             <div id="greeting-badge">GOOD MORNING</div>
 
+            <!-- Glass Clock Display (NEW) -->
+            <div id="glass-clock-display" class="glass-clock-container">
+                <div class="glass-time-row">
+                    <div class="glass-digit-tile" id="gc-h"><span class="gc-num">00</span></div>
+                    <div class="glass-colon">:</div>
+                    <div class="glass-digit-tile" id="gc-m"><span class="gc-num">00</span></div>
+                    <div class="glass-colon gc-sec-colon">:</div>
+                    <div class="glass-digit-tile gc-sec-tile" id="gc-s">
+                        <span class="gc-num">00</span>
+                        <span class="gc-ampm" id="gc-ampm">AM</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flip Clock Display (Existing) -->
             <div class="clock-row" id="clock-row">
                 <!-- Hours Card -->
                 <div class="flip-card" id="fc-h">
@@ -2290,119 +2487,11 @@
         <div id="branding-tag">FLIP CLOCK SCREENSAVER</div>
     </div>
 
-    <!-- Mobile Settings Panel -->
-    <div id="mobile-settings-overlay" class="settings-overlay-hidden">
-        <div id="mobile-settings-panel">
-            <div class="settings-header">
-                <h2>Flip Clock Settings</h2>
-                <button id="settings-close-btn" onclick="toggleSettingsMenu()">✕</button>
-            </div>
-            <div class="settings-body">
-                <div class="settings-group">
-                    <label for="set-theme">Theme</label>
-                    <select id="set-theme" onchange="updateSetting('theme', this.value)">
-                        <option value="luxury_black_gold">Luxury Black Gold</option>
-                        <option value="obsidian_titanium">Obsidian Titanium</option>
-                        <option value="champagne_gold">Champagne Gold</option>
-                        <option value="platinum_silver">Platinum Silver</option>
-                        <option value="matte_black_diamond">Matte Black Diamond</option>
-                        <option value="graphite_gray">Graphite Gray</option>
-                        <option value="arctic_ice">Arctic Ice</option>
-                        <option value="ocean_cyan">Ocean Cyan</option>
-                        <option value="midnight_navy">Midnight Navy</option>
-                        <option value="royal_sapphire">Royal Sapphire</option>
-                        <option value="amethyst_elite">Amethyst Elite</option>
-                        <option value="rose_gold">Rose Gold</option>
-                        <option value="copper_elite">Copper Elite</option>
-                        <option value="ruby_executive">Ruby Executive</option>
-                        <option value="minimal_light">Minimalist Light</option>
-                        <option value="royal_purple">Royal Purple</option>
-                        <option value="burgundy_prestige">Burgundy Prestige</option>
-                        <option value="crimson_royal">Crimson Royal</option>
-                        <option value="dark_emerald">Dark Emerald</option>
-                        <option value="forest_green">Forest Green</option>
-                        <option value="racing_green">British Racing Green</option>
-                        <option value="classic_retro">Classic Retro</option>
-                        <option value="liquid_glass">Liquid Glass</option>
-                        <option value="apple_liquid_glass">Apple Liquid Glass</option>
-                        <option value="swiss_minimalist">Swiss Minimalist</option>
-                        <option value="minimal_dark">Minimalist Dark</option>
-                    </select>
-                </div>
-                <div class="settings-group">
-                    <label for="set-shape">Card Shape</label>
-                    <select id="set-shape" onchange="updateSetting('card_shape', this.value)">
-                        <option value="squircle">Squircle</option>
-                        <option value="rounded_rectangle">Rounded Rectangle</option>
-                        <option value="rectangle">Rectangle</option>
-                        <option value="circle">Circle</option>
-                        <option value="oval">Oval</option>
-                        <option value="pill">Pill</option>
-                        <option value="stadium">Stadium</option>
-                        <option value="octagon">Octagon</option>
-                        <option value="hexagon">Hexagon</option>
-                        <option value="pentagon">Pentagon</option>
-                        <option value="diamond">Diamond</option>
-                        <option value="rhombus">Rhombus</option>
-                        <option value="parallelogram">Parallelogram</option>
-                        <option value="trapezoid">Trapezoid</option>
-                        <option value="arch">Arch</option>
-                        <option value="badge">Badge</option>
-                        <option value="beveled">Beveled</option>
-                        <option value="capsule">Capsule</option>
-                        <option value="card">Card</option>
-                        <option value="chamfered">Chamfered</option>
-                        <option value="chevron">Chevron</option>
-                        <option value="cut_corner">Cut Corner</option>
-                        <option value="frame">Frame</option>
-                        <option value="lozenge">Lozenge</option>
-                        <option value="notched">Notched</option>
-                        <option value="panel">Panel</option>
-                        <option value="shield">Shield</option>
-                        <option value="ticket">Ticket</option>
-                        <option value="tile">Tile</option>
-                    </select>
-                </div>
-                <div class="settings-group">
-                    <label for="set-username">User Name</label>
-                    <input type="text" id="set-username" placeholder="Enter greeting name" oninput="updateSetting('user_name', this.value)" />
-                </div>
-                <div class="settings-group-row">
-                    <label><input type="checkbox" id="set-seconds" onchange="updateSetting('show_seconds', this.checked)"> Show Seconds</label>
-                </div>
-                <div class="settings-group-row">
-                    <label><input type="checkbox" id="set-date" onchange="updateSetting('show_date', this.checked)"> Show Date</label>
-                </div>
-                <div class="settings-group-row">
-                    <label><input type="checkbox" id="set-day" onchange="updateSetting('show_day', this.checked)"> Show Day of Week</label>
-                </div>
-                <div class="settings-group-row">
-                    <label><input type="checkbox" id="set-greeting" onchange="updateSetting('show_greeting', this.checked)"> Show Greeting</label>
-                </div>
-                <div class="settings-group-row">
-                    <label><input type="checkbox" id="set-format24" onchange="updateSetting('format24', this.checked)"> Use 24-Hour Format</label>
-                </div>
-                <div class="settings-hint">
-                    <p>💡 Double-tap anywhere on the clock to show/hide this settings panel.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script>
-        function getSavedSetting(key, defaultValue) {
-            const saved = localStorage.getItem('flipclock_' + key);
-            if (saved !== null) {
-                if (saved === 'true') return true;
-                if (saved === 'false') return false;
-                return saved;
-            }
-            return defaultValue;
-        }
-
         let config = window.screensaverConfig || {};
-        let themeName = getSavedSetting('theme', config.theme || 'luxury_black_gold');
-        let rawShape = getSavedSetting('card_shape', config.card_shape || 'squircle');
+        let savedTheme = localStorage.getItem('flipclock_theme');
+        let themeName = config.theme || savedTheme || 'classic_retro';
+        let rawShape = config.card_shape || 'squircle';
         const legacyShapeMap = {
             'soft_squircle': 'squircle',
             'neo_rounded': 'rounded_rectangle',
@@ -2412,21 +2501,21 @@
             'premium_bevel': 'beveled'
         };
         let cardShape = legacyShapeMap[rawShape] || rawShape;
-        let hourFormat = getSavedSetting('format', config.format || '12');
-        let showSeconds = getSavedSetting('show_seconds', config.show_seconds !== 'false');
-        let showDate = getSavedSetting('show_date', config.show_date !== 'false');
-        let showDay = getSavedSetting('show_day', config.show_day !== 'false');
-        let showGreeting = getSavedSetting('show_greeting', config.show_greeting !== 'false');
-        let userName = getSavedSetting('user_name', config.user_name || '');
-        let clockScale = parseFloat(getSavedSetting('size', config.size || '1.0'));
-        let customCredit = getSavedSetting('custom_credit', config.custom_credit || 'FLIP CLOCK SCREENSAVER');
-        let digitFont = getSavedSetting('digit_font', config.digit_font || 'Inter');
-        let labelFont = getSavedSetting('label_font', config.label_font || 'Cinzel');
-        let customBgColor = getSavedSetting('custom_bg_color', config.custom_bg_color || '#000000');
-        let customCardColor = getSavedSetting('custom_card_color', config.custom_card_color || '#1e1e22');
-        let customDigitColor = getSavedSetting('custom_digit_color', config.custom_digit_color || '#ffffff');
-        let customAccentColor = getSavedSetting('custom_accent_color', config.custom_accent_color || '#d4af37');
-        let customBorderColor = getSavedSetting('custom_border_color', config.custom_border_color || '#333333');
+        let hourFormat = config.format || '12';
+        let showSeconds = config.show_seconds !== 'false';
+        let showDate = config.show_date !== 'false';
+        let showDay = config.show_day !== 'false';
+        let showGreeting = config.show_greeting !== 'false';
+        let userName = config.user_name || '';
+        let clockScale = parseFloat(config.size || '1.0');
+        let customCredit = config.custom_credit || 'FLIP CLOCK SCREENSAVER';
+        let digitFont = config.digit_font || 'Inter';
+        let labelFont = config.label_font || 'Cinzel';
+        let customBgColor = config.custom_bg_color || '#000000';
+        let customCardColor = config.custom_card_color || '#1e1e22';
+        let customDigitColor = config.custom_digit_color || '#ffffff';
+        let customAccentColor = config.custom_accent_color || '#d4af37';
+        let customBorderColor = config.custom_border_color || '#333333';
 
         function applyConfiguration() {
             // 0. Fonts
@@ -2467,6 +2556,7 @@
 
             // Adjust background body color
             const themeBackgrounds = {
+                "glass_clock": "#090d16",
                 "apple_liquid_glass": "#000000",
                 "liquid_glass": "#060810",
                 "luxury_black_gold": "#000000",
@@ -2527,33 +2617,126 @@
             const b = document.getElementById('date-badge');
             if (!b) return;
 
-            const showDt = showDate;
-            const showDy = showDay;
-
-            if (!showDt && !showDy) {
-                b.style.display = 'none';
-                return;
-            }
-            b.style.display = '';
-
             const dayName = days[now.getDay()];
             const dateNum = String(now.getDate()).padStart(2, '0');
             const monthName = months[now.getMonth()];
             const yearNum = now.getFullYear();
 
             let content = '';
-            if (showDy) {
+            if (showDay) {
                 content += `<span class="date-segment date-dayname">${dayName}</span>`;
             }
-            if (showDy && showDt) {
+            if (showDay && showDate) {
                 content += `<span class="date-sep">◆</span>`;
             }
-            if (showDt) {
+            if (showDate) {
                 content += `<span class="date-segment date-num">${dateNum}</span>` +
                            `<span class="date-segment date-month">${monthName}</span>` +
                            `<span class="date-segment date-year">${yearNum}</span>`;
             }
             b.innerHTML = content;
+        }
+
+        function updateGlassClock() {
+            const now = new Date();
+            let h = now.getHours();
+            const m = now.getMinutes();
+            const s = now.getSeconds();
+
+            let ampmText = '';
+            if (hourFormat === '12') {
+                ampmText = h >= 12 ? 'PM' : 'AM';
+                h = h % 12;
+                if (h === 0) h = 12;
+            }
+
+            const p = n => String(n).padStart(2, '0');
+            const gcH = document.getElementById('gc-h');
+            const gcM = document.getElementById('gc-m');
+            const gcS = document.getElementById('gc-s');
+            const gcAmpm = document.getElementById('gc-ampm');
+
+            if (gcH) {
+                const numEl = gcH.querySelector('.gc-num');
+                if (numEl && numEl.textContent !== p(h)) numEl.textContent = p(h);
+            }
+            if (gcM) {
+                const numEl = gcM.querySelector('.gc-num');
+                if (numEl && numEl.textContent !== p(m)) numEl.textContent = p(m);
+            }
+            if (gcS) {
+                const numEl = gcS.querySelector('.gc-num');
+                if (numEl && numEl.textContent !== p(s)) numEl.textContent = p(s);
+            }
+            if (gcAmpm) gcAmpm.textContent = ampmText;
+        }
+
+        function applyBurnInShift() {
+            const container = document.getElementById('clock-container');
+            if (!container) return;
+            const maxShift = 8;
+            const shiftX = Math.floor(Math.random() * (maxShift * 2 + 1)) - maxShift;
+            const shiftY = Math.floor(Math.random() * (maxShift * 2 + 1)) - maxShift;
+            const scaleStr = clockScale !== 1.0 ? `scale(${clockScale})` : '';
+            container.style.transform = `${scaleStr} translate3d(${shiftX}px, ${shiftY}px, 0)`;
+        }
+
+        function initQuickMenu() {
+            const menuBtn = document.getElementById('menu-toggle-btn');
+            const menuDropdown = document.getElementById('quick-menu-dropdown');
+            const menuCloseX = document.getElementById('menu-close-x');
+            const menuWrapper = document.getElementById('quick-menu-wrapper');
+            const menuItems = document.querySelectorAll('.menu-item');
+
+            if (!menuBtn || !menuDropdown) return;
+
+            menuBtn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                const isActive = menuDropdown.classList.toggle('active');
+                if (menuWrapper) menuWrapper.classList.toggle('open', isActive);
+            });
+
+            if (menuCloseX) {
+                menuCloseX.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    menuDropdown.classList.remove('active');
+                    if (menuWrapper) menuWrapper.classList.remove('open');
+                });
+            }
+
+            document.addEventListener('click', function (e) {
+                if (menuDropdown.classList.contains('active') && !menuDropdown.contains(e.target) && e.target !== menuBtn) {
+                    menuDropdown.classList.remove('active');
+                    if (menuWrapper) menuWrapper.classList.remove('open');
+                }
+            });
+
+            menuItems.forEach(item => {
+                item.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    const face = item.getAttribute('data-face');
+                    if (!face) return;
+
+                    themeName = face;
+                    localStorage.setItem('flipclock_theme', face);
+                    
+                    menuItems.forEach(mi => mi.classList.remove('selected'));
+                    item.classList.add('selected');
+
+                    applyConfiguration();
+                    updateFlip();
+                    if (themeName === 'glass_clock') updateGlassClock();
+
+                    menuDropdown.classList.remove('active');
+                    if (menuWrapper) menuWrapper.classList.remove('open');
+                });
+            });
+
+            menuItems.forEach(item => {
+                if (item.getAttribute('data-face') === themeName) {
+                    item.classList.add('selected');
+                }
+            });
         }
 
         let pH = -1, pM = -1, pS = -1;
@@ -2642,94 +2825,18 @@
             if (e.key === 'Escape') forceClose();
         });
 
-        // Mobile settings management functions
-        function updateSetting(key, val) {
-            localStorage.setItem('flipclock_' + key, val);
-            if (key === 'theme') {
-                themeName = val;
-            } else if (key === 'card_shape') {
-                cardShape = val;
-            } else if (key === 'user_name') {
-                userName = val;
-            } else if (key === 'show_seconds') {
-                showSeconds = val;
-            } else if (key === 'show_date') {
-                showDate = val;
-            } else if (key === 'show_day') {
-                showDay = val;
-            } else if (key === 'show_greeting') {
-                showGreeting = val;
-            } else if (key === 'format24') {
-                hourFormat = val ? '24' : '12';
-                localStorage.setItem('flipclock_format', hourFormat);
-            }
+        window.addEventListener('load', function () {
             applyConfiguration();
             updateGreeting();
             updateDate();
             updateFlip();
-        }
-
-        function toggleSettingsMenu() {
-            const overlay = document.getElementById('mobile-settings-overlay');
-            if (!overlay) return;
-            overlay.classList.toggle('settings-overlay-hidden');
-            if (!overlay.classList.contains('settings-overlay-hidden')) {
-                document.getElementById('set-theme').value = themeName;
-                document.getElementById('set-shape').value = cardShape;
-                document.getElementById('set-username').value = userName;
-                document.getElementById('set-seconds').checked = showSeconds;
-                document.getElementById('set-date').checked = showDate;
-                document.getElementById('set-day').checked = showDay;
-                document.getElementById('set-greeting').checked = showGreeting;
-                document.getElementById('set-format24').checked = (hourFormat === '24');
-            }
-        }
-
-        // Double tap detection
-        let lastTap = 0;
-        document.body.addEventListener('touchend', function (e) {
-            if (document.getElementById('mobile-settings-panel').contains(e.target)) return;
-            const currentTime = new Date().getTime();
-            const tapLength = currentTime - lastTap;
-            if (tapLength < 300 && tapLength > 0) {
-                toggleSettingsMenu();
-                e.preventDefault();
-            }
-            lastTap = currentTime;
-        });
-
-        document.body.addEventListener('dblclick', function (e) {
-            if (document.getElementById('mobile-settings-panel').contains(e.target)) return;
-            toggleSettingsMenu();
-        });
-
-        // Wakelock API support
-        let wakeLock = null;
-        async function requestWakeLock() {
-            try {
-                if ('wakeLock' in navigator) {
-                    wakeLock = await navigator.wakeLock.request('screen');
-                    console.log('Screen Wake Lock acquired');
-                }
-            } catch (err) {
-                console.warn(`${err.name}, ${err.message}`);
-            }
-        }
-
-        document.addEventListener('visibilitychange', async () => {
-            if (wakeLock !== null && document.visibilityState === 'visible') {
-                await requestWakeLock();
-            }
-        });
-
-        window.addEventListener('load', function () {
-            applyConfiguration();
-            updateGreeting();
-            updateDate(); updateFlip();
+            updateGlassClock();
+            initQuickMenu();
             setInterval(updateFlip, 1000);
+            setInterval(updateGlassClock, 1000);
             setInterval(updateGreeting, 10000);
             setInterval(updateDate, 30000);
-            requestWakeLock();
+            setInterval(applyBurnInShift, 120000);
         });
     </script>
 </body>

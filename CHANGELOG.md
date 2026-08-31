@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.6.0] - 2026-08-31 - Premium Glass Clock Face & Quick Menu Integration
+
+### Added
+- **✨ Glass Clock Face**: A completely new premium full-screen clock face design featuring a modern transparent frosted glass container (`backdrop-filter: blur(24px)`), semi-transparent dark background (`rgba(10, 15, 25, 0.35)`), light glass borders, and soft glowing depth effects.
+- **Ambient Lighting Background**: Added subtle hardware-accelerated animated floating light circles/orbs in the background for ambient depth.
+- **Responsive Typography & Date**: Large high-readability digit display (`clamp(4rem, 14vw, 16rem)` font sizing) with thin/medium font weight and an elegant date badge (`Sunday, August 31, 2026`).
+- **Interactive Quick Menu**: Added a floating top-right **🪟 Clock Faces** overlay menu button in `clock.html` / `index.html` for switching between Flip Clock mode, theme presets, and the new Glass Clock face.
+- **OLED Burn-In Protection**: Automatic subtle position shifting (±8px X/Y) every 2 minutes with smooth CSS transitions to prevent static monitor burn-in.
+
+### Changed
+- **GTK Settings GUI Integration**: Registered `glass_clock` in `THEME_CATEGORIES` and `PRESET_THEMES` inside `flipclock.py` for selection in `flipclock --settings`.
+
 ## [2.5.7] - 2026-08-14 - Dark Black Theme & Seconds Card AM/PM Badge
 
 ### Added

@@ -358,6 +358,21 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
             --badge-bg: rgba(255,255,255,0.12);
             --badge-border: rgba(255,255,255,0.18);
         }
+        .theme-glass_clock {
+            --card-bg: rgba(255,255,255,0.08);
+            --card-border: rgba(255,255,255,0.18);
+            --card-top-bg: linear-gradient(135deg,rgba(255,255,255,0.15) 0%,rgba(255,255,255,0.02) 100%);
+            --card-bot-bg: linear-gradient(180deg,rgba(255,255,255,0.05) 0%,rgba(255,255,255,0.01) 100%);
+            --digit-color: #FFFFFF;
+            --digit-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            --pin-bg: #38BDF8;
+            --dot-bg: #38BDF8;
+            --dot-shadow: 0 0 12px rgba(56,189,248,0.6);
+            --accent-color: #38BDF8;
+            --badge-color: #FFFFFF;
+            --badge-bg: rgba(10,15,25,0.45);
+            --badge-border: rgba(255,255,255,0.15);
+        }
         .theme-apple_liquid_glass {
             --card-bg: rgba(255,255,255,0.12);
             --card-border: rgba(255,255,255,0.18);

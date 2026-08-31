@@ -2035,6 +2035,318 @@
             .hide-greeting #greeting-badge {
                 display: none !important;
             }
+
+            /* ═══ PREMIUM GLASS CLOCK FACE STYLES ═══════════════════════════ */
+            .theme-glass_clock #scene {
+                background: radial-gradient(circle at 50% 45%, #0e172a 0%, #060a12 100%) !important;
+            }
+
+            .theme-glass_clock #clock-row {
+                display: none !important;
+            }
+
+            .ambient-bg-orbs {
+                position: absolute;
+                inset: 0;
+                overflow: hidden;
+                pointer-events: none;
+                z-index: 1;
+                opacity: 0.85;
+                transition: opacity 0.8s ease;
+            }
+
+            .ambient-orb {
+                position: absolute;
+                border-radius: 50%;
+                filter: blur(90px);
+                will-change: transform;
+            }
+
+            .orb-1 {
+                top: 10%;
+                left: 15%;
+                width: 48vw;
+                height: 48vw;
+                background: radial-gradient(circle, rgba(56, 189, 248, 0.22) 0%, rgba(99, 102, 241, 0.08) 70%, transparent 100%);
+                animation: orbFloat1 24s ease-in-out infinite alternate;
+            }
+
+            .orb-2 {
+                bottom: 5%;
+                right: 12%;
+                width: 52vw;
+                height: 52vw;
+                background: radial-gradient(circle, rgba(236, 72, 153, 0.16) 0%, rgba(139, 92, 246, 0.08) 70%, transparent 100%);
+                animation: orbFloat2 28s ease-in-out infinite alternate;
+            }
+
+            .orb-3 {
+                top: 35%;
+                right: 30%;
+                width: 38vw;
+                height: 38vw;
+                background: radial-gradient(circle, rgba(16, 185, 129, 0.14) 0%, rgba(56, 189, 248, 0.06) 70%, transparent 100%);
+                animation: orbFloat3 22s ease-in-out infinite alternate;
+            }
+
+            @keyframes orbFloat1 {
+                0% { transform: translate3d(0, 0, 0) scale(1); }
+                100% { transform: translate3d(7vw, 5vh, 0) scale(1.12); }
+            }
+            @keyframes orbFloat2 {
+                0% { transform: translate3d(0, 0, 0) scale(1); }
+                100% { transform: translate3d(-9vw, -7vh, 0) scale(1.1); }
+            }
+            @keyframes orbFloat3 {
+                0% { transform: translate3d(0, 0, 0) scale(0.95); }
+                100% { transform: translate3d(5vw, -4vh, 0) scale(1.08); }
+            }
+
+            #glass-clock-display {
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: clamp(20px, 4vh, 52px) clamp(28px, 5vw, 70px);
+                background: rgba(10, 15, 25, 0.35);
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                border-radius: clamp(24px, 3.5vw, 44px);
+                box-shadow: 
+                    0 20px 60px rgba(0, 0, 0, 0.6),
+                    inset 0 1px 1px rgba(255, 255, 255, 0.25),
+                    inset 0 -1px 1px rgba(0, 0, 0, 0.4),
+                    0 0 40px rgba(56, 189, 248, 0.12);
+                backdrop-filter: blur(24px) saturate(180%);
+                -webkit-backdrop-filter: blur(24px) saturate(180%);
+                transition: all 0.5s ease;
+                z-index: 10;
+            }
+
+            .theme-glass_clock #glass-clock-display {
+                display: flex !important;
+            }
+
+            .glass-time-row {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: clamp(8px, 1.8vw, 24px);
+            }
+
+            .glass-digit-tile {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: clamp(10px, 1.8vh, 28px) clamp(14px, 2.2vw, 38px);
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.12);
+                border-radius: clamp(16px, 2vw, 30px);
+                box-shadow: 
+                    0 8px 32px rgba(0, 0, 0, 0.35),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                min-width: clamp(90px, 22vw, 300px);
+                text-align: center;
+                transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+            }
+
+            .glass-digit-tile:hover {
+                background: rgba(255, 255, 255, 0.08);
+                border-color: rgba(255, 255, 255, 0.22);
+            }
+
+            .gc-num {
+                font-family: var(--digit-font, 'Inter', system-ui, sans-serif);
+                font-size: clamp(4rem, 14vw, 16rem);
+                font-weight: 300;
+                line-height: 1;
+                letter-spacing: -0.02em;
+                color: #ffffff;
+                text-shadow: 
+                    0 4px 20px rgba(0, 0, 0, 0.6),
+                    0 0 25px rgba(255, 255, 255, 0.25);
+                transition: all 0.3s ease;
+            }
+
+            .glass-colon {
+                font-family: var(--digit-font, 'Inter', system-ui, sans-serif);
+                font-size: clamp(3rem, 11vw, 12rem);
+                font-weight: 200;
+                color: rgba(255, 255, 255, 0.7);
+                text-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+                animation: colonPulse 2s ease-in-out infinite;
+                margin: 0 clamp(-4px, -0.5vw, -12px);
+                user-select: none;
+            }
+
+            @keyframes colonPulse {
+                0%, 100% { opacity: 0.85; transform: scale(1); }
+                50% { opacity: 0.35; transform: scale(0.95); }
+            }
+
+            .gc-ampm {
+                position: absolute;
+                bottom: clamp(8px, 1.5vh, 20px);
+                right: clamp(12px, 1.8vw, 24px);
+                font-family: var(--label-font, 'Inter', sans-serif);
+                font-size: clamp(11px, 1.5vw, 24px);
+                font-weight: 700;
+                letter-spacing: 0.15em;
+                color: #38bdf8;
+                text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+            }
+
+            /* Quick Menu Overlay Styles */
+            #quick-menu-wrapper {
+                position: absolute;
+                top: 24px;
+                right: 24px;
+                z-index: 1000;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.4s ease;
+            }
+
+            #scene.show-close #quick-menu-wrapper,
+            #quick-menu-wrapper:hover,
+            #quick-menu-wrapper.open {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            #menu-toggle-btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                padding: 10px 18px;
+                background: rgba(15, 23, 42, 0.8);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 30px;
+                color: #ffffff;
+                font-family: 'Inter', sans-serif;
+                font-size: 13px;
+                font-weight: 600;
+                cursor: pointer;
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+                transition: all 0.3s ease;
+            }
+
+            #menu-toggle-btn:hover {
+                background: rgba(30, 41, 59, 0.95);
+                border-color: #38bdf8;
+                transform: translateY(-2px);
+                box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 189, 248, 0.3);
+            }
+
+            .menu-dropdown {
+                position: absolute;
+                top: 50px;
+                right: 0;
+                width: 290px;
+                background: rgba(10, 15, 25, 0.94);
+                border: 1px solid rgba(255, 255, 255, 0.18);
+                border-radius: 18px;
+                padding: 16px;
+                backdrop-filter: blur(24px) saturate(180%);
+                -webkit-backdrop-filter: blur(24px) saturate(180%);
+                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75), 0 0 30px rgba(56, 189, 248, 0.15);
+                display: none;
+                flex-direction: column;
+                gap: 6px;
+                max-height: 80vh;
+                overflow-y: auto;
+                z-index: 1001;
+                animation: menuFadeIn 0.25s ease-out;
+            }
+
+            .menu-dropdown.active {
+                display: flex;
+            }
+
+            @keyframes menuFadeIn {
+                from { opacity: 0; transform: translateY(-10px) scale(0.95); }
+                to { opacity: 1; transform: translateY(0) scale(1); }
+            }
+
+            .menu-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                font-size: 14px;
+                font-weight: 700;
+                color: #ffffff;
+                padding-bottom: 8px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .menu-close-x {
+                background: transparent;
+                border: none;
+                color: rgba(255, 255, 255, 0.6);
+                font-size: 16px;
+                cursor: pointer;
+            }
+
+            .menu-section-title {
+                font-size: 10px;
+                font-weight: 800;
+                letter-spacing: 0.1em;
+                color: #38bdf8;
+                margin-top: 6px;
+                margin-bottom: 2px;
+            }
+
+            .menu-item {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 8px 12px;
+                border-radius: 10px;
+                background: rgba(255, 255, 255, 0.04);
+                border: 1px solid rgba(255, 255, 255, 0.06);
+                cursor: pointer;
+                font-size: 13px;
+                color: #e2e8f0;
+                transition: all 0.2s ease;
+            }
+
+            .menu-item:hover, .menu-item.selected {
+                background: rgba(56, 189, 248, 0.18);
+                border-color: rgba(56, 189, 248, 0.4);
+                color: #ffffff;
+                transform: translateX(3px);
+            }
+
+            .menu-item.selected {
+                font-weight: 700;
+                border-color: #38bdf8;
+            }
+
+            .badge-new {
+                margin-left: auto;
+                font-size: 9px;
+                font-weight: 900;
+                background: linear-gradient(135deg, #38bdf8, #818cf8);
+                color: #000000;
+                padding: 2px 6px;
+                border-radius: 6px;
+                letter-spacing: 0.05em;
+            }
+
+            .menu-divider {
+                height: 1px;
+                background: rgba(255, 255, 255, 0.1);
+                margin: 4px 0;
+            }
+
+            .hide-seconds #gc-s,
+            .hide-seconds .gc-sec-colon {
+                display: none !important;
+            }
     </style>
 </head>
 
@@ -2043,9 +2355,78 @@
     <div id="scene">
         <button id="close-btn" onclick="forceClose()" title="Close Screensaver">✕</button>
 
+        <!-- Ambient Background Light Orbs -->
+        <div class="ambient-bg-orbs" id="ambient-orbs">
+            <div class="ambient-orb orb-1"></div>
+            <div class="ambient-orb orb-2"></div>
+            <div class="ambient-orb orb-3"></div>
+        </div>
+
+        <!-- Quick Menu Overlay -->
+        <div id="quick-menu-wrapper">
+            <button id="menu-toggle-btn" title="Clock Faces & Settings Menu">
+                <span class="menu-icon">🪟</span>
+                <span class="menu-text">Clock Faces</span>
+            </button>
+            <div id="quick-menu-dropdown" class="menu-dropdown">
+                <div class="menu-header">
+                    <span>Clock Faces & Themes</span>
+                    <button class="menu-close-x" id="menu-close-x">✕</button>
+                </div>
+                <div class="menu-section-title">✨ CLOCK FACE</div>
+                <div class="menu-item" data-face="glass_clock">
+                    <span class="item-icon">✨</span>
+                    <span class="item-label">Glass Clock</span>
+                    <span class="badge-new">NEW</span>
+                </div>
+                <div class="menu-item" data-face="classic_retro">
+                    <span class="item-icon">🕐</span>
+                    <span class="item-label">Flip Clock (Retro)</span>
+                </div>
+                
+                <div class="menu-divider"></div>
+                <div class="menu-section-title">🎨 FLIP CLOCK THEMES</div>
+                <div class="menu-item" data-face="luxury_black_gold">
+                    <span class="item-icon">🥇</span>
+                    <span class="item-label">Luxury Black Gold</span>
+                </div>
+                <div class="menu-item" data-face="obsidian_titanium">
+                    <span class="item-icon">🥈</span>
+                    <span class="item-label">Obsidian Titanium</span>
+                </div>
+                <div class="menu-item" data-face="apple_liquid_glass">
+                    <span class="item-icon">💧</span>
+                    <span class="item-label">Apple Liquid Glass</span>
+                </div>
+                <div class="menu-item" data-face="dark_emerald">
+                    <span class="item-icon">🌿</span>
+                    <span class="item-label">Dark Emerald</span>
+                </div>
+                <div class="menu-item" data-face="ruby_executive">
+                    <span class="item-icon">💎</span>
+                    <span class="item-label">Ruby Executive</span>
+                </div>
+            </div>
+        </div>
+
         <div id="clock-container">
             <div id="greeting-badge">GOOD MORNING</div>
 
+            <!-- Glass Clock Display (NEW) -->
+            <div id="glass-clock-display" class="glass-clock-container">
+                <div class="glass-time-row">
+                    <div class="glass-digit-tile" id="gc-h"><span class="gc-num">00</span></div>
+                    <div class="glass-colon">:</div>
+                    <div class="glass-digit-tile" id="gc-m"><span class="gc-num">00</span></div>
+                    <div class="glass-colon gc-sec-colon">:</div>
+                    <div class="glass-digit-tile gc-sec-tile" id="gc-s">
+                        <span class="gc-num">00</span>
+                        <span class="gc-ampm" id="gc-ampm">AM</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flip Clock Display (Existing) -->
             <div class="clock-row" id="clock-row">
                 <!-- Hours Card -->
                 <div class="flip-card" id="fc-h">
@@ -2108,7 +2489,8 @@
 
     <script>
         let config = window.screensaverConfig || {};
-        let themeName = config.theme || 'classic_retro';
+        let savedTheme = localStorage.getItem('flipclock_theme');
+        let themeName = config.theme || savedTheme || 'classic_retro';
         let rawShape = config.card_shape || 'squircle';
         const legacyShapeMap = {
             'soft_squircle': 'squircle',
@@ -2174,6 +2556,7 @@
 
             // Adjust background body color
             const themeBackgrounds = {
+                "glass_clock": "#090d16",
                 "apple_liquid_glass": "#000000",
                 "liquid_glass": "#060810",
                 "luxury_black_gold": "#000000",
@@ -2252,6 +2635,108 @@
                            `<span class="date-segment date-year">${yearNum}</span>`;
             }
             b.innerHTML = content;
+        }
+
+        function updateGlassClock() {
+            const now = new Date();
+            let h = now.getHours();
+            const m = now.getMinutes();
+            const s = now.getSeconds();
+
+            let ampmText = '';
+            if (hourFormat === '12') {
+                ampmText = h >= 12 ? 'PM' : 'AM';
+                h = h % 12;
+                if (h === 0) h = 12;
+            }
+
+            const p = n => String(n).padStart(2, '0');
+            const gcH = document.getElementById('gc-h');
+            const gcM = document.getElementById('gc-m');
+            const gcS = document.getElementById('gc-s');
+            const gcAmpm = document.getElementById('gc-ampm');
+
+            if (gcH) {
+                const numEl = gcH.querySelector('.gc-num');
+                if (numEl && numEl.textContent !== p(h)) numEl.textContent = p(h);
+            }
+            if (gcM) {
+                const numEl = gcM.querySelector('.gc-num');
+                if (numEl && numEl.textContent !== p(m)) numEl.textContent = p(m);
+            }
+            if (gcS) {
+                const numEl = gcS.querySelector('.gc-num');
+                if (numEl && numEl.textContent !== p(s)) numEl.textContent = p(s);
+            }
+            if (gcAmpm) gcAmpm.textContent = ampmText;
+        }
+
+        function applyBurnInShift() {
+            const container = document.getElementById('clock-container');
+            if (!container) return;
+            const maxShift = 8;
+            const shiftX = Math.floor(Math.random() * (maxShift * 2 + 1)) - maxShift;
+            const shiftY = Math.floor(Math.random() * (maxShift * 2 + 1)) - maxShift;
+            const scaleStr = clockScale !== 1.0 ? `scale(${clockScale})` : '';
+            container.style.transform = `${scaleStr} translate3d(${shiftX}px, ${shiftY}px, 0)`;
+        }
+
+        function initQuickMenu() {
+            const menuBtn = document.getElementById('menu-toggle-btn');
+            const menuDropdown = document.getElementById('quick-menu-dropdown');
+            const menuCloseX = document.getElementById('menu-close-x');
+            const menuWrapper = document.getElementById('quick-menu-wrapper');
+            const menuItems = document.querySelectorAll('.menu-item');
+
+            if (!menuBtn || !menuDropdown) return;
+
+            menuBtn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                const isActive = menuDropdown.classList.toggle('active');
+                if (menuWrapper) menuWrapper.classList.toggle('open', isActive);
+            });
+
+            if (menuCloseX) {
+                menuCloseX.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    menuDropdown.classList.remove('active');
+                    if (menuWrapper) menuWrapper.classList.remove('open');
+                });
+            }
+
+            document.addEventListener('click', function (e) {
+                if (menuDropdown.classList.contains('active') && !menuDropdown.contains(e.target) && e.target !== menuBtn) {
+                    menuDropdown.classList.remove('active');
+                    if (menuWrapper) menuWrapper.classList.remove('open');
+                }
+            });
+
+            menuItems.forEach(item => {
+                item.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    const face = item.getAttribute('data-face');
+                    if (!face) return;
+
+                    themeName = face;
+                    localStorage.setItem('flipclock_theme', face);
+                    
+                    menuItems.forEach(mi => mi.classList.remove('selected'));
+                    item.classList.add('selected');
+
+                    applyConfiguration();
+                    updateFlip();
+                    if (themeName === 'glass_clock') updateGlassClock();
+
+                    menuDropdown.classList.remove('active');
+                    if (menuWrapper) menuWrapper.classList.remove('open');
+                });
+            });
+
+            menuItems.forEach(item => {
+                if (item.getAttribute('data-face') === themeName) {
+                    item.classList.add('selected');
+                }
+            });
         }
 
         let pH = -1, pM = -1, pS = -1;
@@ -2343,10 +2828,15 @@
         window.addEventListener('load', function () {
             applyConfiguration();
             updateGreeting();
-            updateDate(); updateFlip();
+            updateDate();
+            updateFlip();
+            updateGlassClock();
+            initQuickMenu();
             setInterval(updateFlip, 1000);
+            setInterval(updateGlassClock, 1000);
             setInterval(updateGreeting, 10000);
             setInterval(updateDate, 30000);
+            setInterval(applyBurnInShift, 120000);
         });
     </script>
 </body>

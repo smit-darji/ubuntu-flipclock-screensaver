@@ -1,10 +1,10 @@
 # Premium Fliqlo-Style Flip Clock Screensaver for Ubuntu
 
 [![Platform](https://img.shields.io/badge/Platform-Ubuntu%2020.04%20%7C%2022.04%20%7C%2024.04-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)](https://ubuntu.com)
-[![Version](https://img.shields.io/badge/Version-v2.5.7-blue?style=for-the-badge)](releases/flipclock-screensaver_2.5.7.deb)
+[![Version](https://img.shields.io/badge/Version-v2.6.0-blue?style=for-the-badge)](releases/flipclock-screensaver_2.6.0.deb)
 [![Download Latest .deb](https://img.shields.io/badge/Download-flipclock--screensaver.deb-10B981?style=for-the-badge&logo=debian&logoColor=white)](https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver.deb)
 [![Download Android APK](https://img.shields.io/badge/Download-flipclock--screensaver.apk-FFB000?style=for-the-badge&logo=android&logoColor=white)](releases/flipclock-screensaver.apk)
-[![Archived Release v2.5.7](https://img.shields.io/badge/Archive-v2.5.7.deb-6366F1?style=for-the-badge&logo=debian&logoColor=white)](https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_2.5.7.deb)
+[![Archived Release v2.6.0](https://img.shields.io/badge/Archive-v2.6.0.deb-6366F1?style=for-the-badge&logo=debian&logoColor=white)](https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_2.6.0.deb)
 [![Language](https://img.shields.io/badge/Language-Python%203%20%2B%20GTK3-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-MIT-6D28D9?style=for-the-badge)](LICENSE)
 
@@ -19,6 +19,12 @@ A native, high-fidelity, multi-monitor flip clock screensaver for Ubuntu Linux. 
 
 > **Default Premium Setup:** Luxury Black Gold theme • Squircle card shape • Cinzel typography • 12-hour format with seconds
 
+### ✨ NEW in v2.6.0 — Premium Glass Clock Face
+
+A modern full-screen frosted glassmorphism clock face featuring semi-transparent dark backgrounds (`backdrop-filter: blur(24px)`), ambient floating background lights, responsive typography, date display, and an interactive **🪟 Clock Faces** quick menu:
+
+![Glass Clock Face](screenshots/theme_glass_clock.png)
+
 ---
 
 ## 📥 Quick Download & Installation
@@ -30,8 +36,8 @@ Click the buttons below to download the pre-compiled packages directly (includin
     <img src="https://img.shields.io/badge/DOWNLOAD-Latest%20.deb%20Package-10B981?style=for-the-badge&logo=debian&logoColor=white" height="48" alt="Download Latest .deb Package">
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_2.5.7.deb" target="_blank">
-    <img src="https://img.shields.io/badge/DOWNLOAD-Versioned%20v2.5.7%20.deb-6366F1?style=for-the-badge&logo=debian&logoColor=white" height="48" alt="Download Versioned .deb Package">
+  <a href="https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_2.6.0.deb" target="_blank">
+    <img src="https://img.shields.io/badge/DOWNLOAD-Versioned%20v2.6.0%20.deb-6366F1?style=for-the-badge&logo=debian&logoColor=white" height="48" alt="Download Versioned .deb Package">
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="releases/flipclock-screensaver.apk" download="flipclock-screensaver.apk">
@@ -217,14 +223,14 @@ sudo apt update
 sudo apt install ./flipclock-screensaver.deb
 ```
 
-#### Option B: Install Versioned Release Archive (`v2.5.7`)
+#### Option B: Install Versioned Release Archive (`v2.6.0`)
 ```bash
-# 1. Download version v2.5.7 from the releases/ directory
-wget https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_2.5.7.deb
+# 1. Download version v2.6.0 from the releases/ directory
+wget https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_2.6.0.deb
 
 # 2. Install versioned package via apt
 sudo apt update
-sudo apt install ./flipclock-screensaver_2.5.7.deb
+sudo apt install ./flipclock-screensaver_2.6.0.deb
 ```
 
 ---
@@ -311,7 +317,7 @@ Once installed, the following commands are available globally in your terminal:
 |---|---|
 | `flipclock` or `flipclock --run` | Previews/launches screensaver full-screen windows immediately |
 | `flipclock --settings` | Opens the graphical settings configuration window |
-| `flipclock --version` | Outputs current software version (`v2.5.7`) |
+| `flipclock --version` | Outputs current software version (`v2.6.0`) |
 | `flipclock --daemon` | Starts the background idle monitor daemon |
 | `pkill -f "flipclock.*--daemon"` | Stops the background idle monitor daemon |
 
@@ -325,7 +331,7 @@ To build a fresh `.deb` package file locally:
 chmod +x build_deb.sh
 ./build_deb.sh
 ```
-This generates `flipclock-screensaver.deb` (and `flipclock-screensaver_2.5.7.deb`) in the `releases/` directory.
+This generates `flipclock-screensaver.deb` (and `flipclock-screensaver_2.6.0.deb`) in the `releases/` directory.
 
 ---
 

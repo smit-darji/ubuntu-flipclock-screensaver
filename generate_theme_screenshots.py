@@ -3,6 +3,19 @@ import os
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 THEMES = {
+    "glass_clock": {
+        "title": "✨ Glass Clock (Frosted)",
+        "bg_color": (10, 15, 25, 255),
+        "card_top": (255, 255, 255, 25),
+        "card_bot": (255, 255, 255, 15),
+        "border_color": (255, 255, 255, 60),
+        "digit_color": (255, 255, 255, 255),
+        "pin_color": (56, 189, 248, 255),
+        "accent_color": (56, 189, 248, 255),
+        "badge_bg": (15, 23, 42, 160),
+        "badge_border": (255, 255, 255, 40),
+        "greeting": "GOOD EVENING"
+    },
     "liquid_glass": {
         "title": "💧 Liquid Glass Dark",
         "bg_color": (6, 8, 16, 255),

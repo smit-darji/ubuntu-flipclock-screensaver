@@ -26,9 +26,13 @@ except ValueError:
         sys.exit(1)
 from gi.repository import Gtk, Gdk, WebKit2, GLib, GdkPixbuf
 
-APP_VERSION = "2.5.7"
+APP_VERSION = "2.6.0"
 
 THEME_CATEGORIES = {
+    "glass_clock": {
+        "label": "✨ Glass Clock (Frosted Glass)",
+        "themes": ["glass_clock"]
+    },
     "liquid_glass": {
         "label": "💧 Liquid Glass & Crystal Dark",
         "themes": ["apple_liquid_glass", "liquid_glass", "luxury_black_gold", "obsidian_titanium", "arctic_ice", "ocean_cyan"]
@@ -56,6 +60,16 @@ THEME_CATEGORIES = {
 }
 
 PRESET_THEMES = {
+    "glass_clock": {
+        "name": "✨ Glass Clock (Frosted Glass)",
+        "bg_color": "#0a0f19",
+        "card_color": "rgba(255, 255, 255, 0.12)",
+        "digit_color": "#FFFFFF",
+        "accent_color": "#38BDF8",
+        "border_color": "rgba(255, 255, 255, 0.18)",
+        "digit_font": "Inter",
+        "label_font": "Inter"
+    },
     "liquid_glass": {
         "name": "💧 Translucent Liquid Cyan",
         "bg_color": "#060810",
