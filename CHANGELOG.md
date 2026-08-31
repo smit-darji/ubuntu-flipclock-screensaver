@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.4.0] - 2026-08-31 - High-Contrast Ganesha Theme & Frameless Spider-Man Theme
+
+### Added
+- **🐘 High-Contrast Ganesha Theme Visibility (`glass_ganesha`)**: Darkened background artwork filter (`brightness(0.70) contrast(1.18)`), dark teak glass tiles (`rgba(14, 6, 2, 0.72)`), and pure white digits (`#FFFFFF`) with glowing golden amber text shadow for 100% crystal-clear readability.
+- **🕷️ 100% Invisible Frameless Spider-Man Theme (`glass_spiderman`)**: Completely removed card boxes, borders, and shadows (`background: transparent; border: none; box-shadow: none`), allowing digits to float cleanly in full-screen space with web lighting.
+
 ## [3.3.0] - 2026-08-31 - User Lord Ganesha Temple Mandap Artwork & Auto-Approve Uninstall Guide
 
 ### Added
