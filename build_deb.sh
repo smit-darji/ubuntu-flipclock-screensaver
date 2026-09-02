@@ -15,7 +15,7 @@ if [ -f "README.md" ]; then
     sed -i -E "s/Archive-v[0-9.]+\.deb/Archive-v${PKG_VER}.deb/g" README.md
     sed -i -E "s/flipclock-screensaver_[0-9.]+\.deb/flipclock-screensaver_${PKG_VER}.deb/g" README.md
     sed -i -E "s/Versioned v[0-9.]+\.deb/Versioned v${PKG_VER}.deb/g" README.md
-    sed -i -E "s/New in v[0-9.]+/New in v${PKG_VER}/g" README.md
+    sed -i -E "s/## ✨ New in v[0-9.]+/## ✨ New in v${PKG_VER}/g" README.md
     sed -i -E "s/v[0-9.]+ Release/v${PKG_VER} Release/g" README.md
 fi
 
