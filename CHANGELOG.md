@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.0.4] - 2026-09-02 - Frameless 3D Glass Live Clock & WebP Wallpaper Release
+
+### Added
+- **🏮 Frameless 3D Glass Live Clock Overlay**: 100% cardless floating 3D glass clock overlay (`11:47:36 AM`) positioned in the right-center area over the lake background (`misty_pavilion.webp` & `misty_pavilion.webm`).
+- **── T U E S D A Y ── Day Line Divider**: Left and right horizontal divider lines flanking the uppercase weekday text.
+- **📅 Real-Time HH:MM:SS Ticking & Uppercase Date**: Real-time ticking seconds and uppercase date (`02 SEPTEMBER 2026`).
+- **📦 Latest Debian Package Build**: Built `releases/flipclock-screensaver_4.0.4.deb` and updated installation scripts.
+
 ## [4.0.0] - 2026-09-02 - Aesthetic Frameless Glass Clock & Day Line Divider Release
 
 ### Added
