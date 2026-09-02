@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.1.0] - 2026-09-02 - 200ms Ticker & Anime Theme Default Load Release
+
+### Added
+- **🌸 Anime Girl Hydrangea Theme First Load**: Set `glass_anime_hydrangea` as default initial theme in both HTML body and Python backend for immediate startup loading.
+- **⏱️ High-Frequency 200ms Clock Tick Loop**: Replaced 1000ms `setInterval` with 200ms high-frequency ticker loop to eliminate clock drift & guarantee seconds (`00-59`) tick continuously without skipping or stuttering.
+- **⚡ Synchronous 0ms Parse-Time Clock Execution**: Evaluated real-time system clock values synchronously at script parse time to prevent multi-monitor `00:00:00 AM` initial rendering flash.
+
 ## [5.0.9] - 2026-09-02 - Removed Week Number & Enhanced Date Contrast Release
 
 ### Added

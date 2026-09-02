@@ -26,7 +26,7 @@ except ValueError:
         sys.exit(1)
 from gi.repository import Gtk, Gdk, WebKit2, GLib, GdkPixbuf
 
-APP_VERSION = "5.0.9"
+APP_VERSION = "5.1.0"
 
 THEME_CATEGORIES = {
     "live_wallpapers": {
@@ -3083,7 +3083,7 @@ class FlipClockManager:
             'clock_size': '1.0',
             'animation_speed': 500,
             'monitors': 'all',
-            'theme': 'glass_misty_pavilion',
+            'theme': 'glass_anime_hydrangea',
             'card_shape': 'squircle',
             'show_seconds': 'true',
             'show_date': 'true',
@@ -3117,7 +3117,7 @@ class FlipClockManager:
                     self.config['clock_size'] = settings.get('clock_size', '1.0')
                     self.config['animation_speed'] = settings.getint('animation_speed', 500)
                     self.config['monitors'] = settings.get('monitors', 'all')
-                    self.config['theme'] = settings.get('theme', 'glass_misty_pavilion')
+                    self.config['theme'] = settings.get('theme', 'glass_anime_hydrangea')
                     self.config['card_shape'] = settings.get('card_shape', 'squircle')
                     self.config['show_seconds'] = settings.get('show_seconds', 'true')
                     self.config['show_date'] = settings.get('show_date', 'true')

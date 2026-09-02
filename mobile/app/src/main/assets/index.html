@@ -3119,7 +3119,7 @@
     </style>
 </head>
 
-<body class="theme-glass_misty_pavilion theme-glass_clock">
+<body class="theme-glass_anime_hydrangea theme-glass_clock">
 
     <div id="scene">
         <button id="close-btn" onclick="forceClose()" title="Close Screensaver">✕</button>
@@ -3815,6 +3815,14 @@
             if (e.key === 'Escape') forceClose();
         });
 
+        // Synchronous immediate time update at script parse time so 00:00:00 NEVER paints on any screen
+        try {
+            updateGlassClock();
+            updateFlip();
+            updateDate();
+            updateGreeting();
+        } catch (e) { }
+
         window.addEventListener('load', function () {
             applyConfiguration();
             updateGreeting();
@@ -3822,8 +3830,13 @@
             updateFlip();
             updateGlassClock();
             initQuickMenu();
-            setInterval(updateFlip, 1000);
-            setInterval(updateGlassClock, 1000);
+            
+            // High-frequency 200ms clock tick loop to eliminate clock drift & guarantee non-skipping seconds
+            setInterval(function() {
+                updateFlip();
+                updateGlassClock();
+            }, 200);
+
             setInterval(updateGreeting, 10000);
             setInterval(updateDate, 30000);
             setInterval(applyBurnInShift, 120000);
