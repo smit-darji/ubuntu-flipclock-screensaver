@@ -21,11 +21,11 @@ A native, high-fidelity, multi-monitor flip clock screensaver for Ubuntu Linux. 
 
 ---
 
-## ✨ New in v3.7.0: 4K Live Video Wallpaper Collections & Frameless Aesthetic Clocks
+## ✨ New in v5.0.0: Frameless 3D Glass Live Clock Overlay & Animated WebP/WebM Wallpapers
 
-Experience the brand new **v3.7.0 Release** featuring:
+Experience the brand new **v5.0.0 Release** featuring:
 - 🌸 **Anime Girl Hydrangea Garden Live Wallpaper**: Seamless 4K live video backdrop with frameless glowing hydrangea lavender typography.
-- 🏮 **Misty Lakeside Pavilion Live Wallpaper**: 4K live video backdrop with warm glowing amber lantern typography.
+- 🏮 **Misty Lakeside Pavilion Live Wallpaper**: 4K live video backdrop with 100% frameless 3D rounded liquid glass typography.
 - 🎥 **LIVE Video Wallpaper Category & Badges**: Dedicated `🎬 4K LIVE VIDEO WALLPAPERS` section and `🎥 LIVE` badges in the quick menu and GTK settings.
 
 ![Glass Clock Face](screenshots/theme_glass_clock.png)
@@ -41,8 +41,8 @@ Click the buttons below to download the pre-compiled packages directly (includin
     <img src="https://img.shields.io/badge/DOWNLOAD-Latest%20.deb%20Package-10B981?style=for-the-badge&logo=debian&logoColor=white" height="48" alt="Download Latest .deb Package">
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_3.7.0.deb" target="_blank">
-    <img src="https://img.shields.io/badge/DOWNLOAD-Versioned%20v3.7.0%20.deb-6366F1?style=for-the-badge&logo=debian&logoColor=white" height="48" alt="Download Versioned .deb Package">
+  <a href="https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_5.0.0.deb" target="_blank">
+    <img src="https://img.shields.io/badge/DOWNLOAD-Versioned%20v5.0.0%20.deb-6366F1?style=for-the-badge&logo=debian&logoColor=white" height="48" alt="Download Versioned .deb Package">
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="releases/flipclock-screensaver.apk" download="flipclock-screensaver.apk">
@@ -248,14 +248,14 @@ sudo apt update
 sudo apt install ./flipclock-screensaver.deb
 ```
 
-#### Option B: Install Versioned Release Archive (`v4.0.0`)
+#### Option B: Install Versioned Release Archive (`v5.0.0`)
 ```bash
-# 1. Download version v4.0.0 from the releases/ directory
-wget https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_4.0.0.deb
+# 1. Download version v5.0.0 from the releases/ directory
+wget https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_5.0.0.deb
 
 # 2. Install versioned package via apt
 sudo apt update
-sudo apt install ./flipclock-screensaver_4.0.0.deb
+sudo apt install ./flipclock-screensaver_5.0.0.deb
 ```
 
 ---
