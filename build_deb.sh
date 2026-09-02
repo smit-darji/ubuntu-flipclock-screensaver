@@ -8,6 +8,17 @@ PKG_NAME="flipclock-screensaver"
 PKG_VER=$(grep -o 'APP_VERSION = "[^"]*"' flipclock.py | cut -d'"' -f2)
 PKG_DIR="flipclock-build"
 
+# Auto-update README.md version references
+if [ -f "README.md" ]; then
+    echo "Updating README.md version references to v${PKG_VER}..."
+    sed -i -E "s/Version-v[0-9.]+-blue/Version-v${PKG_VER}-blue/g" README.md
+    sed -i -E "s/Archive-v[0-9.]+\.deb/Archive-v${PKG_VER}.deb/g" README.md
+    sed -i -E "s/flipclock-screensaver_[0-9.]+\.deb/flipclock-screensaver_${PKG_VER}.deb/g" README.md
+    sed -i -E "s/Versioned v[0-9.]+\.deb/Versioned v${PKG_VER}.deb/g" README.md
+    sed -i -E "s/New in v[0-9.]+/New in v${PKG_VER}/g" README.md
+    sed -i -E "s/v[0-9.]+ Release/v${PKG_VER} Release/g" README.md
+fi
+
 echo "Creating Debian package structure..."
 rm -rf "$PKG_DIR"
 find . -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true
