@@ -3031,7 +3031,10 @@
         <!-- Anime Girl Hydrangea Garden Live Wallpaper Scene Layer -->
         <div class="anime-hydrangea-scene-layer">
             <div class="anime-hydrangea-artwork-bg"></div>
-            <video class="anime-hydrangea-video-bg" autoplay loop muted playsinline src="live-wallpaper/ba98956200_anime-girl-hydrangea-garden-live-wallpaper-wallsflow-com.mp4"></video>
+            <video class="anime-hydrangea-video-bg" autoplay loop muted playsinline>
+                <source src="live-wallpaper/ba98956200_anime-girl-hydrangea-garden-live-wallpaper-wallsflow-com.mp4" type="video/mp4">
+                <source src="/home/dev1035/dev-1035/smit.softvan.com/screensaver/live-wallpaper/ba98956200_anime-girl-hydrangea-garden-live-wallpaper-wallsflow-com.mp4" type="video/mp4">
+            </video>
             <div class="anime-hydrangea-overlay"></div>
             <div class="anime-hydrangea-vignette"></div>
         </div>
@@ -3039,7 +3042,10 @@
         <!-- Misty Lakeside Pavilion Live Wallpaper Scene Layer -->
         <div class="misty-pavilion-scene-layer">
             <div class="misty-pavilion-artwork-bg"></div>
-            <video class="misty-pavilion-video-bg" autoplay loop muted playsinline src="live-wallpaper/6964bab862_misty-lakeside-pavilion-live-wallpaper-wallsflow-com.mp4"></video>
+            <video class="misty-pavilion-video-bg" autoplay loop muted playsinline>
+                <source src="live-wallpaper/6964bab862_misty-lakeside-pavilion-live-wallpaper-wallsflow-com.mp4" type="video/mp4">
+                <source src="/home/dev1035/dev-1035/smit.softvan.com/screensaver/live-wallpaper/6964bab862_misty-lakeside-pavilion-live-wallpaper-wallsflow-com.mp4" type="video/mp4">
+            </video>
             <div class="misty-pavilion-overlay"></div>
             <div class="misty-pavilion-vignette"></div>
         </div>
@@ -3250,6 +3256,14 @@
             } else {
                 scene.style.background = '#000000';
             }
+
+            // Auto-play videos for live wallpaper themes
+            setTimeout(() => {
+                document.querySelectorAll('.anime-hydrangea-scene-layer video, .misty-pavilion-scene-layer video').forEach(v => {
+                    v.muted = true;
+                    v.play().catch(() => {});
+                });
+            }, 50);
         }
 
         function updateGreeting() {
