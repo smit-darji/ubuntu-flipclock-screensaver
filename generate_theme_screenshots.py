@@ -513,53 +513,37 @@ def render_theme_screenshot(theme_key, theme_info, output_dir="assets"):
         tw = tb[2] - tb[0]
         th = tb[3] - tb[1]
 
+
+
         if theme_key == "glass_anime_hydrangea":
-            # Left-aligned frosted glass panel matching Image 2
-            panel_x = int(35 * scale)
-            panel_y = int(75 * scale)
-            panel_w = int(340 * scale)
-            panel_h = int(180 * scale)
-            panel_r = int(24 * scale)
+            # Left-aligned frameless 3D glass clock
+            clock_x = int(50 * scale)
+            clock_y = int(85 * scale)
 
-            # Frosted glass panel box background & border
-            p_box = [panel_x, panel_y, panel_x + panel_w, panel_y + panel_h]
-            draw.rounded_rectangle(p_box, radius=panel_r, fill=(12, 20, 34, 150), outline=(186, 230, 253, 160), width=int(1.5 * scale))
-
-            # Digits inside panel
-            clock_x = panel_x + int(24 * scale)
-            clock_y = panel_y + int(20 * scale)
             draw.text((clock_x, clock_y), time_str, font=font_large, fill=(255, 255, 255, 255))
             draw.text((clock_x + tw + int(8 * scale), clock_y + int(28 * scale)), sec_str, font=font_sub, fill=(186, 230, 253, 230))
+            draw.text((clock_x + tw + int(50 * scale), clock_y + int(45 * scale)), ampm_str, font=font_sub, fill=(186, 230, 253, 230))
 
-            # Day line
-            line_y = clock_y + th + int(25 * scale)
+            # Day divider line
+            line_y = clock_y + th + int(30 * scale)
             db = draw.textbbox((0, 0), day_str, font=font_sub)
             dw = db[2] - db[0]
-            day_x = panel_x + (panel_w - dw) // 2
+            day_x = clock_x + (tw - dw) // 2
 
-            line_len = int(60 * scale)
-            draw.line([(day_x - line_len - int(10 * scale), line_y), (day_x - int(10 * scale), line_y)], fill=(224, 242, 254, 140), width=int(1.2 * scale))
+            line_len = int(80 * scale)
+            draw.line([(day_x - line_len - int(12 * scale), line_y), (day_x - int(12 * scale), line_y)], fill=(224, 242, 254, 150), width=int(1.2 * scale))
             draw.text((day_x, line_y - int(8 * scale)), day_str, font=font_sub, fill=(224, 242, 254, 240))
-            draw.line([(day_x + dw + int(10 * scale), line_y), (day_x + dw + line_len + int(10 * scale), line_y)], fill=(224, 242, 254, 140), width=int(1.2 * scale))
+            draw.line([(day_x + dw + int(12 * scale), line_y), (day_x + dw + line_len + int(12 * scale), line_y)], fill=(224, 242, 254, 150), width=int(1.2 * scale))
 
             # Date text
             dtb = draw.textbbox((0, 0), date_str, font=font_sub)
             dtw = dtb[2] - dtb[0]
-            date_x = panel_x + (panel_w - dtw) // 2
+            date_x = clock_x + (tw - dtw) // 2
             date_y = line_y + int(22 * scale)
             draw.text((date_x, date_y), date_str, font=font_sub, fill=(224, 242, 254, 200))
 
-            # Week 36 pill badge below panel
-            wb = draw.textbbox((0, 0), week_str, font=font_sub)
-            ww = wb[2] - wb[0]
-            wh = wb[3] - wb[1]
-            week_y = panel_y + panel_h + int(16 * scale)
-            w_box = [panel_x + (panel_w - ww) // 2 - int(16 * scale), week_y - int(5 * scale), panel_x + (panel_w + ww) // 2 + int(16 * scale), week_y + wh + int(5 * scale)]
-            draw.rounded_rectangle(w_box, radius=int(16 * scale), fill=(12, 20, 34, 140), outline=(186, 230, 253, 140), width=int(1.2 * scale))
-            draw.text((panel_x + (panel_w - ww) // 2, week_y), week_str, font=font_sub, fill=(224, 242, 254, 240))
-
         else:
-            # Frameless right-aligned for Misty Pavilion matching Image 1
+            # Frameless right-aligned for Misty Pavilion matching Image 2
             right_margin = int(48 * scale)
             clock_x = w - right_margin - tw - int(50 * scale)
             clock_y = int(85 * scale)

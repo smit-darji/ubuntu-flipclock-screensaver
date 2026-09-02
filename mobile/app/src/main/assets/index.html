@@ -2397,7 +2397,7 @@
 
             /* ═══ THEME 1: MISTY LAKESIDE PAVILION (RIGHT ALIGNED FROSTED GLASS) ═══ */
             .theme-glass_misty_pavilion #clock-container {
-            /* ═══ MISTY LAKESIDE PAVILION: FRAMELESS RIGHT-ALIGNED GLASS CLOCK MATCHING IMAGE 2 EXACTLY ═══ */
+            /* ═══ MISTY LAKESIDE PAVILION: FRAMELESS RIGHT-ALIGNED 3D GLASS CLOCK ═══ */
             .theme-glass_misty_pavilion #clock-container {
                 align-items: flex-end !important;
                 justify-content: center !important;
@@ -2410,14 +2410,15 @@
                 display: none !important;
             }
 
-            .theme-glass_misty_pavilion #clock-row {
+            .theme-glass_misty_pavilion #clock-row,
+            .theme-glass_anime_hydrangea #clock-row {
                 display: none !important;
             }
 
-            .theme-glass_misty_pavilion #glass-clock-display {
+            .theme-glass_misty_pavilion #glass-clock-display,
+            .theme-glass_anime_hydrangea #glass-clock-display {
                 display: flex !important;
                 flex-direction: column !important;
-                align-items: center !important;
                 background: transparent !important;
                 border: none !important;
                 box-shadow: none !important;
@@ -2426,7 +2427,12 @@
                 padding: 0 !important;
             }
 
-            .theme-glass_misty_pavilion .glass-time-row {
+            .theme-glass_misty_pavilion #glass-clock-display {
+                align-items: center !important;
+            }
+
+            .theme-glass_misty_pavilion .glass-time-row,
+            .theme-glass_anime_hydrangea .glass-time-row {
                 display: flex !important;
                 align-items: baseline !important;
                 justify-content: center !important;
@@ -2439,7 +2445,8 @@
                 display: none !important;
             }
 
-            .theme-glass_misty_pavilion .glass-digit-tile {
+            .theme-glass_misty_pavilion .glass-digit-tile,
+            .theme-glass_anime_hydrangea .glass-digit-tile {
                 background: transparent !important;
                 border: none !important;
                 box-shadow: none !important;
@@ -2485,7 +2492,8 @@
                 text-shadow: 0 0 20px rgba(186, 230, 253, 0.85) !important;
             }
 
-            .theme-glass_misty_pavilion #date-badge {
+            .theme-glass_misty_pavilion #date-badge,
+            .theme-glass_anime_hydrangea #date-badge {
                 background: transparent !important;
                 border: none !important;
                 box-shadow: none !important;
@@ -2494,61 +2502,40 @@
                 padding: 0 !important;
                 margin-top: 15px !important;
                 width: 100% !important;
+            }
+
+            .theme-glass_misty_pavilion #date-badge {
                 max-width: 580px !important;
             }
 
-            /* ═══ ANIME GIRL HYDRANGEA GARDEN: FROSTED GLASS PANEL LEFT MATCHING REFERENCE ═══ */
+            /* ═══ ANIME GIRL HYDRANGEA GARDEN: FRAMELESS LEFT-ALIGNED 3D GLASS CLOCK ═══ */
             .theme-glass_anime_hydrangea #clock-container {
                 align-items: flex-start !important;
                 justify-content: center !important;
-                padding-left: 7vw !important;
+                padding-left: 8vw !important;
                 max-width: 95vw !important;
             }
 
-            .theme-glass_anime_hydrangea #clock-row {
-                display: none !important;
-            }
-
             .theme-glass_anime_hydrangea #glass-clock-display {
-                display: flex !important;
-                flex-direction: column !important;
                 align-items: center !important;
-                background: rgba(12, 20, 34, 0.42) !important;
-                border: 1.5px solid rgba(186, 230, 253, 0.50) !important;
-                backdrop-filter: blur(18px) !important;
-                -webkit-backdrop-filter: blur(18px) !important;
-                border-radius: 32px !important;
-                padding: clamp(20px, 2.5vw, 36px) clamp(28px, 3.5vw, 52px) !important;
-                box-shadow: 
-                    0 16px 48px rgba(0, 0, 0, 0.55),
-                    inset 0 1.5px 0 rgba(255, 255, 255, 0.25),
-                    0 0 35px rgba(56, 189, 248, 0.20) !important;
-                gap: 0px !important;
-            }
-
-            .theme-glass_anime_hydrangea .glass-digit-tile {
-                background: transparent !important;
-                border: none !important;
-                box-shadow: none !important;
-                backdrop-filter: none !important;
-                -webkit-backdrop-filter: none !important;
-                padding: 0 !important;
             }
 
             .theme-glass_anime_hydrangea .gc-num {
-                font-family: 'Comfortaa', 'Outfit', 'Inter', system-ui, sans-serif !important;
-                font-size: clamp(80px, 11vw, 160px) !important;
+                font-family: 'Comfortaa', 'Outfit', 'Quicksand', system-ui, sans-serif !important;
+                font-size: clamp(90px, 12vw, 180px) !important;
                 font-weight: 300 !important;
                 letter-spacing: -0.01em !important;
                 color: #ffffff !important;
+                -webkit-text-stroke: 1px rgba(255, 255, 255, 0.80) !important;
                 text-shadow: 
-                    0 0 20px rgba(255, 255, 255, 0.85),
-                    0 0 40px rgba(56, 189, 248, 0.60),
+                    0 0 20px rgba(255, 255, 255, 0.90),
+                    0 0 40px rgba(56, 189, 248, 0.65),
                     0 4px 24px rgba(0, 0, 0, 0.90) !important;
             }
 
             .theme-glass_anime_hydrangea .glass-colon {
-                font-size: clamp(70px, 9.5vw, 140px) !important;
+                font-family: 'Comfortaa', 'Outfit', sans-serif !important;
+                font-size: clamp(80px, 10.5vw, 155px) !important;
                 color: #e0f2fe !important;
                 opacity: 0.9 !important;
                 text-shadow: 0 0 20px rgba(186, 230, 253, 0.85) !important;
@@ -2557,7 +2544,7 @@
             }
 
             .theme-glass_anime_hydrangea .gc-sec-tile .gc-num {
-                font-size: clamp(80px, 11vw, 160px) !important;
+                font-size: clamp(90px, 12vw, 180px) !important;
                 color: #ffffff !important;
             }
 
@@ -2577,14 +2564,7 @@
             }
 
             .theme-glass_anime_hydrangea #date-badge {
-                background: transparent !important;
-                border: none !important;
-                box-shadow: none !important;
-                backdrop-filter: none !important;
-                -webkit-backdrop-filter: none !important;
-                padding: 0 !important;
-                margin-top: 14px !important;
-                width: 100% !important;
+                max-width: 520px !important;
             }
 
             .misty-date-wrapper {
