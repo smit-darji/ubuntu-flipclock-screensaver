@@ -26,7 +26,7 @@ except ValueError:
         sys.exit(1)
 from gi.repository import Gtk, Gdk, WebKit2, GLib, GdkPixbuf
 
-APP_VERSION = "4.0.4"
+APP_VERSION = "4.0.5"
 
 THEME_CATEGORIES = {
     "live_wallpapers": {
@@ -1955,6 +1955,10 @@ class FlipClockWindow(Gtk.Window):
             settings.set_allow_universal_access_from_file_urls(True)
         if hasattr(settings, 'set_media_playback_requires_user_gesture'):
             settings.set_media_playback_requires_user_gesture(False)
+        if hasattr(settings, 'set_enable_accelerated_2d_canvas'):
+            settings.set_enable_accelerated_2d_canvas(True)
+        if hasattr(settings, 'set_enable_webgl'):
+            settings.set_enable_webgl(True)
             
         self.webview.add_events(Gdk.EventMask.POINTER_MOTION_MASK | 
                                 Gdk.EventMask.BUTTON_PRESS_MASK | 
