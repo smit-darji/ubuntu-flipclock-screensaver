@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.0.2] - 2026-09-02 - Compact HH:MM:SS Glass Clock Spacing Release
+
+### Added
+- **⏱️ Tighter & Compact HH:MM:SS Digit Spacing**: Reduced colon margins (`margin: 0 -10px`) and letter-spacing (`-0.03em`) to eliminate wide empty gaps between hours, minutes, seconds, and colons.
+- **💎 Uniform 3D Glass Seconds Display**: Seconds (`SS`) rendered in the exact same 3D rounded liquid glass font (`Comfortaa`/`Outfit`) alongside hours and minutes.
+
+## [5.0.1] - 2026-09-02 - WebP Live Animated Wallpaper & 3D Glass Seconds Sync
+
+### Added
+- **🌸 Real-Time Animated WebP Live Backdrop**: Explicit Z-index layering for `misty_pavilion.webp` and `anime_hydrangea.webp` ensuring ultra-smooth 60fps native animated video backgrounds.
+- **⏱️ Ticking 3D Glass Seconds & Matching AM/PM Typography**: `HH:MM:SS AM/PM` with matching translucent liquid glass 3D stroke reflections and glowing drop shadows.
+- **✨ Dual Live Wallpaper Theme Support**: Seamless support for both `glass_misty_pavilion` and `glass_anime_hydrangea` themes.
+
 ## [5.0.0] - 2026-09-02 - Master 3D Glass Live Clock Release
 
 ### Added

@@ -2374,7 +2374,19 @@
                 background-repeat: no-repeat;
                 filter: brightness(0.88) contrast(1.12);
             }
-            .misty-pavilion-video-bg {
+            .misty-pavilion-animated-bg,
+            .anime-hydrangea-animated-bg {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center center;
+                filter: brightness(0.88) contrast(1.12);
+                z-index: 1;
+            }
+            .misty-pavilion-video-bg,
+            .anime-hydrangea-video-bg {
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -2383,6 +2395,7 @@
                 object-fit: cover;
                 object-position: center center;
                 filter: brightness(0.88) contrast(1.12);
+                z-index: 2;
             }
 
             /* ═══ HIDE FLIP CARDS & SHOW ONLY GLASS CLOCK FOR LIVE WALLPAPER THEMES ═══ */
@@ -2461,9 +2474,9 @@
             .theme-glass_misty_pavilion .gc-num,
             .theme-glass_anime_hydrangea .gc-num {
                 font-family: 'Comfortaa', 'Outfit', 'Quicksand', system-ui, sans-serif !important;
-                font-size: clamp(75px, 10.5vw, 165px) !important;
+                font-size: clamp(65px, 9vw, 145px) !important;
                 font-weight: 200 !important;
-                letter-spacing: -0.01em !important;
+                letter-spacing: -0.03em !important;
                 background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(240, 249, 255, 0.75) 55%, rgba(186, 230, 253, 0.45) 100%) !important;
                 -webkit-background-clip: text !important;
                 -webkit-text-fill-color: transparent !important;
@@ -2474,13 +2487,13 @@
             .theme-glass_misty_pavilion .glass-colon,
             .theme-glass_anime_hydrangea .glass-colon {
                 font-family: 'Comfortaa', 'Outfit', sans-serif !important;
-                font-size: clamp(65px, 9vw, 140px) !important;
+                font-size: clamp(55px, 7.5vw, 125px) !important;
                 background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(240, 249, 255, 0.75) 60%, rgba(186, 230, 253, 0.45) 100%) !important;
                 -webkit-background-clip: text !important;
                 -webkit-text-fill-color: transparent !important;
                 -webkit-text-stroke: 1px rgba(255, 255, 255, 0.80) !important;
                 filter: drop-shadow(0 0 16px rgba(255, 255, 255, 0.85)) !important;
-                margin: 0 4px !important;
+                margin: 0 -10px !important;
                 align-self: center !important;
             }
 
