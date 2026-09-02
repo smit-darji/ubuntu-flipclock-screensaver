@@ -147,21 +147,21 @@ PRESET_THEMES = {
     "glass_anime_hydrangea": {
         "name": "🎥🌸 Anime Girl Hydrangea Garden (Live 4K) ✦",
         "bg_color": "#0d0714",
-        "card_color": "transparent",
-        "digit_color": "#F8F5FF",
-        "accent_color": "#C084FC",
-        "border_color": "transparent",
-        "digit_font": "Outfit",
+        "card_color": "rgba(12, 20, 34, 0.35)",
+        "digit_color": "#FFFFFF",
+        "accent_color": "#BAE6FD",
+        "border_color": "rgba(255, 255, 255, 0.40)",
+        "digit_font": "Comfortaa",
         "label_font": "Outfit"
     },
     "glass_misty_pavilion": {
         "name": "🎥🏮 Misty Lakeside Pavilion (Live 4K) ✦",
         "bg_color": "#060b12",
-        "card_color": "transparent",
-        "digit_color": "#FEF3C7",
-        "accent_color": "#F59E0B",
-        "border_color": "transparent",
-        "digit_font": "Outfit",
+        "card_color": "rgba(12, 20, 34, 0.35)",
+        "digit_color": "#FFFFFF",
+        "accent_color": "#BAE6FD",
+        "border_color": "rgba(255, 255, 255, 0.40)",
+        "digit_font": "Comfortaa",
         "label_font": "Outfit"
     },
     "liquid_glass": {
