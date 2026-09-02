@@ -2596,9 +2596,16 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                gap: 10px;
-                margin-top: 12px;
-                width: 100%;
+                gap: 8px;
+                margin-top: 14px;
+                padding: 10px 24px;
+                border-radius: 20px;
+                background: rgba(0, 0, 0, 0.32);
+                backdrop-filter: blur(14px);
+                -webkit-backdrop-filter: blur(14px);
+                border: 1px solid rgba(255, 255, 255, 0.18);
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.50);
+                width: auto;
             }
 
             .misty-day-line {
@@ -2618,11 +2625,11 @@
             .misty-day-text {
                 font-family: 'Outfit', 'Inter', sans-serif;
                 font-size: clamp(14px, 2vw, 26px);
-                font-weight: 300;
+                font-weight: 400;
                 letter-spacing: 0.55em;
                 color: #ffffff;
                 text-transform: uppercase;
-                text-shadow: 0 0 18px rgba(255, 255, 255, 0.85);
+                text-shadow: 0 2px 12px rgba(0, 0, 0, 0.95), 0 0 18px rgba(255, 255, 255, 0.85);
             }
 
             .misty-date-text {
@@ -2632,9 +2639,13 @@
                 letter-spacing: 0.45em;
                 color: rgba(255, 255, 255, 0.95);
                 text-transform: uppercase;
-                margin-top: 6px;
+                margin-top: 4px;
                 text-align: center;
-                text-shadow: 0 0 16px rgba(255, 255, 255, 0.70);
+                text-shadow: 0 2px 12px rgba(0, 0, 0, 0.95), 0 0 16px rgba(255, 255, 255, 0.70);
+            }
+
+            .misty-week-text {
+                display: none !important;
             }
 
             .misty-week-text {
@@ -3589,7 +3600,6 @@
                             <span class="misty-line"></span>
                         </div>
                         <div class="misty-date-text">${dateNum} &nbsp; ${monthName} &nbsp; ${yearNum}</div>
-                        <div class="misty-week-text">WEEK ${weekNum}</div>
                     </div>
                 `;
                 return;

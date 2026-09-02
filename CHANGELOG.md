@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.0.9] - 2026-09-02 - Removed Week Number & Enhanced Date Contrast Release
+
+### Added
+- **🌸 Purged WEEK 36 Badge**: Completely removed the `WEEK 36` pill badge from both live wallpaper themes (`glass_misty_pavilion` & `glass_anime_hydrangea`) for a clean, uncluttered date presentation.
+- **✨ Translucent Glass Date Pill & High-Contrast Shadow**: Added `background: rgba(0, 0, 0, 0.32); backdrop-filter: blur(14px)` and rich text drop shadows behind `WEDNESDAY` and `02 SEPTEMBER 2026` for 100% crystal-clear readability against bright flower backgrounds.
+
 ## [5.0.8] - 2026-09-02 - Inline Relative AM/PM Alignment Release
 
 ### Added
