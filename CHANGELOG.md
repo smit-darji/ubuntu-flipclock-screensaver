@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.0.7] - 2026-09-02 - Instant 0ms Live Load & Standalone Flex AM/PM Release
+
+### Added
+- **⚡ Instant 0ms Live Wallpaper Load**: Set default HTML body class to `theme-glass_misty_pavilion theme-glass_clock` to eliminate the 2 to 5 second black flip clock `00:00:00` startup delay.
+- **⏱️ Permanently Separated AM/PM Badge**: Moved `#gc-ampm` out of `#gc-s` digit container into its own standalone flex child element in `.glass-time-row` to eliminate text overlapping across all resolutions.
+
 ## [5.0.6] - 2026-09-02 - AM/PM Non-Overlapping Alignment & Breathable Colon Spacing Release
 
 ### Added

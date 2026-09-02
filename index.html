@@ -3134,7 +3134,7 @@
     </style>
 </head>
 
-<body class="theme-classic_retro">
+<body class="theme-glass_misty_pavilion theme-glass_clock">
 
     <div id="scene">
         <button id="close-btn" onclick="forceClose()" title="Close Screensaver">✕</button>
@@ -3350,14 +3350,10 @@
                 <div class="glass-time-row">
                     <div class="glass-digit-tile" id="gc-h"><span class="gc-num">00</span></div>
                     <div class="glass-colon">:</div>
-                    <div class="glass-digit-tile" id="gc-m">
-                        <span class="gc-num">00</span>
-                    </div>
+                    <div class="glass-digit-tile" id="gc-m"><span class="gc-num">00</span></div>
                     <div class="glass-colon gc-sec-colon">:</div>
-                    <div class="glass-digit-tile gc-sec-tile" id="gc-s">
-                        <span class="gc-num">00</span>
-                        <span class="gc-ampm-pill" id="gc-ampm">AM</span>
-                    </div>
+                    <div class="glass-digit-tile gc-sec-tile" id="gc-s"><span class="gc-num">00</span></div>
+                    <div class="gc-ampm-pill" id="gc-ampm">AM</div>
                 </div>
             </div>
 
@@ -3484,9 +3480,16 @@
                 const ampmEl = document.getElementById('gc-ampm');
                 if (ampmEl) {
                     const isLiveTheme = themeName === 'glass_misty_pavilion' || themeName === 'glass_anime_hydrangea';
-                    const targetTile = (showSeconds || isLiveTheme) ? document.getElementById('gc-s') : document.getElementById('gc-m');
-                    if (targetTile && ampmEl.parentElement !== targetTile) {
-                        targetTile.appendChild(ampmEl);
+                    if (isLiveTheme) {
+                        const timeRow = document.querySelector('.glass-time-row');
+                        if (timeRow && ampmEl.parentElement !== timeRow) {
+                            timeRow.appendChild(ampmEl);
+                        }
+                    } else {
+                        const targetTile = showSeconds ? document.getElementById('gc-s') : document.getElementById('gc-m');
+                        if (targetTile && ampmEl.parentElement !== targetTile) {
+                            targetTile.appendChild(ampmEl);
+                        }
                     }
                 }
 
