@@ -42,14 +42,7 @@ jobs:
           chmod +x build_deb.sh
           ./build_deb.sh
 
-      - name: Commit and push changes
+      - name: Verify build artifacts
         run: |
-          git add README.md build_deb.sh releases/
-          
-          # Check if there are any changes to commit
-          if git diff --staged --quiet; then
-            echo "No changes to release files or README.md."
-          else
-            git commit -m "Auto-build release package & update README for version $(grep -o 'APP_VERSION = "[^"]*"' flipclock.py | cut -d'"' -f2) [skip ci]"
-            git push origin Master
-          fi
+          echo "Build successful! Package files:"
+          ls -la releases/
