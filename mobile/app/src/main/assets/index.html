@@ -2397,11 +2397,12 @@
 
             /* ═══ THEME 1: MISTY LAKESIDE PAVILION (RIGHT ALIGNED FROSTED GLASS) ═══ */
             .theme-glass_misty_pavilion #clock-container {
-            /* ═══ MISTY LAKESIDE PAVILION: FRAMELESS RIGHT-ALIGNED 3D GLASS CLOCK ═══ */
+            /* ═══ MISTY LAKESIDE PAVILION: FRAMELESS 3D GLASS CLOCK (SLIGHT BOTTOM RIGHT) ═══ */
             .theme-glass_misty_pavilion #clock-container {
                 align-items: flex-end !important;
-                justify-content: center !important;
-                padding-right: 8vw !important;
+                justify-content: flex-end !important;
+                padding-right: 6vw !important;
+                padding-bottom: 10vh !important;
                 max-width: 90vw !important;
             }
 
@@ -2419,18 +2420,17 @@
             .theme-glass_anime_hydrangea #glass-clock-display {
                 display: flex !important;
                 flex-direction: column !important;
-                align-items: center !important;
-                background: rgba(255, 255, 255, 0.16) !important;
-                border: 1.5px solid rgba(255, 255, 255, 0.65) !important;
-                backdrop-filter: blur(22px) saturate(160%) !important;
-                -webkit-backdrop-filter: blur(22px) saturate(160%) !important;
-                border-radius: 28px !important;
-                padding: clamp(18px, 2.5vw, 32px) clamp(24px, 3.2vw, 48px) !important;
-                box-shadow: 
-                    0 16px 48px rgba(0, 0, 0, 0.25),
-                    inset 0 2px 0 rgba(255, 255, 255, 0.60),
-                    0 0 35px rgba(255, 255, 255, 0.25) !important;
+                background: transparent !important;
+                border: none !important;
+                box-shadow: none !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                padding: 0 !important;
                 gap: 0px !important;
+            }
+
+            .theme-glass_misty_pavilion #glass-clock-display {
+                align-items: flex-end !important;
             }
 
             .theme-glass_misty_pavilion .glass-time-row,
@@ -2516,16 +2516,17 @@
                 max-width: 580px !important;
             }
 
-            /* ═══ ANIME GIRL HYDRANGEA GARDEN: FRAMELESS LEFT-ALIGNED 3D GLASS CLOCK ═══ */
+            /* ═══ ANIME GIRL HYDRANGEA GARDEN: FRAMELESS LEFT-ALIGNED 3D GLASS CLOCK (SLIGHT BOTTOM LEFT) ═══ */
             .theme-glass_anime_hydrangea #clock-container {
                 align-items: flex-start !important;
-                justify-content: center !important;
-                padding-left: 8vw !important;
+                justify-content: flex-end !important;
+                padding-left: 6vw !important;
+                padding-bottom: 10vh !important;
                 max-width: 95vw !important;
             }
 
             .theme-glass_anime_hydrangea #glass-clock-display {
-                align-items: center !important;
+                align-items: flex-start !important;
             }
 
             .theme-glass_anime_hydrangea .gc-num {

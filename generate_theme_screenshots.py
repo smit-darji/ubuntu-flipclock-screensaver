@@ -517,32 +517,20 @@ def render_theme_screenshot(theme_key, theme_info, output_dir="assets"):
 
 
         if theme_key in ["glass_anime_hydrangea", "glass_misty_pavilion"]:
-            # Frosted glass card container box
-            card_w = int(480 * scale)
-            card_h = int(210 * scale)
-            if theme_key == "glass_anime_hydrangea":
-                card_x = int(45 * scale)
-            else:
-                card_x = w - int(45 * scale) - card_w
-            card_y = int(60 * scale)
-            card_r = int(24 * scale)
-
-            # Draw translucent white glass card box with proper alpha blending
-            glass_overlay = Image.new("RGBA", (w, h), (0, 0, 0, 0))
-            gdraw = ImageDraw.Draw(glass_overlay)
-            gdraw.rounded_rectangle([card_x, card_y, card_x + card_w, card_y + card_h], radius=card_r, fill=(255, 255, 255, 30), outline=(255, 255, 255, 160), width=int(1.8 * scale))
-            img = Image.alpha_composite(img.convert("RGBA"), glass_overlay).convert("RGB")
-            draw = ImageDraw.Draw(img)
-
-            # Digits inside glass card box
+            # Frameless 3D Glass digits at slight bottom position
             full_time_str = "11:47:36"
             ftb = draw.textbbox((0, 0), full_time_str, font=font_large)
             ftw = ftb[2] - ftb[0]
             fth = ftb[3] - ftb[1]
 
-            clock_x = card_x + (card_w - ftw) // 2 - int(25 * scale)
-            clock_y = card_y + int(18 * scale)
+            if theme_key == "glass_anime_hydrangea":
+                clock_x = int(50 * scale)
+            else:
+                clock_x = w - int(50 * scale) - ftw - int(50 * scale)
 
+            clock_y = h - int(240 * scale)
+
+            # Draw sleek 3D glass digits
             draw.text((clock_x, clock_y), full_time_str, font=font_large, fill=(255, 255, 255, 255))
             draw.text((clock_x + ftw + int(12 * scale), clock_y + int(42 * scale)), ampm_str, font=font_sub, fill=(240, 248, 255, 240))
 
@@ -550,18 +538,18 @@ def render_theme_screenshot(theme_key, theme_info, output_dir="assets"):
             line_y = clock_y + fth + int(32 * scale)
             db = draw.textbbox((0, 0), day_str, font=font_sub)
             dw = db[2] - db[0]
-            day_x = card_x + (card_w - dw) // 2
+            day_x = clock_x + (ftw - dw) // 2
 
             line_len = int(90 * scale)
-            draw.line([(day_x - line_len - int(12 * scale), line_y), (day_x - int(12 * scale), line_y)], fill=(255, 255, 255, 140), width=int(1.2 * scale))
+            draw.line([(day_x - line_len - int(12 * scale), line_y), (day_x - int(12 * scale), line_y)], fill=(255, 255, 255, 160), width=int(1.5 * scale))
             draw.text((day_x, line_y - int(8 * scale)), day_str, font=font_sub, fill=(255, 255, 255, 240))
-            draw.line([(day_x + dw + int(12 * scale), line_y), (day_x + dw + line_len + int(12 * scale), line_y)], fill=(255, 255, 255, 140), width=int(1.2 * scale))
+            draw.line([(day_x + dw + int(12 * scale), line_y), (day_x + dw + line_len + int(12 * scale), line_y)], fill=(255, 255, 255, 160), width=int(1.5 * scale))
 
             # Date text
             dtb = draw.textbbox((0, 0), date_str, font=font_sub)
             dtw = dtb[2] - dtb[0]
-            date_x = card_x + (card_w - dtw) // 2
-            date_y = line_y + int(20 * scale)
+            date_x = clock_x + (ftw - dtw) // 2
+            date_y = line_y + int(22 * scale)
             draw.text((date_x, date_y), date_str, font=font_sub, fill=(255, 255, 255, 220))
 
     else:
