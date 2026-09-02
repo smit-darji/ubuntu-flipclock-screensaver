@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.9.0] - 2026-09-02 - Animated WebP Live Wallpaper & Codec-Free Support
+
+### Added
+- **🎆 Ultra-Lightweight Animated WebP Live Wallpapers**: Created high-definition 24-bit 60fps WebP animated files (`anime_hydrangea.webp` & `misty_pavilion.webp`) providing 100% instant native animation with zero GStreamer codec dependencies.
+- **🖼️ Codec-Free Image + Video Layering**: Combined WebP animated image layers with WebM and MP4 video fallbacks for flawless background rendering across all Linux systems and GTK WebKit versions.
+
 ## [3.8.0] - 2026-09-02 - Live Video Wallpaper Autoplay & Path Resolution Release
 
 ### Added
