@@ -516,59 +516,49 @@ def render_theme_screenshot(theme_key, theme_info, output_dir="assets"):
 
 
 
-        if theme_key == "glass_anime_hydrangea":
-            # Left-aligned frameless 3D glass clock
-            clock_x = int(50 * scale)
-            clock_y = int(85 * scale)
+        if theme_key in ["glass_anime_hydrangea", "glass_misty_pavilion"]:
+            # Frosted glass card container box
+            card_w = int(480 * scale)
+            card_h = int(210 * scale)
+            if theme_key == "glass_anime_hydrangea":
+                card_x = int(45 * scale)
+            else:
+                card_x = w - int(45 * scale) - card_w
+            card_y = int(60 * scale)
+            card_r = int(24 * scale)
 
-            draw.text((clock_x, clock_y), time_str, font=font_large, fill=(255, 255, 255, 255))
-            draw.text((clock_x + tw + int(8 * scale), clock_y + int(28 * scale)), sec_str, font=font_sub, fill=(186, 230, 253, 230))
-            draw.text((clock_x + tw + int(50 * scale), clock_y + int(45 * scale)), ampm_str, font=font_sub, fill=(186, 230, 253, 230))
+            # Draw translucent glass card box
+            draw.rounded_rectangle([card_x, card_y, card_x + card_w, card_y + card_h], radius=card_r, fill=(12, 20, 34, 110), outline=(255, 255, 255, 120), width=int(1.5 * scale))
+
+            # Digits inside glass card box
+            full_time_str = "11:47:36"
+            ftb = draw.textbbox((0, 0), full_time_str, font=font_large)
+            ftw = ftb[2] - ftb[0]
+            fth = ftb[3] - ftb[1]
+
+            clock_x = card_x + (card_w - ftw) // 2 - int(25 * scale)
+            clock_y = card_y + int(18 * scale)
+
+            draw.text((clock_x, clock_y), full_time_str, font=font_large, fill=(255, 255, 255, 255))
+            draw.text((clock_x + ftw + int(12 * scale), clock_y + int(42 * scale)), ampm_str, font=font_sub, fill=(240, 248, 255, 240))
 
             # Day divider line
-            line_y = clock_y + th + int(30 * scale)
+            line_y = clock_y + fth + int(32 * scale)
             db = draw.textbbox((0, 0), day_str, font=font_sub)
             dw = db[2] - db[0]
-            day_x = clock_x + (tw - dw) // 2
+            day_x = card_x + (card_w - dw) // 2
 
-            line_len = int(80 * scale)
-            draw.line([(day_x - line_len - int(12 * scale), line_y), (day_x - int(12 * scale), line_y)], fill=(224, 242, 254, 150), width=int(1.2 * scale))
-            draw.text((day_x, line_y - int(8 * scale)), day_str, font=font_sub, fill=(224, 242, 254, 240))
-            draw.line([(day_x + dw + int(12 * scale), line_y), (day_x + dw + line_len + int(12 * scale), line_y)], fill=(224, 242, 254, 150), width=int(1.2 * scale))
+            line_len = int(90 * scale)
+            draw.line([(day_x - line_len - int(12 * scale), line_y), (day_x - int(12 * scale), line_y)], fill=(255, 255, 255, 140), width=int(1.2 * scale))
+            draw.text((day_x, line_y - int(8 * scale)), day_str, font=font_sub, fill=(255, 255, 255, 240))
+            draw.line([(day_x + dw + int(12 * scale), line_y), (day_x + dw + line_len + int(12 * scale), line_y)], fill=(255, 255, 255, 140), width=int(1.2 * scale))
 
             # Date text
             dtb = draw.textbbox((0, 0), date_str, font=font_sub)
             dtw = dtb[2] - dtb[0]
-            date_x = clock_x + (tw - dtw) // 2
-            date_y = line_y + int(22 * scale)
-            draw.text((date_x, date_y), date_str, font=font_sub, fill=(224, 242, 254, 200))
-
-        else:
-            # Frameless right-aligned for Misty Pavilion matching Image 2
-            right_margin = int(48 * scale)
-            clock_x = w - right_margin - tw - int(50 * scale)
-            clock_y = int(85 * scale)
-
-            draw.text((clock_x, clock_y), time_str, font=font_large, fill=(224, 242, 254, 255))
-            draw.text((clock_x + tw + int(10 * scale), clock_y + int(45 * scale)), ampm_str, font=font_sub, fill=(186, 230, 253, 230))
-
-            # Day divider line
-            line_y = clock_y + th + int(35 * scale)
-            db = draw.textbbox((0, 0), day_str, font=font_sub)
-            dw = db[2] - db[0]
-            day_x = clock_x + (tw - dw) // 2
-
-            line_len = int(120 * scale)
-            draw.line([(day_x - line_len - int(15 * scale), line_y), (day_x - int(15 * scale), line_y)], fill=(224, 242, 254, 160), width=int(1.5 * scale))
-            draw.text((day_x, line_y - int(8 * scale)), day_str, font=font_sub, fill=(224, 242, 254, 240))
-            draw.line([(day_x + dw + int(15 * scale), line_y), (day_x + dw + line_len + int(15 * scale), line_y)], fill=(224, 242, 254, 160), width=int(1.5 * scale))
-
-            # Date text line
-            dtb = draw.textbbox((0, 0), date_str, font=font_sub)
-            dtw = dtb[2] - dtb[0]
-            date_x = clock_x + (tw - dtw) // 2
-            date_y = line_y + int(24 * scale)
-            draw.text((date_x, date_y), date_str, font=font_sub, fill=(224, 242, 254, 200))
+            date_x = card_x + (card_w - dtw) // 2
+            date_y = line_y + int(20 * scale)
+            draw.text((date_x, date_y), date_str, font=font_sub, fill=(255, 255, 255, 220))
 
     else:
         # 3. Flip Cards ("10" : "45")
