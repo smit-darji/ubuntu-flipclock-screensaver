@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.0.6] - 2026-09-02 - AM/PM Non-Overlapping Alignment & Breathable Colon Spacing Release
+
+### Added
+- **⏱️ Resolved AM/PM Overlap**: Configured `display: flex; flex-direction: row` on `.glass-digit-tile` so the `AM`/`PM` badge sits cleanly to the right of seconds digits (`28`) with zero text overlapping.
+- **✨ Breathable Colon Spacing & Clean Typography**: Restored positive colon margins (`margin: 0 clamp(6px, 1vw, 16px)`) ensuring colons (`:`) are 100% visible, breathable, and beautifully aligned across all screens.
+
 ## [5.0.5] - 2026-09-02 - Purged Card Split Lines & Hinge Dots Release
 
 ### Added
