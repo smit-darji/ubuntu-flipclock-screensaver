@@ -17,3 +17,4 @@ daemon.log
 # Duplicate screenshots in assets
 assets/settings_window.png
 assets/shape_*.png
+releases/*.deb

@@ -482,83 +482,187 @@ def render_theme_screenshot(theme_key, theme_info, output_dir="assets"):
     gw = gb[2] - gb[0]
     draw.text(((w - gw) // 2, int(22 * scale)), greeting_text, font=font_cinzel, fill=theme_info["accent_color"])
 
-    # 3. Flip Cards ("10" : "45")
-    card_w = int(170 * scale)
-    card_h = int(220 * scale)
-    card_y = int(60 * scale)
-    gap = int(24 * scale)
-    card_r = int(14 * scale)
+    if theme_key in ["glass_misty_pavilion", "glass_anime_hydrangea"]:
+        # Draw aesthetic glass clock layout matching user's reference images
+        font_large = None
+        font_sub = None
+        font_paths = [
+            "/usr/share/fonts/truetype/ubuntu/Ubuntu-Light.ttf",
+            "/usr/share/fonts/truetype/dejavu/DejaVuSans-ExtraLight.ttf",
+            "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+        ]
+        for fp in font_paths:
+            try:
+                font_large = ImageFont.truetype(fp, int(85 * scale))
+                font_sub = ImageFont.truetype(fp, int(14 * scale))
+                break
+            except Exception:
+                pass
+        if font_large is None:
+            font_large = font_bold
+            font_sub = font_cinzel
 
-    cards_total_w = card_w * 2 + gap + int(30 * scale)
-    start_x = (w - cards_total_w) // 2
+        time_str = "11:47"
+        sec_str = ":36"
+        ampm_str = "AM"
+        day_str = "T U E S D A Y"
+        date_str = "02  SEPTEMBER  2026"
+        week_str = "📅 ── WEEK 36 ──"
 
-    # Helper function to draw card
-    def draw_card(cx, text_val):
-        c_box = [cx, card_y, cx + card_w, card_y + card_h]
-        half_y = (c_box[1] + c_box[3]) // 2
-
-        # Card image mask
-        c_img = Image.new("RGBA", (w, h), (0, 0, 0, 0))
-        c_draw = ImageDraw.Draw(c_img)
-
-        # Top half
-        c_draw.rectangle([c_box[0], c_box[1], c_box[2], half_y], fill=theme_info["card_top"])
-        # Bottom half
-        c_draw.rectangle([c_box[0], half_y, c_box[2], c_box[3]], fill=theme_info["card_bot"])
-
-        mask = Image.new("L", (w, h), 0)
-        m_draw = ImageDraw.Draw(mask)
-        m_draw.rounded_rectangle(c_box, radius=card_r, fill=255)
-
-        img.paste(c_img, (0, 0), mask)
-
-        # Card outline
-        draw.rounded_rectangle(c_box, radius=card_r, outline=theme_info["border_color"], width=int(2 * scale))
-
-        # Split divider line
-        div_h = int(3 * scale)
-        draw.rectangle([c_box[0], half_y - div_h // 2, c_box[2], half_y + div_h // 2], fill=(0, 0, 0, 240))
-
-        # Side pins
-        pin_w = int(6 * scale)
-        pin_h = int(12 * scale)
-        pin_r = int(2 * scale)
-        draw.rounded_rectangle([c_box[0] + int(6 * scale), half_y - pin_h // 2, c_box[0] + int(6 * scale) + pin_w, half_y + pin_h // 2], radius=pin_r, fill=theme_info["pin_color"])
-        draw.rounded_rectangle([c_box[2] - int(6 * scale) - pin_w, half_y - pin_h // 2, c_box[2] - int(6 * scale), half_y + pin_h // 2], radius=pin_r, fill=theme_info["pin_color"])
-
-        # Digit text
-        tb = draw.textbbox((0, 0), text_val, font=font_bold)
+        tb = draw.textbbox((0, 0), time_str, font=font_large)
         tw = tb[2] - tb[0]
         th = tb[3] - tb[1]
-        tx = cx + (card_w - tw) // 2 - tb[0]
-        ty = card_y + (card_h - th) // 2 - tb[1]
-        draw.text((tx, ty), text_val, font=font_bold, fill=theme_info["digit_color"])
 
-    # Draw Hours ("10") & Minutes ("45")
-    draw_card(start_x, "10")
+        if theme_key == "glass_anime_hydrangea":
+            # Left-aligned frosted glass panel matching Image 2
+            panel_x = int(35 * scale)
+            panel_y = int(75 * scale)
+            panel_w = int(340 * scale)
+            panel_h = int(180 * scale)
+            panel_r = int(24 * scale)
 
-    # Separator Dots
-    sep_x = start_x + card_w + int(15 * scale)
-    dot_r = int(5 * scale)
-    dot_y1 = card_y + card_h // 3
-    dot_y2 = card_y + (card_h * 2) // 3
-    draw.ellipse([sep_x - dot_r, dot_y1 - dot_r, sep_x + dot_r, dot_y1 + dot_r], fill=theme_info["accent_color"])
-    draw.ellipse([sep_x - dot_r, dot_y2 - dot_r, sep_x + dot_r, dot_y2 + dot_r], fill=theme_info["accent_color"])
+            # Frosted glass panel box background & border
+            p_box = [panel_x, panel_y, panel_x + panel_w, panel_y + panel_h]
+            draw.rounded_rectangle(p_box, radius=panel_r, fill=(12, 20, 34, 150), outline=(186, 230, 253, 160), width=int(1.5 * scale))
 
-    draw_card(sep_x + int(15 * scale), "45")
+            # Digits inside panel
+            clock_x = panel_x + int(24 * scale)
+            clock_y = panel_y + int(20 * scale)
+            draw.text((clock_x, clock_y), time_str, font=font_large, fill=(255, 255, 255, 255))
+            draw.text((clock_x + tw + int(8 * scale), clock_y + int(28 * scale)), sec_str, font=font_sub, fill=(186, 230, 253, 230))
 
-    # 4. Date Badge at Bottom
-    date_text = "THURSDAY ◆ 30 JULY 2026"
-    db = draw.textbbox((0, 0), date_text, font=font_cinzel)
-    dw = db[2] - db[0]
-    dh = db[3] - db[1]
-    badge_y = card_y + card_h + int(20 * scale)
-    badge_pad_x = int(20 * scale)
-    badge_pad_y = int(6 * scale)
-    b_box = [(w - dw) // 2 - badge_pad_x, badge_y - badge_pad_y, (w + dw) // 2 + badge_pad_x, badge_y + dh + badge_pad_y]
+            # Day line
+            line_y = clock_y + th + int(25 * scale)
+            db = draw.textbbox((0, 0), day_str, font=font_sub)
+            dw = db[2] - db[0]
+            day_x = panel_x + (panel_w - dw) // 2
 
-    draw.rounded_rectangle(b_box, radius=int(20 * scale), fill=theme_info["badge_bg"], outline=theme_info["badge_border"], width=int(1.5 * scale))
-    draw.text(((w - dw) // 2, badge_y), date_text, font=font_cinzel, fill=theme_info["accent_color"])
+            line_len = int(60 * scale)
+            draw.line([(day_x - line_len - int(10 * scale), line_y), (day_x - int(10 * scale), line_y)], fill=(224, 242, 254, 140), width=int(1.2 * scale))
+            draw.text((day_x, line_y - int(8 * scale)), day_str, font=font_sub, fill=(224, 242, 254, 240))
+            draw.line([(day_x + dw + int(10 * scale), line_y), (day_x + dw + line_len + int(10 * scale), line_y)], fill=(224, 242, 254, 140), width=int(1.2 * scale))
+
+            # Date text
+            dtb = draw.textbbox((0, 0), date_str, font=font_sub)
+            dtw = dtb[2] - dtb[0]
+            date_x = panel_x + (panel_w - dtw) // 2
+            date_y = line_y + int(22 * scale)
+            draw.text((date_x, date_y), date_str, font=font_sub, fill=(224, 242, 254, 200))
+
+            # Week 36 pill badge below panel
+            wb = draw.textbbox((0, 0), week_str, font=font_sub)
+            ww = wb[2] - wb[0]
+            wh = wb[3] - wb[1]
+            week_y = panel_y + panel_h + int(16 * scale)
+            w_box = [panel_x + (panel_w - ww) // 2 - int(16 * scale), week_y - int(5 * scale), panel_x + (panel_w + ww) // 2 + int(16 * scale), week_y + wh + int(5 * scale)]
+            draw.rounded_rectangle(w_box, radius=int(16 * scale), fill=(12, 20, 34, 140), outline=(186, 230, 253, 140), width=int(1.2 * scale))
+            draw.text((panel_x + (panel_w - ww) // 2, week_y), week_str, font=font_sub, fill=(224, 242, 254, 240))
+
+        else:
+            # Frameless right-aligned for Misty Pavilion matching Image 1
+            right_margin = int(48 * scale)
+            clock_x = w - right_margin - tw - int(50 * scale)
+            clock_y = int(85 * scale)
+
+            draw.text((clock_x, clock_y), time_str, font=font_large, fill=(224, 242, 254, 255))
+            draw.text((clock_x + tw + int(10 * scale), clock_y + int(45 * scale)), ampm_str, font=font_sub, fill=(186, 230, 253, 230))
+
+            # Day divider line
+            line_y = clock_y + th + int(35 * scale)
+            db = draw.textbbox((0, 0), day_str, font=font_sub)
+            dw = db[2] - db[0]
+            day_x = clock_x + (tw - dw) // 2
+
+            line_len = int(120 * scale)
+            draw.line([(day_x - line_len - int(15 * scale), line_y), (day_x - int(15 * scale), line_y)], fill=(224, 242, 254, 160), width=int(1.5 * scale))
+            draw.text((day_x, line_y - int(8 * scale)), day_str, font=font_sub, fill=(224, 242, 254, 240))
+            draw.line([(day_x + dw + int(15 * scale), line_y), (day_x + dw + line_len + int(15 * scale), line_y)], fill=(224, 242, 254, 160), width=int(1.5 * scale))
+
+            # Date text line
+            dtb = draw.textbbox((0, 0), date_str, font=font_sub)
+            dtw = dtb[2] - dtb[0]
+            date_x = clock_x + (tw - dtw) // 2
+            date_y = line_y + int(24 * scale)
+            draw.text((date_x, date_y), date_str, font=font_sub, fill=(224, 242, 254, 200))
+
+    else:
+        # 3. Flip Cards ("10" : "45")
+        card_w = int(170 * scale)
+        card_h = int(220 * scale)
+        card_y = int(60 * scale)
+        gap = int(24 * scale)
+        card_r = int(14 * scale)
+
+        cards_total_w = card_w * 2 + gap + int(30 * scale)
+        start_x = (w - cards_total_w) // 2
+
+        # Helper function to draw card
+        def draw_card(cx, text_val):
+            c_box = [cx, card_y, cx + card_w, card_y + card_h]
+            half_y = (c_box[1] + c_box[3]) // 2
+
+            # Card image mask
+            c_img = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+            c_draw = ImageDraw.Draw(c_img)
+
+            # Top half
+            c_draw.rectangle([c_box[0], c_box[1], c_box[2], half_y], fill=theme_info["card_top"])
+            # Bottom half
+            c_draw.rectangle([c_box[0], half_y, c_box[2], c_box[3]], fill=theme_info["card_bot"])
+
+            mask = Image.new("L", (w, h), 0)
+            m_draw = ImageDraw.Draw(mask)
+            m_draw.rounded_rectangle(c_box, radius=card_r, fill=255)
+
+            img.paste(c_img, (0, 0), mask)
+
+            # Card outline
+            draw.rounded_rectangle(c_box, radius=card_r, outline=theme_info["border_color"], width=int(2 * scale))
+
+            # Split divider line
+            div_h = int(3 * scale)
+            draw.rectangle([c_box[0], half_y - div_h // 2, c_box[2], half_y + div_h // 2], fill=(0, 0, 0, 240))
+
+            # Side pins
+            pin_w = int(6 * scale)
+            pin_h = int(12 * scale)
+            pin_r = int(2 * scale)
+            draw.rounded_rectangle([c_box[0] + int(6 * scale), half_y - pin_h // 2, c_box[0] + int(6 * scale) + pin_w, half_y + pin_h // 2], radius=pin_r, fill=theme_info["pin_color"])
+            draw.rounded_rectangle([c_box[2] - int(6 * scale) - pin_w, half_y - pin_h // 2, c_box[2] - int(6 * scale), half_y + pin_h // 2], radius=pin_r, fill=theme_info["pin_color"])
+
+            # Digit text
+            tb = draw.textbbox((0, 0), text_val, font=font_bold)
+            tw = tb[2] - tb[0]
+            th = tb[3] - tb[1]
+            tx = cx + (card_w - tw) // 2 - tb[0]
+            ty = card_y + (card_h - th) // 2 - tb[1]
+            draw.text((tx, ty), text_val, font=font_bold, fill=theme_info["digit_color"])
+
+        # Draw Hours ("10") & Minutes ("45")
+        draw_card(start_x, "10")
+
+        # Separator Dots
+        sep_x = start_x + card_w + int(15 * scale)
+        dot_r = int(5 * scale)
+        dot_y1 = card_y + card_h // 3
+        dot_y2 = card_y + (card_h * 2) // 3
+        draw.ellipse([sep_x - dot_r, dot_y1 - dot_r, sep_x + dot_r, dot_y1 + dot_r], fill=theme_info["accent_color"])
+        draw.ellipse([sep_x - dot_r, dot_y2 - dot_r, sep_x + dot_r, dot_y2 + dot_r], fill=theme_info["accent_color"])
+
+        draw_card(sep_x + int(15 * scale), "45")
+
+        # 4. Date Badge at Bottom
+        date_text = "THURSDAY ◆ 30 JULY 2026"
+        db = draw.textbbox((0, 0), date_text, font=font_cinzel)
+        dw = db[2] - db[0]
+        dh = db[3] - db[1]
+        badge_y = card_y + card_h + int(20 * scale)
+        badge_pad_x = int(20 * scale)
+        badge_pad_y = int(6 * scale)
+        b_box = [(w - dw) // 2 - badge_pad_x, badge_y - badge_pad_y, (w + dw) // 2 + badge_pad_x, badge_y + dh + badge_pad_y]
+
+        draw.rounded_rectangle(b_box, radius=int(20 * scale), fill=theme_info["badge_bg"], outline=theme_info["badge_border"], width=int(1.5 * scale))
+        draw.text(((w - dw) // 2, badge_y), date_text, font=font_cinzel, fill=theme_info["accent_color"])
 
     # Scale down for smooth anti-aliased output (640x380)
     out_img = img.resize((640, 380), Image.Resampling.LANCZOS)

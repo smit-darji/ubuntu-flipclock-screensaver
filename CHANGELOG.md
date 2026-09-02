@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.0.0] - 2026-09-02 - Aesthetic Frameless Glass Clock & Day Line Divider Release
+
+### Added
+- **✨ Frameless Cardless Glass Clock Layout**: Designed 100% frameless aesthetic rounded glass digits floating over live video scenes with zero cards or container boxes.
+- **── T U E S D A Y ── Day Line Divider**: Integrated horizontal line divider with uppercase day-of-week typography.
+- **📅 Tracked Uppercase Date Display**: Added clean date formatting below day divider line (`02 SEPTEMBER 2026`).
+- **⚡ Live Ticking HH:MM:SS Updates**: Real-time live second ticking (`HH:MM:SS AM/PM`) smoothly updating on screen.
+
 ## [3.9.0] - 2026-09-02 - Animated WebP Live Wallpaper & Codec-Free Support
 
 ### Added
