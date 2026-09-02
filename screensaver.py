@@ -436,6 +436,24 @@ DEFAULT_HTML_CONTENT = """<!DOCTYPE html>
             --badge-bg: rgba(0,0,0,0.9);
             --badge-border: rgba(255,255,255,0.2);
         }
+        .theme-glass_anime_hydrangea {
+            --card-bg: transparent;
+            --card-border: transparent;
+            --digit-color: #F8F5FF;
+            --accent-color: #C084FC;
+            --badge-color: #F8F5FF;
+            --badge-bg: rgba(13,7,20,0.85);
+            --badge-border: rgba(192,132,252,0.4);
+        }
+        .theme-glass_misty_pavilion {
+            --card-bg: transparent;
+            --card-border: transparent;
+            --digit-color: #FEF3C7;
+            --accent-color: #F59E0B;
+            --badge-color: #FEF3C7;
+            --badge-bg: rgba(6,11,18,0.85);
+            --badge-border: rgba(245,158,11,0.4);
+        }
         .theme-apple_liquid_glass {
             --card-bg: rgba(255,255,255,0.12);
             --card-border: rgba(255,255,255,0.18);

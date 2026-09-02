@@ -107,6 +107,32 @@ THEMES = {
         "badge_border": (245, 158, 11, 140),
         "greeting": "GOOD EVENING"
     },
+    "glass_anime_hydrangea": {
+        "title": "🌸 Anime Girl Hydrangea Garden",
+        "bg_color": (13, 7, 20, 255),
+        "card_top": (192, 132, 252, 0),
+        "card_bot": (168, 85, 247, 0),
+        "border_color": (192, 132, 252, 0),
+        "digit_color": (248, 245, 255, 255),
+        "pin_color": (192, 132, 252, 255),
+        "accent_color": (192, 132, 252, 255),
+        "badge_bg": (25, 12, 40, 200),
+        "badge_border": (192, 132, 252, 140),
+        "greeting": "GOOD EVENING"
+    },
+    "glass_misty_pavilion": {
+        "title": "🏮 Misty Lakeside Pavilion",
+        "bg_color": (6, 11, 18, 255),
+        "card_top": (245, 158, 11, 0),
+        "card_bot": (217, 119, 6, 0),
+        "border_color": (245, 158, 11, 0),
+        "digit_color": (254, 243, 199, 255),
+        "pin_color": (245, 158, 11, 255),
+        "accent_color": (245, 158, 11, 255),
+        "badge_bg": (12, 22, 35, 200),
+        "badge_border": (245, 158, 11, 140),
+        "greeting": "GOOD EVENING"
+    },
     "liquid_glass": {
         "title": "💧 Liquid Glass Dark",
         "bg_color": (6, 8, 16, 255),

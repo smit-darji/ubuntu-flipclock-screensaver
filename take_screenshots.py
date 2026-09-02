@@ -15,7 +15,7 @@ with open(BASE_HTML, "r") as f:
     base_html = f.read()
 
 THEMES = [
-    "glass_clock", "glass_aurora", "glass_cyberpunk", "glass_emerald", "glass_sunset", "glass_spiderman", "glass_ganesha", "glass_minimal_oled",
+    "glass_clock", "glass_aurora", "glass_cyberpunk", "glass_emerald", "glass_sunset", "glass_spiderman", "glass_ganesha", "glass_minimal_oled", "glass_anime_hydrangea", "glass_misty_pavilion",
     "luxury_black_gold", "obsidian_titanium", "dark_emerald", "forest_green",
     "racing_green", "ruby_executive", "burgundy_prestige", "crimson_royal",
     "royal_sapphire", "midnight_navy", "arctic_ice", "ocean_cyan",

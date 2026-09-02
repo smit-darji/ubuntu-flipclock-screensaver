@@ -26,12 +26,16 @@ except ValueError:
         sys.exit(1)
 from gi.repository import Gtk, Gdk, WebKit2, GLib, GdkPixbuf
 
-APP_VERSION = "3.5.0"
+APP_VERSION = "3.7.0"
 
 THEME_CATEGORIES = {
+    "live_wallpapers": {
+        "label": "🎥 Live Video Wallpaper Collections (4K)",
+        "themes": ["glass_anime_hydrangea", "glass_misty_pavilion"]
+    },
     "glass_clock": {
         "label": "✨ Glass Clock Collections",
-        "themes": ["glass_clock", "glass_aurora", "glass_cyberpunk", "glass_emerald", "glass_sunset", "glass_spiderman", "glass_ganesha", "glass_minimal_oled"]
+        "themes": ["glass_clock", "glass_aurora", "glass_cyberpunk", "glass_emerald", "glass_sunset", "glass_spiderman", "glass_ganesha", "glass_minimal_oled", "glass_anime_hydrangea", "glass_misty_pavilion"]
     },
     "liquid_glass": {
         "label": "💧 Liquid Glass & Crystal Dark",
@@ -139,6 +143,26 @@ PRESET_THEMES = {
         "border_color": "transparent",
         "digit_font": "Inter",
         "label_font": "Inter"
+    },
+    "glass_anime_hydrangea": {
+        "name": "🎥🌸 Anime Girl Hydrangea Garden (Live 4K) ✦",
+        "bg_color": "#0d0714",
+        "card_color": "transparent",
+        "digit_color": "#F8F5FF",
+        "accent_color": "#C084FC",
+        "border_color": "transparent",
+        "digit_font": "Outfit",
+        "label_font": "Outfit"
+    },
+    "glass_misty_pavilion": {
+        "name": "🎥🏮 Misty Lakeside Pavilion (Live 4K) ✦",
+        "bg_color": "#060b12",
+        "card_color": "transparent",
+        "digit_color": "#FEF3C7",
+        "accent_color": "#F59E0B",
+        "border_color": "transparent",
+        "digit_font": "Outfit",
+        "label_font": "Outfit"
     },
     "liquid_glass": {
         "name": "💧 Translucent Liquid Cyan",

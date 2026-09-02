@@ -33,6 +33,7 @@ cp flipclock.py "$PKG_DIR/usr/share/flipclock/"
 if [ -f "daemon.py" ]; then cp daemon.py "$PKG_DIR/usr/share/flipclock/"; fi
 if [ -f "screensaver.py" ]; then cp screensaver.py "$PKG_DIR/usr/share/flipclock/"; fi
 if [ -d "assets" ]; then cp -r assets "$PKG_DIR/usr/share/flipclock/"; fi
+if [ -d "live-wallpaper" ]; then cp -r live-wallpaper "$PKG_DIR/usr/share/flipclock/"; fi
 
 if [ -f "flipclock.png" ]; then
     cp flipclock.png "$PKG_DIR/usr/share/pixmaps/flipclock.png"

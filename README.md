@@ -40,8 +40,8 @@ Click the buttons below to download the pre-compiled packages directly (includin
     <img src="https://img.shields.io/badge/DOWNLOAD-Latest%20.deb%20Package-10B981?style=for-the-badge&logo=debian&logoColor=white" height="48" alt="Download Latest .deb Package">
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_3.5.0.deb" target="_blank">
-    <img src="https://img.shields.io/badge/DOWNLOAD-Versioned%20v3.5.0%20.deb-6366F1?style=for-the-badge&logo=debian&logoColor=white" height="48" alt="Download Versioned .deb Package">
+  <a href="https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_3.7.0.deb" target="_blank">
+    <img src="https://img.shields.io/badge/DOWNLOAD-Versioned%20v3.7.0%20.deb-6366F1?style=for-the-badge&logo=debian&logoColor=white" height="48" alt="Download Versioned .deb Package">
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="releases/flipclock-screensaver.apk" download="flipclock-screensaver.apk">
@@ -56,9 +56,9 @@ wget https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/M
 
 ---
 
-## 🎨 31 Premium Color Themes & Glass Collections
+## 🎨 33 Premium Color Themes & Glass Collections
 
-### ✨ Premium Glass Clock Face Collections (8 Themes)
+### ✨ Premium Glass Clock Face Collections (10 Themes)
 
 | ✨ Classic Frosted Cyan | 🌌 Aurora Borealis | 🌆 Cyberpunk Neon |
 |:---:|:---:|:---:|
@@ -71,6 +71,12 @@ wget https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/M
 | 🐘 Ganesha Divine Gold | 🧊 OLED Pure Frameless |
 |:---:|:---:|
 | ![Ganesha Divine Gold](assets/theme_glass_ganesha.png) | ![OLED Pure Frameless](assets/theme_glass_minimal_oled.png) |
+
+### 🎬 4K Live Video Wallpaper Collections (2 Themes)
+
+| 🎬🌸 Anime Girl Hydrangea Garden (Live) | 🎬🏮 Misty Lakeside Pavilion (Live) |
+|:---:|:---:|
+| ![Anime Girl Hydrangea Garden](assets/theme_glass_anime_hydrangea.png) | ![Misty Lakeside Pavilion](assets/theme_glass_misty_pavilion.png) |
 
 ### 🏆 Executive Dark & Gold Collection
 

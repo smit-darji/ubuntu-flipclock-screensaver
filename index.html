@@ -2264,6 +2264,130 @@
                 text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
             }
 
+            /* Theme 9: Anime Girl Hydrangea Garden Live Wallpaper Theme (Frameless Floating Aesthetic Typography) */
+            .theme-glass_anime_hydrangea #scene {
+                background: #0d0714 !important;
+            }
+            .anime-hydrangea-scene-layer {
+                display: none;
+                position: absolute;
+                inset: 0;
+                pointer-events: none;
+                z-index: 2;
+                overflow: hidden;
+            }
+            .theme-glass_anime_hydrangea .anime-hydrangea-scene-layer {
+                display: block;
+            }
+            .anime-hydrangea-video-bg {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center center;
+                filter: brightness(0.85) contrast(1.1);
+            }
+            .anime-hydrangea-overlay {
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(circle at 50% 50%, rgba(192, 132, 252, 0.08) 0%, rgba(15, 10, 25, 0.35) 100%);
+            }
+            .anime-hydrangea-vignette {
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(circle at center, transparent 40%, rgba(10, 6, 20, 0.65) 100%);
+                box-shadow: inset 0 0 100px rgba(168, 85, 247, 0.2);
+            }
+            .theme-glass_anime_hydrangea .orb-1 {
+                background: radial-gradient(circle, rgba(192, 132, 252, 0.35) 0%, rgba(147, 51, 234, 0.12) 70%, transparent 100%);
+            }
+            .theme-glass_anime_hydrangea .orb-2 {
+                background: radial-gradient(circle, rgba(129, 140, 248, 0.30) 0%, rgba(79, 70, 229, 0.10) 70%, transparent 100%);
+            }
+            .theme-glass_anime_hydrangea .glass-digit-tile {
+                background: transparent !important;
+                border: none !important;
+                box-shadow: none !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+            }
+            .theme-glass_anime_hydrangea .gc-num {
+                color: #F8F5FF !important;
+                font-weight: 300 !important;
+                text-shadow: 
+                    0 0 20px rgba(192, 132, 252, 0.85),
+                    0 0 45px rgba(168, 85, 247, 0.55),
+                    0 4px 24px rgba(0, 0, 0, 0.9) !important;
+            }
+            .theme-glass_anime_hydrangea .glass-colon {
+                color: #C084FC !important;
+                text-shadow: 0 0 25px rgba(192, 132, 252, 0.9), 0 0 50px rgba(168, 85, 247, 0.6) !important;
+            }
+
+            /* Theme 10: Misty Lakeside Pavilion Live Wallpaper Theme (Frameless Floating Lantern Typography) */
+            .theme-glass_misty_pavilion #scene {
+                background: #060b12 !important;
+            }
+            .misty-pavilion-scene-layer {
+                display: none;
+                position: absolute;
+                inset: 0;
+                pointer-events: none;
+                z-index: 2;
+                overflow: hidden;
+            }
+            .theme-glass_misty_pavilion .misty-pavilion-scene-layer {
+                display: block;
+            }
+            .misty-pavilion-video-bg {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center center;
+                filter: brightness(0.88) contrast(1.12);
+            }
+            .misty-pavilion-overlay {
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.06) 0%, rgba(6, 11, 18, 0.40) 100%);
+            }
+            .misty-pavilion-vignette {
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(circle at center, transparent 40%, rgba(4, 8, 14, 0.70) 100%);
+                box-shadow: inset 0 0 120px rgba(217, 119, 6, 0.25);
+            }
+            .theme-glass_misty_pavilion .orb-1 {
+                background: radial-gradient(circle, rgba(245, 158, 11, 0.35) 0%, rgba(217, 119, 6, 0.12) 70%, transparent 100%);
+            }
+            .theme-glass_misty_pavilion .orb-2 {
+                background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, rgba(30, 58, 138, 0.10) 70%, transparent 100%);
+            }
+            .theme-glass_misty_pavilion .glass-digit-tile {
+                background: transparent !important;
+                border: none !important;
+                box-shadow: none !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+            }
+            .theme-glass_misty_pavilion .gc-num {
+                color: #FEF3C7 !important;
+                font-weight: 300 !important;
+                text-shadow: 
+                    0 0 20px rgba(245, 158, 11, 0.85),
+                    0 0 45px rgba(217, 119, 6, 0.55),
+                    0 4px 24px rgba(0, 0, 0, 0.95) !important;
+            }
+            .theme-glass_misty_pavilion .glass-colon {
+                color: #F59E0B !important;
+                text-shadow: 0 0 25px rgba(245, 158, 11, 0.9), 0 0 50px rgba(217, 119, 6, 0.6) !important;
+            }
+
             /* Hide flip clock cards when any Glass theme is active */
             body[class*="theme-glass_"] #clock-row {
                 display: none !important;
@@ -2773,6 +2897,19 @@
                 </div>
 
                 <div class="menu-divider"></div>
+                <div class="menu-section-title">🎬 4K LIVE VIDEO WALLPAPERS</div>
+                <div class="menu-item" data-face="glass_anime_hydrangea">
+                    <span class="item-icon">🎬🌸</span>
+                    <span class="item-label">Anime Hydrangea Garden (Live)</span>
+                    <span class="badge-star" style="background: rgba(225, 29, 72, 0.25); color: #FDA4AF; border-color: rgba(244, 63, 94, 0.5);">🎥 LIVE</span>
+                </div>
+                <div class="menu-item" data-face="glass_misty_pavilion">
+                    <span class="item-icon">🎬🏮</span>
+                    <span class="item-label">Misty Lakeside Pavilion (Live)</span>
+                    <span class="badge-star" style="background: rgba(225, 29, 72, 0.25); color: #FDA4AF; border-color: rgba(244, 63, 94, 0.5);">🎥 LIVE</span>
+                </div>
+
+                <div class="menu-divider"></div>
                 <div class="menu-section-title">🕐 RETRO FLIP CLOCK</div>
                 <div class="menu-item" data-face="classic_retro">
                     <span class="item-icon">🕐</span>
@@ -2871,6 +3008,20 @@
         <!-- Lord Ganesha Divine Murti Background Layer -->
         <div class="ganesha-scene-layer">
             <div class="ganesha-artwork-bg"></div>
+        </div>
+
+        <!-- Anime Girl Hydrangea Garden Live Wallpaper Scene Layer -->
+        <div class="anime-hydrangea-scene-layer">
+            <video class="anime-hydrangea-video-bg" autoplay loop muted playsinline src="live-wallpaper/ba98956200_anime-girl-hydrangea-garden-live-wallpaper-wallsflow-com.mp4"></video>
+            <div class="anime-hydrangea-overlay"></div>
+            <div class="anime-hydrangea-vignette"></div>
+        </div>
+
+        <!-- Misty Lakeside Pavilion Live Wallpaper Scene Layer -->
+        <div class="misty-pavilion-scene-layer">
+            <video class="misty-pavilion-video-bg" autoplay loop muted playsinline src="live-wallpaper/6964bab862_misty-lakeside-pavilion-live-wallpaper-wallsflow-com.mp4"></video>
+            <div class="misty-pavilion-overlay"></div>
+            <div class="misty-pavilion-vignette"></div>
         </div>
 
         <div id="clock-container">
@@ -3041,6 +3192,8 @@
                 "glass_spiderman": "#180308",
                 "glass_ganesha": "#1a0c02",
                 "glass_minimal_oled": "#000000",
+                "glass_anime_hydrangea": "#0d0714",
+                "glass_misty_pavilion": "#060b12",
                 "apple_liquid_glass": "#000000",
                 "liquid_glass": "#060810",
                 "luxury_black_gold": "#000000",

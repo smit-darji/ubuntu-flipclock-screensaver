@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.7.0] - 2026-09-02 - Misty Lakeside Pavilion Live Wallpaper Theme & Frameless Lantern Glow Clock
+
+### Added
+- **🏮 Misty Lakeside Pavilion Theme (`glass_misty_pavilion`)**: Integrated 4K live video wallpaper backdrop (`live-wallpaper/6964bab862_misty-lakeside-pavilion-live-wallpaper-wallsflow-com.mp4`) capturing misty lake fog, ancient forest shadows, and amber lantern reflections.
+- **✨ Frameless Floating Amber Lantern Clock Display**: Designed frameless transparent typography overlay (`background: transparent; border: none; box-shadow: none`) featuring warm glowing lantern amber-gold digits (`#FEF3C7` with `#F59E0B` / `#D97706` text shadow) floating above the lake mist.
+
+## [3.6.0] - 2026-09-02 - Anime Girl Hydrangea Garden Live Wallpaper Theme & Frameless Aesthetic Clock
+
+### Added
+- **🌸 Anime Girl Hydrangea Garden Theme (`glass_anime_hydrangea`)**: Integrated seamless live video wallpaper backdrop (`live-wallpaper/ba98956200_anime-girl-hydrangea-garden-live-wallpaper-wallsflow-com.mp4`) with smooth autoplay and dark vignette overlay.
+- **✨ Frameless Floating Aesthetic Clock Display**: Designed frameless transparent typography overlay (`background: transparent; border: none; box-shadow: none`) featuring glowing soft hydrangea lavender digits (`#F8F5FF` with `#C084FC` / `#A855F7` text shadow) floating seamlessly on top of the live video background.
+
 ## [3.5.0] - 2026-08-31 - Frosted Dark Ruby Spider-Man Glass Cards & Deep High-Contrast Ganesha Theme
 
 ### Added
