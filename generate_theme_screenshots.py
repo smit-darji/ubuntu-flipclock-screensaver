@@ -527,8 +527,12 @@ def render_theme_screenshot(theme_key, theme_info, output_dir="assets"):
             card_y = int(60 * scale)
             card_r = int(24 * scale)
 
-            # Draw translucent glass card box
-            draw.rounded_rectangle([card_x, card_y, card_x + card_w, card_y + card_h], radius=card_r, fill=(12, 20, 34, 110), outline=(255, 255, 255, 120), width=int(1.5 * scale))
+            # Draw translucent white glass card box with proper alpha blending
+            glass_overlay = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+            gdraw = ImageDraw.Draw(glass_overlay)
+            gdraw.rounded_rectangle([card_x, card_y, card_x + card_w, card_y + card_h], radius=card_r, fill=(255, 255, 255, 30), outline=(255, 255, 255, 160), width=int(1.8 * scale))
+            img = Image.alpha_composite(img.convert("RGBA"), glass_overlay).convert("RGB")
+            draw = ImageDraw.Draw(img)
 
             # Digits inside glass card box
             full_time_str = "11:47:36"
