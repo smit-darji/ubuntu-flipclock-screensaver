@@ -2383,7 +2383,7 @@
                 object-fit: cover;
                 object-position: center center;
                 filter: brightness(0.88) contrast(1.12);
-                z-index: 1;
+                z-index: 5;
             }
             .misty-pavilion-video-bg,
             .anime-hydrangea-video-bg {
@@ -3440,7 +3440,7 @@
             const scene = document.getElementById('scene');
             if (scene) {
                 scene.className = `shape-${cardShape}`;
-                if (!showSeconds) scene.classList.add('hide-seconds');
+                if (!showSeconds && themeName !== 'glass_misty_pavilion' && themeName !== 'glass_anime_hydrangea') scene.classList.add('hide-seconds');
                 else scene.classList.remove('hide-seconds');
 
                 if (!showDate && !showDay) scene.classList.add('hide-date-badge');
@@ -3451,7 +3451,8 @@
 
                 const ampmEl = document.getElementById('gc-ampm');
                 if (ampmEl) {
-                    const targetTile = showSeconds ? document.getElementById('gc-s') : document.getElementById('gc-m');
+                    const isLiveTheme = themeName === 'glass_misty_pavilion' || themeName === 'glass_anime_hydrangea';
+                    const targetTile = (showSeconds || isLiveTheme) ? document.getElementById('gc-s') : document.getElementById('gc-m');
                     if (targetTile && ampmEl.parentElement !== targetTile) {
                         targetTile.appendChild(ampmEl);
                     }

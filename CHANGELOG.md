@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.0.3] - 2026-09-02 - Mandatory 3D Glass Seconds & Ultra-Smooth WebP Live Background Sync
+
+### Added
+- **⏱️ Mandatory Ticking Seconds (`: SS`)**: Enforced real-time seconds ticking (`HH : MM : SS AM/PM`) for live wallpaper themes (`glass_misty_pavilion` & `glass_anime_hydrangea`).
+- **🌸 60FPS Smooth WebP Live Background**: Prioritized Z-index layering (`z-index: 5`) for `misty_pavilion.webp` and `anime_hydrangea.webp` ensuring ultra-smooth 60fps native animated video backgrounds.
+
 ## [5.0.2] - 2026-09-02 - Compact HH:MM:SS Glass Clock Spacing Release
 
 ### Added
