@@ -3079,7 +3079,7 @@ class FlipClockManager:
             'clock_size': '1.0',
             'animation_speed': 500,
             'monitors': 'all',
-            'theme': 'luxury_black_gold',
+            'theme': 'glass_misty_pavilion',
             'card_shape': 'squircle',
             'show_seconds': 'true',
             'show_date': 'true',

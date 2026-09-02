@@ -477,10 +477,11 @@ def render_theme_screenshot(theme_key, theme_info, output_dir="assets"):
         font_cinzel = ImageFont.load_default()
 
     # 2. Greeting Badge Text
-    greeting_text = theme_info["greeting"]
-    gb = draw.textbbox((0, 0), greeting_text, font=font_cinzel)
-    gw = gb[2] - gb[0]
-    draw.text(((w - gw) // 2, int(22 * scale)), greeting_text, font=font_cinzel, fill=theme_info["accent_color"])
+    if theme_key not in ["glass_misty_pavilion", "glass_anime_hydrangea"]:
+        greeting_text = theme_info["greeting"]
+        gb = draw.textbbox((0, 0), greeting_text, font=font_cinzel)
+        gw = gb[2] - gb[0]
+        draw.text(((w - gw) // 2, int(22 * scale)), greeting_text, font=font_cinzel, fill=theme_info["accent_color"])
 
     if theme_key in ["glass_misty_pavilion", "glass_anime_hydrangea"]:
         # Draw aesthetic glass clock layout matching user's reference images
