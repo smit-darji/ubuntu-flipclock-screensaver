@@ -2441,8 +2441,10 @@
             }
 
             .theme-glass_misty_pavilion .gc-sec-tile,
-            .theme-glass_misty_pavilion .gc-sec-colon {
-                display: none !important;
+            .theme-glass_misty_pavilion .gc-sec-colon,
+            .theme-glass_anime_hydrangea .gc-sec-tile,
+            .theme-glass_anime_hydrangea .gc-sec-colon {
+                display: flex !important;
             }
 
             .theme-glass_misty_pavilion .glass-digit-tile,
@@ -2455,43 +2457,47 @@
                 padding: 0 !important;
             }
 
-            .theme-glass_misty_pavilion .gc-num {
+            /* Pure Transparent White Glass 3D Typography */
+            .theme-glass_misty_pavilion .gc-num,
+            .theme-glass_anime_hydrangea .gc-num {
                 font-family: 'Comfortaa', 'Outfit', 'Quicksand', system-ui, sans-serif !important;
-                font-size: clamp(110px, 16vw, 240px) !important;
+                font-size: clamp(80px, 11vw, 175px) !important;
                 font-weight: 300 !important;
-                letter-spacing: -0.02em !important;
-                background: linear-gradient(180deg, #ffffff 0%, #e0f2fe 55%, #bae6fd 100%) !important;
+                letter-spacing: -0.01em !important;
+                background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 55%, #e0f2fe 100%) !important;
                 -webkit-background-clip: text !important;
                 -webkit-text-fill-color: transparent !important;
-                -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.80) !important;
-                filter: drop-shadow(0 0 18px rgba(186, 230, 253, 0.90)) drop-shadow(0 0 45px rgba(56, 189, 248, 0.60)) drop-shadow(0 6px 28px rgba(0, 0, 0, 0.90)) !important;
+                -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.90) !important;
+                filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 45px rgba(186, 230, 253, 0.70)) drop-shadow(0 8px 28px rgba(0, 0, 0, 0.90)) !important;
             }
 
-            .theme-glass_misty_pavilion .glass-colon {
+            .theme-glass_misty_pavilion .glass-colon,
+            .theme-glass_anime_hydrangea .glass-colon {
                 font-family: 'Comfortaa', 'Outfit', sans-serif !important;
-                font-size: clamp(95px, 14vw, 210px) !important;
-                background: linear-gradient(180deg, #ffffff 0%, #e0f2fe 60%, #bae6fd 100%) !important;
+                font-size: clamp(70px, 9.5vw, 150px) !important;
+                background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 60%, #e0f2fe 100%) !important;
                 -webkit-background-clip: text !important;
                 -webkit-text-fill-color: transparent !important;
-                -webkit-text-stroke: 1.2px rgba(255, 255, 255, 0.75) !important;
-                filter: drop-shadow(0 0 18px rgba(186, 230, 253, 0.90)) !important;
-                margin: 0 6px !important;
+                -webkit-text-stroke: 1.2px rgba(255, 255, 255, 0.85) !important;
+                filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.90)) !important;
+                margin: 0 4px !important;
                 align-self: center !important;
             }
 
-            .theme-glass_misty_pavilion .gc-ampm-pill {
+            .theme-glass_misty_pavilion .gc-ampm-pill,
+            .theme-glass_anime_hydrangea .gc-ampm-pill {
                 font-family: 'Outfit', 'Inter', sans-serif !important;
-                font-size: clamp(18px, 2.5vw, 36px) !important;
+                font-size: clamp(16px, 2.2vw, 30px) !important;
                 font-weight: 400 !important;
                 letter-spacing: 0.25em !important;
-                color: #bae6fd !important;
+                color: #ffffff !important;
                 background: transparent !important;
                 border: none !important;
                 box-shadow: none !important;
-                margin-left: 16px !important;
+                margin-left: 14px !important;
                 align-self: flex-end !important;
-                margin-bottom: 35px !important;
-                text-shadow: 0 0 20px rgba(186, 230, 253, 0.85) !important;
+                margin-bottom: 25px !important;
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.90) !important;
             }
 
             .theme-glass_misty_pavilion #date-badge,
@@ -2504,9 +2510,6 @@
                 padding: 0 !important;
                 margin-top: 15px !important;
                 width: 100% !important;
-            }
-
-            .theme-glass_misty_pavilion #date-badge {
                 max-width: 580px !important;
             }
 
@@ -2596,9 +2599,9 @@
                 font-size: clamp(14px, 2vw, 26px);
                 font-weight: 300;
                 letter-spacing: 0.55em;
-                color: #e0f2fe;
+                color: #ffffff;
                 text-transform: uppercase;
-                text-shadow: 0 0 16px rgba(186, 230, 253, 0.7);
+                text-shadow: 0 0 18px rgba(255, 255, 255, 0.85);
             }
 
             .misty-date-text {
@@ -2606,22 +2609,33 @@
                 font-size: clamp(13px, 1.6vw, 20px);
                 font-weight: 300;
                 letter-spacing: 0.45em;
-                color: rgba(224, 242, 254, 0.90);
+                color: rgba(255, 255, 255, 0.95);
                 text-transform: uppercase;
                 margin-top: 6px;
                 text-align: center;
-                text-shadow: 0 0 14px rgba(186, 230, 253, 0.5);
+                text-shadow: 0 0 16px rgba(255, 255, 255, 0.70);
             }
 
             .misty-week-text {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 12px;
+                padding: 6px 22px;
+                margin-top: 10px;
+                border-radius: 24px;
+                background: rgba(255, 255, 255, 0.08);
+                border: 1.2px solid rgba(255, 255, 255, 0.45);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.30);
                 font-family: 'Outfit', 'Inter', sans-serif;
                 font-size: clamp(11px, 1.3vw, 16px);
-                font-weight: 300;
+                font-weight: 400;
                 letter-spacing: 0.35em;
-                color: rgba(186, 230, 253, 0.75);
+                color: #ffffff;
                 text-transform: uppercase;
-                margin-top: 2px;
-                text-shadow: 0 0 10px rgba(186, 230, 253, 0.4);
+                text-shadow: 0 0 14px rgba(255, 255, 255, 0.85);
             }
 
             .theme-glass_ganesha .glass-colon {
