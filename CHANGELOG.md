@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.0.4] - 2026-09-02 - Collapsed Tile Width & Option B Auto-Update Release
+
+### Added
+- **⏱️ Collapsed Tile Width & Snug HH:MM:SS**: Overrode default `width` and `height` clamp rules on `.glass-digit-tile` (`width: auto !important`, `height: auto !important`, `min-width: 0 !important`) to eliminate giant empty 400px gaps between digits and colons.
+- **📄 Option B Header Auto-Update**: Added regex pattern to `build_deb.sh` to automatically sync `Option B: Install Versioned Release Archive (v5.0.4)` in `README.md`.
+
 ## [5.0.3] - 2026-09-02 - Mandatory 3D Glass Seconds & Ultra-Smooth WebP Live Background Sync
 
 ### Added
