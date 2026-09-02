@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.0.0] - 2026-09-02 - Master 3D Glass Live Clock Release
+
+### Added
+- **🏮 Frameless 3D Glass Live Clock Overlay**: Ultra-sleek 100% cardless 3D glass clock overlay (`11:47:36 AM`) positioned in the right-center area over live WebM/WebP video backgrounds (`misty_pavilion.webp` & `misty_pavilion.webm`).
+- **── T U E S D A Y ── Day Line Divider**: Centered weekday text flanked by left and right horizontal silver lines.
+- **📅 Real-Time HH:MM:SS Ticking & Uppercase Date**: Real-time ticking seconds and uppercase date (`02 SEPTEMBER 2026`).
+- **🚀 Single Instance & Process Cleanup**: Added singleton guards to prevent multiple overlapping screensaver instances.
+
 ## [4.0.4] - 2026-09-02 - Frameless 3D Glass Live Clock & WebP Wallpaper Release
 
 ### Added
