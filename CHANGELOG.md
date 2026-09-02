@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.0.8] - 2026-09-02 - Inline Relative AM/PM Alignment Release
+
+### Added
+- **⏱️ Horizontally Centered AM/PM Badge**: Set `position: relative !important; align-self: center !important` on `.gc-ampm-pill` so `PM` sits inline on the exact same horizontal row right beside the seconds digits (`07 : 16 : 47 PM`), preventing it from dropping down to the bottom corner.
+
 ## [5.0.7] - 2026-09-02 - Instant 0ms Live Load & Standalone Flex AM/PM Release
 
 ### Added
