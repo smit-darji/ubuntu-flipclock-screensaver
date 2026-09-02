@@ -1,4 +1,4 @@
-# Premium Fliqlo-Style Flip Clock Screensaver for Ubuntu
+# Premium 3D Glass & Flip Clock Screensaver for Ubuntu
 
 [![Platform](https://img.shields.io/badge/Platform-Ubuntu%2020.04%20%7C%2022.04%20%7C%2024.04-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)](https://ubuntu.com)
 [![Version](https://img.shields.io/badge/Version-v5.0.2-blue?style=for-the-badge)](releases/flipclock-screensaver_5.0.2.deb)
@@ -11,13 +11,13 @@
 
 ---
 
-## 📷 Default Theme Preview — Luxury Black Gold + Squircle
+## 📷 Featured Live Wallpaper Theme — Misty Lakeside Pavilion (Frameless 3D Glass)
 
-A native, high-fidelity, multi-monitor flip clock screensaver for Ubuntu Linux. It brings a vintage airport split-flap style retro clock to your workstation, rendering across all connected displays simultaneously with smooth 3D CSS animations, dynamic time-based greetings, and **33 premium color themes** with **29 card shape designs**.
+A native, high-fidelity, multi-monitor screensaver for Ubuntu Linux. It brings 4K animated live video wallpapers and vintage retro flip clocks to your workstation, rendering across all connected displays simultaneously with smooth 3D CSS animations, dynamic time-based greetings, and **35 premium color themes** with **29 card shape designs**.
 
-![Default Theme — Luxury Black Gold](screenshots/theme_luxury_black_gold.png)
+![Featured Live Theme — Misty Lakeside Pavilion](assets/theme_glass_misty_pavilion.png)
 
-> **Default Premium Setup:** Luxury Black Gold theme • Squircle card shape • Cinzel typography • 12-hour format with seconds
+> **Default Premium Setup:** Misty Lakeside Pavilion Live Wallpaper • Frameless 3D Liquid Glass Typography • Comfortaa/Outfit Font • 12-Hour HH:MM:SS format with seconds
 
 ---
 
