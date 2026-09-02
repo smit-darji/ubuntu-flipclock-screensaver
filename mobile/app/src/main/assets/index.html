@@ -2279,6 +2279,15 @@
             .theme-glass_anime_hydrangea .anime-hydrangea-scene-layer {
                 display: block;
             }
+            .anime-hydrangea-artwork-bg {
+                position: absolute;
+                inset: 0;
+                background-image: url('assets/anime_hydrangea_bg.png');
+                background-size: cover;
+                background-position: center center;
+                background-repeat: no-repeat;
+                filter: brightness(0.85) contrast(1.1);
+            }
             .anime-hydrangea-video-bg {
                 position: absolute;
                 top: 0;
@@ -2340,6 +2349,15 @@
             }
             .theme-glass_misty_pavilion .misty-pavilion-scene-layer {
                 display: block;
+            }
+            .misty-pavilion-artwork-bg {
+                position: absolute;
+                inset: 0;
+                background-image: url('assets/misty_pavilion_bg.png');
+                background-size: cover;
+                background-position: center center;
+                background-repeat: no-repeat;
+                filter: brightness(0.88) contrast(1.12);
             }
             .misty-pavilion-video-bg {
                 position: absolute;
@@ -3012,6 +3030,7 @@
 
         <!-- Anime Girl Hydrangea Garden Live Wallpaper Scene Layer -->
         <div class="anime-hydrangea-scene-layer">
+            <div class="anime-hydrangea-artwork-bg"></div>
             <video class="anime-hydrangea-video-bg" autoplay loop muted playsinline src="live-wallpaper/ba98956200_anime-girl-hydrangea-garden-live-wallpaper-wallsflow-com.mp4"></video>
             <div class="anime-hydrangea-overlay"></div>
             <div class="anime-hydrangea-vignette"></div>
@@ -3019,6 +3038,7 @@
 
         <!-- Misty Lakeside Pavilion Live Wallpaper Scene Layer -->
         <div class="misty-pavilion-scene-layer">
+            <div class="misty-pavilion-artwork-bg"></div>
             <video class="misty-pavilion-video-bg" autoplay loop muted playsinline src="live-wallpaper/6964bab862_misty-lakeside-pavilion-live-wallpaper-wallsflow-com.mp4"></video>
             <div class="misty-pavilion-overlay"></div>
             <div class="misty-pavilion-vignette"></div>

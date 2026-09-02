@@ -939,6 +939,8 @@ class ScreensaverWindow(Gtk.Window):
             settings.set_allow_file_access_from_file_urls(True)
         if hasattr(settings, 'set_allow_universal_access_from_file_urls'):
             settings.set_allow_universal_access_from_file_urls(True)
+        if hasattr(settings, 'set_media_playback_requires_user_gesture'):
+            settings.set_media_playback_requires_user_gesture(False)
             
         self.webview.add_events(Gdk.EventMask.POINTER_MOTION_MASK | 
                                 Gdk.EventMask.BUTTON_PRESS_MASK | 

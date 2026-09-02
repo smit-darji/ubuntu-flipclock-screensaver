@@ -439,6 +439,21 @@ def render_theme_screenshot(theme_key, theme_info, output_dir="assets"):
     scale = 2
     w, h = 640 * scale, 380 * scale
     img = Image.new("RGBA", (w, h), theme_info["bg_color"])
+    bg_img_map = {
+        "glass_spiderman": "assets/spiderman_bg.png",
+        "glass_ganesha": "assets/ganesha_murti_bg.png",
+        "glass_anime_hydrangea": "assets/anime_hydrangea_bg.png",
+        "glass_misty_pavilion": "assets/misty_pavilion_bg.png"
+    }
+    if theme_key in bg_img_map and os.path.exists(bg_img_map[theme_key]):
+        try:
+            bg_art = Image.open(bg_img_map[theme_key]).convert("RGBA")
+            bg_art = bg_art.resize((w, h), Image.Resampling.LANCZOS)
+            darkener = Image.new("RGBA", (w, h), (0, 0, 0, 90))
+            bg_art = Image.alpha_composite(bg_art, darkener)
+            img.paste(bg_art, (0, 0))
+        except Exception:
+            pass
     draw = ImageDraw.Draw(img)
 
     # 1. Fonts
