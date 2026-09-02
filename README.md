@@ -1,10 +1,10 @@
 # Premium Fliqlo-Style Flip Clock Screensaver for Ubuntu
 
 [![Platform](https://img.shields.io/badge/Platform-Ubuntu%2020.04%20%7C%2022.04%20%7C%2024.04-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)](https://ubuntu.com)
-[![Version](https://img.shields.io/badge/Version-v3.5.0-blue?style=for-the-badge)](releases/flipclock-screensaver_3.5.0.deb)
+[![Version](https://img.shields.io/badge/Version-v3.7.0-blue?style=for-the-badge)](releases/flipclock-screensaver_3.7.0.deb)
 [![Download Latest .deb](https://img.shields.io/badge/Download-flipclock--screensaver.deb-10B981?style=for-the-badge&logo=debian&logoColor=white)](https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver.deb)
 [![Download Android APK](https://img.shields.io/badge/Download-flipclock--screensaver.apk-FFB000?style=for-the-badge&logo=android&logoColor=white)](releases/flipclock-screensaver.apk)
-[![Archived Release v3.5.0](https://img.shields.io/badge/Archive-v3.5.0.deb-6366F1?style=for-the-badge&logo=debian&logoColor=white)](https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_3.5.0.deb)
+[![Archived Release v3.7.0](https://img.shields.io/badge/Archive-v3.7.0.deb-6366F1?style=for-the-badge&logo=debian&logoColor=white)](https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_3.7.0.deb)
 [![Language](https://img.shields.io/badge/Language-Python%203%20%2B%20GTK3-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-MIT-6D28D9?style=for-the-badge)](LICENSE)
 
@@ -13,7 +13,7 @@
 
 ## 📷 Default Theme Preview — Luxury Black Gold + Squircle
 
-A native, high-fidelity, multi-monitor flip clock screensaver for Ubuntu Linux. It brings a vintage airport split-flap style retro clock to your workstation, rendering across all connected displays simultaneously with smooth 3D CSS animations, dynamic time-based greetings, and **31 premium color themes** with **29 card shape designs**.
+A native, high-fidelity, multi-monitor flip clock screensaver for Ubuntu Linux. It brings a vintage airport split-flap style retro clock to your workstation, rendering across all connected displays simultaneously with smooth 3D CSS animations, dynamic time-based greetings, and **33 premium color themes** with **29 card shape designs**.
 
 ![Default Theme — Luxury Black Gold](screenshots/theme_luxury_black_gold.png)
 
@@ -21,11 +21,12 @@ A native, high-fidelity, multi-monitor flip clock screensaver for Ubuntu Linux. 
 
 ---
 
-## ✨ New in v3.5.0: Frosted Dark Ruby Spider-Man Glass Cards & Deep High-Contrast Ganesha Theme
+## ✨ New in v3.7.0: 4K Live Video Wallpaper Collections & Frameless Aesthetic Clocks
 
-Experience the brand new **v3.5.0 Release** featuring:
-- 🕷️ **Frosted Dark Ruby Spider-Man Glass Cards**: Translucent frosted dark ruby glass tiles (`background: rgba(14, 4, 9, 0.76); backdrop-filter: blur(22px);`) to blur out busy NYC window lights for 100% crystal-clear digit visibility.
-- 🐘 **Deep High-Contrast Ganesha Theme**: Enhanced background artwork filter (`brightness(0.55)`), dark teak glass cards, and pure white digits (`#FFFFFF`) with glowing saffron text shadow.
+Experience the brand new **v3.7.0 Release** featuring:
+- 🌸 **Anime Girl Hydrangea Garden Live Wallpaper**: Seamless 4K live video backdrop with frameless glowing hydrangea lavender typography.
+- 🏮 **Misty Lakeside Pavilion Live Wallpaper**: 4K live video backdrop with warm glowing amber lantern typography.
+- 🎥 **LIVE Video Wallpaper Category & Badges**: Dedicated `🎬 4K LIVE VIDEO WALLPAPERS` section and `🎥 LIVE` badges in the quick menu and GTK settings.
 
 ![Glass Clock Face](screenshots/theme_glass_clock.png)
 
@@ -247,14 +248,14 @@ sudo apt update
 sudo apt install ./flipclock-screensaver.deb
 ```
 
-#### Option B: Install Versioned Release Archive (`v3.5.0`)
+#### Option B: Install Versioned Release Archive (`v3.7.0`)
 ```bash
-# 1. Download version v3.5.0 from the releases/ directory
-wget https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_3.5.0.deb
+# 1. Download version v3.7.0 from the releases/ directory
+wget https://raw.githubusercontent.com/smit-darji/ubuntu-flipclock-screensaver/Master/releases/flipclock-screensaver_3.7.0.deb
 
 # 2. Install versioned package via apt
 sudo apt update
-sudo apt install ./flipclock-screensaver_3.5.0.deb
+sudo apt install ./flipclock-screensaver_3.7.0.deb
 ```
 
 ---
