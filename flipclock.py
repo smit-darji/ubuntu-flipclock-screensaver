@@ -26,7 +26,7 @@ except ValueError:
         sys.exit(1)
 from gi.repository import Gtk, Gdk, WebKit2, GLib, GdkPixbuf
 
-APP_VERSION = "3.7.0"
+APP_VERSION = "3.8.0"
 
 THEME_CATEGORIES = {
     "live_wallpapers": {

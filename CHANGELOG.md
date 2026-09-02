@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.8.0] - 2026-09-02 - Live Video Wallpaper Autoplay & Path Resolution Release
+
+### Added
+- **🎥 Dynamic Live Video Path Fallbacks**: Multi-source resolution handling in HTML (`<source src="live-wallpaper/..." type="video/mp4">` and absolute workspace paths) for 100% reliable background rendering.
+- **⚡ GTK WebKit Autoplay Configuration**: Enabled `set_media_playback_requires_user_gesture(False)` in `flipclock.py` and `screensaver.py` for seamless headless screensaver video playback.
+- **🌸 Optimized 4K Video Assets**: High-efficiency MP4 compression preserving 4K video fidelity while keeping the Debian package lightweight.
+
 ## [3.7.0] - 2026-09-02 - Misty Lakeside Pavilion Live Wallpaper Theme & Frameless Lantern Glow Clock
 
 ### Added
