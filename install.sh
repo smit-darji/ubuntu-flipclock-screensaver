@@ -23,6 +23,8 @@ cp clock.html "$INSTALL_DIR/clock.html"
 if [ -f "index.html" ]; then cp index.html "$INSTALL_DIR/index.html"; fi
 if [ -f "daemon.py" ]; then cp daemon.py "$INSTALL_DIR/daemon.py"; fi
 if [ -f "screensaver.py" ]; then cp screensaver.py "$INSTALL_DIR/screensaver.py"; fi
+if [ -d "assets" ]; then cp -r assets "$INSTALL_DIR/"; fi
+if [ -d "live-wallpaper" ]; then cp -r live-wallpaper "$INSTALL_DIR/"; fi
 chmod +x "$INSTALL_DIR/flipclock.py"
 
 ICON_PATH="preferences-desktop-screensaver"
