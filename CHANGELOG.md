@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.0.5] - 2026-09-02 - Purged Card Split Lines & Hinge Dots Release
+
+### Added
+- **🏮 100% Seamless Frameless 3D Glass Typography**: Completely removed split-flap divider line cutouts (`::after`) and hinge dot pseudo-elements (`::before`) from frameless live wallpaper themes.
+- **📐 Compact Balanced Digit Gap**: Optimized `.glass-time-row` gap (`gap: clamp(8px, 1.2vw, 20px)`) to utilize side screen space gracefully while eliminating wide empty card gaps.
+
 ## [5.0.4] - 2026-09-02 - Collapsed Tile Width & Option B Auto-Update Release
 
 ### Added

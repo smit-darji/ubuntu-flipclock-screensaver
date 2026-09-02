@@ -2449,7 +2449,7 @@
                 display: flex !important;
                 align-items: baseline !important;
                 justify-content: center !important;
-                gap: 0px !important;
+                gap: clamp(8px, 1.2vw, 20px) !important;
                 width: auto !important;
             }
 
@@ -2472,6 +2472,14 @@
                 min-width: 0 !important;
                 width: auto !important;
                 height: auto !important;
+            }
+
+            .theme-glass_misty_pavilion .glass-digit-tile::before,
+            .theme-glass_misty_pavilion .glass-digit-tile::after,
+            .theme-glass_anime_hydrangea .glass-digit-tile::before,
+            .theme-glass_anime_hydrangea .glass-digit-tile::after {
+                display: none !important;
+                content: none !important;
             }
 
             /* Sleek 3D Translucent Liquid Glass Typography */
